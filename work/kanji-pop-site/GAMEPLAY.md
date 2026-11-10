@@ -465,3 +465,29 @@ Following product decision, all fixed obstacles have been removed from the game.
 - **State version 11**: Schema v11 automatically migrates legacy v10 boards (40-cell obstacle layouts) and earlier v8/v9 boards to the clean 35-cell board, retaining discovered characters, score, moves, album progress, and sound settings.
 - **Course plans**: Restored all 30 pre-verified complete solutions (15 mobile, 15 desktop) in `course-plans.js`, verified 100% solvable.
 - **Desktop visual scaling**: Combined with the expanded desktop layout, 7×5 provides generous ~130px–135px tile sizes with clear Kanji glyphs across desktop viewports.
+
+### Audio Engine Overhaul & Sound Profiles (2026-11-10 / 2026-11-11)
+
+Following user feedback on sound feedback feel and tactile immersion:
+
+- **Acoustic Overhaul (`audio-fx.js`)**:
+  - Replaced harsh synthesized square/sawtooth clicks with a hybrid physical modeling engine + real recorded Foley audio samples (`audio/tile_slide.mp3`, `audio/gem_clink.ogg`, `audio/go_stone_*.mp3`).
+  - Added dedicated bus routing with lowpass filtering: `sfxBus` (5200Hz lowpass) and `bgmBus` (4000Hz lowpass), fed into a smooth dynamic compressor preventing clipping or distortion.
+  - Composed a joyful 126 BPM Japanese Puzzle Pop BGM groove using warm FM electric piano, bouncy synth bass, acoustic handclaps, and a sparkling celesta melody.
+
+- **Elimination of Double-Click / Audio Mismatch**:
+  - Resolved an issue where tapping a tile produced an unwanted initial tap/click followed by a slide or contact sound.
+  - Unified the sliding audio event: standard tile moves trigger a single clean slide sound matching the active profile.
+  - Suppressed premature contact/fusion sounds during sliding until the two tiles physically touch and the fusion choreography begins.
+
+- **Five Selectable Sound Profiles**:
+  - `tile` (*Mặc định — Lướt gạch êm dịu*): Soft, satisfying slide using `audio/tile_slide.mp3`.
+  - `gem` (*Đá quý va chạm trong & sáng*): Resonant crystal clink using `audio/gem_clink.ogg`.
+  - `crystal` (*Pha lê thanh thoát*): High-frequency inharmonic crystal resonance.
+  - `stone` (*Đá cờ vây mộc mạc*): Authentic Go/Mahjong slate stone clack (`audio/go_stone_*.mp3`).
+  - `soft` (*Ngọc bích nhẹ nhàng*): Warm, deep jade stone resonance.
+  - Active profile persists under `localStorage['kanji-pop-sound-profile']` with runtime switcher exposed in Settings.
+
+- **Automated Validation**:
+  - All test suites (`fusion-check.cjs`, `ui-shell-check.cjs`, `mobile-layout-stability-check.cjs`) pass 100%.
+  - Verified across multiple viewports (320px to 1440px) with zero layout regressions and zero audio stutter.
