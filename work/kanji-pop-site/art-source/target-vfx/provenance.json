@@ -1,0 +1,43 @@
+{
+  "createdAt": "2026-11-08",
+  "generator": "OpenAI built-in image_gen",
+  "purpose": "Elemental target marker: approved sprite + core + thin energy",
+  "assets": [
+    {
+      "element": "thunder",
+      "source": "C:\\Users\\Admin\\.codex\\generated_images\\01a168c6-5ab8-7830-981a-6678d1accc06\\exec-f44c3d05-cc22-41e4-a714-f32466c2efe1.png",
+      "runtime": "dist/target-vfx-assets/thunder.webp",
+      "prompt": "Use case: stylized-concept. Asset type: production game VFX flipbook sprite atlas. EXACT 4 columns by 4 rows of equally sized cells, 16 consecutive frames of ONE branching electric plasma, thin jagged bifurcating lightning filaments inside a soft ionized haze, sparse sparks, crisp high intensity core and dim violet-free gray electrical corona. Every cell centered, same scale, same LEFT TO RIGHT direction. The subject occupies only 70% of cell width and 38% of cell height with transparent padding on ALL sides. Each frame subtly develops the previous frame's fluid motion, last close to first for a loop. This is a horizontal flowing energy strip, not a whole ring. Palette exclusively WHITE, SILVER and GRAY with a bright white core and softer semi-transparent gray detail: it will be tinted dynamically in the game. Rich painterly organic texture, premium polished 2D game VFX, convincing material depth. TRUE transparent alpha background. No colored background, no painted checkerboard, no text, grid lines, labels, gems, stars, UI icons, logos or borders. Square image. Preserve individual separation between all 16 sprites."
+    },
+    {
+      "element": "water",
+      "source": "C:\\Users\\Admin\\.codex\\generated_images\\01a168c6-5ab8-7830-981a-6678d1accc06\\exec-1d0fa5c9-c2e5-4abd-9e4b-51e3ac979e15.png",
+      "runtime": "dist/target-vfx-assets/water.webp",
+      "prompt": "Use case: stylized-concept. Asset type: production game VFX flipbook sprite atlas. EXACT 4 columns by 4 rows of equally sized cells, 16 consecutive frames of ONE transparent liquid flowing ribbon, smooth curling wave crest, refractive watery folds and small suspended droplets, glossy layered ripples with tiny foam flecks. Every cell centered, same scale, same LEFT TO RIGHT direction. The subject occupies only 70% of cell width and 38% of cell height with transparent padding on ALL sides. Each frame subtly develops the previous frame's fluid motion, last close to first for a loop. This is a horizontal flowing energy strip, not a whole ring. Palette exclusively WHITE, SILVER and GRAY with a bright white core and softer semi-transparent gray detail: it will be tinted dynamically in the game. Rich painterly organic texture, premium polished 2D game VFX, convincing material depth. TRUE transparent alpha background. No colored background, no painted checkerboard, no text, grid lines, labels, gems, stars, UI icons, logos or borders. Square image. Preserve individual separation between all 16 sprites."
+    },
+    {
+      "element": "fire",
+      "source": "C:\\Users\\Admin\\.codex\\generated_images\\01a168c6-5ab8-7830-981a-6678d1accc06\\exec-a5561273-b60e-4e61-ba47-8006c7dffa12.png",
+      "runtime": "dist/target-vfx-assets/fire.webp",
+      "prompt": "Use case: stylized-concept. Asset type: production game VFX flipbook sprite atlas. EXACT 4 columns by 4 rows of equally sized cells, 16 consecutive frames of ONE fluid flame tongue, licking curls and tapered incandescent wisps, hot fine veins, small floating ember flecks, not smoke alone. Every cell centered, same scale, same LEFT TO RIGHT direction. The subject occupies only 70% of cell width and 38% of cell height with transparent padding on ALL sides. Each frame subtly develops the previous frame's fluid motion, last close to first for a loop. This is a horizontal flowing energy strip, not a whole ring. Palette exclusively WHITE, SILVER and GRAY with a bright white core and softer semi-transparent gray detail: it will be tinted dynamically in the game. Rich painterly organic texture, premium polished 2D game VFX, convincing material depth. TRUE transparent alpha background. No colored background, no painted checkerboard, no text, grid lines, labels, gems, stars, UI icons, logos or borders. Square image. Preserve individual separation between all 16 sprites."
+    },
+    {
+      "element": "nature",
+      "source": "C:\\Users\\Admin\\.codex\\generated_images\\01a168c6-5ab8-7830-981a-6678d1accc06\\exec-06ea78dd-3603-47cf-87ee-812a9d528120.png",
+      "runtime": "dist/target-vfx-assets/nature.webp",
+      "prompt": "Use case: stylized-concept. Asset type: production game VFX flipbook sprite atlas. EXACT 4 columns by 4 rows of equally sized cells, 16 consecutive frames of ONE living botanical energy current, small organically curling leaves and fern-like plant tendrils embedded in a soft pollen stream, fine leaf veins and tiny pollen particles, no icons. Every cell centered, same scale, same LEFT TO RIGHT direction. The subject occupies only 70% of cell width and 38% of cell height with transparent padding on ALL sides. Each frame subtly develops the previous frame's fluid motion, last close to first for a loop. This is a horizontal flowing energy strip, not a whole ring. Palette exclusively WHITE, SILVER and GRAY with a bright white core and softer semi-transparent gray detail: it will be tinted dynamically in the game. Rich painterly organic texture, premium polished 2D game VFX, convincing material depth. TRUE transparent alpha background. No colored background, no painted checkerboard, no text, grid lines, labels, gems, stars, UI icons, logos or borders. Square image. Preserve individual separation between all 16 sprites."
+    },
+    {
+      "element": "earth",
+      "source": "C:\\Users\\Admin\\.codex\\generated_images\\01a168c6-5ab8-7830-981a-6678d1accc06\\exec-bf136ede-37e3-4e20-88c6-fb701a4636b5.png",
+      "runtime": "dist/target-vfx-assets/earth.webp",
+      "prompt": "Use case: stylized-concept. Asset type: production game VFX flipbook sprite atlas. EXACT 4 columns by 4 rows of equally sized cells, 16 consecutive frames of ONE mineral energy current, swirling fine sand and dust carrying small angular rock splinters, layered granular textures, luminous dust and stone facets. Every cell centered, same scale, same LEFT TO RIGHT direction. The subject occupies only 70% of cell width and 38% of cell height with transparent padding on ALL sides. Each frame subtly develops the previous frame's fluid motion, last close to first for a loop. This is a horizontal flowing energy strip, not a whole ring. Palette exclusively WHITE, SILVER and GRAY with a bright white core and softer semi-transparent gray detail: it will be tinted dynamically in the game. Rich painterly organic texture, premium polished 2D game VFX, convincing material depth. TRUE transparent alpha background. No colored background, no painted checkerboard, no text, grid lines, labels, gems, stars, UI icons, logos or borders. Square image. Preserve individual separation between all 16 sprites."
+    },
+    {
+      "element": "ice",
+      "source": "C:\\Users\\Admin\\.codex\\generated_images\\01a168c6-5ab8-7830-981a-6678d1accc06\\exec-89e2a8db-01b9-4b30-b102-e4402dced937.png",
+      "runtime": "dist/target-vfx-assets/ice.webp",
+      "prompt": "Use case: stylized-concept. Asset type: production game VFX flipbook sprite atlas. EXACT 4 columns by 4 rows of equally sized cells, 16 consecutive frames of ONE cold crystalline energy stream, fine frost filaments, delicate translucent ice splinters and freezing vapor with sharp refractive facets and tiny frost dust. Every cell centered, same scale, same LEFT TO RIGHT direction. The subject occupies only 70% of cell width and 38% of cell height with transparent padding on ALL sides. Each frame subtly develops the previous frame's fluid motion, last close to first for a loop. This is a horizontal flowing energy strip, not a whole ring. Palette exclusively WHITE, SILVER and GRAY with a bright white core and softer semi-transparent gray detail: it will be tinted dynamically in the game. Rich painterly organic texture, premium polished 2D game VFX, convincing material depth. TRUE transparent alpha background. No colored background, no painted checkerboard, no text, grid lines, labels, gems, stars, UI icons, logos or borders. Square image. Preserve individual separation between all 16 sprites."
+    }
+  ]
+}

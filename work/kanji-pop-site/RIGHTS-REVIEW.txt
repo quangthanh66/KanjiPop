@@ -1,0 +1,68 @@
+KANJI POP — RÀ SOÁT NGUỒN VÀ GIẤY PHÉP
+Ngày: 2026-11-07
+Loại kết quả: AI đối chiếu nguồn chính thức; không phải xác nhận pháp lý hoặc quyền sở hữu.
+
+ĐÃ ĐỐI CHIẾU
+1. Lucide: file hiện tại khai báo v1.8.0; license của tag tương ứng là ISC,
+   kèm MIT cho icon kế thừa Feather. Bản notice đã có trong project.
+   Việc giữ notice không cần chủ game quyết định lại.
+   https://raw.githubusercontent.com/lucide-icons/lucide/1.8.0/LICENSE
+
+2. Nunito và Noto Sans JP: nguồn Google Fonts xác nhận OFL 1.1.
+   Có thể dùng và đóng gói cùng phần mềm theo điều kiện license; phải giữ các
+   thông báo áp dụng. Đã pin 41 WOFF2 local, kèm OFL và checksum trong
+   font-provenance.json. Runtime tải fonts.css local; đã kiểm tra tiếng Việt,
+   94 glyph Han/kana và thành phần SVG 𠂇, không gọi font bên ngoài khi chơi.
+   https://raw.githubusercontent.com/google/fonts/main/ofl/nunito/OFL.txt
+   https://raw.githubusercontent.com/google/fonts/main/ofl/notosansjp/OFL.txt
+
+3. JLPT Sensei: terms hiện hành không cấp quyền tái phân phối nội dung của họ;
+   dẫn link nguồn không thay cho giấy phép. Chưa có bằng chứng đủ để kết luận
+   project đã sao chép biểu đạt được bảo hộ; chữ Kanji và dữ kiện cơ bản không
+   được đồng nhất với cả giáo trình, câu ví dụ, hình minh họa hay cách tuyển chọn.
+   Cần xác định phần nào tự biên soạn và phần nào thực sự lấy từ nguồn.
+   https://jlptsensei.com/terms-and-conditions/
+
+4. CJKVI IDS: license phụ thuộc file, có liên hệ CHISE và GPLv2 trong README.
+   Trong dist không thấy database IDS được đóng gói, chỉ có công thức cục bộ và
+   liên kết tham khảo. Không kết luận toàn game phải GPL chỉ vì có liên kết này.
+   Trước khi nhập dataset cần chốt file/revision/license và nghĩa vụ phân phối.
+   https://raw.githubusercontent.com/cjkvi/cjkvi-ids/master/README.md
+   https://www.chise.org/ids/
+
+5. Hình/âm thanh: thấy SVG/canvas và âm tổng hợp trong mã, không thấy ảnh tham khảo
+   PopCap hoặc nhạc mẫu được đóng gói trong dist. Điều đó chưa chứng minh phong cách
+   mỹ thuật là độc lập. Nguồn gốc và mức độ tương đồng vẫn cần quyết định trước bán.
+
+HƯỚNG CHỦ GAME ĐÃ CHỌN TRONG PHIÊN 2026-11-07
+Đã chọn A1: tự biên soạn + chỉ nhập dữ liệu có giấy phép rõ.
+Đã chọn B1 và duyệt mẫu A Tinh thể vũ trụ sau khi xem ba mẫu local.
+Các lựa chọn dưới đây lưu lại để đối chiếu quyết định, không còn chờ chọn.
+A. Nội dung
+   A1 (Khuyến nghị): tự biên soạn lời giải thích/ví dụ, đối chiếu nguồn tin cậy;
+       chỉ nhập dữ liệu ngoài có giấy phép rõ và lưu provenance từng mục.
+   A2: chuẩn bị hồ sơ xin quyền nguồn muốn giữ; không gửi liên hệ khi chưa được giao.
+   A3: chọn một dataset được cấp phép và chấp nhận nghĩa vụ attribution/share-alike
+       hoặc GPL của dữ liệu phù hợp. Cần kiểm tra từng bộ cụ thể trước khi nhập.
+
+B. Phong cách đá
+   B1 (Khuyến nghị): giữ motif gem nhưng tạo bản facet/viền/ánh sáng/thương hiệu riêng;
+       duyệt mẫu trước khi thay cả game.
+   B2: giữ bản này để kiểm chứng local, chưa đóng mục quyền mỹ thuật trước phát hành.
+   B3: tìm gói asset thương mại phù hợp; trình mẫu, license, giá trước khi mua.
+
+KHÔNG CẦN ĐẨY LẠI CHO NGƯỜI DÙNG DUYỆT CÁC VIỆC THƯỜNG QUY
+- Giữ notice Lucide đầy đủ, ghi version/checksum.
+- Pin font local và OFL tương ứng, giữ nguyên family đã chọn.
+- Ghi nguồn từng nội dung mới; phân biệt đối chiếu dữ kiện với sao chép nội dung.
+- Ghi rõ trạng thái chưa chứng minh quyền nguồn; không tự đánh dấu commercial clear.
+
+FRAMEWORK ĐÃ ĐỌC VÀ ÁP DỤNG
+Compliance Auditor (agency-agents): xác định phạm vi, bằng chứng, hiện trạng,
+khoảng trống, bước khắc phục và xác minh. Không áp bộ chứng nhận doanh nghiệp
+không liên quan vào game local, không coi role này là luật sư.
+https://github.com/msitarzewski/agency-agents/blob/main/security/security-compliance-auditor.md
+
+Giới hạn: chưa liên hệ tác giả, chưa mua tài sản, chưa phát hành. Font và nhãn
+nội dung đã được tích hợp local; việc đó không phải xác nhận quyền thương mại
+tổng thể. Bản JSON kèm theo ghi bằng chứng và phương án chi tiết.

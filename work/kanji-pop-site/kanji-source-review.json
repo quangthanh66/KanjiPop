@@ -1,0 +1,958 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-07",
+  "course": "n5-compose-24-v1",
+  "reviewType": "AI source-backed linguistic review; not human certification",
+  "framework": {
+    "url": "https://raw.githubusercontent.com/msitarzewski/agency-agents/main/testing/testing-evidence-collector.md",
+    "use": "Evidence-first review and explicit scope/limitations; read as reference, no installation or scripts executed."
+  },
+  "input": {
+    "path": "dist/n5-data.js",
+    "sha256": "4e2c162d6da11483794c4def3748046e8e6fdd2e8475922f7e32fb562aae19d3"
+  },
+  "summary": {
+    "characters": 24,
+    "idsExactMatches": 22,
+    "visualMnemonicExceptions": [
+      "本",
+      "白"
+    ],
+    "lexicalContradictionsFound": 0,
+    "humanExpertSignoffs": 0,
+    "publicationApproved": false
+  },
+  "scope": "Modern visual composition and selected vocabulary readings/meanings. No proof of educational efficacy, complete N5 coverage, human expertise or commercial licensing.",
+  "recommendations": [
+    {
+      "id": "component-label",
+      "priority": "P0",
+      "action": "Use thành phần chữ for component tiles, since 亻, 𠂇 and strokes are not all standalone Japanese words."
+    },
+    {
+      "id": "word-reading-label",
+      "priority": "P0",
+      "action": "Label word/reading block Từ ví dụ / Cách đọc của từ; do not imply にほんご is the reading of 語 alone."
+    },
+    {
+      "id": "mnemonic-label",
+      "priority": "P0",
+      "action": "Keep a brief distinction: Tách hình để dễ nhớ; không phải giải thích nguồn gốc chữ. Specifically flag 本 and 白 in metadata."
+    },
+    {
+      "id": "white-adjective",
+      "priority": "P1",
+      "action": "Change 白い translation to Trắng; có màu trắng."
+    },
+    {
+      "id": "coverage",
+      "priority": "P0",
+      "action": "Keep 24 chữ sơ cấp tham khảo N5; do not claim completing this subset equals all N5 kanji or mastery."
+    }
+  ],
+  "characters": [
+    {
+      "id": "休",
+      "reviewStatus": "ai-source-checked",
+      "humanExpertReview": "not-performed",
+      "reviewedFields": {
+        "parts": [
+          "亻",
+          "木"
+        ],
+        "meaning": "Nghỉ ngơi",
+        "word": "休む",
+        "reading": "やすむ",
+        "translation": "Nghỉ ngơi",
+        "note": "亻 bên trái, 木 bên phải."
+      },
+      "shapeEvidence": {
+        "source": "https://raw.githubusercontent.com/cjkvi/cjkvi-ids/master/ids.txt",
+        "lookup": "U+4F11",
+        "observedIds": "⿰亻木",
+        "finding": "Modern shape and part positions match this IDS entry."
+      },
+      "lexicalEvidence": {
+        "source": "https://www.kanjipedia.jp/kanji/0001375100",
+        "finding": "Selected basic meaning and reading are consistent with the dictionary entry; this is not an exhaustive meaning or reading list.",
+        "scope": "Kanji entry readings/meanings and its listed compound examples where applicable.",
+        "additionalSources": []
+      },
+      "finding": "Không phát hiện mâu thuẫn trong hai thành phần, nghĩa cơ bản và cách đọc ví dụ đang dùng.",
+      "recommendedNote": "Nhìn bên trái là 亻, bên phải là 木. 亻 là dạng của 人 khi đứng ở bên trái.",
+      "requiredRuntimeChange": null,
+      "etymologyClaim": "none",
+      "licenseScope": "Source URLs are fact-checking references only; no dictionary definitions, illustrations or dataset files imported.",
+      "limitations": [
+        "Không có người biên tập tiếng Nhật ký duyệt.",
+        "Chưa kiểm tra chữ hiển thị thực tế trên mọi phông/màn hình."
+      ]
+    },
+    {
+      "id": "男",
+      "reviewStatus": "ai-source-checked",
+      "humanExpertReview": "not-performed",
+      "reviewedFields": {
+        "parts": [
+          "田",
+          "力"
+        ],
+        "meaning": "Nam giới",
+        "word": "男",
+        "reading": "おとこ",
+        "translation": "Người đàn ông",
+        "note": "田 ở trên, 力 ở dưới."
+      },
+      "shapeEvidence": {
+        "source": "https://raw.githubusercontent.com/cjkvi/cjkvi-ids/master/ids.txt",
+        "lookup": "U+7537",
+        "observedIds": "⿱田力",
+        "finding": "Modern shape and part positions match this IDS entry."
+      },
+      "lexicalEvidence": {
+        "source": "https://www.kanjipedia.jp/kanji/0004638500",
+        "finding": "Selected basic meaning and reading are consistent with the dictionary entry; this is not an exhaustive meaning or reading list.",
+        "scope": "Kanji entry readings/meanings and its listed compound examples where applicable.",
+        "additionalSources": []
+      },
+      "finding": "Không phát hiện mâu thuẫn trong hai thành phần, nghĩa cơ bản và cách đọc ví dụ đang dùng.",
+      "recommendedNote": "Nhìn phần trên là 田; phần dưới là 力.",
+      "requiredRuntimeChange": null,
+      "etymologyClaim": "none",
+      "licenseScope": "Source URLs are fact-checking references only; no dictionary definitions, illustrations or dataset files imported.",
+      "limitations": [
+        "Không có người biên tập tiếng Nhật ký duyệt.",
+        "Chưa kiểm tra chữ hiển thị thực tế trên mọi phông/màn hình."
+      ]
+    },
+    {
+      "id": "分",
+      "reviewStatus": "ai-source-checked",
+      "humanExpertReview": "not-performed",
+      "reviewedFields": {
+        "parts": [
+          "八",
+          "刀"
+        ],
+        "meaning": "Chia",
+        "word": "分ける",
+        "reading": "わける",
+        "translation": "Chia, chia ra",
+        "note": "八 ở trên, 刀 ở dưới."
+      },
+      "shapeEvidence": {
+        "source": "https://raw.githubusercontent.com/cjkvi/cjkvi-ids/master/ids.txt",
+        "lookup": "U+5206",
+        "observedIds": "⿱八刀",
+        "finding": "Modern shape and part positions match this IDS entry."
+      },
+      "lexicalEvidence": {
+        "source": "https://www.kanjipedia.jp/kanji/0006175200",
+        "finding": "Selected basic meaning and reading are consistent with the dictionary entry; this is not an exhaustive meaning or reading list.",
+        "scope": "Kanji entry readings/meanings and its listed compound examples where applicable.",
+        "additionalSources": []
+      },
+      "finding": "Không phát hiện mâu thuẫn trong hai thành phần, nghĩa cơ bản và cách đọc ví dụ đang dùng.",
+      "recommendedNote": "Tìm 八 ở phía trên và 刀 ở phía dưới.",
+      "requiredRuntimeChange": null,
+      "etymologyClaim": "none",
+      "licenseScope": "Source URLs are fact-checking references only; no dictionary definitions, illustrations or dataset files imported.",
+      "limitations": [
+        "Không có người biên tập tiếng Nhật ký duyệt.",
+        "Chưa kiểm tra chữ hiển thị thực tế trên mọi phông/màn hình."
+      ]
+    },
+    {
+      "id": "名",
+      "reviewStatus": "ai-source-checked",
+      "humanExpertReview": "not-performed",
+      "reviewedFields": {
+        "parts": [
+          "夕",
+          "口"
+        ],
+        "meaning": "Tên",
+        "word": "名前",
+        "reading": "なまえ",
+        "translation": "Tên gọi",
+        "note": "夕 ở trên, 口 ở dưới."
+      },
+      "shapeEvidence": {
+        "source": "https://raw.githubusercontent.com/cjkvi/cjkvi-ids/master/ids.txt",
+        "lookup": "U+540D",
+        "observedIds": "⿱夕口",
+        "finding": "Modern shape and part positions match this IDS entry."
+      },
+      "lexicalEvidence": {
+        "source": "https://www.kanjipedia.jp/kanji/0006666900",
+        "finding": "Selected basic meaning and reading are consistent with the dictionary entry; this is not an exhaustive meaning or reading list.",
+        "scope": "Kanji entry plus separately checked example-word source.",
+        "additionalSources": [
+          {
+            "url": "https://a2-2.marugotoweb.jp/en/kanji/vocab/namae/",
+            "supports": "名前 / なまえ và nghĩa tên; tài liệu Japan Foundation."
+          }
+        ]
+      },
+      "finding": "Không phát hiện mâu thuẫn trong hai thành phần, nghĩa cơ bản và cách đọc ví dụ đang dùng.",
+      "recommendedNote": "夕 nằm phía trên; 口 nằm phía dưới.",
+      "requiredRuntimeChange": null,
+      "etymologyClaim": "none",
+      "licenseScope": "Source URLs are fact-checking references only; no dictionary definitions, illustrations or dataset files imported.",
+      "limitations": [
+        "Không có người biên tập tiếng Nhật ký duyệt.",
+        "Chưa kiểm tra chữ hiển thị thực tế trên mọi phông/màn hình."
+      ]
+    },
+    {
+      "id": "外",
+      "reviewStatus": "ai-source-checked",
+      "humanExpertReview": "not-performed",
+      "reviewedFields": {
+        "parts": [
+          "夕",
+          "卜"
+        ],
+        "meaning": "Bên ngoài",
+        "word": "外",
+        "reading": "そと",
+        "translation": "Bên ngoài",
+        "note": "夕 bên trái, 卜 bên phải."
+      },
+      "shapeEvidence": {
+        "source": "https://raw.githubusercontent.com/cjkvi/cjkvi-ids/master/ids.txt",
+        "lookup": "U+5916",
+        "observedIds": "⿰夕卜",
+        "finding": "Modern shape and part positions match this IDS entry."
+      },
+      "lexicalEvidence": {
+        "source": "https://www.kanjipedia.jp/kanji/0000841200",
+        "finding": "Selected basic meaning and reading are consistent with the dictionary entry; this is not an exhaustive meaning or reading list.",
+        "scope": "Kanji entry readings/meanings and its listed compound examples where applicable.",
+        "additionalSources": []
+      },
+      "finding": "Không phát hiện mâu thuẫn trong hai thành phần, nghĩa cơ bản và cách đọc ví dụ đang dùng.",
+      "recommendedNote": "Hai phần đứng cạnh nhau: 夕 bên trái và 卜 bên phải.",
+      "requiredRuntimeChange": null,
+      "etymologyClaim": "none",
+      "licenseScope": "Source URLs are fact-checking references only; no dictionary definitions, illustrations or dataset files imported.",
+      "limitations": [
+        "Không có người biên tập tiếng Nhật ký duyệt.",
+        "Chưa kiểm tra chữ hiển thị thực tế trên mọi phông/màn hình."
+      ]
+    },
+    {
+      "id": "何",
+      "reviewStatus": "ai-source-checked",
+      "humanExpertReview": "not-performed",
+      "reviewedFields": {
+        "parts": [
+          "亻",
+          "可"
+        ],
+        "meaning": "Cái gì",
+        "word": "何",
+        "reading": "なに",
+        "translation": "Cái gì?",
+        "note": "亻 bên trái, 可 bên phải."
+      },
+      "shapeEvidence": {
+        "source": "https://raw.githubusercontent.com/cjkvi/cjkvi-ids/master/ids.txt",
+        "lookup": "U+4F55",
+        "observedIds": "⿰亻可",
+        "finding": "Modern shape and part positions match this IDS entry."
+      },
+      "lexicalEvidence": {
+        "source": "https://www.kanjipedia.jp/kanji/0000641500",
+        "finding": "Selected basic meaning and reading are consistent with the dictionary entry; this is not an exhaustive meaning or reading list.",
+        "scope": "Kanji entry readings/meanings and its listed compound examples where applicable.",
+        "additionalSources": []
+      },
+      "finding": "可 đóng vai trò gợi âm trong giải thích lịch sử; không suy ra nghĩa bằng phép cộng nghĩa hai phần.",
+      "recommendedNote": "亻 đứng bên trái 可. 亻 là dạng của 人 khi đứng ở bên trái.",
+      "requiredRuntimeChange": null,
+      "etymologyClaim": "none",
+      "licenseScope": "Source URLs are fact-checking references only; no dictionary definitions, illustrations or dataset files imported.",
+      "limitations": [
+        "Không có người biên tập tiếng Nhật ký duyệt.",
+        "Chưa kiểm tra chữ hiển thị thực tế trên mọi phông/màn hình."
+      ]
+    },
+    {
+      "id": "見",
+      "reviewStatus": "ai-source-checked",
+      "humanExpertReview": "not-performed",
+      "reviewedFields": {
+        "parts": [
+          "目",
+          "儿"
+        ],
+        "meaning": "Nhìn",
+        "word": "見る",
+        "reading": "みる",
+        "translation": "Nhìn, xem",
+        "note": "目 ở trên, 儿 ở dưới."
+      },
+      "shapeEvidence": {
+        "source": "https://raw.githubusercontent.com/cjkvi/cjkvi-ids/master/ids.txt",
+        "lookup": "U+898B",
+        "observedIds": "⿱目儿",
+        "finding": "Modern shape and part positions match this IDS entry."
+      },
+      "lexicalEvidence": {
+        "source": "https://www.kanjipedia.jp/kanji/0001896200",
+        "finding": "Selected basic meaning and reading are consistent with the dictionary entry; this is not an exhaustive meaning or reading list.",
+        "scope": "Kanji entry readings/meanings and its listed compound examples where applicable.",
+        "additionalSources": []
+      },
+      "finding": "Không phát hiện mâu thuẫn trong hai thành phần, nghĩa cơ bản và cách đọc ví dụ đang dùng.",
+      "recommendedNote": "Phần trên giống 目; phần dưới là 儿.",
+      "requiredRuntimeChange": null,
+      "etymologyClaim": "none",
+      "licenseScope": "Source URLs are fact-checking references only; no dictionary definitions, illustrations or dataset files imported.",
+      "limitations": [
+        "Không có người biên tập tiếng Nhật ký duyệt.",
+        "Chưa kiểm tra chữ hiển thị thực tế trên mọi phông/màn hình."
+      ]
+    },
+    {
+      "id": "国",
+      "reviewStatus": "ai-source-checked",
+      "humanExpertReview": "not-performed",
+      "reviewedFields": {
+        "parts": [
+          "囗",
+          "玉"
+        ],
+        "meaning": "Đất nước",
+        "word": "国",
+        "reading": "くに",
+        "translation": "Đất nước",
+        "note": "囗 bao quanh 玉."
+      },
+      "shapeEvidence": {
+        "source": "https://raw.githubusercontent.com/cjkvi/cjkvi-ids/master/ids.txt",
+        "lookup": "U+56FD",
+        "observedIds": "⿴囗玉",
+        "finding": "Modern shape and part positions match this IDS entry."
+      },
+      "lexicalEvidence": {
+        "source": "https://www.kanjipedia.jp/kanji/0002372600",
+        "finding": "Selected basic meaning and reading are consistent with the dictionary entry; this is not an exhaustive meaning or reading list.",
+        "scope": "Kanji entry readings/meanings and its listed compound examples where applicable.",
+        "additionalSources": []
+      },
+      "finding": "Đối chiếu chữ hiện đại 国; chữ cũ 國 có cấu tạo khác. Không đổi 玉 thành 或 trong trò chơi này.",
+      "recommendedNote": "玉 nằm trong khung 囗. Khung 囗 là thành phần bao ngoài, khác chữ 口.",
+      "requiredRuntimeChange": null,
+      "etymologyClaim": "none",
+      "licenseScope": "Source URLs are fact-checking references only; no dictionary definitions, illustrations or dataset files imported.",
+      "limitations": [
+        "Không có người biên tập tiếng Nhật ký duyệt.",
+        "Chưa kiểm tra chữ hiển thị thực tế trên mọi phông/màn hình."
+      ]
+    },
+    {
+      "id": "時",
+      "reviewStatus": "ai-source-checked",
+      "humanExpertReview": "not-performed",
+      "reviewedFields": {
+        "parts": [
+          "日",
+          "寺"
+        ],
+        "meaning": "Thời gian",
+        "word": "時",
+        "reading": "とき",
+        "translation": "Lúc, thời điểm",
+        "note": "日 bên trái, 寺 bên phải."
+      },
+      "shapeEvidence": {
+        "source": "https://raw.githubusercontent.com/cjkvi/cjkvi-ids/master/ids.txt",
+        "lookup": "U+6642",
+        "observedIds": "⿰日寺",
+        "finding": "Modern shape and part positions match this IDS entry."
+      },
+      "lexicalEvidence": {
+        "source": "https://www.kanjipedia.jp/kanji/0002876900",
+        "finding": "Selected basic meaning and reading are consistent with the dictionary entry; this is not an exhaustive meaning or reading list.",
+        "scope": "Kanji entry readings/meanings and its listed compound examples where applicable.",
+        "additionalSources": []
+      },
+      "finding": "Không phát hiện mâu thuẫn trong hai thành phần, nghĩa cơ bản và cách đọc ví dụ đang dùng.",
+      "recommendedNote": "日 đứng bên trái; 寺 đứng bên phải.",
+      "requiredRuntimeChange": null,
+      "etymologyClaim": "none",
+      "licenseScope": "Source URLs are fact-checking references only; no dictionary definitions, illustrations or dataset files imported.",
+      "limitations": [
+        "Không có người biên tập tiếng Nhật ký duyệt.",
+        "Chưa kiểm tra chữ hiển thị thực tế trên mọi phông/màn hình."
+      ]
+    },
+    {
+      "id": "間",
+      "reviewStatus": "ai-source-checked",
+      "humanExpertReview": "not-performed",
+      "reviewedFields": {
+        "parts": [
+          "門",
+          "日"
+        ],
+        "meaning": "Khoảng",
+        "word": "間",
+        "reading": "あいだ",
+        "translation": "Khoảng, khoảng giữa",
+        "note": "門 bao quanh 日."
+      },
+      "shapeEvidence": {
+        "source": "https://raw.githubusercontent.com/cjkvi/cjkvi-ids/master/ids.txt",
+        "lookup": "U+9593",
+        "observedIds": "⿵門日",
+        "finding": "Modern shape and part positions match this IDS entry."
+      },
+      "lexicalEvidence": {
+        "source": "https://www.kanjipedia.jp/kanji/0001083500",
+        "finding": "Selected basic meaning and reading are consistent with the dictionary entry; this is not an exhaustive meaning or reading list.",
+        "scope": "Kanji entry readings/meanings and its listed compound examples where applicable.",
+        "additionalSources": []
+      },
+      "finding": "Chữ hiện đại dùng 日. Giải thích lịch sử có nhắc 閒 với 月; không được lẫn hai cách viết.",
+      "recommendedNote": "日 nằm dưới phần mái và giữa hai bên của 門; phía dưới vẫn mở.",
+      "requiredRuntimeChange": null,
+      "etymologyClaim": "none",
+      "licenseScope": "Source URLs are fact-checking references only; no dictionary definitions, illustrations or dataset files imported.",
+      "limitations": [
+        "Không có người biên tập tiếng Nhật ký duyệt.",
+        "Chưa kiểm tra chữ hiển thị thực tế trên mọi phông/màn hình."
+      ]
+    },
+    {
+      "id": "聞",
+      "reviewStatus": "ai-source-checked",
+      "humanExpertReview": "not-performed",
+      "reviewedFields": {
+        "parts": [
+          "門",
+          "耳"
+        ],
+        "meaning": "Nghe",
+        "word": "聞く",
+        "reading": "きく",
+        "translation": "Nghe, hỏi",
+        "note": "門 bao quanh 耳."
+      },
+      "shapeEvidence": {
+        "source": "https://raw.githubusercontent.com/cjkvi/cjkvi-ids/master/ids.txt",
+        "lookup": "U+805E",
+        "observedIds": "⿵門耳",
+        "finding": "Modern shape and part positions match this IDS entry."
+      },
+      "lexicalEvidence": {
+        "source": "https://www.kanjipedia.jp/kanji/0006190200",
+        "finding": "Selected basic meaning and reading are consistent with the dictionary entry; this is not an exhaustive meaning or reading list.",
+        "scope": "Kanji entry readings/meanings and its listed compound examples where applicable.",
+        "additionalSources": []
+      },
+      "finding": "Không phát hiện mâu thuẫn trong hai thành phần, nghĩa cơ bản và cách đọc ví dụ đang dùng.",
+      "recommendedNote": "耳 nằm dưới phần mái và giữa hai bên của 門; phía dưới vẫn mở.",
+      "requiredRuntimeChange": null,
+      "etymologyClaim": "none",
+      "licenseScope": "Source URLs are fact-checking references only; no dictionary definitions, illustrations or dataset files imported.",
+      "limitations": [
+        "Không có người biên tập tiếng Nhật ký duyệt.",
+        "Chưa kiểm tra chữ hiển thị thực tế trên mọi phông/màn hình."
+      ]
+    },
+    {
+      "id": "話",
+      "reviewStatus": "ai-source-checked",
+      "humanExpertReview": "not-performed",
+      "reviewedFields": {
+        "parts": [
+          "言",
+          "舌"
+        ],
+        "meaning": "Nói chuyện",
+        "word": "話す",
+        "reading": "はなす",
+        "translation": "Nói, nói chuyện",
+        "note": "言 bên trái, 舌 bên phải."
+      },
+      "shapeEvidence": {
+        "source": "https://raw.githubusercontent.com/cjkvi/cjkvi-ids/master/ids.txt",
+        "lookup": "U+8A71",
+        "observedIds": "⿰言舌",
+        "finding": "Modern shape and part positions match this IDS entry."
+      },
+      "lexicalEvidence": {
+        "source": "https://www.kanjipedia.jp/kanji/0007407700",
+        "finding": "Selected basic meaning and reading are consistent with the dictionary entry; this is not an exhaustive meaning or reading list.",
+        "scope": "Kanji entry readings/meanings and its listed compound examples where applicable.",
+        "additionalSources": []
+      },
+      "finding": "Công thức là hình chữ hiện đại; không biến 言 + 舌 thành câu chuyện từ nguyên khẳng định.",
+      "recommendedNote": "Nhìn 言 ở nửa trái, 舌 ở nửa phải.",
+      "requiredRuntimeChange": null,
+      "etymologyClaim": "none",
+      "licenseScope": "Source URLs are fact-checking references only; no dictionary definitions, illustrations or dataset files imported.",
+      "limitations": [
+        "Không có người biên tập tiếng Nhật ký duyệt.",
+        "Chưa kiểm tra chữ hiển thị thực tế trên mọi phông/màn hình."
+      ]
+    },
+    {
+      "id": "語",
+      "reviewStatus": "ai-source-checked",
+      "humanExpertReview": "not-performed",
+      "reviewedFields": {
+        "parts": [
+          "言",
+          "吾"
+        ],
+        "meaning": "Ngôn ngữ",
+        "word": "日本語",
+        "reading": "にほんご",
+        "translation": "Tiếng Nhật",
+        "note": "言 bên trái, 吾 bên phải."
+      },
+      "shapeEvidence": {
+        "source": "https://raw.githubusercontent.com/cjkvi/cjkvi-ids/master/ids.txt",
+        "lookup": "U+8A9E",
+        "observedIds": "⿰言吾",
+        "finding": "Modern shape and part positions match this IDS entry."
+      },
+      "lexicalEvidence": {
+        "source": "https://www.kanjipedia.jp/kanji/0002110200",
+        "finding": "Selected basic meaning and reading are consistent with the dictionary entry; this is not an exhaustive meaning or reading list.",
+        "scope": "Kanji entry plus separately checked example-word source.",
+        "additionalSources": [
+          {
+            "url": "https://words.marugotoweb.jp/static_contents/pc/about/about.php?lang=en",
+            "supports": "Cách viết 日本語 và cách đọc にほんご trong quy tắc ký âm của Japan Foundation."
+          }
+        ]
+      },
+      "finding": "にほんご là cách đọc toàn từ 日本語, không phải cách đọc riêng chữ 語.",
+      "recommendedNote": "Nhìn 言 ở nửa trái, 吾 ở nửa phải.",
+      "requiredRuntimeChange": null,
+      "etymologyClaim": "none",
+      "licenseScope": "Source URLs are fact-checking references only; no dictionary definitions, illustrations or dataset files imported.",
+      "limitations": [
+        "Không có người biên tập tiếng Nhật ký duyệt.",
+        "Chưa kiểm tra chữ hiển thị thực tế trên mọi phông/màn hình."
+      ]
+    },
+    {
+      "id": "読",
+      "reviewStatus": "ai-source-checked",
+      "humanExpertReview": "not-performed",
+      "reviewedFields": {
+        "parts": [
+          "言",
+          "売"
+        ],
+        "meaning": "Đọc",
+        "word": "読む",
+        "reading": "よむ",
+        "translation": "Đọc",
+        "note": "言 bên trái, 売 bên phải."
+      },
+      "shapeEvidence": {
+        "source": "https://raw.githubusercontent.com/cjkvi/cjkvi-ids/master/ids.txt",
+        "lookup": "U+8AAD",
+        "observedIds": "⿰言売",
+        "finding": "Modern shape and part positions match this IDS entry."
+      },
+      "lexicalEvidence": {
+        "source": "https://www.kanjipedia.jp/kanji/0005324000",
+        "finding": "Selected basic meaning and reading are consistent with the dictionary entry; this is not an exhaustive meaning or reading list.",
+        "scope": "Kanji entry readings/meanings and its listed compound examples where applicable.",
+        "additionalSources": []
+      },
+      "finding": "Chữ hiện đại dùng 売; lịch sử chữ 讀 khác. Chỉ mô tả hình hiện tại.",
+      "recommendedNote": "Trong chữ 読 hiện nay, 言 đứng bên trái 売.",
+      "requiredRuntimeChange": null,
+      "etymologyClaim": "none",
+      "licenseScope": "Source URLs are fact-checking references only; no dictionary definitions, illustrations or dataset files imported.",
+      "limitations": [
+        "Không có người biên tập tiếng Nhật ký duyệt.",
+        "Chưa kiểm tra chữ hiển thị thực tế trên mọi phông/màn hình."
+      ]
+    },
+    {
+      "id": "校",
+      "reviewStatus": "ai-source-checked",
+      "humanExpertReview": "not-performed",
+      "reviewedFields": {
+        "parts": [
+          "木",
+          "交"
+        ],
+        "meaning": "Trường học",
+        "word": "学校",
+        "reading": "がっこう",
+        "translation": "Trường học",
+        "note": "木 bên trái, 交 bên phải."
+      },
+      "shapeEvidence": {
+        "source": "https://raw.githubusercontent.com/cjkvi/cjkvi-ids/master/ids.txt",
+        "lookup": "U+6821",
+        "observedIds": "⿰木交",
+        "finding": "Modern shape and part positions match this IDS entry."
+      },
+      "lexicalEvidence": {
+        "source": "https://www.kanjipedia.jp/kanji/0002236900",
+        "finding": "Selected basic meaning and reading are consistent with the dictionary entry; this is not an exhaustive meaning or reading list.",
+        "scope": "Kanji entry readings/meanings and its listed compound examples where applicable.",
+        "additionalSources": []
+      },
+      "finding": "がっこう là cách đọc toàn từ 学校. 木 + 交 không phải phép cộng nghĩa tạo ra trường học.",
+      "recommendedNote": "木 đứng bên trái 交; hai phần được thu gọn khi ghép.",
+      "requiredRuntimeChange": null,
+      "etymologyClaim": "none",
+      "licenseScope": "Source URLs are fact-checking references only; no dictionary definitions, illustrations or dataset files imported.",
+      "limitations": [
+        "Không có người biên tập tiếng Nhật ký duyệt.",
+        "Chưa kiểm tra chữ hiển thị thực tế trên mọi phông/màn hình."
+      ]
+    },
+    {
+      "id": "友",
+      "reviewStatus": "ai-source-checked",
+      "humanExpertReview": "not-performed",
+      "reviewedFields": {
+        "parts": [
+          "𠂇",
+          "又"
+        ],
+        "meaning": "Bạn bè",
+        "word": "友達",
+        "reading": "ともだち",
+        "translation": "Bạn bè",
+        "note": "𠂇 bao phía trên và bên trái của 又."
+      },
+      "shapeEvidence": {
+        "source": "https://raw.githubusercontent.com/cjkvi/cjkvi-ids/master/ids.txt",
+        "lookup": "U+53CB",
+        "observedIds": "⿸𠂇又",
+        "finding": "Modern shape and part positions match this IDS entry."
+      },
+      "lexicalEvidence": {
+        "source": "https://www.kanjipedia.jp/kanji/0006843100",
+        "finding": "Selected basic meaning and reading are consistent with the dictionary entry; this is not an exhaustive meaning or reading list.",
+        "scope": "Kanji entry readings/meanings and its listed compound examples where applicable.",
+        "additionalSources": []
+      },
+      "finding": "𠂇 là thành phần hình thể; không dạy nó như một từ tiếng Nhật độc lập.",
+      "recommendedNote": "Phần 𠂇 ôm phía trên và bên trái của 又.",
+      "requiredRuntimeChange": null,
+      "etymologyClaim": "none",
+      "licenseScope": "Source URLs are fact-checking references only; no dictionary definitions, illustrations or dataset files imported.",
+      "limitations": [
+        "Không có người biên tập tiếng Nhật ký duyệt.",
+        "Chưa kiểm tra chữ hiển thị thực tế trên mọi phông/màn hình."
+      ]
+    },
+    {
+      "id": "二",
+      "reviewStatus": "ai-source-checked",
+      "humanExpertReview": "not-performed",
+      "reviewedFields": {
+        "parts": [
+          "一",
+          "一"
+        ],
+        "meaning": "Hai",
+        "word": "二",
+        "reading": "に",
+        "translation": "Số hai",
+        "note": "Hai nét 一 xếp trên dưới."
+      },
+      "shapeEvidence": {
+        "source": "https://raw.githubusercontent.com/cjkvi/cjkvi-ids/master/ids.txt",
+        "lookup": "U+4E8C",
+        "observedIds": "⿱一一",
+        "finding": "Modern shape and part positions match this IDS entry."
+      },
+      "lexicalEvidence": {
+        "source": "https://www.kanjipedia.jp/kanji/0005418000",
+        "finding": "Selected basic meaning and reading are consistent with the dictionary entry; this is not an exhaustive meaning or reading list.",
+        "scope": "Kanji entry readings/meanings and its listed compound examples where applicable.",
+        "additionalSources": []
+      },
+      "finding": "Không phát hiện mâu thuẫn trong hai thành phần, nghĩa cơ bản và cách đọc ví dụ đang dùng.",
+      "recommendedNote": "Hai nét ngang xếp thành hai tầng; nét dưới dài hơn nét trên.",
+      "requiredRuntimeChange": null,
+      "etymologyClaim": "none",
+      "licenseScope": "Source URLs are fact-checking references only; no dictionary definitions, illustrations or dataset files imported.",
+      "limitations": [
+        "Không có người biên tập tiếng Nhật ký duyệt.",
+        "Chưa kiểm tra chữ hiển thị thực tế trên mọi phông/màn hình."
+      ]
+    },
+    {
+      "id": "三",
+      "reviewStatus": "ai-source-checked",
+      "humanExpertReview": "not-performed",
+      "reviewedFields": {
+        "parts": [
+          "一",
+          "二"
+        ],
+        "meaning": "Ba",
+        "word": "三",
+        "reading": "さん",
+        "translation": "Số ba",
+        "note": "Một nét 一 phía trên 二."
+      },
+      "shapeEvidence": {
+        "source": "https://raw.githubusercontent.com/cjkvi/cjkvi-ids/master/ids.txt",
+        "lookup": "U+4E09",
+        "observedIds": "⿱一二",
+        "finding": "Modern shape and part positions match this IDS entry."
+      },
+      "lexicalEvidence": {
+        "source": "https://www.kanjipedia.jp/kanji/0002622000",
+        "finding": "Selected basic meaning and reading are consistent with the dictionary entry; this is not an exhaustive meaning or reading list.",
+        "scope": "Kanji entry readings/meanings and its listed compound examples where applicable.",
+        "additionalSources": []
+      },
+      "finding": "Không phát hiện mâu thuẫn trong hai thành phần, nghĩa cơ bản và cách đọc ví dụ đang dùng.",
+      "recommendedNote": "Thêm một nét ngang phía trên 二 để có ba tầng ngang.",
+      "requiredRuntimeChange": null,
+      "etymologyClaim": "none",
+      "licenseScope": "Source URLs are fact-checking references only; no dictionary definitions, illustrations or dataset files imported.",
+      "limitations": [
+        "Không có người biên tập tiếng Nhật ký duyệt.",
+        "Chưa kiểm tra chữ hiển thị thực tế trên mọi phông/màn hình."
+      ]
+    },
+    {
+      "id": "天",
+      "reviewStatus": "ai-source-checked",
+      "humanExpertReview": "not-performed",
+      "reviewedFields": {
+        "parts": [
+          "一",
+          "大"
+        ],
+        "meaning": "Bầu trời",
+        "word": "天",
+        "reading": "てん",
+        "translation": "Trời, bầu trời",
+        "note": "Một nét 一 ở phía trên 大."
+      },
+      "shapeEvidence": {
+        "source": "https://raw.githubusercontent.com/cjkvi/cjkvi-ids/master/ids.txt",
+        "lookup": "U+5929",
+        "observedIds": "⿱一大",
+        "finding": "Modern shape and part positions match this IDS entry."
+      },
+      "lexicalEvidence": {
+        "source": "https://www.kanjipedia.jp/kanji/0005033300",
+        "finding": "Selected basic meaning and reading are consistent with the dictionary entry; this is not an exhaustive meaning or reading list.",
+        "scope": "Kanji entry readings/meanings and its listed compound examples where applicable.",
+        "additionalSources": []
+      },
+      "finding": "一 + 大 là cách nhìn hình hiện đại; không khẳng định nguồn gốc là một cộng lớn.",
+      "recommendedNote": "Nhìn một nét ngang ở phía trên hình 大.",
+      "requiredRuntimeChange": null,
+      "etymologyClaim": "none",
+      "licenseScope": "Source URLs are fact-checking references only; no dictionary definitions, illustrations or dataset files imported.",
+      "limitations": [
+        "Không có người biên tập tiếng Nhật ký duyệt.",
+        "Chưa kiểm tra chữ hiển thị thực tế trên mọi phông/màn hình."
+      ]
+    },
+    {
+      "id": "本",
+      "reviewStatus": "ai-source-checked",
+      "humanExpertReview": "not-performed",
+      "reviewedFields": {
+        "parts": [
+          "木",
+          "一"
+        ],
+        "meaning": "Sách; gốc",
+        "word": "本",
+        "reading": "ほん",
+        "translation": "Quyển sách",
+        "note": "Nét 一 nằm ngang phần gốc của 木."
+      },
+      "shapeEvidence": {
+        "source": "https://raw.githubusercontent.com/cjkvi/cjkvi-ids/master/ids.txt",
+        "lookup": "U+672C",
+        "observedIds": "本",
+        "finding": "Source keeps this character atomic. Game split is a visual mnemonic, not an IDS-confirmed decomposition."
+      },
+      "lexicalEvidence": {
+        "source": "https://www.kanjipedia.jp/kanji/0006505700",
+        "finding": "Selected basic meaning and reading are consistent with the dictionary entry; this is not an exhaustive meaning or reading list.",
+        "scope": "Kanji entry readings/meanings and its listed compound examples where applicable.",
+        "additionalSources": []
+      },
+      "finding": "CJKVI không tách 本. 木 + 一 là mẹo thị giác; KanjiPedia mô tả dấu đánh ở gốc cây. Không đặt 一 rời ở phía dưới 木.",
+      "recommendedNote": "Mẹo nhìn hình: thêm nét ngang ngắn vào phần gốc của 木. Nét này cắt qua thân cây.",
+      "requiredRuntimeChange": null,
+      "etymologyClaim": "none",
+      "licenseScope": "Source URLs are fact-checking references only; no dictionary definitions, illustrations or dataset files imported.",
+      "limitations": [
+        "Không có người biên tập tiếng Nhật ký duyệt.",
+        "Chưa kiểm tra chữ hiển thị thực tế trên mọi phông/màn hình."
+      ]
+    },
+    {
+      "id": "白",
+      "reviewStatus": "ai-source-checked",
+      "humanExpertReview": "not-performed",
+      "reviewedFields": {
+        "parts": [
+          "丿",
+          "日"
+        ],
+        "meaning": "Trắng",
+        "word": "白い",
+        "reading": "しろい",
+        "translation": "Màu trắng",
+        "note": "Nét 丿 ngắn ở phía trên 日."
+      },
+      "shapeEvidence": {
+        "source": "https://raw.githubusercontent.com/cjkvi/cjkvi-ids/master/ids.txt",
+        "lookup": "U+767D",
+        "observedIds": "白",
+        "finding": "Source keeps this character atomic. Game split is a visual mnemonic, not an IDS-confirmed decomposition."
+      },
+      "lexicalEvidence": {
+        "source": "https://www.kanjipedia.jp/kanji/0005607600",
+        "finding": "Selected basic meaning and reading are consistent with the dictionary entry; this is not an exhaustive meaning or reading list.",
+        "scope": "Kanji entry readings/meanings and its listed compound examples where applicable.",
+        "additionalSources": []
+      },
+      "finding": "CJKVI không tách 白. 丿 + 日 chỉ là mẹo thị giác. Không gọi đây là kết luận IDS hoặc từ nguyên.",
+      "recommendedNote": "Mẹo nhìn hình: tìm nét phẩy ngắn ở phía trên hình 日. Đây không phải giải thích nguồn gốc chữ.",
+      "requiredRuntimeChange": {
+        "field": "translation",
+        "from": "Màu trắng",
+        "to": "Trắng; có màu trắng",
+        "reason": "Làm rõ 白い là tính từ; đây là cải thiện diễn đạt, không phải sửa cách đọc."
+      },
+      "etymologyClaim": "none",
+      "licenseScope": "Source URLs are fact-checking references only; no dictionary definitions, illustrations or dataset files imported.",
+      "limitations": [
+        "Không có người biên tập tiếng Nhật ký duyệt.",
+        "Chưa kiểm tra chữ hiển thị thực tế trên mọi phông/màn hình."
+      ]
+    },
+    {
+      "id": "百",
+      "reviewStatus": "ai-source-checked",
+      "humanExpertReview": "not-performed",
+      "reviewedFields": {
+        "parts": [
+          "一",
+          "白"
+        ],
+        "meaning": "Một trăm",
+        "word": "百",
+        "reading": "ひゃく",
+        "translation": "Số một trăm",
+        "note": "Một nét 一 phía trên 白."
+      },
+      "shapeEvidence": {
+        "source": "https://raw.githubusercontent.com/cjkvi/cjkvi-ids/master/ids.txt",
+        "lookup": "U+767E",
+        "observedIds": "⿱一白",
+        "finding": "Modern shape and part positions match this IDS entry."
+      },
+      "lexicalEvidence": {
+        "source": "https://www.kanjipedia.jp/kanji/0005920000",
+        "finding": "Selected basic meaning and reading are consistent with the dictionary entry; this is not an exhaustive meaning or reading list.",
+        "scope": "Kanji entry readings/meanings and its listed compound examples where applicable.",
+        "additionalSources": []
+      },
+      "finding": "Hình hiện đại phù hợp 一 ở trên 白; không diễn giải một cộng trắng thành một trăm.",
+      "recommendedNote": "Nhìn một nét ngang ở phía trên 白.",
+      "requiredRuntimeChange": null,
+      "etymologyClaim": "none",
+      "licenseScope": "Source URLs are fact-checking references only; no dictionary definitions, illustrations or dataset files imported.",
+      "limitations": [
+        "Không có người biên tập tiếng Nhật ký duyệt.",
+        "Chưa kiểm tra chữ hiển thị thực tế trên mọi phông/màn hình."
+      ]
+    },
+    {
+      "id": "左",
+      "reviewStatus": "ai-source-checked",
+      "humanExpertReview": "not-performed",
+      "reviewedFields": {
+        "parts": [
+          "𠂇",
+          "工"
+        ],
+        "meaning": "Bên trái",
+        "word": "左",
+        "reading": "ひだり",
+        "translation": "Bên trái",
+        "note": "𠂇 bao phía trên và bên trái của 工."
+      },
+      "shapeEvidence": {
+        "source": "https://raw.githubusercontent.com/cjkvi/cjkvi-ids/master/ids.txt",
+        "lookup": "U+5DE6",
+        "observedIds": "⿸𠂇工",
+        "finding": "Modern shape and part positions match this IDS entry."
+      },
+      "lexicalEvidence": {
+        "source": "https://www.kanjipedia.jp/kanji/0002452500",
+        "finding": "Selected basic meaning and reading are consistent with the dictionary entry; this is not an exhaustive meaning or reading list.",
+        "scope": "Kanji entry readings/meanings and its listed compound examples where applicable.",
+        "additionalSources": []
+      },
+      "finding": "𠂇 là thành phần hình thể; cần kiểm tra phông chữ hiển thị rõ.",
+      "recommendedNote": "Phần 𠂇 ôm phía trên và bên trái của 工.",
+      "requiredRuntimeChange": null,
+      "etymologyClaim": "none",
+      "licenseScope": "Source URLs are fact-checking references only; no dictionary definitions, illustrations or dataset files imported.",
+      "limitations": [
+        "Không có người biên tập tiếng Nhật ký duyệt.",
+        "Chưa kiểm tra chữ hiển thị thực tế trên mọi phông/màn hình."
+      ]
+    },
+    {
+      "id": "右",
+      "reviewStatus": "ai-source-checked",
+      "humanExpertReview": "not-performed",
+      "reviewedFields": {
+        "parts": [
+          "𠂇",
+          "口"
+        ],
+        "meaning": "Bên phải",
+        "word": "右",
+        "reading": "みぎ",
+        "translation": "Bên phải",
+        "note": "𠂇 bao phía trên và bên trái của 口."
+      },
+      "shapeEvidence": {
+        "source": "https://raw.githubusercontent.com/cjkvi/cjkvi-ids/master/ids.txt",
+        "lookup": "U+53F3",
+        "observedIds": "⿸𠂇口",
+        "finding": "Modern shape and part positions match this IDS entry."
+      },
+      "lexicalEvidence": {
+        "source": "https://www.kanjipedia.jp/kanji/0000308000",
+        "finding": "Selected basic meaning and reading are consistent with the dictionary entry; this is not an exhaustive meaning or reading list.",
+        "scope": "Kanji entry readings/meanings and its listed compound examples where applicable.",
+        "additionalSources": []
+      },
+      "finding": "𠂇 là thành phần hình thể; cần kiểm tra phông chữ hiển thị rõ.",
+      "recommendedNote": "Phần 𠂇 ôm phía trên và bên trái của 口.",
+      "requiredRuntimeChange": null,
+      "etymologyClaim": "none",
+      "licenseScope": "Source URLs are fact-checking references only; no dictionary definitions, illustrations or dataset files imported.",
+      "limitations": [
+        "Không có người biên tập tiếng Nhật ký duyệt.",
+        "Chưa kiểm tra chữ hiển thị thực tế trên mọi phông/màn hình."
+      ]
+    }
+  ]
+}

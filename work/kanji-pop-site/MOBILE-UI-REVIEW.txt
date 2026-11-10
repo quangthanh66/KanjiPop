@@ -1,0 +1,47 @@
+LATEST: Compact HUD pass applied using installed game-ui-ux skill. Mobile keeps 5x7 and the PC palette. Progress is one row; actions are 44px horizontal buttons; secondary stats move to Menu. Board tiles now measure 45.8px at 320x568, 56px at 360x640, 68.4px at 390x844. No scrolling at these sizes or 844x390. Desktop unchanged. See latest GAMEPLAY.md section; earlier recommendations and measurements below are historical.
+
+UPDATE — Owner requested 5x7 mobile and matching PC colors after this initial review. Implemented 5x7 with 17 pairs + one blank, exact desktop sky gradient and matching control palette. Desktop stays 7x5. Supersedes the 4x5 recommendation below. At 320x568 the page is 629px tall to retain 44px touch targets; at 390x844 it fits with 63px targets. See GAMEPLAY.md and mobile57 checks for current results.
+
+Mobile layout review — 2026-11-08
+
+Scope: local-only mobile HUD redesign for the cosmic gem sliding-pair game.
+
+GitHub skills read and applied (not installed):
+1. Game UI/UX: https://github.com/gamedev-skills/awesome-gamedev-agent-skills/blob/main/skills/disciplines/game-ui-ux/SKILL.md
+   Apply stable containers, safe areas, touch sizing and resolution verification.
+2. Game UI Design: https://github.com/guiguiyan930-source/Game-UI-Extension/blob/main/game-ui-design/SKILL.md
+   Prioritize the core loop, separate transient feedback from the HUD and put deeper management behind a menu.
+3. Casual Game FTUE: https://github.com/Gvindor/casual-puzzle-skills/blob/main/skills/casual-game-ftue/SKILL.md
+   Apply compact contextual guidance and portrait-first layout. Preserve the existing open-ended play-first rules.
+
+Problems addressed:
+- Header redundancy and small text competed with the board.
+- Variable coaching/feedback changed available board space.
+- Four equal-weight actions diluted the primary help action.
+- Light card styling conflicted with the cosmic gem board.
+- Later levels contain eight targets and require compact progress indicators.
+
+Result:
+- Fullscreen navy cosmic play UI; no surrounding phone card.
+- Compact header and progress; stable board region; separate message region.
+- Thumb dock: Undo, prominent Hint, Menu. Restart/Album/Settings/Help remain accessible in Menu.
+- Landscape places progress left and actions right; safe-area insets respected.
+- Compact eight-slot progress indicators retain accessible labels.
+- Desktop remains 7x5; mobile remains 4x5. No save schema or engine changes.
+
+Grid comparison (layout estimates, not playtested alternative game rules):
+Viewport      4x5 cell    4x6 cell    5x6 cell
+320x568       52 px       42 px       43 px
+390x844       85 px       74 px       67 px
+Retain 4x5 to preserve readable kanji and >=44 px touch targets on small phones.
+
+Validation:
+- Touch emulation at 320x568, 360x640, 390x844, 768x1024 and 844x390.
+- Stable board after coach dismissal; no horizontal overflow; visible action dock.
+- Real engine movement and menu/navigation preserve progress.
+- Portrait/landscape rotation and reload preserve board; menu Help/Settings/Restart operate.
+- Eight-target levels and quick-discovery notices fit at 320/390/844 widths.
+- Long discovery popups, study/save isolation and gem focus/background checks pass.
+- Reduced-motion behavior preserved. Desktop screenshot reviewed.
+
+Limits: browser emulation does not prove comfort or frame rate on physical phones. Human playtests and real-device safe-area/browser-chrome testing remain required before release. Extremely short viewports may scroll to preserve touch size.

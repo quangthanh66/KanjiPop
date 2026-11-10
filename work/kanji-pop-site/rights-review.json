@@ -1,0 +1,121 @@
+{
+  "reviewedAt": "2026-11-07",
+  "reviewType": "AI source-backed technical provenance and license review",
+  "commercialClearance": "not-issued",
+  "scope": "Local dist assets, declarations and direct primary license sources; no publication, outreach, purchase, font download or runtime changes performed.",
+  "framework": {
+    "name": "Compliance Auditor — agency-agents",
+    "url": "https://github.com/msitarzewski/agency-agents/blob/main/security/security-compliance-auditor.md",
+    "application": "Scoped evidence collection, current versus target state, remediation and verification; no SOC2/ISO certification or legal interpretation claimed."
+  },
+  "findings": [
+    {
+      "id": "lucide",
+      "status": "license-identified-notice-present",
+      "evidence": "dist/lucide.min.js header declares lucide v1.8.0 - ISC. dist/lucide-LICENSE.txt includes ISC notice and Feather-derived icon MIT notice. Primary v1.8.0 license corroborates both notices.",
+      "sources": [
+        "https://raw.githubusercontent.com/lucide-icons/lucide/1.8.0/LICENSE"
+      ],
+      "action": "Keep complete notice with distribution; record version and local checksum. No user choice needed to retain required notices.",
+      "limits": "Full minified binary was not byte-compared to an official release artifact; copyright grants assessed from identified license, not all code provenance."
+    },
+    {
+      "id": "fonts",
+      "status": "self-hosted-binaries-pinned-license-notices-retained",
+      "evidence": "41 WOFF2 subset files downloaded from official fonts.gstatic.com, total 1082584 bytes; Nunito CDN v32 and Noto Sans JP CDN v57. Exact URLs/SHA256 and matching official family OFL notices recorded in font-provenance.json. Runtime integration of fonts.css is performed by parent agent.",
+      "sources": [
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/nunito/OFL.txt",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/notosansjp/OFL.txt"
+      ],
+      "action": "Replace Google Fonts link in index.html with local fonts.css, preserve OFL notices, and rerun glyph coverage when course content changes.",
+      "limits": "CDN version identifiers and binary SHA256 pin exact resources; internal semantic font version not independently extracted. Existing rare component 𠂇 remains rendered as SVG. Browser loaded representative Vietnamese/Japanese glyphs as local custom fonts with external font requests blocked. No overall commercial clearance issued."
+    },
+    {
+      "id": "jlptsensei",
+      "status": "reuse-permission-not-established",
+      "evidence": "n5-data.js cites JLPT Sensei as the N5 list reference. Current primary terms reserve material rights, permit personal access subject to restrictions, and prohibit republishing/copying/redistribution. The project holds curated local strings; whether any protected source expression or selection was copied is not established by the citation alone.",
+      "sources": [
+        "https://jlptsensei.com/terms-and-conditions/",
+        "https://jlptsensei.com/jlpt-n5-kanji-list/"
+      ],
+      "action": "Maintain a provenance record for each locally authored explanation/example. Do not import or reproduce source lessons, examples or illustrations under an assumption that citation grants permission. Resolve imported protected material by permission or independently authored replacement.",
+      "limits": "No claim of infringement or determination about copyrightability of individual Kanji/basic facts is made. No request for permission has been sent."
+    },
+    {
+      "id": "cjkvi",
+      "status": "file-specific-license-review-required-if-data-copied",
+      "evidence": "CJKVI README says ids.txt derives from CHISE and follows its terms, distinguishes an extension file, and describes other data as GPLv2. Runtime has local recipes and a reference link; no IDS database file was found in dist.",
+      "sources": [
+        "https://raw.githubusercontent.com/cjkvi/cjkvi-ids/master/README.md",
+        "https://www.chise.org/ids/"
+      ],
+      "action": "Identify exact source file/revision and any copied or derived data before distributing it; retain applicable notices and satisfy that file's terms. Use as a factual cross-check separately from an explicit data-import pipeline.",
+      "limits": "Do not label the entire game GPL merely because it links to CJKVI. Exact CHISE file license obligations are not resolved by CJKVI README alone."
+    },
+    {
+      "id": "art-and-audio",
+      "status": "implementation-observed-provenance-not-confirmed",
+      "evidence": "gem-art.js generates gemstone SVGs, cosmos.svg is local vector markup, fusion-fx.js implements effects and n5-game.js synthesizes oscillator audio. No supplied PopCap raster reference files or sampled audio tracks appear in dist. User references explicitly sought visual similarity to PopCap gems.",
+      "sources": [],
+      "action": "Keep authorship/history evidence; compare final gem silhouettes, faceting, palette, UI identity and sound as a whole. Produce a distinct original art direction before commercial release if provenance or similarity remains uncertain.",
+      "limits": "Procedural rendering is not proof that a visual design is original. No legal clearance, trademark availability search or infringement finding is issued."
+    }
+  ],
+  "userDecisions": [
+    {
+      "id": "content-provenance",
+      "question": "Chọn hướng xây bộ nội dung để có thể phát hành thương mại sau này?",
+      "options": [
+        {
+          "id": "independent",
+          "recommended": true,
+          "label": "Nội dung biên soạn riêng + nguồn có giấy phép rõ",
+          "tradeoff": "Giữ cơ chế và danh mục sơ cấp; tự viết lời giải thích/ví dụ, ghi nguồn đối chiếu từng mục. Cần thêm công biên tập, tránh phụ thuộc quyền sao chép giáo trình bên ngoài."
+        },
+        {
+          "id": "permission",
+          "recommended": false,
+          "label": "Xin quyền dùng nội dung nguồn",
+          "tradeoff": "Giữ phần thực sự lấy từ nguồn khi có cho phép rõ; có thể phát sinh phí và thời gian chờ. Chưa gửi liên hệ, chỉ chuẩn bị hồ sơ nếu được chọn."
+        },
+        {
+          "id": "licensed-dataset",
+          "recommended": false,
+          "label": "Dùng bộ dữ liệu được cấp phép và đáp ứng điều kiện",
+          "tradeoff": "Dễ mở rộng hơn nhưng phải chọn bộ cụ thể, kiểm tra attribution/share-alike/GPL theo từng dữ liệu và cách phân phối trước khi nhập."
+        }
+      ]
+    },
+    {
+      "id": "visual-identity",
+      "question": "Chọn hướng xử lý bộ đá lấy cảm hứng từ PopCap trước khi thương mại hóa?",
+      "options": [
+        {
+          "id": "original-variant",
+          "recommended": true,
+          "label": "Giữ motif đá quý, tạo phong cách riêng",
+          "tradeoff": "Giữ màu/hình ghép và độ trong trẻo; phát triển facet, viền, ánh sáng, nền và thương hiệu riêng. Cần duyệt mẫu trước khi thay toàn bộ."
+        },
+        {
+          "id": "local-only-until-reviewed",
+          "recommended": false,
+          "label": "Giữ bản hiện tại để thử local",
+          "tradeoff": "Không mất thời gian đổi art lúc kiểm chứng gameplay; quyền nguồn và mức độ tương đồng vẫn là mục chờ trước phát hành."
+        },
+        {
+          "id": "licensed-pack",
+          "recommended": false,
+          "label": "Chọn bộ asset có giấy phép thương mại",
+          "tradeoff": "Có thể tiết kiệm công vẽ nhưng cần tìm bộ hợp chữ Kanji, kiểm tra license và chi phí; không tự mua khi chưa chọn gói cụ thể."
+        }
+      ]
+    }
+  ],
+  "safeNextActions": [
+    "Retain existing Lucide license notices and record declared v1.8.0.",
+    "Pin and self-host approved font families with their matching OFL notices; no font-family replacement is necessary.",
+    "Keep source-backed AI review separate from owner provenance confirmation and final commercial clearance.",
+    "Record explicit original authorship or licensed origin per new content/art entry.",
+    "Exclude unused legacy runtime files from any later release package after dependency checks."
+  ]
+}

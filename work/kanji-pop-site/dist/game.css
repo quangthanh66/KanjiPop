@@ -1,0 +1,28 @@
+html,body{margin:0;min-height:100%;background:#dff5ff}body{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+#kanji-pop button{cursor:pointer}#kanji-pop button:disabled{cursor:default}
+#kanji-pop .kp-kanji-card{width:100%;display:block;cursor:pointer;appearance:none;font-family:inherit}
+#kanji-pop .kp-kanji-card.selected{border-color:#8653e5;box-shadow:0 4px #6f42c0,0 0 0 2px #c4acff;background:linear-gradient(#fff,#f7edff)}
+#kanji-pop .kp-kanji-card.selected .kp-hole{border-color:#9e73e0;background:#f0e4ff;color:#8a5bc3}
+#kanji-pop .kp-kanji-card:disabled{cursor:default;opacity:1}
+#kanji-pop .kp-kanji-card .kp-char-area{display:block;max-width:100%}
+#kanji-pop .kp-kanji-card .kp-meaning{white-space:normal;min-height:18px}
+#kanji-pop .kp-kanji-card .kp-full{clip-path:inset(0 49% 0 0)}
+#kanji-pop .kp-kanji-card.solved .kp-full,#kanji-pop .kp-kanji-card.revealed .kp-full{clip-path:none}
+#kanji-pop .kp-kanji-card.revealed .kp-hole{display:none}
+#kanji-pop .kp-kanji-card.revealed .kp-full{color:#7953ac}
+#kanji-pop .kp-piece.failed{opacity:.45;filter:saturate(.4)}
+#kanji-pop .kp-piece.empty{font-family:Nunito,sans-serif;font-size:30px}
+#kanji-pop .kp-piece:not(:disabled):hover{filter:brightness(1.06)}
+#kanji-pop .kp-feedback{min-height:48px;line-height:1.4}
+#kanji-pop .kp-feedback.error{color:#a74636}
+#kanji-pop .kp-bottom{padding-top:17px}
+#kanji-pop .kp-streak-note{font-size:12px;line-height:1.5;color:#7b6b54;margin-bottom:14px}
+#kanji-pop .kp-empty-star{color:#d9cbae;-webkit-text-stroke:1px #b7a88d}
+#kanji-pop .kp-learned b{letter-spacing:6px}
+#kanji-pop .kp-kanji-card.wrong{animation:kp-shake .35s ease}
+#kanji-pop .kp-kanji-card.just-solved{animation:kp-pop .38s ease}
+#kanji-pop .kp-kanji-card.solved{animation:none}
+#kanji-pop .kp-kanji-card.solved.just-solved{animation:kp-pop .38s ease}
+@keyframes kp-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+@media(max-width:370px){#kanji-pop .kp-relax{max-width:122px;text-align:center;line-height:1.3}#kanji-pop .kp-char-area{font-size:65px}#kanji-pop .kp-tools{padding-left:4px;padding-right:4px}}
+@media(prefers-reduced-motion:reduce){#kanji-pop .kp-kanji-card.wrong,#kanji-pop .kp-kanji-card.solved.just-solved{animation:none}}

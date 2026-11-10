@@ -1,0 +1,67 @@
+#kanji-pop .play-objective{color:#174c76;font-size:12px;font-weight:800;text-align:center;margin:8px 0 3px;line-height:1.4}
+#kanji-pop #coach{display:flex;gap:10px;align-items:center;justify-content:space-between;background:#fff9df;border:2px solid #fff;border-radius:14px;padding:8px 12px;margin:7px 0;color:#405576;font-size:13px}
+#kanji-pop #coach b{color:#8051b9;margin-right:5px}
+#kanji-pop #coach[hidden],#kanji-pop #quick-card[hidden]{display:none}
+#kanji-pop #coach button,#kanji-pop #quick-card button{background:#f3e8ff;border:0;border-radius:9px;color:#624092;font:800 12px 'Nunito',sans-serif;padding:10px;min-height:40px;cursor:pointer;white-space:nowrap}
+#kanji-pop#kanji-pop button.board-tile.mission-gem .jewel-art{filter:drop-shadow(0 0 1px #fff) drop-shadow(0 0 3px #fff8c9a0) saturate(1.13) brightness(1.08)}
+#kanji-pop#kanji-pop button.board-tile.partner-glow .jewel-art{filter:drop-shadow(0 0 3px #fff) drop-shadow(0 0 10px #fff6af) brightness(1.2)}
+#kanji-pop#kanji-pop button.board-tile.coach-tile .jewel-art{animation:coach-glow 1.1s ease-in-out infinite;filter:drop-shadow(0 0 6px #fff8a7)}
+#kanji-pop#kanji-pop .board-cell.coach-hole{border-color:#fff4b0;background:#ffd96830}
+#kanji-pop#kanji-pop button.board-tile.will-shift .jewel-art{filter:drop-shadow(0 0 5px #e8a8ff) brightness(1.2)}
+@keyframes coach-glow{50%{filter:drop-shadow(0 0 12px #fff8b2) brightness(1.4)}}
+#kanji-pop #quick-card{display:flex;align-items:center;justify-content:center;gap:9px;background:#ffffffd9;border:1px solid white;border-radius:12px;padding:5px 9px;margin:6px 0;font-size:13px;color:#315979}
+#kanji-pop #quick-card b{font-size:21px;margin-right:5px}
+#kanji-pop .experience-settings{max-width:510px;text-align:left}
+#kanji-pop .experience-settings label{display:flex;flex-direction:column;gap:5px;font-size:13px;font-weight:800;margin:11px 0;color:#315979}
+#kanji-pop .experience-settings select,#kanji-pop .experience-settings textarea{font:700 14px 'Nunito',sans-serif;color:#234c73;background:#fff;border:1px solid #a8c9dc;border-radius:10px;padding:9px;min-height:44px;width:100%;box-sizing:border-box}
+#kanji-pop .experience-settings p{font-size:12px;line-height:1.5;color:#57738d}
+#kanji-pop .experience-settings .logging-toggle{flex-direction:row;align-items:center}
+#kanji-pop .experience-settings label[hidden]{display:none}
+#kanji-pop .test-stats{display:flex;justify-content:space-around;gap:8px;margin:14px 0;font-size:24px;text-align:center;color:#5a53a5}
+#kanji-pop .test-stats small{display:block;font-size:10px}
+#kanji-pop .reward-shelf{background:#ffffffb0;border:2px solid white;border-radius:20px;padding:16px;margin:18px 0}
+#kanji-pop .reward-shelf h2{font-size:20px;margin:0 0 12px}
+#kanji-pop .reward-card{display:flex;gap:12px;align-items:center;border-top:1px solid #c9deeb;padding:12px 0;color:#315979}
+#kanji-pop .reward-card>div{flex:1}#kanji-pop .reward-card p{font-size:12px;margin:4px 0}
+#kanji-pop .reward-art{display:grid;place-items:center;flex:0 0 58px;height:58px;border-radius:14px;background:radial-gradient(circle at 35% 30%,#8fdfff,#5057a8 60%,#12254b);font-size:37px;color:#fff}
+#kanji-pop .reward-art.sky-rose{background:radial-gradient(circle at 30% 20%,#ffcfec,#9c5eaf 60%,#273657)}
+#kanji-pop .reward-art.sky-gold{background:radial-gradient(circle at 30% 20%,#fff0af,#aa6c65 60%,#273657)}
+#kanji-pop .reward-card:not(.earned) .reward-art{filter:grayscale(.8);opacity:.6}
+#kanji-pop .reward-card button{background:#7659bf;border:0;color:white;border-radius:10px;padding:9px;min-height:44px;font-weight:800;cursor:pointer}
+#kanji-pop .reward-card button:disabled{opacity:.5;cursor:default}
+#kanji-pop .reward-unlocked{padding:10px;background:#fff3bd;border-radius:12px;font-size:13px;line-height:1.5}
+#kanji-pop#kanji-pop[data-sky="aurora"] .slide-board{background-image:linear-gradient(140deg,#009b8570,transparent 45%,#6839bb65),url('cosmos.svg')}
+#kanji-pop#kanji-pop[data-sky="rose"] .slide-board{background-image:linear-gradient(140deg,#b5329960,transparent 55%,#3e559950),url('cosmos.svg')}
+#kanji-pop#kanji-pop[data-sky="gold"] .slide-board{background-image:linear-gradient(140deg,#bd7c2655,transparent 50%,#60358b65),url('cosmos.svg')}
+/* The two components occupy their written layout before the complete glyph appears. */
+#kanji-pop .composition-parts{position:absolute;left:50%;top:var(--gem-label-y,50%);width:45%;height:43%;transform:translate(-50%,-50%);z-index:3;display:grid;font-family:'Noto Sans JP',sans-serif;color:#fff;font-size:.7em;text-shadow:0 1px 2px #123b5b;animation:composition-exit .3s 1.05s both;pointer-events:none}
+#kanji-pop .composition-parts>span{display:grid;place-items:center;animation:composition-enter .8s ease-out both}
+#kanji-pop .composition-parts>span:nth-child(2){animation-name:composition-enter-right}
+#kanji-pop .composition-parts.lr{grid-template-columns:1fr 1fr}
+#kanji-pop .composition-parts.tb{grid-template-rows:1fr 1fr}
+#kanji-pop .composition-parts.tb>span{font-size:.8em;line-height:1}
+#kanji-pop .composition-parts.enclosed>span,#kanji-pop .composition-parts.upper>span,#kanji-pop .composition-parts.root>span{position:absolute;inset:0}
+#kanji-pop .composition-parts.enclosed>span:first-child{font-size:1.65em}
+#kanji-pop .composition-parts.enclosed>span:last-child{font-size:.55em;translate:0 12%}
+#kanji-pop .composition-parts.upper>span:first-child{font-size:1.4em;translate:-12% -12%}
+#kanji-pop .composition-parts.upper>span:last-child{font-size:.7em;translate:18% 20%}
+#kanji-pop .composition-parts.root>span:first-child{font-size:1.45em}
+#kanji-pop .composition-parts.root>span:last-child{font-size:.8em;translate:0 25%}
+#kanji-pop .composition-parts .part-glyph{width:1em;height:1em}
+#kanji-pop .learning-gem>.result-glyph{animation:composition-result .3s 1.2s both}
+@keyframes composition-enter{from{opacity:0;transform:translate(-35px,-10px)}to{opacity:1;transform:translate(0,0)}}
+@keyframes composition-enter-right{from{opacity:0;transform:translate(35px,10px)}to{opacity:1;transform:translate(0,0)}}
+@keyframes composition-exit{to{opacity:0;visibility:hidden}}
+@keyframes composition-result{from{opacity:0;scale:.85}to{opacity:1;scale:1}}
+@media(max-width:899px){#kanji-pop .play-objective{font-size:10px;margin:5px 0 2px}#kanji-pop #coach{font-size:11px;padding:5px 8px}#kanji-pop #quick-card{font-size:11px}#kanji-pop .reward-card{gap:8px}#kanji-pop .reward-art{flex-basis:45px;height:45px}}
+@media(prefers-reduced-motion:reduce){#kanji-pop .composition-parts{display:none}#kanji-pop .learning-gem>.result-glyph{animation:none}#kanji-pop#kanji-pop button.board-tile.coach-tile .jewel-art{animation:none}}
+#kanji-pop[data-quality="light"] .jewel-glint{animation:none}
+/* Guidance replaces the existing status row instead of stacking another panel. */
+#kanji-pop .play-stage:has(#coach:not([hidden])) .slide-feedback,#kanji-pop .play-stage:has(#quick-card:not([hidden])) .slide-feedback{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);margin:0;padding:0;min-height:0}
+#kanji-pop #coach{padding:4px 10px;margin:5px 0}
+#kanji-pop #coach button{padding:5px 8px}
+#kanji-pop .reward-shelf{grid-column:1/-1}
+#kanji-pop .album-group.chapter-earned{background:linear-gradient(140deg,#fff6dacc,#eefaffb8);border:2px solid #fff3ab;border-radius:22px;padding:16px}
+#kanji-pop .album-seal{font-size:10px;font-weight:900;letter-spacing:.4px;color:#876118;margin:-7px 0 13px}
+@media(min-width:900px){#kanji-pop .play-stage{width:min(100%,1040px,max(620px,calc((100dvh - 200px)*1.4 + 28px)))} }
+@media(max-width:899px){#kanji-pop .play-stage{width:min(100%,max(240px,calc((100dvh - 435px)*.8)));margin-inline:auto}#kanji-pop .play-objective{line-height:1.25}#kanji-pop #coach{gap:4px;font-size:10px;line-height:1.35}}

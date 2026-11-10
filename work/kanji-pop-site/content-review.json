@@ -1,0 +1,939 @@
+{
+  "course": "n5-compose-24-v1",
+  "scope": "24 chữ sơ cấp tham khảo N5; không phải danh sách N5 chính thức hoặc chứng nhận học thuộc.",
+  "references": [
+    {
+      "title": "Danh sách N5 tham khảo · JLPT Sensei",
+      "url": "https://jlptsensei.com/jlpt-n5-kanji-list/"
+    },
+    {
+      "title": "Phạm vi JLPT · FAQ chính thức",
+      "url": "https://www.jlpt.jp/e/faq/"
+    },
+    {
+      "title": "Đối chiếu cấu tạo · CJKVI IDS",
+      "url": "https://github.com/cjkvi/cjkvi-ids"
+    }
+  ],
+  "referenceNote": "Liên kết tham khảo không đồng nghĩa có quyền sao chép dữ liệu thương mại.",
+  "characters": [
+    {
+      "id": "休",
+      "kanji": "休",
+      "parts": [
+        "亻",
+        "木"
+      ],
+      "meaning": "Nghỉ ngơi",
+      "word": "休む",
+      "reading": "やすむ",
+      "translation": "Nghỉ ngơi",
+      "note": "Nhìn bên trái là 亻, bên phải là 木. 亻 là dạng của 人 khi đứng ở bên trái.",
+      "chapter": 0,
+      "compositionType": "modern-shape",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0001375100"
+      ],
+      "wordReadingScope": "whole-example-word",
+      "authorship": "project-authored-vietnamese-note",
+      "sourceReview": "AI-source-checked",
+      "humanReview": "pending",
+      "digest": "7ca337af47d05e6d72672667523127088e95982580c9c5cf610f061aa7e0ee3b",
+      "introducedAt": 1,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewedAt": null
+      },
+      "checks": [
+        "Hình chữ và thành phần",
+        "Vị trí thành phần khi ghép",
+        "Nghĩa và cách đọc trong ví dụ",
+        "Bản dịch tiếng Việt",
+        "Không gây hiểu sai về từ nguyên"
+      ],
+      "flags": [
+        "Xác nhận giải thích biến thể 人 → 亻, tránh coi là chữ đứng độc lập."
+      ]
+    },
+    {
+      "id": "男",
+      "kanji": "男",
+      "parts": [
+        "田",
+        "力"
+      ],
+      "meaning": "Nam giới",
+      "word": "男",
+      "reading": "おとこ",
+      "translation": "Người đàn ông",
+      "note": "Nhìn phần trên là 田; phần dưới là 力.",
+      "chapter": 0,
+      "compositionType": "modern-shape",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0004638500"
+      ],
+      "wordReadingScope": "whole-example-word",
+      "authorship": "project-authored-vietnamese-note",
+      "sourceReview": "AI-source-checked",
+      "humanReview": "pending",
+      "digest": "bb9e03a5d924c91037887eaace441044864b44b5f41618d24cb4f7f1b6c75fae",
+      "introducedAt": 1,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewedAt": null
+      },
+      "checks": [
+        "Hình chữ và thành phần",
+        "Vị trí thành phần khi ghép",
+        "Nghĩa và cách đọc trong ví dụ",
+        "Bản dịch tiếng Việt",
+        "Không gây hiểu sai về từ nguyên"
+      ],
+      "flags": []
+    },
+    {
+      "id": "分",
+      "kanji": "分",
+      "parts": [
+        "八",
+        "刀"
+      ],
+      "meaning": "Chia",
+      "word": "分ける",
+      "reading": "わける",
+      "translation": "Chia, chia ra",
+      "note": "Tìm 八 ở phía trên và 刀 ở phía dưới.",
+      "chapter": 0,
+      "compositionType": "modern-shape",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0006175200"
+      ],
+      "wordReadingScope": "whole-example-word",
+      "authorship": "project-authored-vietnamese-note",
+      "sourceReview": "AI-source-checked",
+      "humanReview": "pending",
+      "digest": "aeed0b53d4023b0ccd352e6962b1729a05927825917b60411badf5bb099c83f2",
+      "introducedAt": 1,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewedAt": null
+      },
+      "checks": [
+        "Hình chữ và thành phần",
+        "Vị trí thành phần khi ghép",
+        "Nghĩa và cách đọc trong ví dụ",
+        "Bản dịch tiếng Việt",
+        "Không gây hiểu sai về từ nguyên"
+      ],
+      "flags": []
+    },
+    {
+      "id": "名",
+      "kanji": "名",
+      "parts": [
+        "夕",
+        "口"
+      ],
+      "meaning": "Tên",
+      "word": "名前",
+      "reading": "なまえ",
+      "translation": "Tên gọi",
+      "note": "夕 nằm phía trên; 口 nằm phía dưới.",
+      "chapter": 0,
+      "compositionType": "modern-shape",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0006666900",
+        "https://a2-2.marugotoweb.jp/en/kanji/vocab/namae/"
+      ],
+      "wordReadingScope": "whole-example-word",
+      "authorship": "project-authored-vietnamese-note",
+      "sourceReview": "AI-source-checked",
+      "humanReview": "pending",
+      "digest": "b30569fa79d93221e0dbc30b9bbfcc4415ebe41ed3bde1fa6db1c797a8545e9e",
+      "introducedAt": 1,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewedAt": null
+      },
+      "checks": [
+        "Hình chữ và thành phần",
+        "Vị trí thành phần khi ghép",
+        "Nghĩa và cách đọc trong ví dụ",
+        "Bản dịch tiếng Việt",
+        "Không gây hiểu sai về từ nguyên"
+      ],
+      "flags": []
+    },
+    {
+      "id": "外",
+      "kanji": "外",
+      "parts": [
+        "夕",
+        "卜"
+      ],
+      "meaning": "Bên ngoài",
+      "word": "外",
+      "reading": "そと",
+      "translation": "Bên ngoài",
+      "note": "Hai phần đứng cạnh nhau: 夕 bên trái và 卜 bên phải.",
+      "chapter": 0,
+      "compositionType": "modern-shape",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0000841200"
+      ],
+      "wordReadingScope": "whole-example-word",
+      "authorship": "project-authored-vietnamese-note",
+      "sourceReview": "AI-source-checked",
+      "humanReview": "pending",
+      "digest": "ee8dd059b6f97bc23a931be057218b88cc7f5219439656535b6e6a7e1b250802",
+      "introducedAt": 2,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewedAt": null
+      },
+      "checks": [
+        "Hình chữ và thành phần",
+        "Vị trí thành phần khi ghép",
+        "Nghĩa và cách đọc trong ví dụ",
+        "Bản dịch tiếng Việt",
+        "Không gây hiểu sai về từ nguyên"
+      ],
+      "flags": []
+    },
+    {
+      "id": "何",
+      "kanji": "何",
+      "parts": [
+        "亻",
+        "可"
+      ],
+      "meaning": "Cái gì",
+      "word": "何",
+      "reading": "なに",
+      "translation": "Cái gì?",
+      "note": "亻 đứng bên trái 可. 亻 là dạng của 人 khi đứng ở bên trái.",
+      "chapter": 0,
+      "compositionType": "modern-shape",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0000641500"
+      ],
+      "wordReadingScope": "whole-example-word",
+      "authorship": "project-authored-vietnamese-note",
+      "sourceReview": "AI-source-checked",
+      "humanReview": "pending",
+      "digest": "8bae307451d73ed5194eb679350a4d5e3b9d30dfebbbc28c81d26d4b06a7c0d3",
+      "introducedAt": 2,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewedAt": null
+      },
+      "checks": [
+        "Hình chữ và thành phần",
+        "Vị trí thành phần khi ghép",
+        "Nghĩa và cách đọc trong ví dụ",
+        "Bản dịch tiếng Việt",
+        "Không gây hiểu sai về từ nguyên"
+      ],
+      "flags": [
+        "Xác nhận giải thích biến thể 人 → 亻, tránh coi là chữ đứng độc lập."
+      ]
+    },
+    {
+      "id": "見",
+      "kanji": "見",
+      "parts": [
+        "目",
+        "儿"
+      ],
+      "meaning": "Nhìn",
+      "word": "見る",
+      "reading": "みる",
+      "translation": "Nhìn, xem",
+      "note": "Phần trên giống 目; phần dưới là 儿.",
+      "chapter": 0,
+      "compositionType": "modern-shape",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0001896200"
+      ],
+      "wordReadingScope": "whole-example-word",
+      "authorship": "project-authored-vietnamese-note",
+      "sourceReview": "AI-source-checked",
+      "humanReview": "pending",
+      "digest": "620b2d1539c74e4dfcad9c59071bc6f9f05cf5b3c35e2800146568ea53682c7b",
+      "introducedAt": 3,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewedAt": null
+      },
+      "checks": [
+        "Hình chữ và thành phần",
+        "Vị trí thành phần khi ghép",
+        "Nghĩa và cách đọc trong ví dụ",
+        "Bản dịch tiếng Việt",
+        "Không gây hiểu sai về từ nguyên"
+      ],
+      "flags": []
+    },
+    {
+      "id": "国",
+      "kanji": "国",
+      "parts": [
+        "囗",
+        "玉"
+      ],
+      "meaning": "Đất nước",
+      "word": "国",
+      "reading": "くに",
+      "translation": "Đất nước",
+      "note": "玉 nằm trong khung 囗. Khung 囗 là thành phần bao ngoài, khác chữ 口.",
+      "chapter": 0,
+      "compositionType": "modern-shape",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0002372600"
+      ],
+      "wordReadingScope": "whole-example-word",
+      "authorship": "project-authored-vietnamese-note",
+      "sourceReview": "AI-source-checked",
+      "humanReview": "pending",
+      "digest": "06e2602596f0f9ba12345494dbf6e8a3d063df54a9419a9fd731f3f720e82ecc",
+      "introducedAt": 3,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewedAt": null
+      },
+      "checks": [
+        "Hình chữ và thành phần",
+        "Vị trí thành phần khi ghép",
+        "Nghĩa và cách đọc trong ví dụ",
+        "Bản dịch tiếng Việt",
+        "Không gây hiểu sai về từ nguyên"
+      ],
+      "flags": [
+        "Kiểm tra hình bao quanh trong hoạt ảnh và công thức."
+      ]
+    },
+    {
+      "id": "時",
+      "kanji": "時",
+      "parts": [
+        "日",
+        "寺"
+      ],
+      "meaning": "Thời gian",
+      "word": "時",
+      "reading": "とき",
+      "translation": "Lúc, thời điểm",
+      "note": "日 đứng bên trái; 寺 đứng bên phải.",
+      "chapter": 1,
+      "compositionType": "modern-shape",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0002876900"
+      ],
+      "wordReadingScope": "whole-example-word",
+      "authorship": "project-authored-vietnamese-note",
+      "sourceReview": "AI-source-checked",
+      "humanReview": "pending",
+      "digest": "3f4fbb5e33b0f4e5bdc6c2c4f05b5e0d76d7b2b01d0a2f28deaf183186091287",
+      "introducedAt": 6,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewedAt": null
+      },
+      "checks": [
+        "Hình chữ và thành phần",
+        "Vị trí thành phần khi ghép",
+        "Nghĩa và cách đọc trong ví dụ",
+        "Bản dịch tiếng Việt",
+        "Không gây hiểu sai về từ nguyên"
+      ],
+      "flags": []
+    },
+    {
+      "id": "間",
+      "kanji": "間",
+      "parts": [
+        "門",
+        "日"
+      ],
+      "meaning": "Khoảng",
+      "word": "間",
+      "reading": "あいだ",
+      "translation": "Khoảng, khoảng giữa",
+      "note": "日 nằm dưới phần mái và giữa hai bên của 門; phía dưới vẫn mở.",
+      "chapter": 1,
+      "compositionType": "modern-shape",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0001083500"
+      ],
+      "wordReadingScope": "whole-example-word",
+      "authorship": "project-authored-vietnamese-note",
+      "sourceReview": "AI-source-checked",
+      "humanReview": "pending",
+      "digest": "819506e7507b22ced1d5d5392190ac14c71d353160d3bb9b2b83d3f54545b8b2",
+      "introducedAt": 6,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewedAt": null
+      },
+      "checks": [
+        "Hình chữ và thành phần",
+        "Vị trí thành phần khi ghép",
+        "Nghĩa và cách đọc trong ví dụ",
+        "Bản dịch tiếng Việt",
+        "Không gây hiểu sai về từ nguyên"
+      ],
+      "flags": [
+        "Kiểm tra hình bao quanh trong hoạt ảnh và công thức."
+      ]
+    },
+    {
+      "id": "聞",
+      "kanji": "聞",
+      "parts": [
+        "門",
+        "耳"
+      ],
+      "meaning": "Nghe",
+      "word": "聞く",
+      "reading": "きく",
+      "translation": "Nghe, hỏi",
+      "note": "耳 nằm dưới phần mái và giữa hai bên của 門; phía dưới vẫn mở.",
+      "chapter": 1,
+      "compositionType": "modern-shape",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0006190200"
+      ],
+      "wordReadingScope": "whole-example-word",
+      "authorship": "project-authored-vietnamese-note",
+      "sourceReview": "AI-source-checked",
+      "humanReview": "pending",
+      "digest": "87a8011f12bc44cc91f932e7f690670a97ecb63e927280cd50545ed128782113",
+      "introducedAt": 7,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewedAt": null
+      },
+      "checks": [
+        "Hình chữ và thành phần",
+        "Vị trí thành phần khi ghép",
+        "Nghĩa và cách đọc trong ví dụ",
+        "Bản dịch tiếng Việt",
+        "Không gây hiểu sai về từ nguyên"
+      ],
+      "flags": [
+        "Kiểm tra hình bao quanh trong hoạt ảnh và công thức."
+      ]
+    },
+    {
+      "id": "話",
+      "kanji": "話",
+      "parts": [
+        "言",
+        "舌"
+      ],
+      "meaning": "Nói chuyện",
+      "word": "話す",
+      "reading": "はなす",
+      "translation": "Nói, nói chuyện",
+      "note": "Nhìn 言 ở nửa trái, 舌 ở nửa phải.",
+      "chapter": 1,
+      "compositionType": "modern-shape",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0007407700"
+      ],
+      "wordReadingScope": "whole-example-word",
+      "authorship": "project-authored-vietnamese-note",
+      "sourceReview": "AI-source-checked",
+      "humanReview": "pending",
+      "digest": "f4d00b6cb44526ee8a5e86a40193eded546383167fa36b2698117c14e6c5230e",
+      "introducedAt": 7,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewedAt": null
+      },
+      "checks": [
+        "Hình chữ và thành phần",
+        "Vị trí thành phần khi ghép",
+        "Nghĩa và cách đọc trong ví dụ",
+        "Bản dịch tiếng Việt",
+        "Không gây hiểu sai về từ nguyên"
+      ],
+      "flags": []
+    },
+    {
+      "id": "語",
+      "kanji": "語",
+      "parts": [
+        "言",
+        "吾"
+      ],
+      "meaning": "Ngôn ngữ",
+      "word": "日本語",
+      "reading": "にほんご",
+      "translation": "Tiếng Nhật",
+      "note": "Nhìn 言 ở nửa trái, 吾 ở nửa phải.",
+      "chapter": 1,
+      "compositionType": "modern-shape",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0002110200",
+        "https://words.marugotoweb.jp/static_contents/pc/about/about.php?lang=en"
+      ],
+      "wordReadingScope": "whole-example-word",
+      "authorship": "project-authored-vietnamese-note",
+      "sourceReview": "AI-source-checked",
+      "humanReview": "pending",
+      "digest": "c1f87be96b1609e58353dd0c3767fee0671de4879d1cc525312527b296f65e2f",
+      "introducedAt": 8,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewedAt": null
+      },
+      "checks": [
+        "Hình chữ và thành phần",
+        "Vị trí thành phần khi ghép",
+        "Nghĩa và cách đọc trong ví dụ",
+        "Bản dịch tiếng Việt",
+        "Không gây hiểu sai về từ nguyên"
+      ],
+      "flags": []
+    },
+    {
+      "id": "読",
+      "kanji": "読",
+      "parts": [
+        "言",
+        "売"
+      ],
+      "meaning": "Đọc",
+      "word": "読む",
+      "reading": "よむ",
+      "translation": "Đọc",
+      "note": "Trong chữ 読 hiện nay, 言 đứng bên trái 売.",
+      "chapter": 1,
+      "compositionType": "modern-shape",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0005324000"
+      ],
+      "wordReadingScope": "whole-example-word",
+      "authorship": "project-authored-vietnamese-note",
+      "sourceReview": "AI-source-checked",
+      "humanReview": "pending",
+      "digest": "0f3f0f72eb48d7a1a1ea1a53f3abda9872ec5566e753dc715e3cd06708a520a3",
+      "introducedAt": 8,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewedAt": null
+      },
+      "checks": [
+        "Hình chữ và thành phần",
+        "Vị trí thành phần khi ghép",
+        "Nghĩa và cách đọc trong ví dụ",
+        "Bản dịch tiếng Việt",
+        "Không gây hiểu sai về từ nguyên"
+      ],
+      "flags": []
+    },
+    {
+      "id": "校",
+      "kanji": "校",
+      "parts": [
+        "木",
+        "交"
+      ],
+      "meaning": "Trường học",
+      "word": "学校",
+      "reading": "がっこう",
+      "translation": "Trường học",
+      "note": "木 đứng bên trái 交; hai phần được thu gọn khi ghép.",
+      "chapter": 1,
+      "compositionType": "modern-shape",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0002236900"
+      ],
+      "wordReadingScope": "whole-example-word",
+      "authorship": "project-authored-vietnamese-note",
+      "sourceReview": "AI-source-checked",
+      "humanReview": "pending",
+      "digest": "ee02a7463261948bd2a6aa1585cb720d24640596dda033a2cd3a1d98817df407",
+      "introducedAt": 9,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewedAt": null
+      },
+      "checks": [
+        "Hình chữ và thành phần",
+        "Vị trí thành phần khi ghép",
+        "Nghĩa và cách đọc trong ví dụ",
+        "Bản dịch tiếng Việt",
+        "Không gây hiểu sai về từ nguyên"
+      ],
+      "flags": []
+    },
+    {
+      "id": "友",
+      "kanji": "友",
+      "parts": [
+        "𠂇",
+        "又"
+      ],
+      "meaning": "Bạn bè",
+      "word": "友達",
+      "reading": "ともだち",
+      "translation": "Bạn bè",
+      "note": "Phần 𠂇 ôm phía trên và bên trái của 又.",
+      "chapter": 1,
+      "compositionType": "modern-shape",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0006843100"
+      ],
+      "wordReadingScope": "whole-example-word",
+      "authorship": "project-authored-vietnamese-note",
+      "sourceReview": "AI-source-checked",
+      "humanReview": "pending",
+      "digest": "671f297552db8690c6c47cb1ec53b6ec246abe520d3a1d2e45f16906a7a1dc05",
+      "introducedAt": 9,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewedAt": null
+      },
+      "checks": [
+        "Hình chữ và thành phần",
+        "Vị trí thành phần khi ghép",
+        "Nghĩa và cách đọc trong ví dụ",
+        "Bản dịch tiếng Việt",
+        "Không gây hiểu sai về từ nguyên"
+      ],
+      "flags": [
+        "Đối chiếu hình thành phần hiếm với glyph SVG trong game."
+      ]
+    },
+    {
+      "id": "二",
+      "kanji": "二",
+      "parts": [
+        "一",
+        "一"
+      ],
+      "meaning": "Hai",
+      "word": "二",
+      "reading": "に",
+      "translation": "Số hai",
+      "note": "Hai nét ngang xếp thành hai tầng; nét dưới dài hơn nét trên.",
+      "chapter": 2,
+      "compositionType": "modern-shape",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0005418000"
+      ],
+      "wordReadingScope": "whole-example-word",
+      "authorship": "project-authored-vietnamese-note",
+      "sourceReview": "AI-source-checked",
+      "humanReview": "pending",
+      "digest": "5ecaa12884e601a8a2329837b870a96e48c7725d789c0c7555109b977ae500fc",
+      "introducedAt": 11,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewedAt": null
+      },
+      "checks": [
+        "Hình chữ và thành phần",
+        "Vị trí thành phần khi ghép",
+        "Nghĩa và cách đọc trong ví dụ",
+        "Bản dịch tiếng Việt",
+        "Không gây hiểu sai về từ nguyên"
+      ],
+      "flags": [
+        "Tách hình/nét phục vụ ghi nhớ; không gọi đây là nguồn gốc lịch sử của chữ."
+      ]
+    },
+    {
+      "id": "三",
+      "kanji": "三",
+      "parts": [
+        "一",
+        "二"
+      ],
+      "meaning": "Ba",
+      "word": "三",
+      "reading": "さん",
+      "translation": "Số ba",
+      "note": "Thêm một nét ngang phía trên 二 để có ba tầng ngang.",
+      "chapter": 2,
+      "compositionType": "modern-shape",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0002622000"
+      ],
+      "wordReadingScope": "whole-example-word",
+      "authorship": "project-authored-vietnamese-note",
+      "sourceReview": "AI-source-checked",
+      "humanReview": "pending",
+      "digest": "ff4704fb1b27043def6cdd7b25eabfc36c5add34cfc30c755c186df2e3e09df7",
+      "introducedAt": 11,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewedAt": null
+      },
+      "checks": [
+        "Hình chữ và thành phần",
+        "Vị trí thành phần khi ghép",
+        "Nghĩa và cách đọc trong ví dụ",
+        "Bản dịch tiếng Việt",
+        "Không gây hiểu sai về từ nguyên"
+      ],
+      "flags": [
+        "Tách hình/nét phục vụ ghi nhớ; không gọi đây là nguồn gốc lịch sử của chữ."
+      ]
+    },
+    {
+      "id": "天",
+      "kanji": "天",
+      "parts": [
+        "一",
+        "大"
+      ],
+      "meaning": "Bầu trời",
+      "word": "天",
+      "reading": "てん",
+      "translation": "Trời, bầu trời",
+      "note": "Nhìn một nét ngang ở phía trên hình 大.",
+      "chapter": 2,
+      "compositionType": "modern-shape",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0005033300"
+      ],
+      "wordReadingScope": "whole-example-word",
+      "authorship": "project-authored-vietnamese-note",
+      "sourceReview": "AI-source-checked",
+      "humanReview": "pending",
+      "digest": "3b19da8409a52b25436f414809a2d102f52ea6ecd06231144b44b2bf41f10052",
+      "introducedAt": 12,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewedAt": null
+      },
+      "checks": [
+        "Hình chữ và thành phần",
+        "Vị trí thành phần khi ghép",
+        "Nghĩa và cách đọc trong ví dụ",
+        "Bản dịch tiếng Việt",
+        "Không gây hiểu sai về từ nguyên"
+      ],
+      "flags": [
+        "Tách hình/nét phục vụ ghi nhớ; không gọi đây là nguồn gốc lịch sử của chữ."
+      ]
+    },
+    {
+      "id": "本",
+      "kanji": "本",
+      "parts": [
+        "木",
+        "一"
+      ],
+      "meaning": "Sách; gốc",
+      "word": "本",
+      "reading": "ほん",
+      "translation": "Quyển sách",
+      "note": "Mẹo nhìn hình: thêm nét ngang ngắn vào phần gốc của 木. Nét này cắt qua thân cây.",
+      "chapter": 2,
+      "compositionType": "visual-mnemonic",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0006505700"
+      ],
+      "wordReadingScope": "whole-example-word",
+      "authorship": "project-authored-vietnamese-note",
+      "sourceReview": "AI-source-checked",
+      "humanReview": "pending",
+      "digest": "57b0fdd7ae7fe6994a135c221acdbc128a28ef46d2a6c01b159d565c16b3baf7",
+      "introducedAt": 12,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewedAt": null
+      },
+      "checks": [
+        "Hình chữ và thành phần",
+        "Vị trí thành phần khi ghép",
+        "Nghĩa và cách đọc trong ví dụ",
+        "Bản dịch tiếng Việt",
+        "Không gây hiểu sai về từ nguyên"
+      ],
+      "flags": [
+        "Tách hình/nét phục vụ ghi nhớ; không gọi đây là nguồn gốc lịch sử của chữ."
+      ]
+    },
+    {
+      "id": "白",
+      "kanji": "白",
+      "parts": [
+        "丿",
+        "日"
+      ],
+      "meaning": "Trắng",
+      "word": "白い",
+      "reading": "しろい",
+      "translation": "Trắng; có màu trắng",
+      "note": "Mẹo nhìn hình: tìm nét phẩy ngắn ở phía trên hình 日. Đây không phải giải thích nguồn gốc chữ.",
+      "chapter": 2,
+      "compositionType": "visual-mnemonic",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0005607600"
+      ],
+      "wordReadingScope": "whole-example-word",
+      "authorship": "project-authored-vietnamese-note",
+      "sourceReview": "AI-source-checked",
+      "humanReview": "pending",
+      "digest": "e35374cfe3b448e454583fe31e74245fa67aa44e10a6184c1d249cea488902bc",
+      "introducedAt": 13,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewedAt": null
+      },
+      "checks": [
+        "Hình chữ và thành phần",
+        "Vị trí thành phần khi ghép",
+        "Nghĩa và cách đọc trong ví dụ",
+        "Bản dịch tiếng Việt",
+        "Không gây hiểu sai về từ nguyên"
+      ],
+      "flags": [
+        "Tách hình/nét phục vụ ghi nhớ; không gọi đây là nguồn gốc lịch sử của chữ."
+      ]
+    },
+    {
+      "id": "百",
+      "kanji": "百",
+      "parts": [
+        "一",
+        "白"
+      ],
+      "meaning": "Một trăm",
+      "word": "百",
+      "reading": "ひゃく",
+      "translation": "Số một trăm",
+      "note": "Nhìn một nét ngang ở phía trên 白.",
+      "chapter": 2,
+      "compositionType": "modern-shape",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0005920000"
+      ],
+      "wordReadingScope": "whole-example-word",
+      "authorship": "project-authored-vietnamese-note",
+      "sourceReview": "AI-source-checked",
+      "humanReview": "pending",
+      "digest": "b2a2920f6acaf76cf5816ecd38ffde09c3a870b20a09de6ccda7651b538f9476",
+      "introducedAt": 13,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewedAt": null
+      },
+      "checks": [
+        "Hình chữ và thành phần",
+        "Vị trí thành phần khi ghép",
+        "Nghĩa và cách đọc trong ví dụ",
+        "Bản dịch tiếng Việt",
+        "Không gây hiểu sai về từ nguyên"
+      ],
+      "flags": [
+        "Tách hình/nét phục vụ ghi nhớ; không gọi đây là nguồn gốc lịch sử của chữ."
+      ]
+    },
+    {
+      "id": "左",
+      "kanji": "左",
+      "parts": [
+        "𠂇",
+        "工"
+      ],
+      "meaning": "Bên trái",
+      "word": "左",
+      "reading": "ひだり",
+      "translation": "Bên trái",
+      "note": "Phần 𠂇 ôm phía trên và bên trái của 工.",
+      "chapter": 2,
+      "compositionType": "modern-shape",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0002452500"
+      ],
+      "wordReadingScope": "whole-example-word",
+      "authorship": "project-authored-vietnamese-note",
+      "sourceReview": "AI-source-checked",
+      "humanReview": "pending",
+      "digest": "a1ca8f2381dd76cb31e60a9ff9720a3b25736f52fd5fb1f3d9276b443a6c3856",
+      "introducedAt": 14,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewedAt": null
+      },
+      "checks": [
+        "Hình chữ và thành phần",
+        "Vị trí thành phần khi ghép",
+        "Nghĩa và cách đọc trong ví dụ",
+        "Bản dịch tiếng Việt",
+        "Không gây hiểu sai về từ nguyên"
+      ],
+      "flags": [
+        "Đối chiếu hình thành phần hiếm với glyph SVG trong game."
+      ]
+    },
+    {
+      "id": "右",
+      "kanji": "右",
+      "parts": [
+        "𠂇",
+        "口"
+      ],
+      "meaning": "Bên phải",
+      "word": "右",
+      "reading": "みぎ",
+      "translation": "Bên phải",
+      "note": "Phần 𠂇 ôm phía trên và bên trái của 口.",
+      "chapter": 2,
+      "compositionType": "modern-shape",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0000308000"
+      ],
+      "wordReadingScope": "whole-example-word",
+      "authorship": "project-authored-vietnamese-note",
+      "sourceReview": "AI-source-checked",
+      "humanReview": "pending",
+      "digest": "b4f22234fd84e245f11010550e2cf61f7f09473f6d22914cf2a538efae0669d1",
+      "introducedAt": 14,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewedAt": null
+      },
+      "checks": [
+        "Hình chữ và thành phần",
+        "Vị trí thành phần khi ghép",
+        "Nghĩa và cách đọc trong ví dụ",
+        "Bản dịch tiếng Việt",
+        "Không gây hiểu sai về từ nguyên"
+      ],
+      "flags": [
+        "Đối chiếu hình thành phần hiếm với glyph SVG trong game."
+      ]
+    }
+  ]
+}

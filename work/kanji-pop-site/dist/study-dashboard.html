@@ -1,0 +1,12 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kanji Pop · Quản lý chơi thử local</title><link rel="stylesheet" href="fonts.css"><link rel="stylesheet" href="study-dashboard.css"></head><body>
+<main><header><a href="/">KANJI POP ✦</a><span>NGƯỜI ĐIỀU PHỐI · LOCALHOST</span></header>
+<h1>Hiểu người chơi, từng phiên một.</h1><p class="lead">Tổng hợp các phiên thử riêng và ghi nhận quan sát thật. Không thay đổi tiến trình game chính.</p>
+<section class="toolbar" aria-label="Nguồn báo cáo"><button id="load-local">Đọc các phiên trên máy</button><label class="file-button">Nhập báo cáo JSON<input type="file" id="import-files" multiple accept=".json,application/json"></label><button id="export-report">Xuất tổng hợp</button><button id="print-report">In báo cáo</button></section>
+<p id="status" role="status">Chưa đọc dữ liệu. File nhập chỉ nằm trong bộ nhớ trang này. Giữ file phiên gốc để nhập lại; bản tổng hợp dùng để đọc kết quả, không thay thế file gốc.</p>
+<section class="metrics" id="metrics" aria-label="Số liệu quan sát"></section>
+<p class="caution">Một phiên không mặc nhiên là một người. Không có dữ liệu không có nghĩa là thất bại. Thời gian ghép đầu loại trừ tab ẩn, nhưng gồm đọc hướng dẫn.</p>
+<section class="workspace"><div><h2>Các phiên thử</h2><div id="sessions"><p>Chưa có phiên được chọn.</p></div></div>
+<section id="detail" aria-label="Phiên đang xem"><h2>Chọn một phiên để xem</h2></section></section>
+<details><summary>Kịch bản cho người điều phối</summary><ol><li>Mở game → Tùy chỉnh → Mở phiên chơi thử riêng. Mỗi người dùng một phiên mới.</li><li>Để họ tự chơi ba màn đầu; không giải thích thêm trước khi quan sát.</li><li>Sau khi chơi, hỏi lại luật bằng câu hỏi mở. Ghi kết quả quan sát, không chọn thay người chơi.</li><li>Ghi riêng việc hết giờ, lỗi kỹ thuật và tự muốn dừng.</li><li>Hỏi nhớ chữ/nghĩa nào trước khi mở album, rồi hỏi lại vào hôm sau nếu có thể.</li><li>Xuất báo cáo từng phiên và tổng hợp; mẫu nhỏ dùng để tìm vấn đề, không kết luận hiệu quả học tập.</li></ol></details>
+<label id="export-fallback" hidden>JSON dự phòng để sao chép<textarea id="export-json" readonly rows="6"></textarea></label>
+</main><script src="study-report.js"></script><script src="study-cohort.js"></script><script src="study-dashboard.js"></script></body></html>

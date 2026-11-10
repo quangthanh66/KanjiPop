@@ -1,0 +1,9 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-11-08",
+  "prompt": "Use case: stylized-concept. Asset type: production 2D game VFX flipbook sprite atlas for a purple magical energy ribbon. One square image, an EXACT 4-column by 4-row grid, 16 equally sized cells, no gutters drawn, no outlines, no labels. Each cell contains one successive frame of the SAME horizontal magical wisp, flowing LEFT TO RIGHT. Every wisp is centered within its cell, spans 70% of cell width and 35% of cell height, fully contained with generous transparent margins. A luminous amethyst and violet liquid-smoke ribbon, complex silky translucent curls, bright lilac inner veins, tapered wispy trailing end at left, small luminous leading curl at right, sparse tiny magic dust suspended near it. Natural painterly game VFX material, convincing fine fluid details and distinct light and dark density, no hard wire lines. The 16 frames animate subtle curling turbulence, retaining identical scale, position and direction, suitable for cyclic playback; final frame close to first. Palette ONLY deep violet, amethyst, lavender and a little white. TRUE transparent background with alpha. No black background, no checkerboard painted into artwork. No gemstones, stars, symbols, runes, icons, text, circles, borders or entire rings. The atlas will be played as a flipbook and each moving ribbon wrapped along a gemstone perimeter in code.",
+  "source": "magic-ribbon-atlas.png",
+  "runtime": "../../dist/vfx-study-assets/magic-ribbon-atlas.webp",
+  "processing": "Resized to 1024 square and encoded WebP, alpha preserved. Frame extraction and edge fading happen in the preview canvas at runtime.",
+  "scope": "Local comparison prototype, not selected for the production game."
+}

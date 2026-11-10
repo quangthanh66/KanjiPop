@@ -1,0 +1,20 @@
+#kanji-pop .fusion-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:7;border-radius:10px}
+.fusion-overlay{position:fixed;inset:0;z-index:1000;pointer-events:none;isolation:isolate;overflow:visible}
+.fusion-overlay .fusion-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.fusion-overlay .result-gem{position:absolute;display:block;background:none;border:0;box-shadow:none;overflow:visible;font-family:'Noto Sans JP',sans-serif;animation:fusion-jewel-arrive 1s .5s both;z-index:2}
+.fusion-overlay .jewel-art{position:absolute;inset:0;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 0 16px #d8f5ff99) saturate(1.13) brightness(1.08)}
+.fusion-overlay .result-glyph{position:absolute;top:var(--gem-label-y,50%);left:50%;transform:translate(-50%,-50%);font-size:var(--gem-glyph-size,24px);font-weight:700;line-height:1;color:#fff;text-shadow:0 1px 2px #001429,0 0 3px #001429}
+@keyframes fusion-jewel-arrive{0%{scale:.15;opacity:0;rotate:-12deg}55%{scale:1.17;opacity:1;rotate:3deg}100%{scale:1;opacity:1;rotate:0deg}}
+#kanji-pop .fusion-caption{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);padding:7px 16px;border:1px solid var(--fusion-color);border-radius:30px;background:#080e2bd9;color:var(--fusion-color);font-size:12px;font-weight:900;letter-spacing:2px;white-space:nowrap;z-index:10;animation:fusion-caption-in .5s .35s both;pointer-events:none}
+#kanji-pop .result-gem.pair-result.fusion-result{animation-delay:.5s;animation-duration:1s}
+@keyframes fusion-caption-in{from{opacity:0;translate:0 8px}to{opacity:1;translate:0 0}}
+@media(prefers-reduced-motion:reduce){#kanji-pop .fusion-caption{animation:none}#kanji-pop .result-gem.pair-result.fusion-result{animation:none}}
+.fusion-overlay[data-choreography] .jewel-art{filter:drop-shadow(0 0 8px var(--tile-mid)) drop-shadow(0 0 2px #fff9) brightness(1.14) saturate(1.12)}
+.fusion-overlay[data-choreography] .fusion-ingredient{z-index:2;will-change:transform,opacity}
+.fusion-overlay[data-choreography] .fusion-result{will-change:scale,opacity}
+#kanji-pop .reveal-char .jewel-art{filter:drop-shadow(0 0 12px var(--tile-mid)) brightness(1.1)}
+#kanji-pop .combo-callout{position:absolute;z-index:12;transform:translate(-50%,-50%);padding:6px 14px;border-radius:999px;background:linear-gradient(135deg,#111d42ee,#2c1654ee);border:1.5px solid var(--combo-color,#ffd86b);box-shadow:0 6px 20px #040a1f99,0 0 16px var(--combo-color,#ffd86b);color:#fff;font:900 13px/1.1 'Nunito',system-ui,sans-serif;letter-spacing:1.2px;white-space:nowrap;pointer-events:none;animation:combo-float 1.15s cubic-bezier(.18,.88,.32,1.15) both}
+#kanji-pop .combo-callout b{color:var(--combo-color,#ffd86b);font-size:15px;margin-right:5px}
+#kanji-pop .reveal-combo-badge{display:inline-flex;align-items:center;gap:5px;margin-left:6px;padding:2px 9px;border-radius:999px;background:linear-gradient(135deg,#ffef99,#ffb84d);color:#422000;font-weight:900;font-size:11px;letter-spacing:.6px;box-shadow:0 2px 8px #ffb84d66}
+@keyframes combo-float{0%{opacity:0;transform:translate(-50%,-20%) scale(.55)}22%{opacity:1;transform:translate(-50%,-75%) scale(1.08)}75%{opacity:1;transform:translate(-50%,-115%) scale(1)}100%{opacity:0;transform:translate(-50%,-145%) scale(.92)}}
+@media(prefers-reduced-motion:reduce){#kanji-pop .combo-callout{animation:none}}

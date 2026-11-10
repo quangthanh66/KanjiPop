@@ -1,0 +1,63 @@
+{
+  "tool": "Built-in image_gen",
+  "selection": "Hybrid: broad polished facets from B plus clearer optical depth from realistic A",
+  "basePrompt": "Create ONE hybrid gemstone sprite using both references. Reference 1 provides the broad clean polished facets and soft bevels; reference 2 provides transparent ruby glass depth, light transmission and internal refraction. Blend these qualities, NOT images overlaid. A premium clear rose-pink crystal for a mobile puzzle game. Keep a small number of LARGE facets (roughly 8 crown planes and a second broad inner bevel), no tiny shattered triangular fragments or busy kaleidoscope. Much clearer and more optically deep than reference 1, much simpler surface geometry than reference 2. See a few soft secondary internal reflections THROUGH the large planes, with luminous lower-edge caustics and subtle pale pink edge light. Calm medium-dark pink central table occupying middle 45%, with gently transparent optical depth, no opaque plastic slab. Bright restrained upper-left studio reflection, clean polished rim, rich saturation without black dead patches. Front orthographic view of one square cut with clipped corners, outer vertices percentages (19,8),(81,8),(92,19),(92,81),(81,92),(19,92),(8,81),(8,19). Centered square canvas. Genuine transparent background, no floor, no exterior cast shadow, no external glow or stars, no frame, no metal, no text/letters. Sprite must remain readable at 60px. This is original crystal artwork, not an imitation of a specific game.",
+  "extensions": [
+    {
+      "key": "diamond",
+      "prompt": "Create ONE new gemstone sprite matching the attached hybrid ruby EXACTLY in material. Broad clean polished planes, luminous transparent rose-pink crystal, soft internal refracted reflections visible through glass, jewel depth, delicate lower-edge caustic, controlled pale upper-left reflection and polished slightly softened bevel. A carefully simplified precious crystal: only a few LARGE crown planes and one broad inner bevel, not busy shattered facets, not kaleidoscope, not opaque plastic. Calm medium-dark pink center occupying about40% for a white Kanji added later. Front orthographic square canvas; same rich pink hue as reference. Genuine transparent background, no floor, no cast shadow outside shape, no external glow, no external stars, no text, no metal. Keep the same artistic finish as reference; ONLY change cut to: Rhombus outer vertices (50%,5%),(95%,50%),(50%,95%),(5%,50%). Reading face at center50%,50%."
+    },
+    {
+      "key": "triangle",
+      "prompt": "Create ONE new gemstone sprite matching the attached hybrid ruby EXACTLY in material. Broad clean polished planes, luminous transparent rose-pink crystal, soft internal refracted reflections visible through glass, jewel depth, delicate lower-edge caustic, controlled pale upper-left reflection and polished slightly softened bevel. A carefully simplified precious crystal: only a few LARGE crown planes and one broad inner bevel, not busy shattered facets, not kaleidoscope, not opaque plastic. Calm medium-dark pink center occupying about40% for a white Kanji added later. Front orthographic square canvas; same rich pink hue as reference. Genuine transparent background, no floor, no cast shadow outside shape, no external glow, no external stars, no text, no metal. Keep the same artistic finish as reference; ONLY change cut to: Upright triangular outer vertices (50%,5%),(95%,91%),(5%,91%). Flat base. Broad quiet reading face centered at50%,65%."
+    },
+    {
+      "key": "hexagon",
+      "prompt": "Create ONE new gemstone sprite matching the attached hybrid ruby EXACTLY in material. Broad clean polished planes, luminous transparent rose-pink crystal, soft internal refracted reflections visible through glass, jewel depth, delicate lower-edge caustic, controlled pale upper-left reflection and polished slightly softened bevel. A carefully simplified precious crystal: only a few LARGE crown planes and one broad inner bevel, not busy shattered facets, not kaleidoscope, not opaque plastic. Calm medium-dark pink center occupying about40% for a white Kanji added later. Front orthographic square canvas; same rich pink hue as reference. Genuine transparent background, no floor, no cast shadow outside shape, no external glow, no external stars, no text, no metal. Keep the same artistic finish as reference; ONLY change cut to: Hexagon outer vertices (28%,8%),(72%,8%),(94%,49%),(73%,90%),(27%,90%),(6%,49%). Reading face centered50%,49%."
+    },
+    {
+      "key": "round",
+      "prompt": "Create ONE new gemstone sprite matching the attached hybrid ruby EXACTLY in material. Broad clean polished planes, luminous transparent rose-pink crystal, soft internal refracted reflections visible through glass, jewel depth, delicate lower-edge caustic, controlled pale upper-left reflection and polished slightly softened bevel. A carefully simplified precious crystal: only a few LARGE crown planes and one broad inner bevel, not busy shattered facets, not kaleidoscope, not opaque plastic. Calm medium-dark pink center occupying about40% for a white Kanji added later. Front orthographic square canvas; same rich pink hue as reference. Genuine transparent background, no floor, no cast shadow outside shape, no external glow, no external stars, no text, no metal. Keep the same artistic finish as reference; ONLY change cut to: Near circular brilliant cut, twelve broad perimeter planes, bounds4% to96% horizontally and5% to95% vertically. Quiet circular center50%,50%."
+    },
+    {
+      "key": "pentagon",
+      "prompt": "Create ONE new gemstone sprite matching the attached hybrid ruby EXACTLY in material. Broad clean polished planes, luminous transparent rose-pink crystal, soft internal refracted reflections visible through glass, jewel depth, delicate lower-edge caustic, controlled pale upper-left reflection and polished slightly softened bevel. A carefully simplified precious crystal: only a few LARGE crown planes and one broad inner bevel, not busy shattered facets, not kaleidoscope, not opaque plastic. Calm medium-dark pink center occupying about40% for a white Kanji added later. Front orthographic square canvas; same rich pink hue as reference. Genuine transparent background, no floor, no cast shadow outside shape, no external glow, no external stars, no text, no metal. Keep the same artistic finish as reference; ONLY change cut to: Pentagon vertices (50%,4%),(94%,34%),(82%,89%),(18%,89%),(6%,34%). Broad quiet face centered50%,49%."
+    },
+    {
+      "key": "point",
+      "prompt": "Create ONE new gemstone sprite matching the attached hybrid ruby EXACTLY in material. Broad clean polished planes, luminous transparent rose-pink crystal, soft internal refracted reflections visible through glass, jewel depth, delicate lower-edge caustic, controlled pale upper-left reflection and polished slightly softened bevel. A carefully simplified precious crystal: only a few LARGE crown planes and one broad inner bevel, not busy shattered facets, not kaleidoscope, not opaque plastic. Calm medium-dark pink center occupying about40% for a white Kanji added later. Front orthographic square canvas; same rich pink hue as reference. Genuine transparent background, no floor, no cast shadow outside shape, no external glow, no external stars, no text, no metal. Keep the same artistic finish as reference; ONLY change cut to: Classic pointed diamond jewel outline, flat top, broad shoulders, pointed base. Vertices(27%,7%),(73%,7%),(94%,33%),(50%,96%),(6%,33%). Quiet reading face centered50%,43%."
+    }
+  ],
+  "sources": [
+    {
+      "key": "square",
+      "source": "C:\\Users\\Admin\\.codex\\generated_images\\01a168c6-5ab8-7830-981a-6678d1accc06\\exec-98dab99d-3ce3-4fea-80dc-ab195f357d70.png"
+    },
+    {
+      "key": "diamond",
+      "source": "C:\\Users\\Admin\\.codex\\generated_images\\01a168c6-5ab8-7830-981a-6678d1accc06\\exec-85013a5b-61ab-4e2d-b3ec-60806cc57f68.png"
+    },
+    {
+      "key": "triangle",
+      "source": "C:\\Users\\Admin\\.codex\\generated_images\\01a168c6-5ab8-7830-981a-6678d1accc06\\exec-07883ee3-e55c-4686-a807-df05a7c23ff4.png"
+    },
+    {
+      "key": "hexagon",
+      "source": "C:\\Users\\Admin\\.codex\\generated_images\\01a168c6-5ab8-7830-981a-6678d1accc06\\exec-6d54bfea-79e1-4247-8304-5e91793f30af.png"
+    },
+    {
+      "key": "round",
+      "source": "C:\\Users\\Admin\\.codex\\generated_images\\01a168c6-5ab8-7830-981a-6678d1accc06\\exec-79ff523a-15eb-4ab6-ad4c-45f49be35b12.png"
+    },
+    {
+      "key": "pentagon",
+      "source": "C:\\Users\\Admin\\.codex\\generated_images\\01a168c6-5ab8-7830-981a-6678d1accc06\\exec-db3713ff-6774-4df7-82d3-fe78bfd31474.png"
+    },
+    {
+      "key": "point",
+      "source": "C:\\Users\\Admin\\.codex\\generated_images\\01a168c6-5ab8-7830-981a-6678d1accc06\\exec-2e66d8ef-245f-43ba-be5c-b11f1a8b6874.png"
+    }
+  ],
+  "runtime": "dist/gem-hybrid/*.webp",
+  "originals": "art-source/gem-hybrid/*-source.png"
+}

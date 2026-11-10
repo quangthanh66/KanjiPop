@@ -1,0 +1,46 @@
+#kanji-pop .level-intro{max-width:460px;padding:21px 24px 17px;border-width:3px;overflow:auto}
+#kanji-pop .level-intro .intro-level{display:inline-block;padding:4px 12px;border-radius:20px;background:#e9dcff;color:#7653b4;font-size:11px;font-weight:900}
+#kanji-pop .level-intro h2{font-size:25px;line-height:1.2;margin:10px 0 14px;color:#2d6080}
+#kanji-pop .intro-demo{--demo-cell:67px;--demo-gap:8px;position:relative;width:calc(var(--demo-cell)*3 + var(--demo-gap)*2);height:var(--demo-cell);margin:0 auto 18px;border-radius:16px;background:radial-gradient(ellipse,#233b6e,#10182e);box-sizing:content-box;border:8px solid #16233e}
+#kanji-pop .intro-demo .intro-demo-gem{position:absolute;top:0;width:var(--demo-cell);height:var(--demo-cell)}
+#kanji-pop .intro-demo-empty{position:absolute;left:calc(var(--demo-cell) + var(--demo-gap));top:3px;bottom:3px;width:calc(var(--demo-cell) - 2px);display:grid;place-items:center;border:1px dashed #9ab8da;border-radius:10px;font:800 9px Nunito,sans-serif;color:#bdd9ed}
+#kanji-pop .intro-demo .demo-left{left:0;animation:demo-slide 5s ease-in-out infinite}
+#kanji-pop .intro-demo .demo-right{right:0;animation:demo-pair 5s ease-in-out infinite}
+#kanji-pop .intro-demo-pop{position:absolute;left:73%;top:30%;font-size:31px;line-height:1;color:#fff7a5;text-shadow:0 0 12px #ffd348;animation:demo-pop 5s ease-in-out infinite}
+#kanji-pop .intro-demo-arrow{position:absolute;left:43%;top:28%;font-size:26px;line-height:1;color:#fff6c8;animation:demo-arrow 5s ease-in-out infinite}
+#kanji-pop .intro-instructions{text-align:left}
+#kanji-pop .intro-instructions p{display:flex;align-items:center;gap:10px;margin:10px 0;font-size:14px;line-height:1.45;color:#365a72}
+#kanji-pop .intro-instructions p>b{display:grid;place-items:center;flex:0 0 24px;height:24px;border-radius:50%;background:#e8e1fc;color:#7356ab;font-size:12px}
+#kanji-pop .intro-halo-note{font-size:12px;line-height:1.4;margin:13px 0;color:#6b6190}
+#kanji-pop .intro-goal{padding:10px;border-radius:12px;background:#e4f5e7;margin:10px 0 14px;color:#386c4e}
+#kanji-pop .intro-goal strong{display:block;font-size:13px;line-height:1.4}
+#kanji-pop .intro-goal small{display:block;font-size:11px;line-height:1.4;margin-top:4px}
+#kanji-pop .level-intro .kp-action{min-height:47px;margin:0;padding:8px;font-size:16px}
+@keyframes demo-slide{0%,18%,100%{transform:translateX(0);opacity:1}40%,65%{transform:translateX(calc(var(--demo-cell) + var(--demo-gap)));opacity:1}76%,90%{transform:translateX(calc(var(--demo-cell) + var(--demo-gap)));opacity:0}}
+@keyframes demo-pair{0%,35%,100%{opacity:1;filter:none}45%,65%{opacity:1;filter:drop-shadow(0 0 5px #fff5ab)}76%,90%{opacity:0;filter:none}}
+@keyframes demo-pop{0%,43%,91%,100%{opacity:0;scale:.5}55%,68%{opacity:1;scale:1}85%{opacity:0;scale:1.4}}
+@keyframes demo-arrow{0%,22%,100%{opacity:1;translate:-3px 0}35%,92%{opacity:0;translate:6px 0}}
+@media(max-width:370px){
+ #kanji-pop .level-intro{padding:14px 13px 12px}
+ #kanji-pop .level-intro h2{font-size:21px;margin:8px 0 12px}
+ #kanji-pop .intro-demo{--demo-cell:56px;--demo-gap:6px;margin-bottom:12px}
+ #kanji-pop .intro-instructions p{font-size:12px;margin:8px 0}
+ #kanji-pop .intro-halo-note{font-size:11px;margin:9px 0}
+ #kanji-pop .intro-goal{margin:8px 0 11px;padding:8px}
+ #kanji-pop .intro-goal strong{font-size:12px}
+}
+@media(max-height:540px) and (min-width:600px){
+ #kanji-pop .level-intro{max-width:650px;display:grid;grid-template-columns:1fr 1.3fr;gap:5px 18px;padding:12px 18px}
+ #kanji-pop .intro-level{grid-column:1/-1;justify-self:center}
+ #kanji-pop .level-intro h2{grid-column:1/-1;margin:2px 0 5px;font-size:21px}
+ #kanji-pop .intro-demo{--demo-cell:55px;align-self:center;margin:0 auto;grid-column:1;grid-row:3/5}
+ #kanji-pop .intro-instructions{grid-column:2;grid-row:3}
+ #kanji-pop .intro-instructions p{font-size:12px;margin:4px 0}
+ #kanji-pop .intro-halo-note{grid-column:2;margin:3px 0;font-size:11px}
+ #kanji-pop .intro-goal{grid-column:1/-1;margin:4px 0;padding:5px}
+ #kanji-pop .level-intro .kp-action{grid-column:1/-1}
+}
+@media(prefers-reduced-motion:reduce){
+ #kanji-pop .intro-demo *{animation:none!important}
+ #kanji-pop .intro-demo-pop{display:none}
+}

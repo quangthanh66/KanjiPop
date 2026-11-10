@@ -1,0 +1,979 @@
+{
+  "generatedAt": "2026-11-08T08:06:26.208Z",
+  "commercialClearance": "pending",
+  "localFiles": [
+    {
+      "file": "dist/aurora-background.js",
+      "bytes": 3745,
+      "sha256": "1414d6b75876bc0ff4e70c0dd971d812d550db88d04fa90b5ec6557bd805298a",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/cosmic-stars-far.svg",
+      "bytes": 4543,
+      "sha256": "cefb3b705964139bc5d11607a799e258dee7ef21128dacc342e26aee0c6954d7",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/cosmic-stars-near.svg",
+      "bytes": 1564,
+      "sha256": "1c52ee81679200a911b7e46079839a4b9e17190a055d8d1cc2596ceb22976b04",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/cosmos.svg",
+      "bytes": 16840,
+      "sha256": "35d30ec136b07d31db513a7dd35ec0958abd398ae12e140caea6e901037bf630",
+      "usage": "css-background",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/course-plans.js",
+      "bytes": 41140,
+      "sha256": "734df7649331f93ece9b1fdb298d27271ba235a56e7e0e8ea4d22e57dfa3190a",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/crystal-water.svg",
+      "bytes": 1785,
+      "sha256": "e66362c031d67897b2124a45929138a1f5778d4ae19d3749211f491234481e10",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/experience.css",
+      "bytes": 7750,
+      "sha256": "740a604a1e143dd0b66b31bd73e6dddb837a56bbaadcbbaa7171bdcaa79295b3",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/experience.js",
+      "bytes": 6539,
+      "sha256": "9217626b1fad09f9f578ce07f416737afe9488335079c57a50d61143cb2c3158",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-00-4ed87893d252.woff2",
+      "bytes": 69120,
+      "sha256": "4ed87893d252fd7ed9fdf20d0e46f1e2899c3b83d46a9fd12d2267e9aa2f7b10",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-01-d7b4a8e4ea53.woff2",
+      "bytes": 74976,
+      "sha256": "d7b4a8e4ea5396f4150fe1b5dd938c36f2b0b623fc2bb16e4ce78a89abd2aa3b",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-02-cc5454ba0e72.woff2",
+      "bytes": 60672,
+      "sha256": "cc5454ba0e72d0920aefea4d776d6569ad1efacdece506b049a38f17e1fe1ceb",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-03-e3989740a877.woff2",
+      "bytes": 31060,
+      "sha256": "e3989740a8776e342dcb2b32689c29db3766204ca2328ca0f0e2dc8453c72376",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-04-ae90d39c8e98.woff2",
+      "bytes": 42160,
+      "sha256": "ae90d39c8e98aae88879a98c2465a1ceedfebafdc6737d581c7d0cb04d083834",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-05-e9155b6c0498.woff2",
+      "bytes": 25344,
+      "sha256": "e9155b6c04982ce0e84b31cd26c2434bd682e5d20f8b122a6e0cb62c9d9d5952",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-06-0d41d2c75761.woff2",
+      "bytes": 21896,
+      "sha256": "0d41d2c757611d16f94de5522cba7cb9046df4da901b7719deabea03f5335530",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-07-16aa9414e54f.woff2",
+      "bytes": 21500,
+      "sha256": "16aa9414e54ffc85cc0a74960fa48fde7a7298c36cda688a9a630134dcfc768e",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-08-eab9d56485fc.woff2",
+      "bytes": 22184,
+      "sha256": "eab9d56485fcd7cb1553e00d36b79641b0fd1534de0a96895ef426a1b01b01da",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-09-6b9b03a5f1c7.woff2",
+      "bytes": 20932,
+      "sha256": "6b9b03a5f1c7fca919b6c4ec6fbb93f4707f9f207299aaa7f12bdaa639a11566",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-10-4357f1ced5e8.woff2",
+      "bytes": 21668,
+      "sha256": "4357f1ced5e89060b783067f9ca90a065c6be9a0460db34247f1bc0fc7b2ba11",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-11-0576573ee39b.woff2",
+      "bytes": 19732,
+      "sha256": "0576573ee39bf32a3746449eb2d74d53b4c7373c41ffb59eaf7d59d7aaa7061c",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-12-e92af94fb516.woff2",
+      "bytes": 22284,
+      "sha256": "e92af94fb5167ac274bfbb2d4aef5f101313f6fd34cd26273bf9cc3b2a1e6fe8",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-13-9e6b8f448697.woff2",
+      "bytes": 20056,
+      "sha256": "9e6b8f448697c1edf980822a1e5258d559b6dd16e384e77bde5a430bf854cb63",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-14-9d07de3c886a.woff2",
+      "bytes": 21280,
+      "sha256": "9d07de3c886aaabc811ec1f7a0a2eb3138de7611984c48d3f41ddeba8d567dc1",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-15-34f9bb151947.woff2",
+      "bytes": 21112,
+      "sha256": "34f9bb1519473eaf6b0b7af3278dd057d238e2da348137a03e42548f39e7bb79",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-16-9555ca3c3e95.woff2",
+      "bytes": 19164,
+      "sha256": "9555ca3c3e95bdbf0d1cfa1a831d296176385f9ef9e4eb7943ed56ecacad1343",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-17-b95cee9ae535.woff2",
+      "bytes": 22160,
+      "sha256": "b95cee9ae53563a52cd5334d7d493c37bebd92e5b55766c6631837dcd6157179",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-18-49ce40b325dc.woff2",
+      "bytes": 20248,
+      "sha256": "49ce40b325dc2be957cc079f2ab1a4c7f864d59a96381d50f1cc71e88c1580ea",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-19-814636ff75c8.woff2",
+      "bytes": 19544,
+      "sha256": "814636ff75c8a68fa6dd317bcea34ea440a22d795cd78653f161caed3af275a3",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-20-a5d77d839af3.woff2",
+      "bytes": 20296,
+      "sha256": "a5d77d839af33d7a6525369988d9eb7e681fa73de4d68adb04a5bd507ea3c824",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-21-ebd0b58e4285.woff2",
+      "bytes": 22876,
+      "sha256": "ebd0b58e4285446db646c1e0844338128ca992419a48f2e78ff69ecbff26c788",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-22-7f678d488342.woff2",
+      "bytes": 18324,
+      "sha256": "7f678d4883427c76347935c7b4bd28abbcab44d3e30040c42594575de02e89bf",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-23-cc20c986d54a.woff2",
+      "bytes": 20824,
+      "sha256": "cc20c986d54a91c49740e274693030fe0fa34f060113f36f6735afad2c53c77c",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-24-835b976dad27.woff2",
+      "bytes": 23808,
+      "sha256": "835b976dad277177ff042d8aa3cc6c1645c9297afa0b8b53dfc8abeb363e8b74",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-25-c41523b6bb43.woff2",
+      "bytes": 18784,
+      "sha256": "c41523b6bb431cbeea7721009dc07164a9b06a7f3b57934d40ee00326ec3e341",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-26-9e288e859248.woff2",
+      "bytes": 21484,
+      "sha256": "9e288e859248aa2c18a79d137a530b6dbc970286b4c41bf68e03e533cc5d89a8",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-27-f5861b584d08.woff2",
+      "bytes": 16552,
+      "sha256": "f5861b584d084262ffbca3f362a9c3b5b27b477e3e33f1de340ca61fa4f624b1",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-28-d264b7fb4eb8.woff2",
+      "bytes": 17796,
+      "sha256": "d264b7fb4eb86901d0800d80d069b6940b6686f9929dd14909354d39d47205ad",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-29-add77686e506.woff2",
+      "bytes": 18860,
+      "sha256": "add77686e5062903172d2ecbfa58a30c5bc3fabe23c7ea23723a5ded26353e45",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-30-1a41a1e026f0.woff2",
+      "bytes": 17372,
+      "sha256": "1a41a1e026f03712cf0bcd3f80e24eb3cdbeec72e6fad8eed8b25f1bdb8628a2",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-31-030dfa6fc4f0.woff2",
+      "bytes": 16488,
+      "sha256": "030dfa6fc4f0b364ea1a0eb7142f5d9139bea82c77b0c355d6005871f0f5be95",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-32-ce324843172a.woff2",
+      "bytes": 16632,
+      "sha256": "ce324843172afe1f1fd37760edd73c97e5c5611fe985402735b91e1f5341e859",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-33-5a2b7c813f01.woff2",
+      "bytes": 19744,
+      "sha256": "5a2b7c813f0122dc0180fd0752420cec278fa663158691458666bd987a7e241a",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-34-30425125bb74.woff2",
+      "bytes": 17320,
+      "sha256": "30425125bb740642a2e23f4eafc507988e7005f2a3de2efd70b2c4d6d44e2fe2",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-35-a4cb052e82a4.woff2",
+      "bytes": 13084,
+      "sha256": "a4cb052e82a4e5b2bdbd73a24771971e46013e76adb24c433ada6d20782702be",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-36-df20f01d9fa1.woff2",
+      "bytes": 18372,
+      "sha256": "df20f01d9fa1c1d10485d4a6aea5dba2c9601c9c4cf6d7c4419c34da7ba7e463",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-37-2c0a698f3f84.woff2",
+      "bytes": 79064,
+      "sha256": "2c0a698f3f840c00421ab992d6415841bc551258e3bfe227b30145a886f6ef42",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/noto-sans-jp-source.css",
+      "bytes": 114561,
+      "sha256": "09ad0a706cd7ec84944838bbb7e66d4872577ae930eb214f8c78772474c568aa",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/notosansjp-OFL.txt",
+      "bytes": 4388,
+      "sha256": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/nunito-00-61e5958cf3c7.woff2",
+      "bytes": 13096,
+      "sha256": "61e5958cf3c731423456b31739aa454317ea3bdcb205dd87090e94f632c3642b",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/nunito-01-2c8d79286981.woff2",
+      "bytes": 35588,
+      "sha256": "2c8d792869818ecb253a46bc3c63c7013df7aac2f69291c3c85e5cdc94160960",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/nunito-02-ba344451eab2.woff2",
+      "bytes": 39128,
+      "sha256": "ba344451eab25b217a165363b1982048a5e5830a0daf36577973955a04cac793",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/nunito-OFL.txt",
+      "bytes": 4385,
+      "sha256": "580df76c95a1ec5ab878ceb25bb3d85c6a076804e9c970c8c6972aea775fdf65",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts/nunito-source.css",
+      "bytes": 1846,
+      "sha256": "94c1ac268c44f910bb2d90337880fe0967f2c3be5622b5dca300f8362ae36a44",
+      "usage": "local-font-or-license",
+      "rightsStatus": "see-font-provenance"
+    },
+    {
+      "file": "dist/fonts.css",
+      "bytes": 25399,
+      "sha256": "34f1bdd178364cef6e9d030f3f64c4dbe74d91146943dfb15ae69cfe48c5e6ff",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/fusion-fx.css",
+      "bytes": 2053,
+      "sha256": "6be10506dca85a3e85751c231aad55d9c8b4582081da7451f36e07a8ae7bd2aa",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/fusion-fx.js",
+      "bytes": 26819,
+      "sha256": "fd2fcfae2d290c5998b438d1b02781fe8e0c26f2abb38d39f3035c194e294f5f",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/fusion-motion-preview.html",
+      "bytes": 5415,
+      "sha256": "2d8bbea2e9a23d32f7f9b46c8136343b197117f8c334e38499af1f4de9c3df8b",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/game.css",
+      "bytes": 2272,
+      "sha256": "1ec6a7c6c5fadc084e2cb2ddecc7f9f6815a77cda970e02d1babf0ab0cd66503",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/game.js",
+      "bytes": 12784,
+      "sha256": "6b959eee11d177106f5dd64afc141573697b277fa7162bf4a58e5340b9577d94",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/gem-art.css",
+      "bytes": 6702,
+      "sha256": "3844ef21548574313004070d0cd4646bd1cad77296052b6998dfe0f6e9b2467a",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/gem-art.js",
+      "bytes": 4546,
+      "sha256": "d7a7bb287d81173de59841a7b1f7f68bf520e729afe51a9a6f617fef277c0476",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/gem-hybrid/diamond.webp",
+      "bytes": 23746,
+      "sha256": "98a40272136b5fd40989f598d920a626699a1bd360ccd89774de85d2f2c3cb0c",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/gem-hybrid/hexagon.webp",
+      "bytes": 28454,
+      "sha256": "3faf51d743ae30c9a8c2d274daa7749f502b91df4ad8e19f2ee6406ee1308ee9",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/gem-hybrid/pentagon.webp",
+      "bytes": 29944,
+      "sha256": "7b4b525f7e4b143786cbee8b4616acf9d576eb8db61fef57e5ec288aba375749",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/gem-hybrid/point.webp",
+      "bytes": 26130,
+      "sha256": "abf3a6afa4def92a6791442c177690493e0b70594c7f5b5716615e58642c140e",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/gem-hybrid/round.webp",
+      "bytes": 37644,
+      "sha256": "fa1c85c1cfc6aa32f469c79c63c33efb6074ca6eed4074d5cc1f263d9aa51f30",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/gem-hybrid/square.webp",
+      "bytes": 36510,
+      "sha256": "b9681595d6684ca1ffba0fa899c740a2f162123fdb49f273013143e68a834a9c",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/gem-hybrid/triangle.webp",
+      "bytes": 27880,
+      "sha256": "b341a40de3e2f947be53a4a95c5b70c6f920bbe222632b9389d17fd77a677b02",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/gem-realistic/diamond.webp",
+      "bytes": 39026,
+      "sha256": "e7690488e0e505119aff502d6fa5905bb0af8ecbae3165408ad31fc08cd56c83",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/gem-realistic/hexagon.webp",
+      "bytes": 43352,
+      "sha256": "82b9e9d6862105c865625db4e8d1b2f6f3663d8e03a1559ff74d9531a4e96471",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/gem-realistic/pentagon.webp",
+      "bytes": 48686,
+      "sha256": "b0b0ed17376049024608d96f49320a21471329ece94c15f4a3029535daf27da6",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/gem-realistic/point.webp",
+      "bytes": 40690,
+      "sha256": "4c9be5940b80c1c3bf9ef714adc0de86d3820da7f7024807bc1c9b503c69c718",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/gem-realistic/round.webp",
+      "bytes": 50374,
+      "sha256": "119564070b568526fba36ea00c7595ae194b61feb557772998afed1b6ba092b3",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/gem-realistic/square.webp",
+      "bytes": 47766,
+      "sha256": "4466864e363c6396503eea4e5e608d16fa56df9605e7edf0598be234ec8e87f6",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/gem-realistic/triangle.webp",
+      "bytes": 38248,
+      "sha256": "64e5a01adb6744f917904fb1998fc1d0b9374854aad40fbac0b8db0315708aba",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/gem-study-assets/ruby-a-realistic.png",
+      "bytes": 1632168,
+      "sha256": "d0c215deb0b776f3c9fd43f63d5a2d59e68389b416ff6dad00e6fd80e5670b22",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/gem-study-assets/ruby-b-stylized.png",
+      "bytes": 1356179,
+      "sha256": "483e572d4a71c7672114e7be0a65f7843a94dc29f849b27e16ec341cc9fe2ef5",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/gem-study-assets/ruby-c-magic.png",
+      "bytes": 1658112,
+      "sha256": "13ef019cd4ed537fcdafdc654849699e5f311d0c9ac01fcefde97a535934cdb0",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/gem-style-b/diamond.webp",
+      "bytes": 22068,
+      "sha256": "2fe135993fa50547f7a634946f28c76712ef40d6902ab1a2f47070f06ce2c34d",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/gem-style-b/hexagon.webp",
+      "bytes": 24738,
+      "sha256": "2756e7c88ea76aeef9135a1f133c19c6282a5ab0475467bd1c37af8c6aa99c3f",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/gem-style-b/pentagon.webp",
+      "bytes": 24224,
+      "sha256": "10cb74ddb4b0228703455f8a2130ed7f9f9afbf02dba5ae32eb15ae9ae4f36f1",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/gem-style-b/point.webp",
+      "bytes": 26368,
+      "sha256": "d7310c470a25200c7a3108b06fd7d76c3775b07b94643c313e0beeb505f6ddcc",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/gem-style-b/round.webp",
+      "bytes": 27908,
+      "sha256": "08213cf5c11b9e76df70c6046af7a5040848e42b20d7784d507ec52dd3114fb0",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/gem-style-b/square.webp",
+      "bytes": 22476,
+      "sha256": "48c6190aac09c482acac9a017f5eda9dd3baedbcafadcbd6d0ee140ecb5e79ab",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/gem-style-b/triangle.webp",
+      "bytes": 21806,
+      "sha256": "c669267cc4508c4f6d29e7c840a952308603bb5564b7da8c585508358ff252c6",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/gem-style-preview.html",
+      "bytes": 13475,
+      "sha256": "f9eb71d88059b543c53c1d9cf416fdefda1ef2fdb163bcd2bfb8236be675bb7d",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/index.html",
+      "bytes": 5638,
+      "sha256": "ff1214bd058db70cebb3212d6b2dbb71ade6326ad36db325d52cae83611e8b41",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/journey-map.css",
+      "bytes": 12528,
+      "sha256": "dc726ac4923cbc420b0df38f7aacc05351805a59f552cdd48f142160a7a6d75a",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/level-intro.css",
+      "bytes": 4186,
+      "sha256": "9d6f37f7bb7777da1dcd98c85e55cf9a3ca742ec3ef21d7527e03f772dfcc0f6",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/lucide-LICENSE.txt",
+      "bytes": 3208,
+      "sha256": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57",
+      "usage": "license-notice",
+      "rightsStatus": "bundled-license-source-checked"
+    },
+    {
+      "file": "dist/lucide.min.js",
+      "bytes": 397450,
+      "sha256": "ab85225ecc1daa2033607856f03dd2dabcbc08e2d260a5b97e17c690aa929766",
+      "usage": "loaded-by-index",
+      "rightsStatus": "bundled-license-source-checked"
+    },
+    {
+      "file": "dist/mission-ui.css",
+      "bytes": 3147,
+      "sha256": "b662361360f2ff471f46aa1b7b7f797411b54f1b8c3a137c5a9656b90d11b08e",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/mobile-fullscreen.css",
+      "bytes": 12836,
+      "sha256": "fb0cf7673d5cfd5a5c3d2b17e07c7bd6110c90902d24e6bce95b6d719997b674",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/n5-data.js",
+      "bytes": 13114,
+      "sha256": "6c892d8fa4b5e259eca1313026badeeca76ca199f93c19273b8736c05a0dbf2e",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/n5-engine.js",
+      "bytes": 22010,
+      "sha256": "fbe149589bbe0af4ac1254953efae624da01baa3a6f22f66a59efcb97e5921e6",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/n5-game.js",
+      "bytes": 65423,
+      "sha256": "921442ba802336203b90b404bf6a49f7a21928424129820299ee68c5abb43f88",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/n5-legacy-v9.js",
+      "bytes": 21863,
+      "sha256": "ce9375eee98c8c4cf7ec65aef1f5afbf7a8fd65c7d791a1bf4f73797ce7b33db",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/n5.css",
+      "bytes": 9817,
+      "sha256": "ee4dc71802be41bb986f8d3990bd7c944cc884fa397d9792ec8e82ef5d411e42",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/pair-engine.js",
+      "bytes": 6403,
+      "sha256": "609d9b9b4b128a88d017a66217e18db13fc810575463b491f66f8f7744a7e86e",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/pairs.css",
+      "bytes": 5392,
+      "sha256": "f03d6972507757d76dd830b265b65d966daf1bd95b8f8bae89bea1306e50b55c",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/pairs.js",
+      "bytes": 11234,
+      "sha256": "150125ee150e57be2d6f6ce59c5dc7b62ef75a0f019ef9eb56d5afaab42ed9ac",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/progress-lock.js",
+      "bytes": 1667,
+      "sha256": "840bb1171638cea4900e7ca8d721a5daf68a55cb63063bd25dfd08c497d19884",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/progress-store.js",
+      "bytes": 4817,
+      "sha256": "fcab1851e2ffeb5549c5ceb4724918b899baa3b5c9b65cc1642be9558c75822c",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/progress.css",
+      "bytes": 1880,
+      "sha256": "b2d1689c6fb59d0def259d5db14cfb9c00de6b546a917b0b50b08eff4c6e08bb",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/responsive.css",
+      "bytes": 56590,
+      "sha256": "375252c6a3bb7fe0654cc98c9f2e78e44fd9a70c30e4657a9e5475f3aa65dfed",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/reveal-layout.css",
+      "bytes": 6167,
+      "sha256": "af1a1c30bc886e7f8ca719c2b366feb083e19242ed4176b567af41eccbb96ba2",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/reveal-layout.js",
+      "bytes": 723,
+      "sha256": "d510e3d7ff31bb87fb2a3dabd8c64e08fda78e1fc7fe34f048019213f896f68d",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/session-context.js",
+      "bytes": 492,
+      "sha256": "fba81bc5fb194a9305518b0949ed6c936c4a016145fdf37ad0eb9208875530e2",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/silk-background.js",
+      "bytes": 3406,
+      "sha256": "cf58ea906ebd8f93d63c23e054b0491dc7ca0b4ca6803922ce55c5d06dd04719",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/slide-engine.js",
+      "bytes": 3394,
+      "sha256": "2f30115777dcd2d518c309db596eb41f6e93674feedeb22f62e9c0e823d93b6c",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/slide.css",
+      "bytes": 6141,
+      "sha256": "5b7cdd7bab9df930b8ed2843c7fe39fa7a37d0e7225cd22b5cdbc7d8ea4dc0d4",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/slide.js",
+      "bytes": 12621,
+      "sha256": "7d19d694fc37f67d3f41de8767984ce88897f847990e6dd1e7db66a3b8ff4b63",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/study-cohort.js",
+      "bytes": 4228,
+      "sha256": "38d0344d650aa661efcc78522e34da9c82f7f81f6ad4ad1d0d5306f4969c4ad3",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/study-dashboard.css",
+      "bytes": 3129,
+      "sha256": "daed093937b1ee56ed58761597986dd587dd5d2ccbd0dcbc6b9caa2adb33caa0",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/study-dashboard.html",
+      "bytes": 2760,
+      "sha256": "5aa655d4c51743059f43bd877c59238e4ea8f3ae8e2baea61936bc34fbdaae89",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/study-dashboard.js",
+      "bytes": 8663,
+      "sha256": "3c039a059967412497c647585c7ba9b6566d0511d895a13fda6c3854476d3ddc",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/study-report.js",
+      "bytes": 2082,
+      "sha256": "2a896b31c9bb10487a26cd3220bdd3d15df7a75a19ccf2b060e166a9a954f16f",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/target-marker.css",
+      "bytes": 899,
+      "sha256": "ee9ab477afe4cd38325177872e6deda0711824975ea5294ca3a7c71ce669060a",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/target-toolbar.css",
+      "bytes": 5460,
+      "sha256": "98e90742e2063223ebfb4f38e818c5ca1ff549c14fa169855b0afd2a544cac3e",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/target-vfx-assets/earth.webp",
+      "bytes": 688472,
+      "sha256": "9e018dcacc8b198f373de6e7a040032a872abb4a407e5b93cf2b01bfd90e4929",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/target-vfx-assets/fire.webp",
+      "bytes": 330014,
+      "sha256": "cad7fdcbadaec046e223f21dcb66d82f4bcef6b1f123ba0e132c39222ae6930c",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/target-vfx-assets/ice.webp",
+      "bytes": 355392,
+      "sha256": "ffc043fad45f39c72b220bd644041ac22edd6880dcbd31d2c9018c29ba083069",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/target-vfx-assets/nature.webp",
+      "bytes": 684074,
+      "sha256": "0d365cfe49b0feea68ac09abd83490be495b48fc104b60b3f63f26d7c455bd0d",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/target-vfx-assets/thunder.webp",
+      "bytes": 407256,
+      "sha256": "623d2fdc788e489aa00237b3ef6ecfc46366702b8fca23bc354e26992b85940b",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/target-vfx-assets/water.webp",
+      "bytes": 403596,
+      "sha256": "8f672b8fdf357d8968e8d02f593d2c8a01714ce4a1788c5e98b5b4877b7503c5",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/target-vfx.js",
+      "bytes": 12192,
+      "sha256": "c695b071c48d4eba24f999c13ff3f38cfc1b8c725217da4acd8da02f126546da",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/theme.css",
+      "bytes": 11777,
+      "sha256": "2156503825e4f3888985f2f5da89e5134904d02329713a7f62d7f2d003925add",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/ui-shell.css",
+      "bytes": 432,
+      "sha256": "26282f12213870280390cf2f5c81dc48cf278132aec8a4b3a8d203ee85eb78e0",
+      "usage": "loaded-by-index",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/vfx-study-assets/magic-ribbon-atlas.webp",
+      "bytes": 422342,
+      "sha256": "a8c0e13eea09996b6beee529cbcf658f5d64af0a7d9342ed25cc6d8555dc16af",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/vfx-style-preview.css",
+      "bytes": 6531,
+      "sha256": "da4d2a89832a316e290e6feaeb469595da33922807899525c1662a2e18e73746",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/vfx-style-preview.html",
+      "bytes": 2581,
+      "sha256": "38024e0a2d4869ed4ef6d7fb55549be1f6eadba03ab3c68b49a55d220512d41e",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    },
+    {
+      "file": "dist/vfx-style-preview.js",
+      "bytes": 17309,
+      "sha256": "feb3f055286534ade53d09b201257f02827716e40c728ff0a552cb315c0ae41b",
+      "usage": "indirect-or-legacy-check-before-release",
+      "rightsStatus": "provenance-review-pending"
+    }
+  ],
+  "externalAssets": [],
+  "localFonts": {
+    "families": [
+      "Nunito",
+      "Noto Sans JP"
+    ],
+    "evidence": "font-provenance.json",
+    "license": "OFL-1.1 notices bundled",
+    "runtime": "Served locally through fonts.css"
+  },
+  "authoredAssets": [
+    {
+      "files": [
+        "dist/gem-art.js",
+        "dist/cosmos.svg",
+        "dist/fusion-fx.js"
+      ],
+      "implementation": "Procedural SVG/canvas code present locally.",
+      "status": "Verify ownership/provenance and visual distinctiveness; local source code is not proof of commercial clearance."
+    },
+    {
+      "files": [
+        "dist/n5-game.js"
+      ],
+      "implementation": "Audio generated with Web Audio oscillators; no sampled music files found in dist.",
+      "status": "Source review only; not a full rights determination."
+    }
+  ],
+  "references": [
+    {
+      "title": "Danh sách N5 tham khảo · JLPT Sensei",
+      "url": "https://jlptsensei.com/jlpt-n5-kanji-list/"
+    },
+    {
+      "title": "Phạm vi JLPT · FAQ chính thức",
+      "url": "https://www.jlpt.jp/e/faq/"
+    },
+    {
+      "title": "Đối chiếu cấu tạo · CJKVI IDS",
+      "url": "https://github.com/cjkvi/cjkvi-ids"
+    }
+  ],
+  "releaseChecks": [
+    "Keep applicable third-party notices.",
+    "Verify dataset and example-text reuse rights separately from citations.",
+    "Review gem silhouettes, palette, branding and audio against supplied PopCap references.",
+    "Verify title/branding availability for intended release markets.",
+    "Do not distribute old or unused scripts without review."
+  ]
+}

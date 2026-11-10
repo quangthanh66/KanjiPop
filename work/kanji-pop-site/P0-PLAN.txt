@@ -1,0 +1,113 @@
+KANJI POP — P0 LOCAL READINESS
+Updated: 2026-11-08
+
+PHẠM VI
+Chỉ phát triển và kiểm tra tại http://127.0.0.1:8765.
+Không phát hành, không thanh toán, không thêm SDK analytics hoặc quảng cáo.
+24 chữ tuyển chọn / 15 màn / 3 chương. Không phải toàn bộ N5.
+
+ĐÃ TRIỂN KHAI
+[x] Lưu tiến trình có kiểm tra dữ liệu; lỗi lưu hiện cảnh báo cho người chơi.
+[x] Bản dự phòng là lần lưu hợp lệ trước; tự khôi phục khi bản chính hỏng.
+[x] Giữ dữ liệu hỏng tại khóa kanji-pop-n5-v1-damaged trước khi tạo bản mới.
+[x] Xuất JSON; hỗ trợ sao chép khi trình duyệt chặn tải file.
+[x] Nhập JSON có kiểm tra kích thước, cấu trúc, bàn chơi, album, mở màn và undo.
+[x] Xem tóm tắt rồi xác nhận trước khi thay tiến trình; có thể xuất bản hiện tại trước.
+[x] Kiểm tra thay đổi từ tab khác trước khi ghi; cảnh báo thay vì ghi đè bản mới.
+[x] Kiểm tra quy tắc trên 30 lộ trình và 80 ván đi ngẫu nhiên.
+[x] Tách kết quả PC/mobile, thống kê dịch chuyển khối và viên mục tiêu khi bù.
+[x] Kiểm tra cấu trúc bộ chữ và phủ đủ 24 mục tiêu bắt buộc.
+[x] Hiển thị rõ phạm vi bản thử, không khẳng định đã thuộc hoặc hoàn tất N5.
+[x] Danh mục tài sản và phiếu duyệt từng chữ đã được tạo.
+[x] Web Locks: một tab được ghi trong mỗi phiên; tab khác chỉ đọc/xuất file.
+[x] Phiên thử riêng qua Tùy chỉnh: tách save, album, settings và nhật ký khỏi phiên chính.
+[x] Báo cáo theo lượt chơi: bắt đầu/chơi tiếp, gợi ý, lỗi thao tác, ghép đầu, tác động bù.
+[x] Nhận xét không có đáp án tích cực chọn sẵn; yêu cầu người thử tự chọn.
+[x] AI đối chiếu nguồn 24 chữ; viết mới 24 lời giải thích tiếng Việt; chưa phải human signoff.
+[x] Font đã chuyển local, có OFL và checksum; không gọi Google Fonts khi chơi.
+[x] Chủ game chọn nội dung tự soạn + mẫu A Tinh thể vũ trụ qua trang preview.
+[x] Mẫu A đã áp vào đá trên bàn, popup và công thức; giữ mapping cặp hiện tại.
+[x] Bảng tổng hợp local: đọc phiên riêng, nhập JSON có kiểm tra, tránh đếm trùng phiên.
+[x] Ghi riêng mức hiểu ba luật, lý do dừng, thiết bị và hồi tưởng tự do; mặc định chưa quan sát.
+[x] Lưu nhận xét lỗi được rollback; thời gian ghép đầu không gán nhầm sau khoảng tắt logging.
+[x] Đánh dấu nhật ký thiếu; trung vị chỉ dùng phiên có đồng ý và dữ liệu đầy đủ.
+
+GIỚI HẠN CỦA BẢO VỆ TIẾN TRÌNH
+Bản dự phòng tự động vẫn cùng trình duyệt: xóa dữ liệu web có thể xóa cả hai.
+File xuất ra máy là bản sao độc lập. Chưa có tài khoản hoặc đồng bộ cloud.
+File gồm bàn chơi, album, kết quả, undo và âm thanh; không gồm tùy chỉnh hiệu ứng,
+số lần gặp lại chữ và nhật ký nghiên cứu. Nhật ký có chức năng xuất riêng.
+Web Locks giữ quyền ghi độc quyền giữa các tab đã cập nhật. Tab không có lock hoặc
+trình duyệt thiếu API chỉ được chơi tạm/xuất file. Đóng tab chủ rồi tải lại tab còn lại
+để tiếp tục lưu. Tab code cũ không tham gia khóa: cần tải lại các tab đã mở từ trước.
+Chưa có đồng bộ đa thiết bị. Không coi khóa local là quyền mua hay chống gian lận.
+Kiểm tra file không phải cơ chế chống gian lận hoặc xác nhận quyền mua.
+
+CẦN CON NGƯỜI XÁC NHẬN — CHƯA ĐÁNH DẤU HOÀN TẤT
+[x] Nhóm thử ban đầu đã được chủ game chọn: người Việt trưởng thành mới học tiếng Nhật;
+    thêm nhóm chưa biết tiếng Nhật để kiểm chứng “ai cũng chơi được”.
+    Đây là giả thuyết tuyển người thử, không phải giới hạn đối tượng cuối cùng.
+[ ] Chuyên gia tiếng Nhật duyệt content-review.json: ghi tên/ngày/ghi chú từng chữ.
+[ ] Quyền thương mại tổng thể chưa xác nhận; font/Lucide đã được đối chiếu giấy phép,
+    nội dung chọn tự biên soạn và art chọn mẫu riêng, vẫn cần kiểm tra provenance.
+[ ] Thử trên Android cấu hình thấp và iPhone thật; không suy từ thời gian chạy Node.
+[ ] Người chơi thật xác nhận bù khối không làm họ cảm thấy mất quyền kiểm soát.
+[ ] Ngưỡng sao PC/mobile được hiệu chỉnh bằng dữ liệu người chơi; chưa coi lời giải
+    tự động là lời giải tối ưu hoặc độ khó đã được xác thực.
+
+KỊCH BẢN CHƠI THỬ (8–12 NGƯỜI, KHÔNG COACH TRƯỚC)
+1. Tùy chỉnh → Mở phiên chơi thử riêng. Chọn mức quen tiếng Nhật và xác nhận đồng ý.
+   Tab mới có namespace riêng; dùng một phiên mới cho mỗi người. Không xóa save chính.
+2. Ghi mã tự đặt, loại thiết bị, mức quen Kanji; không cần tên/email.
+3. Yêu cầu: “Hãy thử chơi ba màn đầu theo cách bạn hiểu”.
+4. Quan sát: thời gian tự ghép cặp đầu, chạm sai, xin trợ giúp, bỏ cuộc.
+5. Sau buổi chơi, hỏi: ô nào di chuyển được? Hào quang có bắt buộc không?
+   Ghép mục tiêu khác trước có được tính không? Cần gì để qua màn?
+6. Khi bàn bù khối, hỏi họ có thấy khối đổi vị trí không, có hiểu nguyên nhân không.
+7. Ghi nhận họ tự chọn chơi tiếp hay chỉ làm theo yêu cầu người thử.
+8. Sau nghỉ ngắn và vào hôm sau, hỏi nhớ chữ/nghĩa nào, không đưa màu đá gợi ý.
+9. Dùng Cách chơi → Tùy chỉnh → Buổi chơi thử để lưu nhận xét và xuất JSON.
+   Nút Xem báo cáo phiên này tách các lượt chơi và lần chơi tiếp sau reload.
+   Thời gian ghép đầu loại trừ lúc tab ẩn nhưng bao gồm đọc hướng dẫn; thiếu dữ liệu
+   được ghi null, không thay bằng 0. Rời màn không tự được kết luận bỏ cuộc.
+   Người điều phối mở http://127.0.0.1:8765/study-dashboard.html, đọc phiên trên máy
+   hoặc nhập JSON phiên để ghi câu trả lời luật, lý do dừng và mức cần hỗ trợ.
+   Phiên không đồng nghĩa người duy nhất. Bản trùng/cũ không cộng dồn sự kiện;
+   bản cùng timestamp nhưng khác nội dung được báo xung đột và giữ bản trước.
+   File nhập nằm trong RAM trang; giữ file phiên gốc để nhập lại. Bản tổng hợp
+   không thay thế file gốc. Quan sát điều phối lưu ở khóa riêng, không đụng save game.
+10. Đánh giá vấn đề lặp lại; mẫu nhỏ dùng để tìm vấn đề, không chứng minh retention.
+
+CỔNG RA QUYẾT ĐỊNH ĐỀ XUẤT
+- Cả ba luật chính đều được người chơi giải thích đúng mà không được nhắc đáp án.
+- Nếu từ hai người trở lên gặp cùng vướng mắc trong mẫu này, sửa và thử lại.
+- Không còn lỗi nghiêm trọng đã biết về lưu dữ liệu / kẹt ván / spawn sai quy tắc.
+- Không mở bán khi nội dung hoặc quyền sử dụng còn chưa duyệt.
+- Không đổi spawn/độ khó chỉ dựa vào tỷ lệ ghép của người chơi ngẫu nhiên tự động.
+
+CÁC LỆNH KIỂM TRA (TỪ THƯ MỤC CHAT)
+node work/progress-store-check.cjs
+node work/p0-audit.cjs
+node work/progress-browser-check.cjs
+node work/level-intro-check.cjs
+node work/experience-completion-check.cjs
+node work/make-p0-review.cjs
+node work/progress-lock-check.cjs
+node work/study-report-check.cjs
+node work/study-browser-check.cjs
+node work/kanji-pop-site/tools/audit-fonts.cjs
+node work/content-layout-check.cjs
+node work/study-measurement-audit.cjs
+node work/study-cohort-check.cjs
+node work/study-dashboard-check.cjs
+
+KẾT QUẢ
+p0-audit-results.json: quy tắc spawn, số lượt, ngưỡng sao, tác động bù theo bố cục.
+content-review.json: phiếu dữ liệu 24 chữ; kiểm tra kỹ thuật không thay chuyên gia.
+asset-inventory.json: nguồn, giấy phép cần đối chiếu; chưa xác nhận quyền thương mại.
+review-decisions.json: các lựa chọn chủ game đã duyệt và giới hạn của rà soát AI.
+kanji-source-review.json: bằng chứng từng chữ; 本/白 là mẹo tách hình, không IDS-verified.
+font-provenance.json / rights-review.json: bằng chứng giấy phép và các mục còn mở.
+dist/gem-style-preview.html: 3 mẫu đối chiếu; chủ game đã chọn A và đã áp trong game.
+dist/study-dashboard.html: bảng tổng hợp cho người điều phối, không phải UI người chơi.
+STUDY-MEASUREMENT-REVIEW.txt: agent QA xác nhận 8 kiểm tra VM, chưa phải dữ liệu người thật.

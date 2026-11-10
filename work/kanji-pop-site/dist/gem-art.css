@@ -1,0 +1,50 @@
+/* The jewel silhouette is drawn by the SVG; the button is only a touch target. */
+#kanji-pop#kanji-pop button.board-tile[data-gem]{background:none;border:0;border-radius:0;box-shadow:none;clip-path:none;-webkit-clip-path:none;filter:none;text-shadow:none;overflow:visible}
+#kanji-pop#kanji-pop button.board-tile[data-gem]:before,
+#kanji-pop#kanji-pop button.board-tile[data-gem]:after{content:none;animation:none}
+#kanji-pop .jewel-art{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;filter:drop-shadow(0 1px 1px #02082045)}
+#kanji-pop#kanji-pop button.board-tile[data-gem] .tile-glyph{position:absolute;top:var(--gem-label-y,50%);left:50%;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;font-size:var(--gem-glyph-size,24px);line-height:1;color:#fff;font-weight:700;text-shadow:0 1px 2px #001429,0 0 3px #001429;pointer-events:none;z-index:1}
+#kanji-pop#kanji-pop button.board-tile[data-gem] .part-glyph{width:1em;height:1em}
+#kanji-pop#kanji-pop button.board-tile[data-gem].selected .jewel-art{filter:drop-shadow(0 0 2px white) drop-shadow(0 0 5px #b3dfff)}
+#kanji-pop#kanji-pop button.board-tile[data-gem].hinted .jewel-art{filter:drop-shadow(0 0 3px #fff88c) drop-shadow(0 0 7px #ffd43a)}
+#kanji-pop button.board-tile:focus-visible .jewel-art{filter:drop-shadow(0 0 4px white)}
+#kanji-pop .jewel-glint{animation:jewel-twinkle 5.2s ease-in-out var(--glint-delay,0s) infinite;transform-box:fill-box;transform-origin:center}
+@keyframes jewel-twinkle{0%,65%,100%{opacity:.14;transform:scale(.65)}78%{opacity:.9;transform:scale(1.15)}88%{opacity:.35;transform:scale(.8)}}
+@media(prefers-reduced-motion:reduce){#kanji-pop .jewel-glint{animation:none;opacity:.6}}
+
+/* Static fallback; the clipped cosmic-depth layers below add continuous parallax drift. */
+/* Result jewels reuse the matching pair's cut and palette in both reveal stages. */
+#kanji-pop .result-gem{position:relative;display:block;background:none;border:0;box-shadow:none;clip-path:none;overflow:visible;font-family:'Noto Sans JP',sans-serif}
+#kanji-pop .result-glyph{position:absolute;left:50%;top:var(--gem-label-y,50%);transform:translate(-50%,-50%);font-size:var(--gem-glyph-size,inherit);font-weight:700;line-height:1;color:#fff;-webkit-text-fill-color:#fff;-webkit-text-stroke:0;text-shadow:0 1px 2px #001429,0 0 3px #001429;z-index:1}
+#kanji-pop .result-gem.pair-result{position:absolute;left:0;top:0;z-index:8;pointer-events:none;animation:kanji-impact .95s cubic-bezier(.15,.8,.2,1) both}
+#kanji-pop#kanji-pop .reveal-modal .reveal-char.result-gem{position:relative;display:block;width:clamp(150px,25vh,230px);height:auto;aspect-ratio:1;flex:0 0 auto;border:0;border-radius:0;background:none;box-shadow:none;clip-path:none;filter:none;font-size:clamp(40.5px,6.75vh,62.1px);text-shadow:none;-webkit-text-stroke:0;animation:reveal-tile-in .72s cubic-bezier(.18,.8,.25,1.15) both}
+#kanji-pop .reveal-char.result-gem .jewel-art{filter:drop-shadow(0 0 13px #a2d5ff40)}
+@media(prefers-reduced-motion:reduce){#kanji-pop .result-gem.pair-result,#kanji-pop#kanji-pop .reveal-modal .reveal-char.result-gem{animation:none!important}}
+#kanji-pop#kanji-pop .slide-board{background:linear-gradient(145deg,#176978,#07394d);border-color:#c5f4ff;box-shadow:inset 0 0 24px #16618b25}
+#kanji-pop#kanji-pop .board-cell.empty{background:#d6f8ff24;border-color:#c5f4ffb3;color:#effcff;box-shadow:inset 0 1px 8px #195c8220}
+#kanji-pop#kanji-pop .board-cell.empty.destination{background:#dffbff88;border-color:#ffffff;color:#18547e}
+#kanji-pop#kanji-pop .board-cell.empty.hint-target{background:#fff8c9;border-color:#f2b600;color:#87601b}
+
+#kanji-pop#kanji-pop .reveal-modal:not(.cinematic-reveal) .reveal-char.result-gem{width:112px;font-size:30px}
+
+#kanji-pop#kanji-pop .reveal-formula{display:flex;align-items:center;justify-content:center;gap:8px;margin:4px 0 6px;line-height:1}
+#kanji-pop .formula-gem{width:72px;height:72px;flex:0 0 auto;font-size:22px}
+#kanji-pop .formula-operator{font-family:system-ui,sans-serif;font-size:25px;font-weight:700;color:#7a6a9a;text-shadow:none}
+#kanji-pop#kanji-pop .formula-gem .part-glyph{width:1em;height:1em;display:block}
+#kanji-pop .formula-gem .jewel-art{filter:drop-shadow(0 1px 1px #27385a20)}
+@media(max-width:599px){#kanji-pop .formula-gem{width:58px;height:58px;font-size:18px}#kanji-pop#kanji-pop .reveal-formula{gap:5px}#kanji-pop .formula-operator{font-size:21px}}
+/* Glass reflections stay on the facets; the colored reading face remains calm. */
+#kanji-pop .jewel-glint{display:none;animation:none}
+#kanji-pop .jewel-glint-secondary{animation-delay:calc(var(--crystal-phase,0s) - 3.1s)}
+#kanji-pop .crystal-sheen{display:none;animation:none;pointer-events:none}
+@keyframes crystal-sparkle{0%,48%,100%{opacity:.2;transform:scale(.65)}59%{opacity:1;transform:scale(1.2)}70%{opacity:.45;transform:scale(.8)}}
+@keyframes crystal-sweep{0%,56%{opacity:0;transform:translateX(0)}61%{opacity:.85}78%{opacity:.7;transform:translateX(130px)}82%,100%{opacity:0;transform:translateX(130px)}}
+#kanji-pop[data-quality="light"] .crystal-sheen,#kanji-pop[data-marker-quality="light"] .crystal-sheen{display:none}
+@media(prefers-reduced-motion:reduce){#kanji-pop .jewel-glint,#kanji-pop .crystal-sheen{animation:none!important}#kanji-pop .jewel-glint{opacity:.75;transform:none}#kanji-pop .crystal-sheen{display:none}}
+/* Soft aurora curtains with a gently drifting star field. */
+#kanji-pop .cosmic-depth{position:absolute;inset:0;border-radius:inherit;overflow:hidden;pointer-events:none;isolation:isolate;background:radial-gradient(ellipse at 45% 45%,#14374f,#0b2c43 65%,#164657)}
+#kanji-pop .cosmic-depth::after{content:'';position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 1px #d6fff590,inset 0 0 26px #062e4445}
+#kanji-pop .cosmic-nebula{position:absolute;inset:-15%;background:radial-gradient(ellipse at 10% 25%,#39cfbc30,transparent 50%),radial-gradient(ellipse at 90% 75%,#4c79c51c,transparent 45%);animation:aurora-atmosphere 21s linear infinite;will-change:transform}
+#kanji-pop .aurora-field{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:1}
+@keyframes aurora-atmosphere{0%,100%{transform:translate3d(-2%,0,0)}50%{transform:translate3d(3%,3%,0)}}
+@media(prefers-reduced-motion:reduce){#kanji-pop .cosmic-nebula{animation:none!important;will-change:auto}}

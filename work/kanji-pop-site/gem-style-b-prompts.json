@@ -1,0 +1,80 @@
+{
+  "tool": "Built-in image_gen",
+  "selected": "B: premium stylized 3D",
+  "base": {
+    "key": "b",
+    "prompt": "Create ONE premium mobile puzzle game gemstone sprite on a genuinely transparent background, square canvas. Single centered hot rose-pink ruby crystal, front-facing orthographic view, square silhouette with four small clipped corners (octagonal princess cut), upright horizontal top and bottom edges, NOT a diamond rotation. Same silhouette as a square spanning from 8% to 92% of canvas, corner bevels 12% wide. Gem fills 84% of canvas width and height, centered at 50%,50%. Directional studio key light upper left. Crisp silhouette, clean alpha edges, no background, no floor, no cast shadow outside the silhouette, no frame, no metal, no text, no symbol, no letters, no watermark. Leave a reasonably calm medium-dark pink central table face occupying the middle 40% for a white Kanji overlay added later by code. Preserve rich pink hue, shiny highlights limited mainly to the edges, excellent readability at 60px. STYLE B: premium stylized 3D casual puzzle game art. Bold juicy candy-jewel shape with gently softened polished edges, fewer broad beautifully designed facets, highly luminous clear pink crystal, rich clean saturated colors, strong readable light and dark planes, inviting toy-like volume without looking cheap or flat. Luxurious high-end game icon finish, controlled bright glints, charming chunky mass. No stars outside the gem."
+  },
+  "extensions": [
+    {
+      "key": "diamond",
+      "prompt": "Use the attached pink beveled gemstone as the MATERIAL AND ART STYLE reference. Make ONE new mobile puzzle game gemstone sprite, same premium stylized 3D clear rose-pink crystal, juicy rich pink depths, gently polished softened bevels, a few large readable crown facets, controlled upper-left white reflection, smooth quiet medium-dark pink center ready for a white Kanji overlay. No text or glyphs. A front-facing orthographic view, centered on a square transparent canvas, no floor, no scene, no metal, no frame, no external stars or glow, no shadow outside the silhouette. Material and hue must closely match the reference; change ONLY the outer cut and facet arrangement as specified. The listed percentages are of the whole canvas; fill that region with the single crystal. Keep all background fully transparent. A square diamond/rhombus cut rotated 45 degrees: outer vertices at (50%,5%),(95%,50%),(50%,95%),(5%,50%). Reading table centered at (50%,50%), about 45% width. Symmetrical jewel with sharp top and bottom points."
+    },
+    {
+      "key": "triangle",
+      "prompt": "Use the attached pink beveled gemstone as the MATERIAL AND ART STYLE reference. Make ONE new mobile puzzle game gemstone sprite, same premium stylized 3D clear rose-pink crystal, juicy rich pink depths, gently polished softened bevels, a few large readable crown facets, controlled upper-left white reflection, smooth quiet medium-dark pink center ready for a white Kanji overlay. No text or glyphs. A front-facing orthographic view, centered on a square transparent canvas, no floor, no scene, no metal, no frame, no external stars or glow, no shadow outside the silhouette. Material and hue must closely match the reference; change ONLY the outer cut and facet arrangement as specified. The listed percentages are of the whole canvas; fill that region with the single crystal. Keep all background fully transparent. An upright triangular cut: outer vertices at (50%,5%),(95%,91%),(5%,91%). Flat horizontal bottom, pointed top. Broad quiet triangular reading table centered low at (50%,65%), because the Kanji will be there. NOT a pyramid viewed from the side; front view of a flat triangular crystal crown."
+    },
+    {
+      "key": "hexagon",
+      "prompt": "Use the attached pink beveled gemstone as the MATERIAL AND ART STYLE reference. Make ONE new mobile puzzle game gemstone sprite, same premium stylized 3D clear rose-pink crystal, juicy rich pink depths, gently polished softened bevels, a few large readable crown facets, controlled upper-left white reflection, smooth quiet medium-dark pink center ready for a white Kanji overlay. No text or glyphs. A front-facing orthographic view, centered on a square transparent canvas, no floor, no scene, no metal, no frame, no external stars or glow, no shadow outside the silhouette. Material and hue must closely match the reference; change ONLY the outer cut and facet arrangement as specified. The listed percentages are of the whole canvas; fill that region with the single crystal. Keep all background fully transparent. A classic emerald-green-style cut but in the SAME ROSE PINK color as reference: six-sided elongated hexagonal crystal: vertices (28%,8%),(72%,8%),(94%,49%),(73%,90%),(27%,90%),(6%,49%). Flat top and bottom, angled shoulders; quiet central table at (50%,49%)."
+    },
+    {
+      "key": "round",
+      "prompt": "Use the attached pink beveled gemstone as the MATERIAL AND ART STYLE reference. Make ONE new mobile puzzle game gemstone sprite, same premium stylized 3D clear rose-pink crystal, juicy rich pink depths, gently polished softened bevels, a few large readable crown facets, controlled upper-left white reflection, smooth quiet medium-dark pink center ready for a white Kanji overlay. No text or glyphs. A front-facing orthographic view, centered on a square transparent canvas, no floor, no scene, no metal, no frame, no external stars or glow, no shadow outside the silhouette. Material and hue must closely match the reference; change ONLY the outer cut and facet arrangement as specified. The listed percentages are of the whole canvas; fill that region with the single crystal. Keep all background fully transparent. A round brilliant gemstone cut, nearly circular with twelve large polished facets around the outer perimeter. Bounding box (5%,5%) to (95%,95%). Broad circular quiet central table at (50%,50%). Broad softened facets, no spiky gear teeth."
+    },
+    {
+      "key": "pentagon",
+      "prompt": "Use the attached pink beveled gemstone as the MATERIAL AND ART STYLE reference. Make ONE new mobile puzzle game gemstone sprite, same premium stylized 3D clear rose-pink crystal, juicy rich pink depths, gently polished softened bevels, a few large readable crown facets, controlled upper-left white reflection, smooth quiet medium-dark pink center ready for a white Kanji overlay. No text or glyphs. A front-facing orthographic view, centered on a square transparent canvas, no floor, no scene, no metal, no frame, no external stars or glow, no shadow outside the silhouette. Material and hue must closely match the reference; change ONLY the outer cut and facet arrangement as specified. The listed percentages are of the whole canvas; fill that region with the single crystal. Keep all background fully transparent. A five-sided pentagonal crystal cut: outer vertices (50%,4%),(94%,34%),(82%,89%),(18%,89%),(6%,34%). One top point like a house roof, broad flat bottom. Quiet table centered at (50%,49%)."
+    },
+    {
+      "key": "point",
+      "prompt": "Use the attached pink beveled gemstone as the MATERIAL AND ART STYLE reference. Make ONE new mobile puzzle game gemstone sprite, same premium stylized 3D clear rose-pink crystal, juicy rich pink depths, gently polished softened bevels, a few large readable crown facets, controlled upper-left white reflection, smooth quiet medium-dark pink center ready for a white Kanji overlay. No text or glyphs. A front-facing orthographic view, centered on a square transparent canvas, no floor, no scene, no metal, no frame, no external stars or glow, no shadow outside the silhouette. Material and hue must closely match the reference; change ONLY the outer cut and facet arrangement as specified. The listed percentages are of the whole canvas; fill that region with the single crystal. Keep all background fully transparent. A pointed sapphire-style five-sided cut but in the SAME ROSE PINK color as reference: outer vertices (27%,7%),(73%,7%),(94%,33%),(50%,96%),(6%,33%). Flat top, wide shoulders near upper third, long pointed bottom. Quiet broad table centered at (50%,43%). NOT a rotated square."
+    }
+  ],
+  "runtimeAssets": [
+    {
+      "name": "diamond",
+      "file": "dist/gem-style-b/diamond.webp",
+      "source": "art-source/gem-style-b/diamond-source.png",
+      "width": 512
+    },
+    {
+      "name": "triangle",
+      "file": "dist/gem-style-b/triangle.webp",
+      "source": "art-source/gem-style-b/triangle-source.png",
+      "width": 512
+    },
+    {
+      "name": "hexagon",
+      "file": "dist/gem-style-b/hexagon.webp",
+      "source": "art-source/gem-style-b/hexagon-source.png",
+      "width": 512
+    },
+    {
+      "name": "round",
+      "file": "dist/gem-style-b/round.webp",
+      "source": "art-source/gem-style-b/round-source.png",
+      "width": 512
+    },
+    {
+      "name": "square",
+      "file": "dist/gem-style-b/square.webp",
+      "source": "art-source/gem-style-b/square-source.png",
+      "width": 512
+    },
+    {
+      "name": "pentagon",
+      "file": "dist/gem-style-b/pentagon.webp",
+      "source": "art-source/gem-style-b/pentagon-source.png",
+      "width": 512
+    },
+    {
+      "name": "point",
+      "file": "dist/gem-style-b/point.webp",
+      "source": "art-source/gem-style-b/point-source.png",
+      "width": 512
+    }
+  ],
+  "runtimeTotalBytes": 169588,
+  "encoding": "Source PNG preserved; resized to 512px and encoded as WebP quality 88 with alpha. No painting or new geometry in encoding."
+}

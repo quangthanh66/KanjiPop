@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000">
+ <defs>
+  <radialGradient id="edge"><stop stop-color="white" stop-opacity=".06"/><stop offset=".65" stop-color="white" stop-opacity=".35"/><stop offset="1" stop-color="white" stop-opacity=".85"/></radialGradient>
+  <mask id="rim"><rect width="1000" height="1000" fill="url(#edge)"/></mask>
+  <filter id="soft"><feGaussianBlur stdDeviation="3"/></filter>
+  <linearGradient id="light" x2=".8" y2="1"><stop stop-color="#b4fff2"/><stop offset=".5" stop-color="#74c6f8"/><stop offset="1" stop-color="#b2beff"/></linearGradient>
+  <g id="water" fill="none" stroke="url(#light)" stroke-linecap="round">
+   <path d="M-80 180C60 40 126 300 270 194S418 40 540 100 760 238 1060 20M-70 194C78 82 150 327 286 214S436 77 540 116 780 269 1070 38"/>
+   <path d="M-60 440C90 350 117 520 230 408S306 214 450 280 600 454 760 362 906 250 1070 318M-30 460C110 390 132 540 254 419S332 253 456 303 621 480 780 382 949 300 1080 350"/>
+   <path d="M-50 700C82 590 210 752 298 620S358 480 502 568 690 774 832 640 944 496 1080 584M-50 716C100 622 222 772 315 638S382 512 510 592 704 806 850 666 962 543 1090 620"/>
+   <path d="M-40 940C150 800 214 1020 380 896S546 742 690 862 880 960 1060 830M-50 957C142 830 236 1050 396 915S566 775 711 884 904 980 1080 860"/>
+   <path d="M95-40C245 98 45 160 148 318S310 458 206 590 134 810 290 1060M108-40C273 104 78 179 170 325S337 469 229 609 166 843 310 1070"/>
+   <path d="M735-60C620 100 904 182 780 320S632 450 758 586 920 750 780 1060M755-60C658 112 934 193 804 339S666 477 780 600 950 781 808 1060"/>
+  </g>
+ </defs>
+ <g mask="url(#rim)"><use href="#water" stroke-width="12" opacity=".12" filter="url(#soft)"/><use href="#water" stroke-width="1.4" opacity=".2"/></g>
+</svg>

@@ -1,0 +1,17 @@
+{
+  "at": "2026-11-07T14:46:36.227Z",
+  "scope": "Isolated Chromium browser context and local harness; tests real browser Web Locks and production lock/store modules. Main game integration reviewed separately by parent.",
+  "checks": [
+    "simultaneous acquire: exactly one writer; readonly write/import rejected; export allowed",
+    "owner close: explicit reload acquires lock and reads latest snapshot",
+    "owner reload releases and reacquires without losing persisted state",
+    "different save keys have independent locks",
+    "unsupported API and missing guard fail closed; manual export still works",
+    "ten additional simultaneous two-tab starts: exactly one writer each"
+  ],
+  "remaining": [
+    "Real iOS/Android device lifecycle not tested.",
+    "Older app tabs that do not cooperate with Web Locks can still write; existing compare-observed guard remains.",
+    "Browser data deletion and manual devtools edits remain outside locking guarantees."
+  ]
+}

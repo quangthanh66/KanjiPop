@@ -1,0 +1,49 @@
+{
+  "tool": "Built-in image_gen",
+  "selection": "User corrected selection using the original realistic ruby screenshot; supersedes B.",
+  "reference": "dist/gem-study-assets/ruby-a-realistic.png",
+  "square": "Original reference reused directly, not regenerated.",
+  "shapes": [
+    {
+      "key": "diamond",
+      "prompt": "Use the attached REALISTIC RUBY as the exact material and artistic reference. Create ONE new gemstone sprite in the same luxury jewelry photorealistic rendering style: sharp precision-cut edges, many crisp layered internal facets, deep translucent rose-red/magenta ruby glass, realistic internal refraction and subtle dispersion, crisp restrained upper-left studio highlight. MATCH THE REFERENCE'S optical depth and complex jewel reflections. Not a soft toy, not candy, not cartoon, not low-poly vector, no rounded plastic bevels. Front-facing orthographic view, centered square canvas. Same rose-pink hue as reference. Transparent background with clean alpha, no floor, no background, no shadows outside silhouette, no metal, no text, no glyph, no external decorative sparkles. Central 35-40% reading table calm medium-dark ruby for a white Kanji overlay later. Change the cut only as follows: Rhombus/diamond outer vertices at (50%,5%), (95%,50%), (50%,95%), (5%,50%). Quiet reading table at 50%,50%."
+    },
+    {
+      "key": "triangle",
+      "prompt": "Use the attached REALISTIC RUBY as the exact material and artistic reference. Create ONE new gemstone sprite in the same luxury jewelry photorealistic rendering style: sharp precision-cut edges, many crisp layered internal facets, deep translucent rose-red/magenta ruby glass, realistic internal refraction and subtle dispersion, crisp restrained upper-left studio highlight. MATCH THE REFERENCE'S optical depth and complex jewel reflections. Not a soft toy, not candy, not cartoon, not low-poly vector, no rounded plastic bevels. Front-facing orthographic view, centered square canvas. Same rose-pink hue as reference. Transparent background with clean alpha, no floor, no background, no shadows outside silhouette, no metal, no text, no glyph, no external decorative sparkles. Central 35-40% reading table calm medium-dark ruby for a white Kanji overlay later. Change the cut only as follows: Upright triangular outer vertices (50%,5%), (95%,91%), (5%,91%). Flat base. Quiet broad table centered low at (50%,65%)."
+    },
+    {
+      "key": "hexagon",
+      "prompt": "Use the attached REALISTIC RUBY as the exact material and artistic reference. Create ONE new gemstone sprite in the same luxury jewelry photorealistic rendering style: sharp precision-cut edges, many crisp layered internal facets, deep translucent rose-red/magenta ruby glass, realistic internal refraction and subtle dispersion, crisp restrained upper-left studio highlight. MATCH THE REFERENCE'S optical depth and complex jewel reflections. Not a soft toy, not candy, not cartoon, not low-poly vector, no rounded plastic bevels. Front-facing orthographic view, centered square canvas. Same rose-pink hue as reference. Transparent background with clean alpha, no floor, no background, no shadows outside silhouette, no metal, no text, no glyph, no external decorative sparkles. Central 35-40% reading table calm medium-dark ruby for a white Kanji overlay later. Change the cut only as follows: Six-sided elongated hexagon, vertices (28%,8%),(72%,8%),(94%,49%),(73%,90%),(27%,90%),(6%,49%). Flat top/bottom. Quiet table at 50%,49%."
+    },
+    {
+      "key": "round",
+      "prompt": "Use the attached REALISTIC RUBY as the exact material and artistic reference. Create ONE new gemstone sprite in the same luxury jewelry photorealistic rendering style: sharp precision-cut edges, many crisp layered internal facets, deep translucent rose-red/magenta ruby glass, realistic internal refraction and subtle dispersion, crisp restrained upper-left studio highlight. MATCH THE REFERENCE'S optical depth and complex jewel reflections. Not a soft toy, not candy, not cartoon, not low-poly vector, no rounded plastic bevels. Front-facing orthographic view, centered square canvas. Same rose-pink hue as reference. Transparent background with clean alpha, no floor, no background, no shadows outside silhouette, no metal, no text, no glyph, no external decorative sparkles. Central 35-40% reading table calm medium-dark ruby for a white Kanji overlay later. Change the cut only as follows: Round brilliant cut, bounding box (5%,5%) to (95%,95%), twelve primary perimeter facets and smaller internal brilliant facets. Circular quiet table centered 50%,50%. No gear teeth."
+    },
+    {
+      "key": "pentagon",
+      "prompt": "Use the attached REALISTIC RUBY as the exact material and artistic reference. Create ONE new gemstone sprite in the same luxury jewelry photorealistic rendering style: sharp precision-cut edges, many crisp layered internal facets, deep translucent rose-red/magenta ruby glass, realistic internal refraction and subtle dispersion, crisp restrained upper-left studio highlight. MATCH THE REFERENCE'S optical depth and complex jewel reflections. Not a soft toy, not candy, not cartoon, not low-poly vector, no rounded plastic bevels. Front-facing orthographic view, centered square canvas. Same rose-pink hue as reference. Transparent background with clean alpha, no floor, no background, no shadows outside silhouette, no metal, no text, no glyph, no external decorative sparkles. Central 35-40% reading table calm medium-dark ruby for a white Kanji overlay later. Change the cut only as follows: Pentagon with one top point and flat base. Vertices (50%,4%),(94%,34%),(82%,89%),(18%,89%),(6%,34%). Quiet table centered 50%,49%."
+    },
+    {
+      "key": "point",
+      "prompt": "Use the attached REALISTIC RUBY as the exact material and artistic reference. Create ONE new gemstone sprite in the same luxury jewelry photorealistic rendering style: sharp precision-cut edges, many crisp layered internal facets, deep translucent rose-red/magenta ruby glass, realistic internal refraction and subtle dispersion, crisp restrained upper-left studio highlight. MATCH THE REFERENCE'S optical depth and complex jewel reflections. Not a soft toy, not candy, not cartoon, not low-poly vector, no rounded plastic bevels. Front-facing orthographic view, centered square canvas. Same rose-pink hue as reference. Transparent background with clean alpha, no floor, no background, no shadows outside silhouette, no metal, no text, no glyph, no external decorative sparkles. Central 35-40% reading table calm medium-dark ruby for a white Kanji overlay later. Change the cut only as follows: Five-sided pointed sapphire cut with flat top, wide shoulders and long pointed bottom. Vertices (27%,7%),(73%,7%),(94%,33%),(50%,96%),(6%,33%). Quiet table centered 50%,43%."
+    }
+  ],
+  "runtime": {
+    "directory": "dist/gem-realistic",
+    "sourceDirectory": "art-source/gem-realistic",
+    "files": [
+      "square",
+      "diamond",
+      "triangle",
+      "hexagon",
+      "round",
+      "pentagon",
+      "point"
+    ],
+    "format": "512px WebP with alpha",
+    "totalBytes": 308142,
+    "encoding": "work/encode-gem-realistic.cjs",
+    "squareSourceSHA256": "D0C215DEB0B776F3C9FD43F63D5A2D59E68389B416FF6DAD00E6FD80E5670B22"
+  }
+}

@@ -1,0 +1,299 @@
+{
+  "schemaVersion": 1,
+  "authoredAt": "2026-11-07",
+  "authorship": "New Vietnamese explanatory wording drafted for this project by AI; no copied dictionary definitions or example sentences.",
+  "reviewStatus": "AI source-checked, no human expert signoff",
+  "policy": "References verify facts; they do not grant reuse rights. Existing ordinary example words are retained as lexical facts, not copied prose. Full-sentence examples not added without pedagogical need.",
+  "characters": [
+    {
+      "id": "休",
+      "note": "Nhìn bên trái là 亻, bên phải là 木. 亻 là dạng của 人 khi đứng ở bên trái.",
+      "compositionType": "modern-shape",
+      "word": "休む",
+      "reading": "やすむ",
+      "translation": "Nghỉ ngơi",
+      "exampleChange": "No example change needed; retain the short, already checked vocabulary example.",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0001375100"
+      ]
+    },
+    {
+      "id": "男",
+      "note": "Nhìn phần trên là 田; phần dưới là 力.",
+      "compositionType": "modern-shape",
+      "word": "男",
+      "reading": "おとこ",
+      "translation": "Người đàn ông",
+      "exampleChange": "No example change needed; retain the short, already checked vocabulary example.",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0004638500"
+      ]
+    },
+    {
+      "id": "分",
+      "note": "Tìm 八 ở phía trên và 刀 ở phía dưới.",
+      "compositionType": "modern-shape",
+      "word": "分ける",
+      "reading": "わける",
+      "translation": "Chia, chia ra",
+      "exampleChange": "No example change needed; retain the short, already checked vocabulary example.",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0006175200"
+      ]
+    },
+    {
+      "id": "名",
+      "note": "夕 nằm phía trên; 口 nằm phía dưới.",
+      "compositionType": "modern-shape",
+      "word": "名前",
+      "reading": "なまえ",
+      "translation": "Tên gọi",
+      "exampleChange": "No example change needed; retain the short, already checked vocabulary example.",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0006666900",
+        "https://a2-2.marugotoweb.jp/en/kanji/vocab/namae/"
+      ]
+    },
+    {
+      "id": "外",
+      "note": "Hai phần đứng cạnh nhau: 夕 bên trái và 卜 bên phải.",
+      "compositionType": "modern-shape",
+      "word": "外",
+      "reading": "そと",
+      "translation": "Bên ngoài",
+      "exampleChange": "No example change needed; retain the short, already checked vocabulary example.",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0000841200"
+      ]
+    },
+    {
+      "id": "何",
+      "note": "亻 đứng bên trái 可. 亻 là dạng của 人 khi đứng ở bên trái.",
+      "compositionType": "modern-shape",
+      "word": "何",
+      "reading": "なに",
+      "translation": "Cái gì?",
+      "exampleChange": "No example change needed; retain the short, already checked vocabulary example.",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0000641500"
+      ]
+    },
+    {
+      "id": "見",
+      "note": "Phần trên giống 目; phần dưới là 儿.",
+      "compositionType": "modern-shape",
+      "word": "見る",
+      "reading": "みる",
+      "translation": "Nhìn, xem",
+      "exampleChange": "No example change needed; retain the short, already checked vocabulary example.",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0001896200"
+      ]
+    },
+    {
+      "id": "国",
+      "note": "玉 nằm trong khung 囗. Khung 囗 là thành phần bao ngoài, khác chữ 口.",
+      "compositionType": "modern-shape",
+      "word": "国",
+      "reading": "くに",
+      "translation": "Đất nước",
+      "exampleChange": "No example change needed; retain the short, already checked vocabulary example.",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0002372600"
+      ]
+    },
+    {
+      "id": "時",
+      "note": "日 đứng bên trái; 寺 đứng bên phải.",
+      "compositionType": "modern-shape",
+      "word": "時",
+      "reading": "とき",
+      "translation": "Lúc, thời điểm",
+      "exampleChange": "No example change needed; retain the short, already checked vocabulary example.",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0002876900"
+      ]
+    },
+    {
+      "id": "間",
+      "note": "日 nằm dưới phần mái và giữa hai bên của 門; phía dưới vẫn mở.",
+      "compositionType": "modern-shape",
+      "word": "間",
+      "reading": "あいだ",
+      "translation": "Khoảng, khoảng giữa",
+      "exampleChange": "No example change needed; retain the short, already checked vocabulary example.",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0001083500"
+      ]
+    },
+    {
+      "id": "聞",
+      "note": "耳 nằm dưới phần mái và giữa hai bên của 門; phía dưới vẫn mở.",
+      "compositionType": "modern-shape",
+      "word": "聞く",
+      "reading": "きく",
+      "translation": "Nghe, hỏi",
+      "exampleChange": "No example change needed; retain the short, already checked vocabulary example.",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0006190200"
+      ]
+    },
+    {
+      "id": "話",
+      "note": "Nhìn 言 ở nửa trái, 舌 ở nửa phải.",
+      "compositionType": "modern-shape",
+      "word": "話す",
+      "reading": "はなす",
+      "translation": "Nói, nói chuyện",
+      "exampleChange": "No example change needed; retain the short, already checked vocabulary example.",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0007407700"
+      ]
+    },
+    {
+      "id": "語",
+      "note": "Nhìn 言 ở nửa trái, 吾 ở nửa phải.",
+      "compositionType": "modern-shape",
+      "word": "日本語",
+      "reading": "にほんご",
+      "translation": "Tiếng Nhật",
+      "exampleChange": "No example change needed; retain the short, already checked vocabulary example.",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0002110200",
+        "https://words.marugotoweb.jp/static_contents/pc/about/about.php?lang=en"
+      ]
+    },
+    {
+      "id": "読",
+      "note": "Trong chữ 読 hiện nay, 言 đứng bên trái 売.",
+      "compositionType": "modern-shape",
+      "word": "読む",
+      "reading": "よむ",
+      "translation": "Đọc",
+      "exampleChange": "No example change needed; retain the short, already checked vocabulary example.",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0005324000"
+      ]
+    },
+    {
+      "id": "校",
+      "note": "木 đứng bên trái 交; hai phần được thu gọn khi ghép.",
+      "compositionType": "modern-shape",
+      "word": "学校",
+      "reading": "がっこう",
+      "translation": "Trường học",
+      "exampleChange": "No example change needed; retain the short, already checked vocabulary example.",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0002236900"
+      ]
+    },
+    {
+      "id": "友",
+      "note": "Phần 𠂇 ôm phía trên và bên trái của 又.",
+      "compositionType": "modern-shape",
+      "word": "友達",
+      "reading": "ともだち",
+      "translation": "Bạn bè",
+      "exampleChange": "No example change needed; retain the short, already checked vocabulary example.",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0006843100"
+      ]
+    },
+    {
+      "id": "二",
+      "note": "Hai nét ngang xếp thành hai tầng; nét dưới dài hơn nét trên.",
+      "compositionType": "modern-shape",
+      "word": "二",
+      "reading": "に",
+      "translation": "Số hai",
+      "exampleChange": "No example change needed; retain the short, already checked vocabulary example.",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0005418000"
+      ]
+    },
+    {
+      "id": "三",
+      "note": "Thêm một nét ngang phía trên 二 để có ba tầng ngang.",
+      "compositionType": "modern-shape",
+      "word": "三",
+      "reading": "さん",
+      "translation": "Số ba",
+      "exampleChange": "No example change needed; retain the short, already checked vocabulary example.",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0002622000"
+      ]
+    },
+    {
+      "id": "天",
+      "note": "Nhìn một nét ngang ở phía trên hình 大.",
+      "compositionType": "modern-shape",
+      "word": "天",
+      "reading": "てん",
+      "translation": "Trời, bầu trời",
+      "exampleChange": "No example change needed; retain the short, already checked vocabulary example.",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0005033300"
+      ]
+    },
+    {
+      "id": "本",
+      "note": "Mẹo nhìn hình: thêm nét ngang ngắn vào phần gốc của 木. Nét này cắt qua thân cây.",
+      "compositionType": "visual-mnemonic",
+      "word": "本",
+      "reading": "ほん",
+      "translation": "Quyển sách",
+      "exampleChange": "No example change needed; retain the short, already checked vocabulary example.",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0006505700"
+      ]
+    },
+    {
+      "id": "白",
+      "note": "Mẹo nhìn hình: tìm nét phẩy ngắn ở phía trên hình 日. Đây không phải giải thích nguồn gốc chữ.",
+      "compositionType": "visual-mnemonic",
+      "word": "白い",
+      "reading": "しろい",
+      "translation": "Trắng; có màu trắng",
+      "exampleChange": "Clarifies adjective meaning; word and reading unchanged.",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0005607600"
+      ]
+    },
+    {
+      "id": "百",
+      "note": "Nhìn một nét ngang ở phía trên 白.",
+      "compositionType": "modern-shape",
+      "word": "百",
+      "reading": "ひゃく",
+      "translation": "Số một trăm",
+      "exampleChange": "No example change needed; retain the short, already checked vocabulary example.",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0005920000"
+      ]
+    },
+    {
+      "id": "左",
+      "note": "Phần 𠂇 ôm phía trên và bên trái của 工.",
+      "compositionType": "modern-shape",
+      "word": "左",
+      "reading": "ひだり",
+      "translation": "Bên trái",
+      "exampleChange": "No example change needed; retain the short, already checked vocabulary example.",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0002452500"
+      ]
+    },
+    {
+      "id": "右",
+      "note": "Phần 𠂇 ôm phía trên và bên trái của 口.",
+      "compositionType": "modern-shape",
+      "word": "右",
+      "reading": "みぎ",
+      "translation": "Bên phải",
+      "exampleChange": "No example change needed; retain the short, already checked vocabulary example.",
+      "evidence": [
+        "https://www.kanjipedia.jp/kanji/0000308000"
+      ]
+    }
+  ]
+}

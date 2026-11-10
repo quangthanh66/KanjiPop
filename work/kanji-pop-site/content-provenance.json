@@ -1,0 +1,40 @@
+{
+  "policy": "Self-authored explanatory prose; references used for fact-checking only; external datasets not bundled.",
+  "approvedByOwner": "2026-11-07 conversation choice",
+  "notesAuthorship": "New Vietnamese explanatory wording drafted for this project by AI; no copied dictionary definitions or example sentences.",
+  "coverage": [
+    "休",
+    "男",
+    "分",
+    "名",
+    "外",
+    "何",
+    "見",
+    "国",
+    "時",
+    "間",
+    "聞",
+    "話",
+    "語",
+    "読",
+    "校",
+    "友",
+    "二",
+    "三",
+    "天",
+    "本",
+    "白",
+    "百",
+    "左",
+    "右"
+  ],
+  "sourceReviewFile": "kanji-source-review.json",
+  "commercialClearance": "not-granted",
+  "humanReview": "pending",
+  "historicalCuration": "Initial subset referenced JLPT Sensei study list. Its collection/selection provenance is not independently cleared by rewriting explanations.",
+  "readingLabels": "Readings belong to the whole example word; not a complete on/kun inventory.",
+  "visualMnemonics": [
+    "本",
+    "白"
+  ]
+}

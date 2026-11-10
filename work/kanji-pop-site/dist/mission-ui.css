@@ -1,0 +1,37 @@
+/* One active source gem; unrevealed recipes stay hidden until matched. */
+#kanji-pop #mission-cards{display:flex;flex-direction:column;gap:12px;width:100%;margin:0 0 9px}
+#kanji-pop .objective-current{display:flex;align-items:center;gap:12px;padding:9px 12px;background:#effaffc4;border:2px solid white;border-radius:16px;color:#255b7c}
+#kanji-pop .objective-current strong{display:block;font-size:15px;line-height:1.35}
+#kanji-pop .objective-current div>span{display:block;font-size:11px;line-height:1.4;margin-top:4px}
+#kanji-pop .objective-preview.result-gem,#kanji-pop .objective-preview.waiting{display:block;position:relative;flex:0 0 64px;width:64px;height:64px;--gem-glyph-size:22px}
+#kanji-pop .objective-preview.waiting{display:grid;place-items:center;font-size:32px;color:#937132}
+#kanji-pop .objective-preview .part-glyph{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:8;stroke-linecap:round}
+#kanji-pop .objective-route{display:flex;gap:6px;flex-wrap:wrap;list-style:none;padding:0;margin:0}
+#kanji-pop .objective-route li{position:relative;display:grid;place-items:center;flex:0 0 25px;height:29px;border:1px solid #ffffffbd;border-radius:8px;background:#b7e0ee;color:#5c8b9e;font:800 16px Nunito,sans-serif}
+#kanji-pop .objective-route li.current{color:#8a5b11;border:2px solid #eab538;background:#fff0ae}
+#kanji-pop .objective-route li.done{background:#e7ffec;color:#367755}
+#kanji-pop .objective-route li i{position:absolute;right:-3px;bottom:-4px;background:#378e60;color:white;border-radius:50%;font:900 8px Nunito,sans-serif;width:12px;height:12px;text-align:center}
+#kanji-pop #mission-status{font-size:11px;font-weight:800;line-height:1.4;margin:0 0 9px;color:#315e7f;min-height:31px}
+#kanji-pop #mission-done[hidden]{display:none}
+@media(min-width:900px){
+ #kanji-pop .play-summary{align-items:stretch;gap:0}
+ #kanji-pop .play-summary .mission{margin-bottom:10px}
+ #kanji-pop .play-summary .kp-level{margin-bottom:16px}
+ #kanji-pop .desktop-guide{padding-top:12px}
+ #kanji-pop .desktop-guide h2,#kanji-pop .desktop-guide>p,#kanji-pop .desktop-guide .course-badge{display:none}
+ #kanji-pop .desktop-guide .journey-progress{margin-bottom:10px}
+}
+@media(max-width:899px){
+ #kanji-pop .play-summary{grid-template-columns:minmax(0,1fr);gap:4px;margin-bottom:17px}
+ #kanji-pop .play-summary .mission{width:100%;margin:0}
+ #kanji-pop #mission-cards{flex-direction:row;align-items:center;gap:8px;margin:1px 0;min-height:0}
+ #kanji-pop .objective-current{flex:1;padding:4px 6px;gap:6px;border-radius:12px}
+ #kanji-pop .objective-current strong{font-size:11px}
+ #kanji-pop .objective-current div>span{font-size:9px;margin-top:2px}
+ #kanji-pop .objective-preview.result-gem,#kanji-pop .objective-preview.waiting{flex-basis:40px;width:40px;height:40px;--gem-glyph-size:15px}
+ #kanji-pop .objective-route{display:grid;grid-template-columns:repeat(4,21px);gap:3px}
+ #kanji-pop .objective-route li{width:21px;height:23px;font-size:13px;border-radius:6px}
+ #kanji-pop #mission-status{font-size:10px;min-height:26px;margin:0;line-height:1.3}
+ #kanji-pop .play-stage{width:min(100%,max(240px,calc((100dvh - 493px)*.8)))}
+}
+

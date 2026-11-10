@@ -1,0 +1,31 @@
+RÀ SOÁT ĐỘ TIN CẬY ĐO LƯỜNG PLAYTEST — 2026-11-08
+
+Phạm vi
+Đọc dist/experience.js, dist/study-report.js và vị trí gọi trong dist/n5-game.js. Áp dụng cách rà soát có chứng cứ của GitHub Evidence Collector đã đọc ở lượt trước. Tái hiện bằng Node VM với localStorage, khóa ghi, đồng hồ và visibility giả lập. Không có người chơi thật; không suy diễn kết quả học tập hay mức hấp dẫn.
+
+Phát hiện trên mã trước khi parent sửa
+P1 — Nhận xét thất bại vẫn đi vào báo cáo.
+experience.js observation() thêm vào data.observations trước save(). Với canWrite=false, hàm trả false nhưng report vẫn chứa một nhận xét và storage chứa 0. Quota fail rồi bấm lại tạo hai nhận xét trong RAM. Vì UI báo chưa xác nhận lưu, xuất JSON có thể chứa câu trả lời người dùng tưởng chưa gửi, đồng thời retry làm tăng trọng số một người. Hướng sửa: kiểm tra quyền trước mutation; rollback đúng array cũ khi lưu lỗi. Nếu báo cáo tổng hợp dùng nhiều lần trả lời hợp lệ của một participant thì phải công bố quy tắc chọn câu cuối hoặc tách lần đo, không coi đó là nhiều participant.
+
+P1 — Lần ghép sau được ghi nhầm thành lần ghép đầu khi có khoảng tắt logging.
+log() return ngay khi logging=false, trước khi cập nhật firstMatchLogged. VM: start được ghi; tắt logging; ghép thật lúc 1000ms; bật logging; ghép lần sau lúc 5000ms => báo cáo ghi firstMatchVisibleMs=5000. Các moves/hints trong khoảng tắt cũng mất nhưng run trông đủ dữ liệu. Hướng sửa: run có measurementIncomplete khi logging đổi; first-match timing không còn chứng minh được phải null; propagation tới cohort để không tính vào thống kê phiên đầy đủ.
+
+P2 — Biên nhập cần validation và quy tắc snapshot.
+study-report.summarize({events:[null]}) ném TypeError. Event số âm hoặc field sai kiểu chưa được validate bên trong summarizer. Event không có ID ổn định; ghép mảng từ nhiều bản export cùng phiên có thể đếm một hành động nhiều lần. Đây là trách nhiệm của công cụ nhập mới: validate schema trước summarize, chọn snapshot mới nhất theo studyId hoặc dedupe có chứng cứ; không nối mảng một cách mặc định. Một event move giống hình thức một event khác không tự chứng minh trùng vì có thể là hai thao tác hợp lệ.
+
+Giới hạn đang được mô tả đúng
+Thời gian visible không phải thời gian chỉ thao tác: vẫn bao gồm đọc hướng dẫn, popup và dừng suy nghĩ khi trang hiện. Không tự phân loại exit thành bỏ cuộc; thiếu dữ liệu không đổi thành 0. Không đổi lời tự khai nhớ chữ thành kiểm chứng học thuộc.
+
+Hợp đồng regression trong work/study-measurement-audit.cjs
+1. Readonly nhận xét trả false, không mutation/report/persistence.
+2. Quota fail hai lần không tăng nhận xét; phục hồi và thử lại lưu đúng một lần.
+3. Run sạch ghép tại1000ms giữ firstMatchVisibleMs1000.
+4. Chạy 1s, background3s, hiện1s => visible2s.
+5. Có ghép lúc tắt logging rồi bật lại => first timing null, measurementIncomplete true.
+6. Tắt logging dù chưa ghép vẫn khiến số đếm incomplete và timing null.
+7. Không quan sát được start => first timing null.
+8. Tắt logging rồi giữ nguyên trạng thái OFF khi báo cáo => vẫn đánh dấu measurementIncomplete; không cần bật logging trở lại.
+
+Trạng thái kiểm thử
+Các lỗi trên đã tái hiện trước sửa. Sau bản sửa của parent, đã đọc lại experience.js/study-report.js và chạy độc lập node work/study-measurement-audit.cjs: 8/8 PASS (exit 0). Phát hiện bổ sung trong lần rà soát: tắt logging rồi giữ OFF từng làm summary thiếu flag; đã báo parent, parent chuyển marker logging_changed sang trước khi tắt, test 8 hiện PASS. observation có kiểm tra quyền trước mutation và rollback khi save thất bại; first-match không được gán cho lần ghép sau khoảng logging off. Không sửa runtime trong nhánh review. Bản review chỉ xác nhận những kiểm tra VM nêu trên, không xác nhận dashboard import UI hoặc browser thực tế; parent kiểm tra riêng. Parent thông báo cohort có validation và chọn snapshot theo timestamp; kết luận đó chưa được kiểm thử độc lập trong scope review này.
+

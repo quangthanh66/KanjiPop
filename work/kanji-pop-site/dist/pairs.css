@@ -1,0 +1,48 @@
+#kanji-pop .kp-level{margin-bottom:29px}#kanji-pop .slide-panel{padding-top:24px}
+#kanji-pop .board-tile{font-size:34px}
+#kanji-pop .board-tile[data-pair="0"]{--tile-top:#fff197;--tile-mid:#ffce45;--tile-base:#ffb927;--tile-edge:#ca8b19;--tile-ink:#755015}
+#kanji-pop .board-tile[data-pair="1"]{--tile-top:#e1c7ff;--tile-mid:#be93fc;--tile-base:#a776e7;--tile-edge:#8155b9;--tile-ink:#513075}
+#kanji-pop .board-tile[data-pair="2"]{--tile-top:#dafb9d;--tile-mid:#a9e764;--tile-base:#91d346;--tile-edge:#669c35;--tile-ink:#3b641b}
+#kanji-pop .board-tile[data-pair="3"]{--tile-top:#ffd2e8;--tile-mid:#ffa3cb;--tile-base:#f380b3;--tile-edge:#bd5586;--tile-ink:#7e3156}
+#kanji-pop .board-tile[data-pair="4"]{--tile-top:#a6f5ee;--tile-mid:#6bddcf;--tile-base:#46c4ba;--tile-edge:#218c86;--tile-ink:#195e61}
+#kanji-pop .board-tile[data-pair="5"]{--tile-top:#ffd4b7;--tile-mid:#ffa676;--tile-base:#fa8b5c;--tile-edge:#bd633e;--tile-ink:#793b25}
+#kanji-pop .pair-mark{position:absolute;bottom:3px;right:5px;font:900 10px/1 Nunito,sans-serif;opacity:.65}
+#kanji-pop .board-tile.selected:after{display:none}#kanji-pop .board-tile.selected{box-shadow:0 4px var(--tile-edge),inset 0 0 0 2px white,0 0 0 2px #286099;border-color:#286099}
+#kanji-pop .board-tile.merging{animation:pair-flash .22s ease}
+#kanji-pop .board-tile.pair-result{background:linear-gradient(#fff8ba,#ffdb46);color:#78531b;box-shadow:0 0 24px #ffdf2b,0 4px #d99e2b;z-index:8;animation:kp-pop .3s ease}
+#kanji-pop .pair-progress{background:#ede4ff;color:#7650a5;border-radius:12px;padding:4px 10px}
+#kanji-pop .slide-feedback{margin:15px 0 12px;min-height:40px}
+#kanji-pop .kp-tools{padding-bottom:3px}
+#kanji-pop .reveal-modal{padding:48px 17px 20px;background:radial-gradient(ellipse at 50% 27%,#fff9da,#fffaf0 65%)}
+#kanji-pop .reveal-kicker{font-size:11px;letter-spacing:2px;color:#987431;margin-bottom:4px}
+#kanji-pop .reveal-stage{position:relative;height:160px;display:flex;align-items:center;justify-content:center;isolation:isolate}
+#kanji-pop .reveal-rays{position:absolute;width:180px;height:180px;z-index:-1;border-radius:50%;background:repeating-conic-gradient(from 0deg,#ffe57a70 0deg 13deg,transparent 13deg 30deg);mask-image:radial-gradient(circle,#000 25%,transparent 72%);animation:ray-turn 1.1s ease-out both}
+#kanji-pop .reveal-char{font-family:'Noto Sans JP',sans-serif;font-size:106px;line-height:1.2;color:#264f7c;text-shadow:0 4px #fff,0 8px #d5cba8;animation:kanji-reveal .5s cubic-bezier(.2,.8,.3,1.2) both}
+#kanji-pop .reveal-spark{position:absolute;font-size:27px;color:#f5bc22;text-shadow:0 2px white;animation:spark-reveal .65s ease-out both}
+#kanji-pop .reveal-spark.a{top:27px;left:22px}#kanji-pop .reveal-spark.b{bottom:23px;right:19px;animation-delay:.1s}#kanji-pop .reveal-spark.c{top:17px;right:32px;font-size:17px}
+#kanji-pop .reveal-meaning{font-size:24px;font-weight:1000;color:#315979;margin-top:-3px}
+#kanji-pop .reveal-formula{font:600 20px/1.5 'Noto Sans JP',sans-serif;color:#997027;margin:8px 0 3px}
+#kanji-pop .reveal-note{font-size:12px;line-height:1.5;color:#86704e;margin:0 0 13px}
+#kanji-pop .reveal-word{background:#f1e9db;border-radius:13px;padding:10px 12px;margin-bottom:17px;font-size:13px;line-height:1.5;color:#766850}
+#kanji-pop .reveal-word strong{font:600 22px/1.5 'Noto Sans JP',sans-serif;color:#324f74;margin-right:9px}
+#kanji-pop .reveal-word .reading{font:500 15px/1.5 'Noto Sans JP',sans-serif;color:#775895}
+#kanji-pop .reveal-word small{display:block;font-size:12px;margin-top:3px}
+#kanji-pop .reveal-count{font-size:11px;color:#8d7758;margin:0 0 7px}
+@keyframes pair-flash{50%{filter:brightness(1.7)}}
+@keyframes kanji-reveal{from{scale:.35;opacity:0;rotate:-12deg}65%{scale:1.12;rotate:3deg}to{scale:1;opacity:1;rotate:0deg}}
+@keyframes ray-turn{from{rotate:-45deg;scale:.7;opacity:0}to{rotate:25deg;scale:1;opacity:1}}
+@keyframes spark-reveal{from{scale:0;opacity:0}60%{scale:1.4;opacity:1}to{scale:1;opacity:1}}
+@media(max-width:370px){#kanji-pop .board-tile{font-size:30px}#kanji-pop .reveal-stage{height:132px}#kanji-pop .reveal-char{font-size:88px}#kanji-pop .reveal-meaning{font-size:21px}#kanji-pop .reveal-modal{padding-left:12px;padding-right:12px}#kanji-pop .kp-modal-title{font-size:18px}}
+@media(prefers-reduced-motion:reduce){#kanji-pop .reveal-char,#kanji-pop .reveal-rays,#kanji-pop .reveal-spark,#kanji-pop .board-tile.merging{animation:none}}
+/* One blank, one-tile sliding board. Wider tiles keep all five rows thumb-friendly. */
+#kanji-pop .slide-board{aspect-ratio:3/4}
+#kanji-pop .board-cells{grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(5,1fr)}
+#kanji-pop .board-cell.empty{display:flex;align-items:center;justify-content:center;border:2px dashed #73b2b7;background:#ddf3e9;box-shadow:inset 0 3px 6px #548d7130;color:#6c9996;font-size:10px;letter-spacing:1px}
+#kanji-pop .board-tile{border-color:#fffaf0b8}
+#kanji-pop .board-tile.movable{border:3px solid #fff;box-shadow:0 4px var(--tile-edge),inset 0 0 0 2px #ffffff88,0 0 9px #ffffff95}
+#kanji-pop .board-tile.selected{border-color:#286099}
+#kanji-pop .refill-note{font-size:10px;color:#907d5b;margin:10px 0 0}
+#kanji-pop .help-modal{padding-top:34px}
+#kanji-pop .keyboard-note{font-size:11px;opacity:.75}
+#kanji-pop .slide-feedback{min-height:35px;margin:10px 0 8px}
+@media(max-width:370px){#kanji-pop .board-info{font-size:10px}#kanji-pop .pair-progress{padding:4px 7px}}

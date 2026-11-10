@@ -1,0 +1,36 @@
+RÀ SOÁT NỘI DUNG KANJI — 2026-11-07
+
+Kết luận
+Đã đối chiếu 24 mục của n5-data.js bằng KanjiPedia (từ điển của Japan Kanji Aptitude Testing Foundation), dữ liệu hình thể CJKVI IDS, cùng Japan Foundation cho hai từ ví dụ cần nguồn bổ sung. Không phát hiện mâu thuẫn cơ bản về nghĩa/cách đọc đã chọn. Đây là rà soát AI có dẫn nguồn, không phải chứng nhận của chuyên gia người thật, không xác nhận quyền tái sử dụng thương mại của các nguồn.
+
+22 công thức khớp trực tiếp CJKVI IDS. Hai ngoại lệ quan trọng: 本 và 白 được nguồn IDS giữ nguyên, không tách. 木 + 一 và 丿 + 日 có thể giữ làm mẹo nhìn hình trong game, nhưng không được gọi là từ nguyên hoặc công thức đã được IDS xác nhận. Bản báo cáo chi tiết ghi từng mã Unicode, IDS thực sự quan sát được và URL từ điển.
+
+Cần xử lý ngay, không cần người dùng chọn sự thật
+1. Gọi các mảnh là thành phần chữ; không coi 亻, 𠂇 hoặc nét 一 đều là từ tiếng Nhật độc lập.
+2. Gắn nhãn Từ ví dụ / Cách đọc của từ. 日本語 đọc にほんご không có nghĩa riêng 語 đọc như vậy; tương tự 学校.
+3. Giữ thông báo ngắn về tách hình để nhớ, không phải giải thích nguồn gốc. Dữ liệu 本/白 có nhãn visual-mnemonic.
+4. 白い: đề xuất bản dịch Trắng; có màu trắng thay cho Màu trắng để rõ tính từ.
+5. Giữ phạm vi 24 chữ sơ cấp tham khảo N5. Không quảng bá là toàn bộ N5 hay học xong đồng nghĩa thuộc hết.
+6. 国: 囗 là khung bao, khác 口. 間/聞 có khung 門 mở dưới; nên giải thích rõ hơn. Giữ 日 trong 間, 玉 trong 国 và 売 trong 読 vì game dùng chữ hiện đại.
+
+Nội dung tự soạn
+content-authored-proposals.json chứa 24 lời giải thích tiếng Việt mới, mô tả vị trí bộ phận, không chép định nghĩa từ điển và không thêm chuyện từ nguyên. Giữ ví dụ từ ngắn hiện có vì chưa có lý do đổi. Không nhập nội dung định nghĩa, hình hoặc dataset bên ngoài vào runtime.
+
+Điểm cần kiểm tra tiếp
+- Kiểm tra trực quan 𠂇, 囗 so với 口, 本/白 trên phông thật; kiểm tra không bị cắt chữ trên viên đá.
+- Chưa đánh giá khả năng ghi nhớ của người mới hoặc toàn bộ biến thể cách đọc. Chưa có chuyên gia tiếng Nhật ký duyệt.
+- Các nhãn pending cho expert review không được tự động chuyển thành human-approved sau bản rà soát AI này.
+
+Lựa chọn phù hợp đưa người dùng duyệt khi chuẩn bị phát hành
+A (khuyến nghị): tiếp tục bản localhost bằng nội dung tự soạn đã đối chiếu; thuê/nhờ một biên tập viên Nhật–Việt kiểm tra một lượt trước phát hành trả phí. Không yêu cầu duyệt từng chữ ngay bây giờ.
+B: dùng quy trình AI + nguồn làm lớp duyệt nội bộ duy nhất, vẫn ghi rõ giới hạn; ít chi phí hơn nhưng rủi ro lỗi học liệu còn cao hơn.
+C: mở rộng luôn sang giáo trình đọc/viết đầy đủ; cần thêm nội dung, đánh giá học tập và công kiểm duyệt, chưa phù hợp mục tiêu thử gameplay hiện tại.
+
+Nguồn và phạm vi sử dụng
+Framework: https://raw.githubusercontent.com/msitarzewski/agency-agents/main/testing/testing-evidence-collector.md — chỉ đọc hướng dẫn thu thập chứng cứ, không cài hoặc chạy script.
+Hình thể: https://raw.githubusercontent.com/cjkvi/cjkvi-ids/master/ids.txt — 22 mục khớp; 本 và 白 không tách. Chỉ dùng đối chiếu, không cấp quyền mặc nhiên.
+Từ điển: từng URL KanjiPedia trong kanji-source-review.json.
+Tên: https://a2-2.marugotoweb.jp/en/kanji/vocab/namae/
+日本語: https://words.marugotoweb.jp/static_contents/pc/about/about.php?lang=en
+
+Chỉ ba file báo cáo mới được tạo. Không sửa runtime, không sửa content-review.json, không triển khai mạng.

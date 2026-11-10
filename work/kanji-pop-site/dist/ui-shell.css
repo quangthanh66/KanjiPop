@@ -1,0 +1,4 @@
+/* Original bright theme is supplied by theme.css and mobile-fullscreen.css.
+   Keep only shared interaction refinements here; do not recolor the playfield. */
+#kanji-pop#kanji-pop button:not(.board-tile):not(.board-cell):focus-visible{outline:2px solid #315c9b;outline-offset:3px;text-decoration:none}
+@media(hover:hover){#kanji-pop#kanji-pop button:not(.board-tile):not(.board-cell):not(:disabled):hover{filter:brightness(1.05)}}

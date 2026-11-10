@@ -1,0 +1,10 @@
+/* Hybrid material follows the actual cut. Canvas extends beyond the tile. */
+#kanji-pop .board-tile{--focus-color:var(--tile-mid)}
+#kanji-pop .objective-halo,.fusion-halo{display:none;position:absolute;inset:0;pointer-events:none;z-index:2;overflow:visible}
+#kanji-pop .objective-anchor .objective-halo,#kanji-pop .fusion-contact .fusion-halo,.fusion-ingredient .fusion-halo,#kanji-pop .reveal-char .fusion-halo,#kanji-pop .formula-gem .fusion-halo{display:block}
+#kanji-pop .objective-fx[data-vfx="hybrid"],canvas.fusion-gem-fx{display:block;position:absolute;left:-32%;top:-32%;width:164%;height:164%;pointer-events:none;max-width:none}
+#kanji-pop#kanji-pop button.board-tile.objective-anchor,#kanji-pop#kanji-pop button.board-tile.fusion-contact{z-index:6}
+#kanji-pop#kanji-pop button.board-tile.objective-anchor .tile-glyph,#kanji-pop#kanji-pop button.board-tile.fusion-contact .tile-glyph,.fusion-ingredient .result-glyph,#kanji-pop .reveal-char .result-glyph{z-index:3}
+#kanji-pop#kanji-pop button.board-tile.objective-anchor .jewel-art{filter:brightness(1.08) drop-shadow(0 0 2px var(--focus-color))}
+#kanji-pop#kanji-pop button.board-tile.fusion-contact .jewel-art{filter:brightness(1.28) saturate(1.2) drop-shadow(0 0 8px #fff) drop-shadow(0 0 18px var(--tile-mid));transition:filter .16s ease-out}
+#kanji-pop#kanji-pop button.board-tile.objective-mate-hint .jewel-art{filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 10px var(--focus-color)) brightness(1.3)}
