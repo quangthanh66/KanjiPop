@@ -1,0 +1,11 @@
+const fs=require('fs'),p='work/kanji-pop-site/dist/gem-art.css';let s=fs.readFileSync(p,'utf8');
+s=s.replace('linear-gradient(145deg,#389fc8,#247cae)','linear-gradient(145deg,#246e91,#173e68)');
+s=s.replace('/* Sky-blue glass backdrop: clipped ambient drift leaves gem/fusion effects free. */','/* Crystal lagoon: a quiet blue center, luminous rims and drifting refracted light. */');
+s=s.replace('background:linear-gradient(155deg,#389fc8,#2587b7 55%,#287eaf)','background:radial-gradient(ellipse at 50% 42%,#1b3f69 0%,#184a70 48%,#227b98 100%)');
+s=s.replace('box-shadow:inset 0 1px 0 #e8fcff80,inset 0 0 30px #12638a30','background:linear-gradient(135deg,#ccfff517,transparent 25%,transparent 80%,#71bdff15);box-shadow:inset 0 1px 0 #e8fcffb0,inset 0 0 28px #09274465');
+s=s.replace('radial-gradient(ellipse at 25% 25%,#a0f3ec65,transparent 48%),radial-gradient(ellipse at 78% 68%,#9bd8ff45,transparent 50%),radial-gradient(ellipse at 45% 88%,#1b6a9a40,transparent 55%)','radial-gradient(ellipse at 9% 14%,#54e2c847,transparent 37%),radial-gradient(ellipse at 90% 78%,#708dff30,transparent 38%),radial-gradient(ellipse at 50% 50%,#10365360,transparent 60%)');
+s=s.replace("background-image:url('cosmic-stars-far.svg');background-size:384px 384px;opacity:.2;animation:cosmic-far-drift 125s linear infinite","background-image:url('crystal-water.svg');background-size:100% 100%;width:140%;height:140%;left:-20%;top:-20%;opacity:.85;animation:crystal-water-drift 48s ease-in-out infinite alternate");
+s=s.replace("background-size:256px 256px;opacity:.24","background-size:256px 256px;opacity:.18");
+s=s.replace('#9af8de70','#61dfc334').replace('#a9ddff40','#82bcff22').replace('#f3c8ed45','#c4a2ec24').replaceAll('#a9eaff55','#86dfff24').replace('#fff3bb45','#e2dc9f24');
+s+='\n@keyframes crystal-water-drift{from{transform:translate3d(-2%,-1%,0) rotate(-4deg) scale(1)}to{transform:translate3d(3%,2%,0) rotate(3deg) scale(1.08)}}\n#kanji-pop[data-quality="light"] .cosmic-stars-far,#kanji-pop[data-marker-quality="light"] .cosmic-stars-far{animation:none;will-change:auto}\n';
+fs.writeFileSync(p,s);

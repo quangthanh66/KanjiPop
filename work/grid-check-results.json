@@ -1,0 +1,249 @@
+{
+  "status": "PASS",
+  "checks": 9136,
+  "ambiguous": 4148,
+  "refills": 478,
+  "maxHintMs": 124,
+  "results": [
+    {
+      "mode": "mobile",
+      "level": 1,
+      "cols": 3,
+      "rows": 3,
+      "steps": 12,
+      "hintMs": 1
+    },
+    {
+      "mode": "mobile",
+      "level": 2,
+      "cols": 4,
+      "rows": 3,
+      "steps": 7,
+      "hintMs": 1
+    },
+    {
+      "mode": "mobile",
+      "level": 3,
+      "cols": 4,
+      "rows": 4,
+      "steps": 7,
+      "hintMs": 1
+    },
+    {
+      "mode": "mobile",
+      "level": 4,
+      "cols": 4,
+      "rows": 4,
+      "steps": 10,
+      "hintMs": 3
+    },
+    {
+      "mode": "mobile",
+      "level": 5,
+      "cols": 4,
+      "rows": 4,
+      "steps": 37,
+      "hintMs": 42
+    },
+    {
+      "mode": "mobile",
+      "level": 6,
+      "cols": 4,
+      "rows": 5,
+      "steps": 9,
+      "hintMs": 3
+    },
+    {
+      "mode": "mobile",
+      "level": 7,
+      "cols": 4,
+      "rows": 5,
+      "steps": 9,
+      "hintMs": 1
+    },
+    {
+      "mode": "mobile",
+      "level": 8,
+      "cols": 4,
+      "rows": 5,
+      "steps": 15,
+      "hintMs": 72
+    },
+    {
+      "mode": "mobile",
+      "level": 9,
+      "cols": 4,
+      "rows": 5,
+      "steps": 8,
+      "hintMs": 1
+    },
+    {
+      "mode": "mobile",
+      "level": 10,
+      "cols": 4,
+      "rows": 5,
+      "steps": 39,
+      "hintMs": 246
+    },
+    {
+      "mode": "mobile",
+      "level": 11,
+      "cols": 4,
+      "rows": 5,
+      "steps": 24,
+      "hintMs": 323
+    },
+    {
+      "mode": "mobile",
+      "level": 12,
+      "cols": 4,
+      "rows": 5,
+      "steps": 14,
+      "hintMs": 117
+    },
+    {
+      "mode": "mobile",
+      "level": 13,
+      "cols": 4,
+      "rows": 5,
+      "steps": 24,
+      "hintMs": 246
+    },
+    {
+      "mode": "mobile",
+      "level": 14,
+      "cols": 4,
+      "rows": 5,
+      "steps": 14,
+      "hintMs": 74
+    },
+    {
+      "mode": "mobile",
+      "level": 15,
+      "cols": 4,
+      "rows": 5,
+      "steps": 46,
+      "hintMs": 129
+    },
+    {
+      "mode": "desktop",
+      "level": 1,
+      "cols": 3,
+      "rows": 3,
+      "steps": 12,
+      "hintMs": 0
+    },
+    {
+      "mode": "desktop",
+      "level": 2,
+      "cols": 4,
+      "rows": 3,
+      "steps": 7,
+      "hintMs": 0
+    },
+    {
+      "mode": "desktop",
+      "level": 3,
+      "cols": 4,
+      "rows": 4,
+      "steps": 7,
+      "hintMs": 0
+    },
+    {
+      "mode": "desktop",
+      "level": 4,
+      "cols": 4,
+      "rows": 4,
+      "steps": 10,
+      "hintMs": 2
+    },
+    {
+      "mode": "desktop",
+      "level": 5,
+      "cols": 4,
+      "rows": 4,
+      "steps": 37,
+      "hintMs": 28
+    },
+    {
+      "mode": "desktop",
+      "level": 6,
+      "cols": 5,
+      "rows": 4,
+      "steps": 20,
+      "hintMs": 213
+    },
+    {
+      "mode": "desktop",
+      "level": 7,
+      "cols": 5,
+      "rows": 4,
+      "steps": 12,
+      "hintMs": 43
+    },
+    {
+      "mode": "desktop",
+      "level": 8,
+      "cols": 5,
+      "rows": 6,
+      "steps": 18,
+      "hintMs": 305
+    },
+    {
+      "mode": "desktop",
+      "level": 9,
+      "cols": 5,
+      "rows": 6,
+      "steps": 10,
+      "hintMs": 7
+    },
+    {
+      "mode": "desktop",
+      "level": 10,
+      "cols": 5,
+      "rows": 6,
+      "steps": 47,
+      "hintMs": 698
+    },
+    {
+      "mode": "desktop",
+      "level": 11,
+      "cols": 5,
+      "rows": 6,
+      "steps": 21,
+      "hintMs": 340
+    },
+    {
+      "mode": "desktop",
+      "level": 12,
+      "cols": 5,
+      "rows": 6,
+      "steps": 11,
+      "hintMs": 38
+    },
+    {
+      "mode": "desktop",
+      "level": 13,
+      "cols": 5,
+      "rows": 6,
+      "steps": 8,
+      "hintMs": 4
+    },
+    {
+      "mode": "desktop",
+      "level": 14,
+      "cols": 5,
+      "rows": 6,
+      "steps": 13,
+      "hintMs": 208
+    },
+    {
+      "mode": "desktop",
+      "level": 15,
+      "cols": 5,
+      "rows": 6,
+      "steps": 64,
+      "hintMs": 1648
+    }
+  ]
+}

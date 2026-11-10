@@ -1,0 +1,24 @@
+const {chromium}=require('C:/Users/Admin/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const assert=require('node:assert/strict');
+const {pathToFileURL}=require('node:url');
+const url='http://127.0.0.1:8765/';
+(async()=>{
+ const browser=await chromium.launch({headless:true,executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe'});
+ try{
+  for(const [width,height,name,reduced,known] of [[1440,900,'desktop',false,false],[390,844,'mobile',false,false],[390,844,'mobile-repeat',false,true],[390,844,'reduced',true,false]]){
+   const p=await browser.newPage({viewport:{width,height},reducedMotion:reduced?'reduce':'no-preference'}),errors=[];p.on('pageerror',e=>errors.push(e.message));await p.addInitScript(()=>{const q=sessionStorage.getItem('qa-fixture');if(q){localStorage.setItem('kanji-pop-n5-v1',q);sessionStorage.removeItem('qa-fixture');}});await p.goto(url);
+   const step=await p.evaluate(known=>{const E=KanjiN5;let s=E.fresh(0,1234,innerWidth>=900?'desktop':'mobile');for(let i=0;i<100;i++){const h=E.hint(s),r=E.move(s,h.at,h.dir);if(r.match){sessionStorage.setItem('qa-fixture',JSON.stringify({course:E.C.id,state:s,profile:{collected:known?[r.match.recipe]:[],results:{}},history:[],undos:3,view:'play',sound:false}));return {...h,pair:r.state.pending.pair,recipe:r.match.recipe,score:s.score,guided:r.match.recipe===E.currentTarget(s),target:E.C.levels[s.level].targets.includes(r.match.recipe)};}s=r.state;}throw Error('No merge route');},known);
+   await p.reload();if(await p.locator('[data-action="begin-level"]').isVisible())await p.locator('[data-action="begin-level"]').click();await p.evaluate(()=>{KanjiExperience.settings.effect='fireworks';KanjiExperience.settings.pacing='balanced';const original=KanjiFusion.play;KanjiFusion.play=args=>{const fx=original(args);window.lastFusionDuration=fx.duration;return fx;};});const r=await p.locator('#tiles [data-at="'+step.at+'"]').boundingBox();await p.mouse.move(r.x+r.width/2,r.y+r.height/2);await p.mouse.down();await p.mouse.move(r.x+r.width/2+({left:-40,right:40}[step.dir]||0),r.y+r.height/2+({up:-40,down:40}[step.dir]||0));await p.mouse.up();
+   if(!reduced){await p.locator('.fusion-canvas').waitFor();const expected=await p.evaluate(pair=>{const e=KanjiGemArt.elementFor(pair);return e==='thunder'?'lightning':e;},step.pair);assert.equal(await p.locator('.fusion-canvas').getAttribute('data-theme'),expected);assert.equal(await p.locator('#kanji-pop').getAttribute('aria-busy'),'true');assert.equal(await p.locator('.fusion-ingredient').count(),2);assert.equal(await p.locator('.reveal-info-panel').isVisible(),false);assert(await p.locator('[data-action="continue"]').isDisabled());await p.evaluate(()=>window.fusionResultIdentity=document.querySelector('.reveal-char'));await p.waitForTimeout(300);await p.screenshot({path:__dirname+'/fusion-flight-'+name+'.png'});await p.waitForTimeout(750);await p.screenshot({path:__dirname+'/fusion-'+name+'.png'});}
+   await p.locator('.cinematic-reveal[data-fusion="ready"]').waitFor();if(!reduced)assert(await p.evaluate(()=>fusionResultIdentity===document.querySelector('.reveal-char')));assert.equal(await p.locator('#quick-card').isVisible(),false);
+   assert(await p.locator('.reveal-meaning').isVisible());assert(await p.locator('.reveal-formula').isVisible());assert(await p.locator('.reveal-word').isVisible());
+   assert.equal(await p.locator('.reveal-char .result-glyph').textContent(),step.recipe);
+   if(!reduced)assert(await p.evaluate(()=>lastFusionDuration===2200));
+   const credited=await p.evaluate(()=>{const s=JSON.parse(localStorage.getItem('kanji-pop-n5-v1'));return {score:s.state.score,found:s.state.found,pending:s.state.pending,collected:s.profile.collected};});
+   assert.equal(credited.score,step.score+100);assert(credited.found.includes(step.recipe));assert.equal(credited.collected.filter(c=>c===step.recipe).length,1);assert.equal(credited.pending.creditedTarget,step.target);
+   if(!step.guided){await p.reload();await p.locator('.reveal-char').waitFor();assert.equal(await p.evaluate(()=>JSON.parse(localStorage.getItem('kanji-pop-n5-v1')).state.score),credited.score);}
+   await p.locator('[data-action="continue"]').click();
+   await p.waitForFunction(()=>document.querySelector('#kanji-pop').getAttribute('aria-busy')==='false');assert.equal(await p.locator('.fusion-canvas').count(),0);assert.equal(await p.locator('.fusion-caption').count(),0);await p.waitForFunction(()=>KanjiTargetVFX.state.markers.length===1&&KanjiTargetVFX.state.markers[0].asset);assert.equal(await p.locator('#tiles .objective-fx').count(),1);assert.deepEqual(errors,[]);console.log(name,step.guided?'guided':'off-target','full VFX/card, credit, pending reload and cleanup OK');await p.close();
+  }
+ }finally{await browser.close();}
+})().catch(e=>{console.error(e);process.exitCode=1});

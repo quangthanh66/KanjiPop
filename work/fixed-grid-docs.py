@@ -1,0 +1,13 @@
+from pathlib import Path
+p=Path('work/kanji-pop-site/GAMEPLAY.md');s=p.read_text(encoding='utf-8')
+s=s.replace('The first level introduces four pairs on a 3×3 board.','The first level has four required target recipes on the same full board size as every other level.')
+a=s.index('- Dimensions are columns × rows.');b=s.index('- A tap slides',a)
+s=s[:a]+'''- Dimensions are columns × rows, fixed across all 15 levels: desktop 5×6 (28 tiles / 14 unique pairs), mobile 4×5 (18 tiles / 9 unique pairs). Both have exactly two blanks.
+- Desktop is a viewport at least 900 px wide. A run keeps its shape while resizing; start/restart uses the current viewport. Fourteen colors have distinct corner marks as a secondary identifier.
+- Required targets enter first, followed by the level's previously scheduled material, then supplemental recipes from the 24-character set to fill every pair slot. Supplemental matches award points and album entries but do not replace required targets. A recipe is never duplicated simultaneously; future characters can be discovered early and will still be required in their assigned levels.
+''' + s[b:]
+s=s.replace('Otherwise use an inactive recipe from material already introduced, preferring less recent recipes and fewer repeated components. If the starter pool has only four recipes, reusing the matched recipe is unavoidable, but there is still only one pair for it on the board.','Otherwise use an inactive recipe from the full 24-character set, preferring less recent recipes and fewer repeated components.')
+s=s.replace('engine schema v8. Saved v7 runs and undo history migrate to a legacy 3-column layout, preserving their current board and pending refill exactly. A new run uses the new dimensions.','engine schema v9. Saved v7/v8 runs and undo history migrate to the fixed layout. Existing full-size boards retain positions; smaller boards are repacked with unique supplemental pairs. Score, moves, found targets, pending reveal identity, album and level results are preserved. A pending refill is rebuilt if its board expands.')
+s=s.replace('`node work/grid-engine-check.cjs`','`node work/fixed-grid-check.cjs`').replace('`work/grid-check-results.json`','`work/fixed-grid-check-results.json`').replace('`node work/grid-browser-check.cjs`','`node work/fixed-grid-browser-check.cjs`').replace('`work/grid-browser-results.json`','`work/fixed-grid-browser-results.json`')
+s=s.replace('Earlier `n5-*check.cjs` and `responsive-check.cjs` files describe prior layouts','Earlier `grid-engine-check.cjs`, `grid-browser-check.cjs`, `n5-*check.cjs` and `responsive-check.cjs` files describe prior layouts')
+p.write_text(s,encoding='utf-8')

@@ -1,0 +1,11 @@
+from pathlib import Path
+p=Path('work/grid-browser-check.cjs');s=p.read_text(encoding='utf-8')
+s=s.replace("await fixture(mode==='desktop'?7:5,mode)","await fixture(0,mode)")
+s=s.replace("assert.equal((await state()).rows,4)","assert.equal((await state()).rows,6)")
+s=s.replace("let old=E.fresh(0,1234);old.version=7;", "let old=E.fresh(0,1234);const ts=old.board.filter(t=>t&&t.pair<4).sort((a,b)=>a.id-b.id);old.board=[2,0,4,6,null,1,3,5,7].map(i=>i===null?null:ts[i]);old.rows=3;old.cols=3;old.blanks=1;old.version=8;let pending=E.move(old,5,'left').state;old.version=7;")
+s=s.replace("let pending=E.move(E.upgrade(old),5,'left').state;pending.version=7;", "pending.version=7;")
+s=s.replace("assert.equal((await state()).mode,'legacy')", "assert.equal((await state()).mode,'mobile')")
+s=s.replace("assert.equal(await p.locator('.board-cell.empty').count(),1)","assert.equal(await p.locator('.board-cell.empty').count(),2)")
+s=s.replace("assert.equal((await state()).cols,3)","assert.equal((await state()).cols,4)")
+s=s.replace("'work/grid-browser-results.json'","'work/fixed-grid-browser-results.json'").replace("work/grid-'+name", "work/fixed-grid-'+name")
+Path('work/fixed-grid-browser-check.cjs').write_text(s,encoding='utf-8')

@@ -1,0 +1,6 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),E=require('./kanji-pop-site/dist/n5-engine.js');
+const source=fs.readFileSync('work/kanji-pop-site/dist/n5-engine.js','utf8'),fixture=JSON.parse(fs.readFileSync('work/refill-loop-fixture.json','utf8'));
+// Force exhaustion of the local-slide search; the production engine still verifies the fallback.
+for(const exact of [false,true]){let code=source.replace('depth<=3','depth<=0');if(exact)code=code.replace('attempt<500','attempt<0');const sandbox={KanjiCourse:E.C,module:{exports:{}}};vm.runInNewContext(code,sandbox);const F=sandbox.module.exports;
+ let s=F.move(fixture,1,'down').state;s=F.move(s,12,'up').state;assert(s.pending.plan.reflow);assert(E.valid(s));assert(E.valid(E.resume(s)));assert(s.pending.plan.spawn.every(x=>s.board[x.at]));const originalIds=s.board.filter(Boolean).map(t=>t.id).sort((a,b)=>a-b),movedIds=s.pending.plan.reflow.map(t=>t.id).sort((a,b)=>a-b);assert.equal(JSON.stringify(originalIds),JSON.stringify(movedIds));if(!exact)fs.writeFileSync('work/refill-reflow-fixture.json',JSON.stringify(s));}
+console.log('PASS: blocked-pocket rearrangement and exact placement fallback preserve every survivor');

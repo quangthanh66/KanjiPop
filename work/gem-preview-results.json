@@ -1,0 +1,33 @@
+{
+  "date": "2026-11-07T14:41:36.393Z",
+  "report": [
+    {
+      "width": 1440,
+      "height": 1050,
+      "noHorizontalOverflow": true,
+      "whiteGlyphs": 27,
+      "pairIdentity": "passed",
+      "externalRequests": 0,
+      "controls": "passed"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "noHorizontalOverflow": true,
+      "whiteGlyphs": 27,
+      "pairIdentity": "passed",
+      "externalRequests": 0,
+      "controls": "passed"
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "noHorizontalOverflow": true,
+      "whiteGlyphs": 27,
+      "pairIdentity": "passed",
+      "externalRequests": 0,
+      "controls": "passed"
+    }
+  ],
+  "scope": "Standalone proposal only; no production assets changed. Screenshots are desktop Chromium responsive emulation, not real phones."
+}

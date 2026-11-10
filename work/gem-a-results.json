@@ -1,0 +1,54 @@
+{
+  "date": "2026-11-07T14:46:43.377Z",
+  "runs": [
+    {
+      "width": 1440,
+      "height": 1000,
+      "columns": 7,
+      "rows": 5,
+      "pairCount": 17,
+      "pairIdentity": true,
+      "uniqueAppearance": 17,
+      "allGlyphBoxesInsideOutline": true,
+      "bareTouchTargets": true,
+      "whiteGlyphs": true,
+      "overflow": false,
+      "svgIdsUnique": true,
+      "sharedRevealRenderer": true,
+      "externalRequests": 0
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "columns": 4,
+      "rows": 5,
+      "pairCount": 9,
+      "pairIdentity": true,
+      "uniqueAppearance": 9,
+      "allGlyphBoxesInsideOutline": true,
+      "bareTouchTargets": true,
+      "whiteGlyphs": true,
+      "overflow": false,
+      "svgIdsUnique": true,
+      "sharedRevealRenderer": true,
+      "externalRequests": 0
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "columns": 4,
+      "rows": 5,
+      "pairCount": 9,
+      "pairIdentity": true,
+      "uniqueAppearance": 9,
+      "allGlyphBoxesInsideOutline": true,
+      "bareTouchTargets": true,
+      "whiteGlyphs": true,
+      "overflow": false,
+      "svgIdsUnique": true,
+      "sharedRevealRenderer": true,
+      "externalRequests": 0
+    }
+  ],
+  "scope": "Actual game in isolated desktop Chromium contexts with mobile viewport emulation; no real phone testing. Palette assignment, engine, save data and curriculum unchanged."
+}

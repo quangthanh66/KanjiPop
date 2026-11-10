@@ -1,0 +1,249 @@
+{
+  "status": "PASS",
+  "checks": 9255,
+  "ambiguous": 3902,
+  "refills": 294,
+  "maxHintMs": 164,
+  "results": [
+    {
+      "mode": "mobile",
+      "level": 1,
+      "cols": 4,
+      "rows": 5,
+      "steps": 25,
+      "hintMs": 346
+    },
+    {
+      "mode": "mobile",
+      "level": 2,
+      "cols": 4,
+      "rows": 5,
+      "steps": 13,
+      "hintMs": 74
+    },
+    {
+      "mode": "mobile",
+      "level": 3,
+      "cols": 4,
+      "rows": 5,
+      "steps": 10,
+      "hintMs": 3
+    },
+    {
+      "mode": "mobile",
+      "level": 4,
+      "cols": 4,
+      "rows": 5,
+      "steps": 17,
+      "hintMs": 73
+    },
+    {
+      "mode": "mobile",
+      "level": 5,
+      "cols": 4,
+      "rows": 5,
+      "steps": 44,
+      "hintMs": 260
+    },
+    {
+      "mode": "mobile",
+      "level": 6,
+      "cols": 4,
+      "rows": 5,
+      "steps": 10,
+      "hintMs": 2
+    },
+    {
+      "mode": "mobile",
+      "level": 7,
+      "cols": 4,
+      "rows": 5,
+      "steps": 9,
+      "hintMs": 1
+    },
+    {
+      "mode": "mobile",
+      "level": 8,
+      "cols": 4,
+      "rows": 5,
+      "steps": 15,
+      "hintMs": 43
+    },
+    {
+      "mode": "mobile",
+      "level": 9,
+      "cols": 4,
+      "rows": 5,
+      "steps": 8,
+      "hintMs": 1
+    },
+    {
+      "mode": "mobile",
+      "level": 10,
+      "cols": 4,
+      "rows": 5,
+      "steps": 31,
+      "hintMs": 27
+    },
+    {
+      "mode": "mobile",
+      "level": 11,
+      "cols": 4,
+      "rows": 5,
+      "steps": 22,
+      "hintMs": 190
+    },
+    {
+      "mode": "mobile",
+      "level": 12,
+      "cols": 4,
+      "rows": 5,
+      "steps": 12,
+      "hintMs": 38
+    },
+    {
+      "mode": "mobile",
+      "level": 13,
+      "cols": 4,
+      "rows": 5,
+      "steps": 20,
+      "hintMs": 131
+    },
+    {
+      "mode": "mobile",
+      "level": 14,
+      "cols": 4,
+      "rows": 5,
+      "steps": 14,
+      "hintMs": 71
+    },
+    {
+      "mode": "mobile",
+      "level": 15,
+      "cols": 4,
+      "rows": 5,
+      "steps": 32,
+      "hintMs": 57
+    },
+    {
+      "mode": "desktop",
+      "level": 1,
+      "cols": 5,
+      "rows": 6,
+      "steps": 23,
+      "hintMs": 72
+    },
+    {
+      "mode": "desktop",
+      "level": 2,
+      "cols": 5,
+      "rows": 6,
+      "steps": 26,
+      "hintMs": 598
+    },
+    {
+      "mode": "desktop",
+      "level": 3,
+      "cols": 5,
+      "rows": 6,
+      "steps": 5,
+      "hintMs": 1
+    },
+    {
+      "mode": "desktop",
+      "level": 4,
+      "cols": 5,
+      "rows": 6,
+      "steps": 37,
+      "hintMs": 506
+    },
+    {
+      "mode": "desktop",
+      "level": 5,
+      "cols": 5,
+      "rows": 6,
+      "steps": 55,
+      "hintMs": 837
+    },
+    {
+      "mode": "desktop",
+      "level": 6,
+      "cols": 5,
+      "rows": 6,
+      "steps": 21,
+      "hintMs": 527
+    },
+    {
+      "mode": "desktop",
+      "level": 7,
+      "cols": 5,
+      "rows": 6,
+      "steps": 10,
+      "hintMs": 22
+    },
+    {
+      "mode": "desktop",
+      "level": 8,
+      "cols": 5,
+      "rows": 6,
+      "steps": 18,
+      "hintMs": 503
+    },
+    {
+      "mode": "desktop",
+      "level": 9,
+      "cols": 5,
+      "rows": 6,
+      "steps": 10,
+      "hintMs": 11
+    },
+    {
+      "mode": "desktop",
+      "level": 10,
+      "cols": 5,
+      "rows": 6,
+      "steps": 36,
+      "hintMs": 528
+    },
+    {
+      "mode": "desktop",
+      "level": 11,
+      "cols": 5,
+      "rows": 6,
+      "steps": 21,
+      "hintMs": 527
+    },
+    {
+      "mode": "desktop",
+      "level": 12,
+      "cols": 5,
+      "rows": 6,
+      "steps": 11,
+      "hintMs": 29
+    },
+    {
+      "mode": "desktop",
+      "level": 13,
+      "cols": 5,
+      "rows": 6,
+      "steps": 6,
+      "hintMs": 1
+    },
+    {
+      "mode": "desktop",
+      "level": 14,
+      "cols": 5,
+      "rows": 6,
+      "steps": 13,
+      "hintMs": 176
+    },
+    {
+      "mode": "desktop",
+      "level": 15,
+      "cols": 5,
+      "rows": 6,
+      "steps": 55,
+      "hintMs": 821
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "name": "desktop",
+    "size": {
+      "scroll": 1440,
+      "inner": 1440,
+      "height": 900,
+      "view": 900
+    },
+    "passed": true
+  },
+  {
+    "name": "mobile",
+    "size": {
+      "scroll": 390,
+      "inner": 390,
+      "height": 844,
+      "view": 844
+    },
+    "passed": true
+  },
+  {
+    "name": "small",
+    "size": {
+      "scroll": 320,
+      "inner": 320,
+      "height": 686,
+      "view": 568
+    },
+    "passed": true
+  }
+]

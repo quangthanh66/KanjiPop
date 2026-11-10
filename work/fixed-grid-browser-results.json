@@ -1,0 +1,84 @@
+{
+  "status": "PASS",
+  "metrics": [
+    {
+      "mode": "desktop",
+      "width": 1440,
+      "height": 900,
+      "scrollHeight": 900,
+      "minTile": 81.328125
+    },
+    {
+      "mode": "desktop",
+      "width": 1366,
+      "height": 768,
+      "scrollHeight": 768,
+      "minTile": 61
+    },
+    {
+      "mode": "desktop",
+      "width": 900,
+      "height": 700,
+      "scrollHeight": 700,
+      "minTile": 49.65625
+    },
+    {
+      "mode": "desktop",
+      "width": 390,
+      "height": 844,
+      "scrollHeight": 844,
+      "minTile": 53.828094482421875
+    },
+    {
+      "mode": "desktop",
+      "width": 320,
+      "height": 568,
+      "scrollHeight": 679,
+      "minTile": 44
+    },
+    {
+      "mode": "mobile",
+      "width": 390,
+      "height": 844,
+      "scrollHeight": 844,
+      "minTile": 66.39059448242188
+    },
+    {
+      "mode": "mobile",
+      "width": 375,
+      "height": 667,
+      "scrollHeight": 667,
+      "minTile": 49.79685974121094
+    },
+    {
+      "mode": "mobile",
+      "width": 320,
+      "height": 568,
+      "scrollHeight": 626,
+      "minTile": 44
+    },
+    {
+      "mode": "mobile",
+      "width": 1440,
+      "height": 900,
+      "scrollHeight": 900,
+      "minTile": 99.390625
+    }
+  ],
+  "checks": [
+    "desktop 5x6",
+    "mobile 4x5",
+    "no overflow or overlaps",
+    "minimum 44px targets",
+    "resize preserves run",
+    "new run chooses viewport",
+    "ambiguous tap does not move",
+    "explicit blank destination",
+    "keyboard direction",
+    "hint destination",
+    "undo",
+    "legacy pending and history migration",
+    "album preserved"
+  ],
+  "errors": []
+}

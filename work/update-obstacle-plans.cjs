@@ -1,0 +1,1 @@
+const fs=require('fs'),p='work/build-course.cjs';let s=fs.readFileSync(p,'utf8').replace('attempt<70','attempt<25').replace('j<16','j<40').replace('[[3,4],[6,8],[9,12]]','[[8,16],[12,22],[14,28]]').replace('attempt===69','attempt===24');fs.writeFileSync(p,s);
