@@ -1,124 +1,226 @@
-# 🀄 Kanji Pop! — Trò Chơi Xếp Chữ Kanji N5 Tuyển Chọn
+<div align="center">
 
-> Trò chơi giải đố kết hợp trượt gạch (**Sliding Puzzle**) và ghép nguyên tố (**Elemental Fusion**) giúp người học ghi nhớ và làm quen với 24 chữ Hán tự (Kanji) sơ cấp theo lộ trình JLPT N5.  
-> **100% Zero-Build, Offline-First, Vanilla Web Standards.**
+# 🀄 Kanji Pop! — 漢字ポップ
+
+### *Trò chơi giải đố trượt đá quý & hợp nhất nguyên tố học 24 Kanji N5*
+
+<p align="center">
+  <img src="work/kanji-pop-site/art-source/gem-hybrid/round-source.png" width="64" alt="Round Crystal"/>
+  <img src="work/kanji-pop-site/art-source/gem-hybrid/diamond-source.png" width="64" alt="Diamond Crystal"/>
+  <img src="work/kanji-pop-site/art-source/gem-hybrid/hexagon-source.png" width="64" alt="Hexagon Crystal"/>
+  <img src="work/kanji-pop-site/art-source/gem-hybrid/triangle-source.png" width="64" alt="Triangle Crystal"/>
+  <img src="work/kanji-pop-site/art-source/gem-hybrid/square-source.png" width="64" alt="Square Crystal"/>
+  <img src="work/kanji-pop-site/art-source/gem-hybrid/pentagon-source.png" width="64" alt="Pentagon Crystal"/>
+  <img src="work/kanji-pop-site/art-source/gem-hybrid/point-source.png" width="64" alt="Point Crystal"/>
+</p>
+
+[![Vanilla JS](https://img.shields.io/badge/Vanilla-JavaScript_ES2022-F7DF1E?logo=javascript&logoColor=black&style=for-the-badge)](#)
+[![Zero Build](https://img.shields.io/badge/Zero--Build-100%25_Offline-00C7B7?style=for-the-badge)](#)
+[![Web Audio API](https://img.shields.io/badge/Web_Audio-Acoustic_Engine-FF6F00?logo=soundcharts&logoColor=white&style=for-the-badge)](#)
+[![JLPT N5](https://img.shields.io/badge/Curriculum-24_Kanji_N5-4A90E2?style=for-the-badge)](#)
+[![Playwright Tests](https://img.shields.io/badge/Tests-Playwright_100%25_Pass-2EAD33?logo=playwright&logoColor=white&style=for-the-badge)](#)
+[![License](https://img.shields.io/badge/License-MIT-lightgrey?style=for-the-badge)](#)
+
+<p align="center">
+  <a href="#-tính-năng-nổi-bật">Tính Năng</a> •
+  <a href="#-cơ-chế-chơi-gameplay-mechanics">Cơ Chế Chơi</a> •
+  <a href="#-hệ-thống-âm-thanh-sound-profiles">Hệ Thống Âm Thanh</a> •
+  <a href="#-giáo-trình-24-kanji-n5">Giáo Trình N5</a> •
+  <a href="#-khởi-chạy-cục-bộ-quickstart">Khởi Chạy</a> •
+  <a href="#-bộ-kiểm-thử-tự-động">Kiểm Thử</a> •
+  <a href="#-dành-cho-ai-agent">Dành Cho AI</a>
+</p>
+
+</div>
 
 ---
 
-> [!TIP]
-> 🤖 **Dành cho AI Agent & Lập trình viên mới**:  
-> Vui lòng tham khảo tài liệu chuẩn hóa toàn diện tại **[`AGENTS.md`](./AGENTS.md)** để nắm bắt ngay kiến trúc, các quy tắc bất biến (invariants), bảng tiến độ và bộ kiểm thử mà không cần rà soát thủ công.
+> [!IMPORTANT]
+> 🤖 **Tài liệu bàn giao cho AI Agent (Antigravity, Cursor, Claude Code, GitHub Copilot, Codex, Aider)**:  
+> Để AI quét toàn bộ kiến trúc, bảng tiến độ và các quy tắc bất biến mà không cần giải thích lại, vui lòng đọc trực tiếp file **[`AGENTS.md`](./AGENTS.md)**.
 
 ---
 
 ## 🌟 Tính Năng Nổi Bật
 
-- **Cơ Chế Trượt Độc Đáo (Sliding Tile & Merge)**:
-  - Bàn cờ cố định 17 cặp đá ngọc và 1 ô trống (35 ô).
-  - Tự động thích ứng & hoán vị tọa độ: **5×7** trên Mobile và **7×5** trên PC/Desktop.
-  - Trượt các viên đá cùng màu, cùng dáng lại gần nhau để kích hoạt hợp nhất Kanji.
-  - Cơ chế tái sinh ngọc đảm bảo khoảng cách Manhattan $\ge 5$, không bị deadlock.
-- **Hiệu Ứng Hình Ảnh & VFX Tinh Xảo**:
-  - 8 nguyên tố ma thuật: Hỏa (Fire), Thủy (Water), Băng (Ice), Lôi (Lightning), Mộc (Nature), Vũ trụ (Cosmic Aurora), v.v.
-  - Hào quang định hướng (Target Halo) 3 lớp bám viền đá quý bốc sáng và lưu thông hạt.
-  - Pháo hoa và hoạt họa hợp nhất điện ảnh khi mở chữ mới.
-- **Hệ Thống Âm Thanh Chân Thực (Acoustic Audio Engine)**:
-  - Mô phỏng âm học va chạm đá quý kết hợp bộ mẫu Foley thu âm thực tế.
-  - Tiếng trượt gạch êm dịu, thỏa mãn xúc giác (Tactile Tile Slide).
-  - Tích hợp **5 Sound Profiles** tùy chọn trong Cài đặt:
-    1. *Lướt gạch êm dịu* (`tile` - Mặc định).
-    2. *Đá quý va chạm trong & sáng* (`gem`).
-    3. *Pha lê thanh thoát* (`crystal`).
-    4. *Đá cờ vây mộc mạc* (`stone`).
-    5. *Ngọc bích nhẹ nhàng* (`soft`).
-  - Nhạc nền (BGM) phong cách Japanese Puzzle Pop 126 BPM vui tươi, sôi động.
-- **Nội Dung Học Tập N5 Chuẩn Xác**:
-  - 15 màn chơi qua 3 chương với 24 chữ Kanji tuyển chọn.
-  - Thẻ thông tin (Kanji Reveal Card) đầy đủ: Âm Hán Việt, Nghĩa, Công thức cấu tạo bộ thủ, Từ vựng ví dụ và cách đọc Hiragana.
-  - Album lưu trữ chữ đã khám phá, hỗ trợ ôn tập và theo dõi tiến trình.
-- **Tiện Ích & Quyền Riêng Tư**:
-  - Lưu tiến trình tự động vào `localStorage` kèm công cụ Sao lưu / Khôi phục JSON (Schema v11).
-  - Khóa Web Locks API độc quyền ngăn chặn xung đột dữ liệu đa tab.
-  - Chế độ chơi thử riêng biệt dành cho nghiên cứu (Playtest Session).
-  - Hoạt động 100% offline, không gửi dữ liệu ra máy chủ ngoài.
+* 🧩 **Cơ chế Trượt & Ghép độc đáo (Sliding & Fusion)**: Bàn cờ 35 ô gồm 17 cặp ngọc cùng 1 ô trống duy nhất. Trượt các viên đá đồng màu, đồng dáng chạm cạnh nhau để kích hoạt hợp nhất Kanji.
+* 📱 **Bố cục thích ứng hoàn hảo (Smart Transposition)**:
+  * **Mobile (< 900px)**: Bàn dọc $5 \times 7$ tối ưu thao tác 1 tay, phím bấm $\ge 44\text{px}$.
+  * **Desktop ($\ge 900px$)**: Bàn ngang $7 \times 5$ hiển thị Kanji siêu lớn (~135px), không gian khoáng đạt.
+  * Tự động hoán vị trục tọa độ khi xoay màn hình/resize mà **giữ nguyên 100% tiến trình chơi**.
+* 💎 **Đồ họa đá quý Hybrid Clear Crystal**: 7 dáng cắt ngọc kết hợp giữa độ trong quang học và diện mạo góc cạnh bóng bẩy (Round, Diamond, Hexagon, Triangle, Square, Pentagon, Point).
+* ✨ **Hiệu ứng Canvas VFX 8 nguyên tố ma thuật**: Hỏa (Lửa bốc), Thủy (Sóng cuộn), Băng (Pha lê tuyết), Sấm (Tia sét vàng), Mộc (Dây leo), Đất (Mảnh đá vỡ), Ma thuật (Vòng tròn ma pháp), Vũ trụ (Cực quang trôi).
+* 🔊 **Âm thanh Foley chân thực & 5 Sound Profiles**: Tích hợp bộ tổng hợp vật lý Web Audio API + mẫu thu âm thực tế tiếng đá va chạm, tiếng lướt gạch đá êm ái cùng BGM Pop Nhật Bản 126 BPM.
+* 📚 **Giáo trình 24 Kanji N5 có căn cứ khoa học**: 15 màn chơi qua 3 chương, cung cấp thẻ học toàn diện: Âm Hán Việt, Nghĩa, Công thức cấu tạo bộ thủ, Từ vựng thực tế và cách đọc Hiragana.
+* 🔒 **Bảo toàn dữ liệu Schema v11**: Lưu trữ tự động `localStorage`, khóa Web Locks API chống ghi đè đa tab, xoay vòng backup và hỗ trợ xuất/nhập JSON an toàn.
+* ⚡ **100% Zero-Build & Offline-First**: Chạy trực tiếp trên trình duyệt bằng ES Modules thuần, toàn bộ font chữ Noto Sans JP và Nunito lưu cục bộ WOFF2, không phụ thuộc internet.
 
 ---
 
-## 🚀 Khởi Chạy Cục Bộ (Local Development)
+## 🎮 Cơ Chế Chơi (Gameplay Mechanics)
 
-### Yêu cầu
-- [Node.js](https://nodejs.org/) (phiên bản 18+ trở lên).
+```
+        [Viên A]  --->  Trượt vào ô trống  --->  [Chạm cạnh Viên B]
+                                                         │
+                                                         ▼
+                                                [HỢP NHẤT NGUYÊN TỐ]
+                                                         │
+                                                         ▼
+                                                [MỞ THẺ KANJI N5]
+                                                         │
+                                                         ▼
+                                            [TÁI SINH CẶP NGỌC MỚI]
+                                           (Khoảng cách Manhattan ≥ 5)
+```
 
-### Khởi động Server
+1. **Trượt gạch**: Nhấp/kéo một viên đá nằm cạnh ô trống để di chuyển viên đá vào ô trống đó.
+2. **Hợp nhất (Fusion)**: Khi 2 viên đá cùng màu và cùng hình dáng chạm cạnh nhau (theo chiều ngang hoặc dọc), chúng sẽ tự động kích hoạt hoạt họa va chạm nguyên tố.
+3. **Thẻ học Kanji**: Màn hình hiển thị thẻ thông tin chữ Hán tương ứng, giải thích cấu tạo các bộ phận hợp thành chữ Kanji, phát âm và từ vựng thông dụng.
+4. **Tái sinh ngọc thông minh (Refill Distance $\ge 5$)**: Khi cặp đá biến mất, cặp đá thay thế sẽ xuất hiện tại 2 vị trí cách nhau tối thiểu 5 bước Manhattan ($|x_1 - x_2| + |y_1 - y_2| \ge 5$), đảm bảo bàn cờ luôn thông thoáng và **không bao giờ bị deadlock**.
+
+---
+
+## 🎧 Hệ Thống Âm Thanh (Sound Profiles)
+
+Kanji Pop tích hợp bộ xử lý âm thanh **Web Audio API** chuyên nghiệp với hệ thống lọc đa tầng:
+* `sfxBus`: Đi qua bộ lọc Lowpass 5200Hz giúp âm thanh va chạm đá ấm áp, loại bỏ tiếng chói gắt.
+* `bgmBus`: Đi qua bộ lọc Lowpass 4000Hz giữ cho giai điệu BGM vui tươi (126 BPM) luôn êm dịu, không lấn át tiếng trượt ngọc.
+* `masterBus`: Tích hợp bộ Dynamic Compressor chống méo tiếng / vỡ âm (clipping).
+
+Người chơi có thể tùy chọn **5 phong cách âm thanh** trong phần Cài đặt:
+
+| Sound Profile | Mã Profile | Cảm giác âm học | Mẫu âm thanh Foley |
+| :--- | :---: | :--- | :--- |
+| **Lướt gạch êm dịu** *(Mặc định)* | `'tile'` | Êm ái, đầm chắc, thỏa mãn xúc giác trượt đá | `audio/tile_slide.mp3` |
+| **Đá quý va chạm** | `'gem'` | Trong trẻo, sáng rõ, tiếng đá quý cọ xát | `audio/gem_clink.ogg` |
+| **Pha lê thanh thoát** | `'crystal'` | Âm bội cao vút, ngân vang tựa chuông gió | Synthesizer inharmonic modes |
+| **Đá cờ vây** | `'stone'` | Tiếng quân cờ đá va vào bàn gỗ mộc mạc | `audio/go_stone_*.mp3` |
+| **Ngọc bích** | `'soft'` | Trầm ấm, dịu nhẹ, tạo cảm giác thư giãn | Low-frequency stone slate |
+
+---
+
+## 📖 Giáo Trình 24 Kanji N5
+
+Trò chơi được chia làm **3 Chương (15 Màn chơi)** bám sát từ vựng sơ cấp JLPT N5:
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                              KANJI POP! N5                                  │
+├───────────────────┬─────────────────────────────────────────────────────────┤
+│ CHƯƠNG 1 (Màn 1-5) │  休 (Hưu)   男 (Nam)   分 (Phân)   名 (Danh)               │
+│ Con người & Đời sống│  外 (Ngoại) 何 (Hà)    見 (Kiến)   国 (Quốc)               │
+├───────────────────┼─────────────────────────────────────────────────────────┤
+│ CHƯƠNG 2 (Màn 6-10)│  時 (Thời)  間 (Gian)  聞 (Văn)    話 (Thoại)              │
+│ Thời gian & Giao tiếp│ 語 (Ngữ)   読 (Độc)   校 (Hiệu)   友 (Hữu)                │
+├───────────────────┼─────────────────────────────────────────────────────────┤
+│ CHƯƠNG 3 (Màn 11-15)│ 二 (Nhị)   三 (Tam)   天 (Thiên)  本 (Bản)                │
+│ Số đếm & Tự nhiên │  白 (Bạch)  百 (Bách)  左 (Tả)     右 (Hữu)                │
+└───────────────────┴─────────────────────────────────────────────────────────┘
+```
+
+Mỗi khi mở khóa thành công một chữ Kanji:
+* Xem thẻ phân tích chi tiết các bộ thủ cấu thành (ví dụ: `亻` [Người] + `木` [Cây] $\rightarrow$ `休` [Nghỉ ngơi]).
+* Nghe âm thanh phát âm và xem ví dụ từ vựng kèm Hiragana phiên âm chuẩn.
+* Lưu vào **Album Kanji** cá nhân để ôn tập bất cứ lúc nào.
+
+---
+
+## 🚀 Khởi Chạy Cục Bộ (Quickstart)
+
+### 1. Yêu cầu hệ thống
+* Đã cài đặt [Node.js](https://nodejs.org/) (khuyến nghị phiên bản 18+ trở lên).
+* Trình duyệt hiện đại hỗ trợ ES Modules (Chrome, Safari, Edge, Firefox).
+
+### 2. Tải mã nguồn & Khởi động
 ```bash
-# 1. Di chuyển vào thư mục game
-cd work/kanji-pop-site
+# 1. Clone repository
+git clone https://github.com/quangthanh66/KanjiPop.git
+cd KanjiPop
 
-# 2. Chạy server cục bộ
+# 2. Di chuyển vào thư mục web và chạy server
+cd work/kanji-pop-site
 node server.js
 ```
 
-Mở trình duyệt và truy cập: **`http://127.0.0.1:8765/`**
+### 3. Trải nghiệm game
+Mở trình duyệt bất kỳ và truy cập đường dẫn:
+👉 **`http://127.0.0.1:8765/`**
 
 ---
 
-## 🧪 Kiểm Thử Tự Động (Automated Testing)
+## 🧪 Bộ Kiểm Thử Tự Động (Automated Test Suite)
 
-Dự án tích hợp bộ kiểm thử Playwright tự động chạy không giao diện (Headless):
+Dự án tích hợp sẵn các bộ kịch bản kiểm thử Playwright Headless kiểm tra tự động toàn bộ logic:
 
 ```bash
-# Chạy từ thư mục gốc KanjiPop (yêu cầu local server 8765 đang chạy):
+# Đảm bảo local server đang chạy trên cổng 8765, sau đó mở terminal mới tại root:
 
-# Kiểm tra hợp nhất nguyên tố & hiển thị thẻ Kanji:
+# 1. Kiểm tra toàn diện cơ chế Hợp nhất (Fusion VFX) & Hiển thị thẻ Kanji:
 node work/fusion-check.cjs
 
-# Kiểm tra điều hướng toàn bộ UI (Lộ trình, Bàn chơi, Menu, Album):
+# 2. Kiểm tra điều hướng toàn bộ UI Shell (Lộ trình -> Bàn chơi -> Menu -> Album):
 node work/ui-shell-check.cjs
 
-# Kiểm tra ổn định bố cục đa kích thước màn hình (320px đến 1440px):
+# 3. Kiểm tra độ ổn định Layout trên 6 kích thước màn hình (320px đến 1440px):
 node work/mobile-layout-stability-check.cjs
+
+# 4. Kiểm tra Lộ trình hành trình 3 chương:
+node work/journey-map-check.cjs
 ```
 
 ---
 
-## 📁 Cấu Trúc Dự Án
+## 📁 Cấu Trúc Thư Mục Dự Án
 
 ```
 KanjiPop/
-├── AGENTS.md                   # 🤖 Hướng dẫn AI Agent & đặc tả kỹ thuật chi tiết
-├── README.md                   # 📖 Tài liệu giới thiệu tổng quan dự án
-├── .gitignore                  # Loại trừ screenshots test (~93MB) và logs
+├── AGENTS.md                   # 🤖 Bảng đặc tả toàn diện dành riêng cho AI Coding Agents
+├── README.md                   # 📖 Tài liệu giới thiệu tổng quan dự án (File này)
+├── .gitignore                  # Bỏ qua screenshots Playwright (~93MB) và file tạm
 │
 └── work/
-    ├── kanji-pop-site/         # Mã nguồn chính của trò chơi
-    │   ├── server.js           # Máy chủ tĩnh Node.js phục vụ port 8765
-    │   ├── GAMEPLAY.md         # Toàn bộ lịch sử thiết kế và chi tiết cơ chế game
-    │   ├── art-source/         # Tài nguyên đồ họa gốc & prompt sinh hình ảnh
+    ├── kanji-pop-site/         # Thư mục chính của ứng dụng Web
+    │   ├── server.js           # Server tĩnh Node.js phục vụ port 8765
+    │   ├── GAMEPLAY.md         # Toàn bộ nhật ký thiết kế & lịch sử kỹ thuật
+    │   ├── art-source/         # File ảnh gốc, prompt AI sinh sprite, atlas VFX
     │   │
-    │   └── dist/               # Ứng dụng Web hoàn chỉnh (chạy trực tiếp không cần build)
-    │       ├── index.html      # Trang chủ game
-    │       ├── n5-game.js      # Bộ điều khiển giao diện & sự kiện người dùng
-    │       ├── n5-engine.js    # Logic bàn cờ, solver BFS & cơ chế refill
-    │       ├── n5-data.js      # Dữ liệu 24 Kanji N5 và từ vựng
-    │       ├── audio-fx.js     # Audio Engine (5 sound profiles + BGM 126 BPM)
-    │       ├── fusion-fx.js    # Canvas 2D VFX hiệu ứng hợp nhất nguyên tố
-    │       ├── target-vfx.js   # Hào quang mục tiêu 3 lớp bám viền đá quý
-    │       ├── gem-art.js      # Đồ họa đá quý (7 dáng cắt x 24 bảng màu)
-    │       ├── course-plans.js # 30 lộ trình giải mẫu đã xác thực
-    │       ├── progress-store.js # Lưu tiến trình, backup và export/import JSON
-    │       ├── audio/          # Bộ tệp âm thanh Foley chất lượng cao
-    │       ├── fonts/          # Font tiếng Nhật offline (Noto Sans JP, Nunito)
-    │       └── *.css           # Giao diện responsive đa nền tảng
+    │   └── dist/               # Thư mục phục vụ Web (Chạy trực tiếp trên trình duyệt)
+    │       ├── index.html      # Trang chủ game & cấu trúc DOM
+    │       ├── n5-game.js      # Controller chính: Quản lý vòng lặp, Touch/Mouse, UI
+    │       ├── n5-engine.js    # Bàn cờ thuần: Tính toán di chuyển, solver BFS, refill
+    │       ├── n5-data.js      # Bộ dữ liệu 24 Kanji N5 (Hán Việt, bộ thủ, từ vựng)
+    │       ├── audio-fx.js     # Web Audio API Engine: 5 sound profiles, BGM 126 BPM
+    │       ├── fusion-fx.js    # Canvas 2D VFX: Hoạt họa va chạm nguyên tố khi hợp nhất
+    │       ├── target-vfx.js   # Hiệu ứng hào quang mục tiêu 3 lớp bám viền đá quý
+    │       ├── gem-art.js      # Vector & WebP sprite renderer cho 7 dáng đá quý
+    │       ├── course-plans.js # 30 lộ trình giải mẫu đã xác thực (15 Mobile + 15 Desktop)
+    │       ├── progress-store.js # Lưu tiến trình localStorage, backup, export/import JSON
+    │       ├── progress-lock.js  # Khóa Web Locks API chống xung đột đa tab
+    │       ├── aurora-background.js # Canvas nền cực quang và sao trôi lơ lửng
+    │       ├── audio/          # Bộ file âm thanh Foley thực tế (*.mp3, *.ogg, *.wav)
+    │       ├── fonts/          # Font Noto Sans JP và Nunito WOFF2 offline
+    │       └── *.css           # Toàn bộ hệ thống giao diện responsive
     │
-    └── *.cjs                   # Kịch bản kiểm thử tự động Playwright
+    └── *.cjs                   # Bộ kịch bản kiểm thử tự động Playwright
 ```
 
 ---
 
-## 🛠️ Công Nghệ Sử Dụng
+## 🤖 Dành Cho AI Agent
 
-- **Vanilla JavaScript (ES2022+)**: Hiệu năng cao, zero-dependency, zero-build.
-- **Web Audio API**: Xử lý âm thanh độ trễ thấp, lọc tần số lowpass, compressor và bộ tổng hợp nốt nhạc.
-- **HTML5 Canvas 2D**: Render hiệu ứng hạt, hào quang ma thuật, tia sét, sóng nước đạt 60fps.
-- **CSS Grid & Flexbox**: Bố cục đáp ứng mượt mà từ màn hình siêu nhỏ (320px) đến Desktop 4K.
-- **Playwright Test Suite**: Đảm bảo chất lượng game tự động qua kiểm thử không giao diện (Headless).
+Nếu bạn là một **AI Agent** tiếp quản dự án này trên thiết bị mới:
+1. Hãy đọc file **[`AGENTS.md`](./AGENTS.md)** ngay lập tức.
+2. Nắm vững **6 Quy tắc bất biến** (Không thêm build tool, duy trì bàn cờ 35 ô, không mang obstacles quay lại, quy tắc khoảng cách Manhattan $\ge 5$, cấu trúc âm thanh đơn nhịp).
+3. Đảm bảo chạy `node work/fusion-check.cjs` và `node work/ui-shell-check.cjs` sau mỗi thay đổi lớn để đảm bảo không xảy ra hồi quy (regression).
+
+---
+
+## 📜 Giấy Phép & Bản Quyền (License & Credits)
+
+* **Mã nguồn**: Phát triển theo giấy phép **MIT License**.
+* **Font chữ**: [Noto Sans JP](https://fonts.google.com/noto/specimen/Noto+Sans+JP) và [Nunito](https://fonts.google.com/specimen/Nunito) theo giấy phép **SIL Open Font License (OFL)**.
+* **Tác giả**: Được phát triển và hoàn thiện bởi [`quangthanh66`](https://github.com/quangthanh66).
+
+<div align="center">
+  <sub>Made with ❤️ for Vietnamese Japanese learners • 2026</sub>
+</div>
