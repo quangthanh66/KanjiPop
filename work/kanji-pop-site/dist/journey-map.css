@@ -38,12 +38,14 @@
 #kanji-pop .journey-trail path.traveled{stroke:#6bb716;stroke-width:3;stroke-dasharray:none}
 #kanji-pop#kanji-pop button.journey-stop{grid-column:var(--stop-column) / span 3;grid-row:var(--stop-row);justify-self:center;align-self:center;position:relative;display:grid;place-items:center;width:72px;height:62px;background:none;border:0;padding:0;box-shadow:none;color:#ffffff;overflow:visible;cursor:pointer;filter:none}
 #kanji-pop .journey-stop-body{position:relative;display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:radial-gradient(circle at 35% 20%,#acebff,#309cd5 75%);border:1px solid #ffffff;box-shadow:inset 0 2px #ffffff70,0 5px 18px #16557718;font-size:20px;font-weight:900;z-index:1}
-#kanji-pop .journey-stop-caption{position:absolute;top:calc(50% + 29px);left:50%;transform:translateX(-50%);font-size:8px;font-weight:800;letter-spacing:1px;white-space:nowrap;color:#2d6a93}
+#kanji-pop .journey-stop-caption{position:absolute;top:calc(50% + 32px);left:50%;transform:translateX(-50%);font-size:8px;font-weight:800;letter-spacing:1px;white-space:nowrap;color:#2d6a93}
+#kanji-pop .journey-stop.treasure .journey-stop-caption{top:calc(50% + 38px)}
 #kanji-pop .journey-stars{font-size:11px;letter-spacing:2px;color:#ffcb24}
 #kanji-pop .journey-stars>span{color:#8ac0d9}
 #kanji-pop .journey-stop.completed .journey-stop-body{background:radial-gradient(circle at 35% 15%,#b9f55a,#56b705 80%);border-color:#ffffff;color:#ffffff}
 #kanji-pop .journey-stop.selected .journey-stop-body{width:66px;height:66px;background:radial-gradient(circle at 30% 15%,#c7a5ff,#9a70fc 50%,#7849e9);border:1px solid #ffffff;color:#fff;font-size:25px;box-shadow:0 0 0 6px #ffffff55,0 0 32px #9161ee30,inset 0 2px #ffffff38}
-#kanji-pop .journey-stop.selected .journey-stop-caption{top:calc(50% + 36px);color:#5b3ea0}
+#kanji-pop .journey-stop.selected .journey-stop-caption{top:calc(50% + 47px);color:#5b3ea0}
+#kanji-pop .journey-stop.treasure.selected .journey-stop-caption{top:calc(50% + 47px)}
 #kanji-pop .journey-stop.treasure .journey-stop-body{border-radius:16px;transform:rotate(45deg);width:46px;height:46px}
 #kanji-pop .journey-stop.treasure .journey-stop-body>span{transform:rotate(-45deg)}
 #kanji-pop .journey-stop.treasure.selected .journey-stop-body{width:54px;height:54px}
@@ -91,8 +93,10 @@
  #kanji-pop .journey-stop.selected .journey-stop-body{width:86px;height:86px;font-size:33px}
  #kanji-pop .journey-stop.treasure .journey-stop-body{width:60px;height:60px}
  #kanji-pop .journey-stop.treasure.selected .journey-stop-body{width:72px;height:72px}
- #kanji-pop .journey-stop-caption{top:calc(50% + 40px);font-size:9.5px}
- #kanji-pop .journey-stop.selected .journey-stop-caption{top:calc(50% + 50px)}
+ #kanji-pop .journey-stop-caption{top:calc(50% + 47px);font-size:9.5px}
+ #kanji-pop .journey-stop.treasure .journey-stop-caption{top:calc(50% + 56px)}
+ #kanji-pop .journey-stop.selected .journey-stop-caption{top:calc(50% + 68px)}
+ #kanji-pop .journey-stop.treasure.selected .journey-stop-caption{top:calc(50% + 68px)}
  #kanji-pop .journey-stars{font-size:14px}
  #kanji-pop .journey-selection h2{font-size:25px}#kanji-pop .journey-selection p{font-size:13px}
  #kanji-pop#kanji-pop[data-view="map"] .course-nav{width:min(100%,420px);justify-self:center;padding:6px 16px;border-radius:999px;background:rgba(255,255,255,0.45);backdrop-filter:blur(8px);border:1.5px solid rgba(255,255,255,0.8);box-shadow:0 6px 20px rgba(22,85,119,0.08)}
@@ -106,3 +110,4 @@
 #kanji-pop .journey-stop-body,#kanji-pop .journey-stop.selected .journey-stop-body{border-width:2px}
 #kanji-pop .journey-stars{text-shadow:0 1px #a97513}
 #kanji-pop .journey-options{color:#184879}
+

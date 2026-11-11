@@ -1,4 +1,4 @@
-.save-notice{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:70;width:min(94vw,600px);padding:12px 16px;border:2px solid #fff;border-radius:14px;background:#fff4cf;color:#553e1f;font:800 14px Nunito,sans-serif;text-align:center;cursor:pointer}
+.save-notice{position:fixed;bottom:max(16px,calc(74px + env(safe-area-inset-bottom)));left:50%;transform:translateX(-50%);z-index:70;width:min(92vw,540px);padding:10px 18px;border:2px solid #fff;border-radius:14px;background:#fff4cf;color:#553e1f;font:800 13px Nunito,sans-serif;text-align:center;cursor:pointer;box-shadow:0 8px 24px rgba(22,85,119,0.18)}
 .save-notice[hidden]{display:none}
 #modal:not([hidden])~.save-notice{display:none}
 .progress-panel{max-width:480px!important;max-height:90dvh;overflow:auto;padding:22px!important}
@@ -18,3 +18,4 @@
 .study-run{padding:12px;background:#eaf7ff;border-radius:12px;text-align:left}
 #kanji-pop .reveal-word .example-label{display:block;grid-column:1/-1;font-size:11px;color:#6b625a;margin:0 0 2px;font-weight:700}
 @media(max-width:420px){.study-badge{position:absolute;top:3px;right:8px;font-size:8px;padding:2px 4px}}
+
