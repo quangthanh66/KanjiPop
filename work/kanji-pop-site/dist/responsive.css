@@ -354,7 +354,7 @@
 }
 
 @media(min-width:900px){
- #kanji-pop .play-summary{margin-top:8px}
+ #kanji-pop .play-summary{margin-top:0}
 }
 
 /* Longer, staged impact gives the kanji reveal time to register. */
