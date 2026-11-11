@@ -440,7 +440,7 @@
   </div>
  </div>`;
 }
- function showJourneyMenu(){modalOpen('<section class="kp-modal journey-options" role="dialog" aria-modal="true"><h2>Hành trình của bạn</h2><p>24 chữ ghép tuyển chọn · 3 chương · 15 màn.<br>Đây là bộ sơ cấp tham khảo, chưa phải toàn bộ Kanji N5.</p><button class="kp-secondary" data-settings><i data-lucide="settings" aria-hidden="true"></i>Tùy chỉnh & chơi thử</button><button class="kp-secondary" data-progress><i data-lucide="save" aria-hidden="true"></i>Sao lưu tiến trình</button><button class="kp-secondary" data-about><i data-lucide="info" aria-hidden="true"></i>Bộ chữ & nguồn tham khảo</button><button class="kp-action" data-action="close">Về hành trình</button></section>','Menu hành trình');}
+ function showJourneyMenu(){modalOpen('<section class="kp-modal journey-options" role="dialog" aria-modal="true"><h2>Hành trình của bạn</h2><p>24 chữ ghép tuyển chọn · 3 chương · 15 màn.<br>Đây là bộ sơ cấp tham khảo, chưa phải toàn bộ Kanji N5.</p><button class="kp-secondary" data-audio-studio style="background:#f0f8ff;border-color:#53aadc;color:#0d5c8a"><i data-lucide="headphones" aria-hidden="true"></i>🎧 Phòng thử & chọn âm thanh từng chức năng</button><button class="kp-secondary" data-settings><i data-lucide="settings" aria-hidden="true"></i>Tùy chỉnh & chơi thử</button><button class="kp-secondary" data-progress><i data-lucide="save" aria-hidden="true"></i>Sao lưu tiến trình</button><button class="kp-secondary" data-about><i data-lucide="info" aria-hidden="true"></i>Bộ chữ & nguồn tham khảo</button><button class="kp-action" data-action="close">Về hành trình</button></section>','Menu hành trình');}
  function renderAlbum(){
   const todayKey=getDailyKey();
   const dailyRec=getDailyRecord(todayKey,currentGrade);
@@ -606,7 +606,7 @@
  function showMobileMenu(){
   if(busy)return;
   const curSound=A?.getSoundProfile?.()||'gem',curBgm=A?.getBgmStyle?.()||'pop',opt=(v,t,c)=>`<option value="${v}" ${c===v?'selected':''}>${t}</option>`;
-  modalOpen(`<section class="kp-modal mobile-play-menu" role="dialog" aria-modal="true"><h2>Màn ${String(state.level+1).padStart(2,'0')}</h2><p class="mobile-menu-stats">${state.moves} lượt · ${state.matches} cặp ghép<br><strong>★★★ ≤ ${thresholds().three} lượt · ★★ ≤ ${thresholds().two} lượt</strong></p><label style="display:block;margin:10px 0 6px;text-align:left;font-size:13px;font-weight:700;color:#c7b7fd">Nhạc nền (BGM):<select data-bgm-style style="display:block;margin-top:5px;width:100%;padding:10px;border-radius:10px;background:#241d4f;color:#fff;border:1px solid #7d65db;font-size:13px;font-weight:600">${opt('pop','🎵 Pop Nhật Bản vui tươi (Bản gốc)',curBgm)}${opt('zen','🍃 Zen Chill thư giãn (Đàn đá & mộc cầm)',curBgm)}${opt('none','🔇 Tắt nhạc nền',curBgm)}</select></label><label style="display:block;margin:6px 0 14px;text-align:left;font-size:13px;font-weight:700;color:#c7b7fd">Hiệu ứng trượt khối:<select data-sound-style style="display:block;margin-top:5px;width:100%;padding:10px;border-radius:10px;background:#241d4f;color:#fff;border:1px solid #7d65db;font-size:13px;font-weight:600">${opt('gem','💎 ① Đá quý & Pha lê (Bản gốc)',curSound)}${opt('tile','🪨 ② Lướt gạch đá êm (Tile Slide)',curSound)}${opt('crystal','✨ ③ Pha lê ngân nhẹ (Crystal Chime)',curSound)}${opt('stone','⚫ ④ Đá cờ vây (Go Stone)',curSound)}${opt('soft','🎋 ⑤ Ngọc bích dịu (Soft Jade)',curSound)}</select></label><div class="mobile-menu-grid"><button data-mobile-help><i data-lucide="circle-help" aria-hidden="true"></i>Cách chơi</button><button data-action="album"><i data-lucide="book-open" aria-hidden="true"></i>Album</button><button data-action="map"><i data-lucide="map" aria-hidden="true"></i>Lộ trình</button><button data-settings><i data-lucide="settings" aria-hidden="true"></i>Tùy chỉnh</button></div><button class="mobile-restart" data-mobile-restart>Chơi lại màn này</button><button class="kp-action" data-action="close">Tiếp tục chơi</button></section>`,'Menu màn chơi');
+  modalOpen(`<section class="kp-modal mobile-play-menu" role="dialog" aria-modal="true"><h2>Màn ${String(state.level+1).padStart(2,'0')}</h2><p class="mobile-menu-stats">${state.moves} lượt · ${state.matches} cặp ghép<br><strong>★★★ ≤ ${thresholds().three} lượt · ★★ ≤ ${thresholds().two} lượt</strong></p><label style="display:block;margin:10px 0 6px;text-align:left;font-size:13px;font-weight:700;color:#c7b7fd">Nhạc nền (BGM):<select data-bgm-style style="display:block;margin-top:5px;width:100%;padding:10px;border-radius:10px;background:#241d4f;color:#fff;border:1px solid #7d65db;font-size:13px;font-weight:600">${opt('pop','🎵 Pop Nhật Bản vui tươi (Bản gốc)',curBgm)}${opt('zen','🍃 Zen Chill thư giãn (Đàn đá & mộc cầm)',curBgm)}${opt('none','🔇 Tắt nhạc nền',curBgm)}</select></label><label style="display:block;margin:6px 0 14px;text-align:left;font-size:13px;font-weight:700;color:#c7b7fd">Hiệu ứng trượt khối:<select data-sound-style style="display:block;margin-top:5px;width:100%;padding:10px;border-radius:10px;background:#241d4f;color:#fff;border:1px solid #7d65db;font-size:13px;font-weight:600">${opt('gem','💎 ① Đá quý & Pha lê (Bản gốc)',curSound)}${opt('tile','🪨 ② Lướt gạch đá êm (Tile Slide)',curSound)}${opt('crystal','✨ ③ Pha lê ngân nhẹ (Crystal Chime)',curSound)}${opt('stone','⚫ ④ Đá cờ vây (Go Stone)',curSound)}${opt('soft','🎋 ⑤ Ngọc bích dịu (Soft Jade)',curSound)}</select></label><button class="kp-secondary" data-audio-studio style="width:100%;margin:4px 0 12px;padding:10px;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px;background:#32205c;color:#fff;border:1px solid #9471f5;border-radius:10px;cursor:pointer"><i data-lucide="headphones" aria-hidden="true"></i>🎧 Phòng thử & Nghe chọn từng âm thanh...</button><div class="mobile-menu-grid"><button data-mobile-help><i data-lucide="circle-help" aria-hidden="true"></i>Cách chơi</button><button data-action="album"><i data-lucide="book-open" aria-hidden="true"></i>Album</button><button data-action="map"><i data-lucide="map" aria-hidden="true"></i>Lộ trình</button><button data-settings><i data-lucide="settings" aria-hidden="true"></i>Tùy chỉnh</button></div><button class="mobile-restart" data-mobile-restart>Chơi lại màn này</button><button class="kp-action" data-action="close">Tiếp tục chơi</button></section>`,'Menu màn chơi');
  }
  function showHint(){
   if(busy||state.pending||state.status!=='playing')return;
@@ -634,10 +634,167 @@
  function rewardsMarkup(){return '<section class="reward-shelf"><h2>Kho báu hành trình</h2>'+C.chapters.map((c,i)=>{const done=chaptersDone()[i],progress=C.levels.filter(l=>l.chapter===i&&profile.results[l.id]).length;return `<div class="reward-card ${done?'earned':''}"><span class="reward-art sky-${rewardThemes[i]}" aria-hidden="true">${['✧','✿','✦'][i]}</span><div><strong>${rewardNames[i]}</strong><p>${done?'Đã mở nền và trang album sao':`${progress}/5 màn · Hoàn thành chương ${i+1} để mở`}</p></div><button data-reward="${i}" ${done?'':'disabled'}>${X.settings.theme===rewardThemes[i]?'Đang dùng':'Dùng nền'}</button></div>`;}).join('')+'<button class="scope-link" data-settings>Tùy chỉnh nhịp chơi & nền</button></section>';}
  function rewardWin(){const c=C.levels[state.level].chapter;return state.level%5===4?`<div class="reward-unlocked"><span aria-hidden="true">✦</span> Đã mở <strong>${rewardNames[c]}</strong><br>Nền mới · Trang album<button class="kp-secondary" data-reward="${c}">Dùng nền mới</button></div>`:'';}
  function openCard(id){if(busy||!C.recipes[id])return;const r=C.recipes[id];modalOpen(`<section class="kp-modal reveal-modal" role="dialog" aria-modal="true"><div class="kp-modal-title">${X.data.reviewed[id]?'ĐÃ ÔN':'ĐÃ KHÁM PHÁ'}</div>${revealBody(r)}<button class="kp-action" data-action="close">Chơi tiếp →</button></section>`,r.meaning);X.log('card_reopen',{recipe:id});}
- function showSettings(){
+ 
+function showAudioStudio(){
+  if(busy) return;
+  const curMap = A?.getAudioMap?.() || {};
+  const presets = A?.getPresets?.() || {};
+  
+  const audioFunctions = [
+    {
+      key: 'select',
+      title: '👆 Chạm / Chọn khối',
+      desc: 'Âm thanh khi ngón tay chạm hoặc chọn một khối đá',
+      options: [
+        { val: 'gem', label: '💎 Đá quý chạm trong (Bản gốc - Nảy giòn)' },
+        { val: 'tile', label: '🪨 Phiến đá lướt êm (Tile tap)' },
+        { val: 'crystal', label: '✨ Pha lê ngân cao (Crystal chime)' },
+        { val: 'stone', label: '⚫ Quân cờ vây lách cách (Go stone)' },
+        { val: 'soft', label: '🎋 Ngọc bích dịu tai (Soft jade)' },
+        { val: 'wood', label: '🪵 Gõ mộc bản ấm (Wood block)' }
+      ]
+    },
+    {
+      key: 'slide',
+      title: '↔️ Trượt khối vào ô trống',
+      desc: 'Âm thanh khi khối trượt di chuyển trên bàn cờ',
+      options: [
+        { val: 'gem', label: '💎 Đá quý lướt giòn tan (Bản gốc)' },
+        { val: 'tile', label: '🪨 Trượt phiến đá êm dịu' },
+        { val: 'crystal', label: '✨ Trượt pha lê ngân nhẹ' },
+        { val: 'stone', label: '⚫ Cờ vây lướt bàn cờ' },
+        { val: 'soft', label: '🎋 Trượt ngọc bích êm tai' },
+        { val: 'wood', label: '🪵 Trượt mộc ấm áp' }
+      ]
+    },
+    {
+      key: 'contact',
+      title: '💥 Hai khối cùng loại chạm nhau',
+      desc: 'Âm thanh khi hai viên cùng Kanji chạm cạnh nhau trước khi ghép',
+      options: [
+        { val: 'gem', label: '💎 Đá quý va chạm + tia sáng (Bản gốc)' },
+        { val: 'stone', label: '🪨 Hai khối đá gõ cạch đanh' },
+        { val: 'crystal', label: '✨ Pha lê chạm ngân chuông' },
+        { val: 'soft', label: '🎋 Hai khối ngọc chạm khẽ' }
+      ]
+    },
+    {
+      key: 'fusion',
+      title: '🌟 Ghép thành công chữ Kanji',
+      desc: 'Hiệu ứng âm thanh khi hợp thể thành chữ Kanji hoàn chỉnh',
+      options: [
+        { val: 'pop', label: '🎵 Thác ngọc Celesta & J-Pop rực rỡ (Bản gốc - Hân hoan)' },
+        { val: 'zen', label: '🍃 Đàn đá Lithophone & Mộc cầm thiền (Ấm áp, thanh tịnh)' },
+        { val: 'sparkle', label: '✨ Mưa sao băng pha lê lấp lánh (Huyền ảo, lung linh)' },
+        { val: 'taiko', label: '🔔 Chuông chùa Nhật Bản & Taiko trầm hùng (Trang nghiêm)' }
+      ]
+    },
+    {
+      key: 'invalid',
+      title: '⚠️ Nước đi không hợp lệ',
+      desc: 'Âm thanh khi chạm khối bị chặn hoặc trượt sai hướng',
+      options: [
+        { val: 'gem', label: '💎 Gõ kính trầm nhẹ (Bản gốc)' },
+        { val: 'stone', label: '🪨 Tiếng đá trầm mộc (Stone bump)' },
+        { val: 'soft', label: '🎋 Tiếng ngọc bích đục (Muted jade)' }
+      ]
+    },
+    {
+      key: 'hint',
+      title: '💡 Gợi ý nước đi',
+      desc: 'Âm thanh kích hoạt khi bấm nút Gợi ý',
+      options: [
+        { val: 'sparkle', label: '✨ Chuông sao lấp lánh (Sparkle Chime)' },
+        { val: 'stone', label: '🍃 Chuông đá thanh tao (Stone Chime)' },
+        { val: 'bell', label: '🔔 Chuông đồng nhỏ (Brass Bell)' }
+      ]
+    },
+    {
+      key: 'win',
+      title: '🏆 Chiến thắng màn chơi',
+      desc: 'Giai điệu ăn mừng khi hoàn thành mục tiêu màn chơi',
+      options: [
+        { val: 'pop', label: '🎺 Khúc ca J-Pop rộn ràng (Pop Fanfare)' },
+        { val: 'zen', label: '🍃 Đại hợp âm đàn đá & mộc cầm (Grand Harmony)' },
+        { val: 'crystal', label: '✨ Ánh hào quang ngân vang (Celestial Bloom)' }
+      ]
+    },
+    {
+      key: 'bgm',
+      title: '🎵 Nhạc nền (BGM)',
+      desc: 'Giai điệu âm nhạc phát xuyên suốt trò chơi',
+      options: [
+        { val: 'pop', label: '🎵 Pop Nhật Bản vui tươi 126 BPM (Bản gốc)' },
+        { val: 'zen', label: '🍃 Zen Chill 118 BPM (Đàn đá Lithophone & Marimba)' },
+        { val: 'none', label: '🔇 Tắt nhạc nền (Chỉ giữ hiệu ứng)' }
+      ]
+    },
+    {
+      key: 'voice',
+      title: '🗣️ Phát âm tiếng Nhật (TTS)',
+      desc: 'Giọng đọc native chuẩn tiếng Nhật phát âm Kanji và ví dụ khi ghép',
+      options: [
+        { val: 'on', label: '🔊 Bật tự động phát âm khi ghép chữ' },
+        { val: 'off', label: '🔇 Tắt giọng đọc tiếng Nhật' }
+      ]
+    }
+  ];
+
+  const optHtml = (options, selectedVal) =>
+    options.map(o => `<option value="${o.val}" ${o.val === selectedVal ? 'selected' : ''}>${o.label}</option>`).join('');
+
+  const rowsHtml = audioFunctions.map(fn => `
+    <div class="audio-fn-card">
+      <div class="audio-fn-header">
+        <span class="audio-fn-title">${fn.title}</span>
+        <span class="audio-fn-desc">${fn.desc}</span>
+      </div>
+      <div class="audio-fn-controls">
+        <select data-audio-fn="${fn.key}">
+          ${optHtml(fn.options, curMap[fn.key])}
+        </select>
+        <button type="button" class="audio-preview-btn" data-audio-preview="${fn.key}" title="Bấm để nghe thử âm thanh này">
+          ▷ Nghe thử
+        </button>
+      </div>
+    </div>
+  `).join('');
+
+  const presetBtnsHtml = Object.entries(presets).map(([k, p]) => `
+    <button type="button" class="audio-preset-btn ${p.map.bgm === curMap.bgm && p.map.select === curMap.select ? 'active' : ''}" data-preset-btn="${k}">
+      <strong>${p.name}</strong><br><small style="color:#5f829d;font-size:10.5px">${p.desc}</small>
+    </button>
+  `).join('');
+
+  const bodyHtml = `
+    <section class="kp-modal audio-studio-modal" role="dialog" aria-modal="true">
+      <div class="kp-modal-title">PHÒNG THỬ ÂM THANH</div>
+      <p class="audio-studio-desc">
+        Bấm nút <strong>▷ Nghe thử</strong> ở từng dòng để nghe thực tế và tự do phối ghép âm thanh cho từng chức năng theo đúng sở thích của bạn!
+      </p>
+      <div class="audio-preset-box">
+        <span class="preset-box-title">Bộ phối mẫu nhanh:</span>
+        <div class="preset-grid">
+          ${presetBtnsHtml}
+        </div>
+      </div>
+      <div class="audio-rows-container">
+        ${rowsHtml}
+      </div>
+      <div class="audio-studio-footer">
+        <button type="button" class="kp-action" data-action="save-audio-studio">💾 Lưu & Áp dụng ngay</button>
+        <button type="button" class="kp-secondary" data-action="close">Đóng</button>
+      </div>
+    </section>
+  `;
+
+  modalOpen(bodyHtml, 'Phòng thử & Tùy chỉnh âm thanh');
+}
+
+function showSettings(){
   if(busy)return;const done=chaptersDone(),opt=(value,text,current)=>`<option value="${value}" ${current===value?'selected':''}>${text}</option>`;
   const curSound=A?.getSoundProfile?.()||'gem',curBgm=A?.getBgmStyle?.()||'pop',isVoice=A?.isVoiceEnabled?A.isVoiceEnabled():true;
-  modalOpen(`<section class="kp-modal experience-settings" role="dialog" aria-modal="true"><div class="kp-modal-title">CÀI ĐẶT & NHỊP CHƠI</div><label>Nhạc nền (BGM)<select data-bgm-style>${opt('pop','🎵 Pop Nhật Bản vui tươi 126 BPM (Bản gốc sôi động)',curBgm)}${opt('zen','🍃 Zen Chill 118 BPM (Thư giãn, đàn đá & mộc cầm)',curBgm)}${opt('none','🔇 Tắt nhạc nền (Chỉ giữ hiệu ứng)',curBgm)}</select></label><label>Hiệu ứng trượt khối (SFX)<select data-sound-style>${opt('gem','💎 ① Tiếng đá quý & pha lê (Gem Clink - Bản gốc)',curSound)}${opt('tile','🪨 ② Tiếng lướt gạch đá êm dịu (Tile Slide)',curSound)}${opt('crystal','✨ ③ Tiếng pha lê ngân nhẹ (Crystal Chime)',curSound)}${opt('stone','⚫ ④ Tiếng đá cờ vây đanh gọn (Go Stone)',curSound)}${opt('soft','🎋 ⑤ Tiếng ngọc bích dịu (Soft Jade)',curSound)}</select></label><label>Phát âm tiếng Nhật (TTS)<select data-voice-toggle>${opt('on','🔊 Bật tự động phát âm khi ghép chữ (Đề xuất)',isVoice?'on':'off')}${opt('off','🔇 Tắt giọng đọc tiếng Nhật',isVoice?'on':'off')}</select></label><label>Hiệu ứng<select data-setting="quality">${opt('auto','Tự động theo độ mượt',X.settings.quality)}${opt('light','Nhẹ · tiết kiệm tài nguyên',X.settings.quality)}${opt('full','Đầy đủ',X.settings.quality)}</select></label><label>Nền bàn chơi<select data-setting="theme">${opt('cosmos','Vũ trụ',X.settings.theme)}${rewardThemes.map((id,i)=>done[i]?opt(id,rewardNames[i],X.settings.theme):'').join('')}</select></label><p class="settings-note"><strong>Hiệu ứng ghép theo nguyên tố của viên đá.</strong> Hào quang ma thuật → ghép ma thuật; sét → sét; nước → nước.</p><p class="settings-note">Mọi cặp ghép đều có hiệu ứng đầy đủ và bảng thông tin. Ghép cặp khác vẫn nhận điểm, thêm chữ vào album và tính mục tiêu nếu thuộc màn này. Hoàn thành từng chương để mở nền mới. Gợi ý không trừ sao.</p><button class="kp-secondary" data-progress>Sao lưu & khôi phục tiến trình</button><button class="kp-secondary" data-study-new>Mở phiên chơi thử riêng</button><button class="kp-secondary" data-playtest>Buổi chơi thử · ghi nhận trên thiết bị</button><button class="kp-action" data-action="close">Lưu & tiếp tục</button></section>`,'Tùy chỉnh nhịp chơi');
+  modalOpen(`<section class="kp-modal experience-settings" role="dialog" aria-modal="true"><div class="kp-modal-title">CÀI ĐẶT & NHỊP CHƠI</div><label>Nhạc nền (BGM)<select data-bgm-style>${opt('pop','🎵 Pop Nhật Bản vui tươi 126 BPM (Bản gốc sôi động)',curBgm)}${opt('zen','🍃 Zen Chill 118 BPM (Thư giãn, đàn đá & mộc cầm)',curBgm)}${opt('none','🔇 Tắt nhạc nền (Chỉ giữ hiệu ứng)',curBgm)}</select></label><label>Hiệu ứng trượt khối (SFX)<select data-sound-style>${opt('gem','💎 ① Tiếng đá quý & pha lê (Gem Clink - Bản gốc)',curSound)}${opt('tile','🪨 ② Tiếng lướt gạch đá êm dịu (Tile Slide)',curSound)}${opt('crystal','✨ ③ Tiếng pha lê ngân nhẹ (Crystal Chime)',curSound)}${opt('stone','⚫ ④ Tiếng đá cờ vây đanh gọn (Go Stone)',curSound)}${opt('soft','🎋 ⑤ Tiếng ngọc bích dịu (Soft Jade)',curSound)}</select></label><label>Phát âm tiếng Nhật (TTS)<select data-voice-toggle>${opt('on','🔊 Bật tự động phát âm khi ghép chữ (Đề xuất)',isVoice?'on':'off')}${opt('off','🔇 Tắt giọng đọc tiếng Nhật',isVoice?'on':'off')}</select></label><label>Hiệu ứng<select data-setting="quality">${opt('auto','Tự động theo độ mượt',X.settings.quality)}${opt('light','Nhẹ · tiết kiệm tài nguyên',X.settings.quality)}${opt('full','Đầy đủ',X.settings.quality)}</select></label><label>Nền bàn chơi<select data-setting="theme">${opt('cosmos','Vũ trụ',X.settings.theme)}${rewardThemes.map((id,i)=>done[i]?opt(id,rewardNames[i],X.settings.theme):'').join('')}</select></label><p class="settings-note"><strong>Hiệu ứng ghép theo nguyên tố của viên đá.</strong> Hào quang ma thuật → ghép ma thuật; sét → sét; nước → nước.</p><p class="settings-note">Mọi cặp ghép đều có hiệu ứng đầy đủ và bảng thông tin. Ghép cặp khác vẫn nhận điểm, thêm chữ vào album và tính mục tiêu nếu thuộc màn này. Hoàn thành từng chương để mở nền mới. Gợi ý không trừ sao.</p><button class="kp-secondary" data-audio-studio style="background:#f0f8ff;border-color:#53aadc;color:#0d5c8a"><i data-lucide="headphones" aria-hidden="true"></i>🎧 Mở Phòng thử âm thanh (Nghe thử & đổi từng hiệu ứng) ➔</button><button class="kp-secondary" data-progress>Sao lưu & khôi phục tiến trình</button><button class="kp-secondary" data-study-new>Mở phiên chơi thử riêng</button><button class="kp-secondary" data-playtest>Buổi chơi thử · ghi nhận trên thiết bị</button><button class="kp-action" data-action="close">Lưu & tiếp tục</button></section>`,'Tùy chỉnh nhịp chơi');
  }
  function showStudySetup(){
   if(busy)return;modalOpen('<section class="kp-modal progress-panel" role="dialog" aria-modal="true"><h2>Phiên chơi thử riêng</h2><p>Dành cho người Việt trưởng thành. Bắt đầu từ màn 1 trong tab mới; bàn chơi và nhật ký được lưu riêng, không dùng album chính.</p><label>Mức quen tiếng Nhật<select id="study-familiarity"><option value="">Chọn mức quen thuộc</option><option value="none">Chưa biết tiếng Nhật</option><option value="beginner">Mới bắt đầu học</option></select></label><label class="study-consent"><input id="study-consent" type="checkbox"> Người thử là người trưởng thành và đồng ý ghi thao tác, nhận xét trên máy này để đánh giá game.</label><p>Không cần tên hoặc email. Không gửi dữ liệu lên máy chủ.</p><button class="kp-secondary" data-study-launch>Mở phiên mới</button><p id="study-setup-status" role="status"></p><a id="study-open-link" hidden target="_blank" rel="noopener">Mở phiên đã tạo</a><button class="kp-action" data-action="close">Quay lại</button></section>','Tạo phiên chơi thử riêng');
@@ -656,9 +813,9 @@
  }
  root.addEventListener('click',e=>{if(e.target.closest('[data-study-new]'))showStudySetup();if(e.target.closest('[data-study-launch]'))launchStudy();if(e.target.closest('[data-study-report]'))showStudyReport();});
  function showPlaytest(){const events=X.data.events,matches=events.filter(e=>e.type==='match'),invalid=events.filter(e=>e.type==='invalid_tap'||e.type==='invalid_move'),refills=events.filter(e=>e.type==='refill');modalOpen(`<section class="kp-modal experience-settings" role="dialog" aria-modal="true"><div class="kp-modal-title">BUỔI CHƠI THỬ</div><p>Chỉ lưu cục bộ trên trình duyệt. Không gửi dữ liệu ra ngoài. ${KanjiSession.study?'Đây là phiên thử riêng, tách khỏi tiến trình chính.':'Đây là dữ liệu chơi chính; hãy mở phiên thử riêng cho người mới.'}</p><button class="kp-secondary" data-study-new>Mở phiên thử cho người tiếp theo</button><button class="kp-secondary" data-study-report>Xem báo cáo phiên này</button><a class="kp-secondary" href="study-dashboard.html" target="_blank" rel="noopener">Tổng hợp các phiên · người điều phối ↗</a><label class="logging-toggle"><input type="checkbox" data-logging ${X.settings.logging?'checked':''}> Ghi nhận thao tác và độ mượt</label><div class="test-stats"><span>${matches.length}<small>lần ghép</small></span><span>${invalid.length}<small>chạm chưa hợp lệ</small></span><span>${refills.filter(e=>e.reflow>0||e.shifts>0).length}<small>lần đổi vị trí</small></span></div><label>Sau buổi chơi, bạn nhớ chữ hoặc nghĩa nào?<textarea id="recall-answer" rows="3" maxlength="1500" placeholder="Tự nhớ trước khi mở album…"></textarea></label><label>Mức độ muốn chơi tiếp<select id="again-answer"><option value="">Chọn câu trả lời</option><option value="yes">Muốn chơi thêm</option><option value="unsure">Chưa chắc</option><option value="no">Muốn dừng</option></select></label><label>Độ dễ hiểu<select id="rating-answer"><option value="">Chọn mức độ</option>${[5,4,3,2,1].map(n=>`<option>${n}</option>`).join('')}</select></label><button class="kp-secondary" data-save-observation>Lưu nhận xét của người chơi</button><button class="kp-secondary" data-export-test>Xuất dữ liệu chơi thử JSON</button><label id="export-backup" hidden>Bản JSON dự phòng · có thể chọn và sao chép nếu trình duyệt chặn tải xuống<textarea id="export-json" readonly rows="4"></textarea></label><p id="observation-status" role="status"></p><button class="kp-action" data-action="close">Quay lại game</button></section>`,'Ghi nhận buổi chơi thử');}
- root.addEventListener('change',e=>{if(e.target.matches('[data-sound-style]'))A?.setSoundProfile?.(e.target.value);if(e.target.matches('[data-bgm-style]'))A?.setBgmStyle?.(e.target.value);if(e.target.matches('[data-voice-toggle]'))A?.setVoiceEnabled?.(e.target.value === 'on');if(e.target.matches('[data-setting]')){X.set(e.target.dataset.setting,e.target.value);X.log('setting',{name:e.target.dataset.setting,value:e.target.value});}if(e.target.matches('[data-logging]'))X.set('logging',e.target.checked);});
+ root.addEventListener('change',e=>{if(e.target.matches('[data-audio-fn]'))A?.preview?.(e.target.dataset.audioFn, e.target.value);if(e.target.matches('[data-sound-style]'))A?.setSoundProfile?.(e.target.value);if(e.target.matches('[data-bgm-style]'))A?.setBgmStyle?.(e.target.value);if(e.target.matches('[data-voice-toggle]'))A?.setVoiceEnabled?.(e.target.value === 'on');if(e.target.matches('[data-setting]')){X.set(e.target.dataset.setting,e.target.value);X.log('setting',{name:e.target.dataset.setting,value:e.target.value});}if(e.target.matches('[data-logging]'))X.set('logging',e.target.checked);});
  root.addEventListener('click',e=>{
-  if(e.target.closest('[data-settings]'))showSettings();
+  if(e.target.closest('[data-audio-studio]')){showAudioStudio();return;}if(e.target.closest('[data-settings]'))showSettings();
   if(e.target.closest('[data-about]'))showAbout();
   if(e.target.closest('[data-guide-again]'))showLevelIntro();
   if(e.target.closest('[data-playtest]'))showPlaytest();
@@ -734,7 +891,49 @@
   }
  });
  $('#album-screen').addEventListener('click',e=>{const b=e.target.closest('[data-card]');if(!b||b.disabled)return;const r=C.recipes[b.dataset.card];modalOpen(`<section class="kp-modal reveal-modal" role="dialog" aria-modal="true"><div class="kp-modal-title">THẺ ĐÃ THU THẬP</div>${revealBody(r)}<button class="kp-action" data-action="close">Về album</button></section>`,r.id+' — '+r.meaning);});
- $('#modal').addEventListener('click',e=>{if(e.target.closest('[data-mobile-help]')){showHelp();return;}if(e.target.closest('[data-mobile-restart]')){startLevel(state.level);return;}const a=e.target.closest('[data-action]')?.dataset.action;if(a==='begin-level')beginLevel();if(a==='continue')continueGame();if(a==='next')startLevel(state.level+1);if(a==='map')changeView('map');if(a==='album')changeView('album');if(a==='close')closeModal();if(a==='daily-win')showDailyWin(C.recipes[state.dailyTarget]);});
+ $('#modal').addEventListener('click',e=>{if(e.target.closest('[data-mobile-help]')){showHelp();return;}if(e.target.closest('[data-mobile-restart]')){startLevel(state.level);return;}
+  if(e.target.closest('[data-audio-preview]')){
+    const btn = e.target.closest('[data-audio-preview]');
+    const fnKey = btn.dataset.audioPreview;
+    const card = btn.closest('.audio-fn-card');
+    const sel = card?.querySelector('[data-audio-fn]');
+    const val = sel?.value || 'gem';
+    btn.classList.add('playing');
+    btn.textContent = '▶ Đang nghe...';
+    A?.preview?.(fnKey, val);
+    setTimeout(()=>{
+      btn.classList.remove('playing');
+      btn.textContent = '▷ Nghe thử';
+    }, fnKey === 'bgm' ? 2400 : (fnKey === 'fusion' ? 1200 : 450));
+    return;
+  }
+  if(e.target.closest('[data-preset-btn]')){
+    const pBtn = e.target.closest('[data-preset-btn]');
+    const pId = pBtn.dataset.presetBtn;
+    const presets = A?.getPresets?.() || {};
+    const preset = presets[pId];
+    if(preset && preset.map){
+      $('#modal').querySelectorAll('.audio-preset-btn').forEach(b => b.classList.remove('active'));
+      pBtn.classList.add('active');
+      Object.entries(preset.map).forEach(([k, v])=>{
+        const sel = $('#modal').querySelector(`[data-audio-fn="${k}"]`);
+        if(sel) sel.value = v;
+      });
+      A?.preview?.('fusion', preset.map.fusion || 'pop');
+    }
+    return;
+  }
+  if(e.target.closest('[data-action="save-audio-studio"]')){
+    const newMap = {};
+    $('#modal').querySelectorAll('[data-audio-fn]').forEach(sel=>{
+      newMap[sel.dataset.audioFn] = sel.value;
+    });
+    A?.setAudioMap?.(newMap);
+    closeModal();
+    say('Đã lưu cấu hình âm thanh của bạn! 🎵');
+    return;
+  }
+  const a=e.target.closest('[data-action]')?.dataset.action;if(a==='begin-level')beginLevel();if(a==='continue')continueGame();if(a==='next')startLevel(state.level+1);if(a==='map')changeView('map');if(a==='album')changeView('album');if(a==='close')closeModal();if(a==='daily-win')showDailyWin(C.recipes[state.dailyTarget]);});
  const board=$('#slide-board');
  $('.board-cells').addEventListener('click',e=>{const cell=e.target.closest('button[data-empty]');if(!cell||busy||view!=='play'||!$('#modal').hidden)return;const to=Number(cell.dataset.empty),dir=E.directions.find(d=>E.destination(selected,d,state.rows,state.cols)===to);if(selected===null||!dir){say('Chọn một khối ngay cạnh ô trống này trước nhé.');return;}move(dir);});
  $('#tiles').addEventListener('click',e=>{const t=e.target.closest('button.board-tile');if(t&&e.detail===0)tap(Number(t.dataset.at));});

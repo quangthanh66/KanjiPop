@@ -1,25 +1,77 @@
-/* Studio-grade Dual-Style Audio Engine for Kanji Pop.
-   Physical modeling of Sparkling Gemstones & Acoustic Slate Stones
-   Dual BGM: 126 BPM Joyful Japanese Pop Groove + 118 BPM Zen Lithophone Chill
+/* Studio-grade Granular Audio Engine & Audition Studio for Kanji Pop.
+   Physical modeling of Sparkling Gemstones, Acoustic Slate Stones, Wood Blocks & Bells.
+   Granular per-action sound configuration with interactive real-time audition previews.
    Full TTS Japanese Speech Synthesis integration. */
 (()=>{
  'use strict';
  let ctx=null,master=null,sfxBus=null,bgmBus=null,bgmTimer=0,enabled=false,bgmActive=false,bgmStep=0;
  const gemBuffers={};
 
- let soundProfile = (()=>{
-  try{ return localStorage.getItem('kanji-pop-sound-profile') || 'gem'; }catch{ return 'gem'; }
+ const defaultAudioMap = {
+  select: 'gem',
+  slide: 'gem',
+  contact: 'gem',
+  fusion: 'pop',
+  invalid: 'gem',
+  hint: 'sparkle',
+  win: 'pop',
+  bgm: 'pop',
+  voice: 'on'
+ };
+
+ const audioPresets = {
+  popGem: {
+   id: 'popGem',
+   name: '💎 Pop & Đá quý (Bản gốc)',
+   desc: 'Âm thanh đá quý trong trẻo kết hợp giai điệu J-Pop 126 BPM sôi động.',
+   map: { select: 'gem', slide: 'gem', contact: 'gem', fusion: 'pop', invalid: 'gem', hint: 'sparkle', win: 'pop', bgm: 'pop', voice: 'on' }
+  },
+  zenStone: {
+   id: 'zenStone',
+   name: '🍃 Cổ phong (Zen & Đá mộc)',
+   desc: 'Tiếng phiến đá mộc êm dịu, đàn đá Lithophone và mộc cầm thanh tịnh 118 BPM.',
+   map: { select: 'tile', slide: 'tile', contact: 'stone', fusion: 'zen', invalid: 'stone', hint: 'stone', win: 'zen', bgm: 'zen', voice: 'on' }
+  },
+  crystalFantasy: {
+   id: 'crystalFantasy',
+   name: '✨ Pha lê huyền ảo',
+   desc: 'Chuỗi âm thanh pha lê ngân nga thanh khiết và pháo hoa ánh sao.',
+   map: { select: 'crystal', slide: 'crystal', contact: 'crystal', fusion: 'sparkle', invalid: 'gem', hint: 'sparkle', win: 'crystal', bgm: 'pop', voice: 'on' }
+  },
+  traditionalGo: {
+   id: 'traditionalGo',
+   name: '⚫ Cờ vây & Chuông đền',
+   desc: 'Quân cờ vây lách cách đanh gọn, mộc bản và chuông đồng trang nhã.',
+   map: { select: 'stone', slide: 'stone', contact: 'stone', fusion: 'taiko', invalid: 'stone', hint: 'bell', win: 'zen', bgm: 'zen', voice: 'on' }
+  }
+ };
+
+ let customAudioMap = (()=>{
+  try{
+   const saved = localStorage.getItem('kp-custom-audio-map');
+   if(saved) return Object.assign({}, defaultAudioMap, JSON.parse(saved));
+  }catch{}
+  // Fallback to legacy single-keys if previously saved
+  let b = 'pop', p = 'gem', v = true;
+  try{ b = localStorage.getItem('kp-bgm-style') || 'pop'; }catch{}
+  try{ p = localStorage.getItem('kanji-pop-sound-profile') || 'gem'; }catch{}
+  try{ v = localStorage.getItem('kp-voice-enabled') !== 'false'; }catch{}
+  return {
+   select: ['gem','tile','crystal','stone','soft','wood'].includes(p)?p:'gem',
+   slide: ['gem','tile','crystal','stone','soft','wood'].includes(p)?p:'gem',
+   contact: p === 'tile' || p === 'stone' ? 'stone' : (p === 'crystal' ? 'crystal' : 'gem'),
+   fusion: b === 'zen' ? 'zen' : 'pop',
+   invalid: p === 'tile' || p === 'stone' ? 'stone' : 'gem',
+   hint: p === 'tile' || p === 'stone' ? 'stone' : 'sparkle',
+   win: b === 'zen' ? 'zen' : 'pop',
+   bgm: b,
+   voice: v ? 'on' : 'off'
+  };
  })();
 
- let bgmStyle = (()=>{
-  try{ return localStorage.getItem('kp-bgm-style') || 'pop'; }catch{ return 'pop'; }
- })();
+ /* --- PHYSICAL MODELING SYNTHESIS GENERATORS --- */
 
- let voiceEnabled = (()=>{
-  try{ return localStorage.getItem('kp-voice-enabled') !== 'false'; }catch{ return true; }
- })();
-
- /* Synthesis: High-frequency Sparkling Resonant Modal Gemstone / Crystal */
+ // 1. Sparkling Modal Crystal / Gemstone
  function renderCrystalSample(c, f0, dur, sparkle=1, double=false){
   const sr=c.sampleRate, len=Math.floor(sr*dur), buf=c.createBuffer(2, len, sr);
   const left=buf.getChannelData(0), right=buf.getChannelData(1);
@@ -53,7 +105,7 @@
   return buf;
  }
 
- /* Synthesis: Acoustic Slate Stone Physics (Mahjong / Go Stone / Slate Tile) */
+ // 2. Acoustic Slate Stone Physics (Mahjong / Go stone / Slate Tile)
  function renderAcousticStone(c, f0, dur, double=false, damping=1.0){
   const sr=c.sampleRate, len=Math.floor(sr*dur), buf=c.createBuffer(2, len, sr);
   const left=buf.getChannelData(0), right=buf.getChannelData(1);
@@ -91,6 +143,7 @@
   return renderAcousticStone(c, f0, dur, true, 1.15);
  }
 
+ // 3. Stone Lithophone Chime
  function renderStoneChime(c, f0, dur){
   const sr=c.sampleRate, len=Math.floor(sr*dur), buf=c.createBuffer(2, len, sr);
   const left=buf.getChannelData(0), right=buf.getChannelData(1);
@@ -110,8 +163,38 @@
    const impact = (Math.random()*2 - 1) * Math.exp(-350.0 * t) * 0.18;
    const env = Math.min(1.0, t/0.002);
    const val = (s * 0.75 + impact) * env * 0.45;
-   left[i] = val;
-   right[i] = val;
+   left[i] = val; right[i] = val;
+  }
+  return buf;
+ }
+
+ // 4. Organic Resonant Wood Block / Marimba Mallet
+ function renderWoodBlock(c, f0, dur){
+  const sr=c.sampleRate, len=Math.floor(sr*dur), buf=c.createBuffer(2, len, sr);
+  const left=buf.getChannelData(0), right=buf.getChannelData(1);
+  for(let i=0; i<len; i++){
+   const t=i/sr;
+   const f=f0*(1.0 + 0.6*Math.exp(-140*t));
+   const body=Math.sin(2*Math.PI*f*t)*Math.exp(-48*t);
+   const overtone=0.35*Math.sin(2*Math.PI*f*2.76*t)*Math.exp(-95*t);
+   const click=(Math.random()*2 - 1)*Math.exp(-600*t)*0.28;
+   const val=(body + overtone + click)*Math.min(1.0, t/0.001)*0.65;
+   left[i]=val; right[i]=val;
+  }
+  return buf;
+ }
+
+ // 5. Brass Temple Bell / Tiny Chime
+ function renderBrassBell(c, f0, dur){
+  const sr=c.sampleRate, len=Math.floor(sr*dur), buf=c.createBuffer(2, len, sr);
+  const left=buf.getChannelData(0), right=buf.getChannelData(1);
+  const modes=[{r:1.0, a:1.0, d:6.0}, {r:2.76, a:0.55, d:12.0}, {r:5.4, a:0.25, d:24.0}];
+  for(let i=0; i<len; i++){
+   const t=i/sr;
+   let s=0;
+   modes.forEach(m => s += m.a * Math.sin(2*Math.PI*f0*m.r*t) * Math.exp(-m.d*t));
+   const val=s*Math.min(1.0, t/0.001)*0.45;
+   left[i]=val; right[i]=val;
   }
   return buf;
  }
@@ -120,17 +203,19 @@
   gemBuffers.gem = [renderCrystalSample(c, 1760.00, 0.22, 0.85, false)];
   gemBuffers.crystal = [renderCrystalSample(c, 2489.02, 0.18, 1.1, false)];
   gemBuffers.tile = [renderAcousticStone(c, 520, 0.09, true)];
-  gemBuffers.stone = [renderAcousticStone(c, 540, 0.08, true)];
-  gemBuffers.soft = [renderAcousticStone(c, 460, 0.10, true)];
-  gemBuffers.select = [renderAcousticStone(c, 580, 0.065, true, 1.2)];
-  gemBuffers.slide = [renderAcousticStone(c, 520, 0.09, true)];
+  gemBuffers.stone = [renderAcousticStone(c, 540, 0.08, true, 1.4)];
+  gemBuffers.soft = [renderAcousticStone(c, 440, 0.10, true, 0.8)];
+  gemBuffers.wood = [renderWoodBlock(c, 480, 0.09)];
+  gemBuffers.bell = [renderBrassBell(c, 1864.66, 0.38)];
+  gemBuffers.select = [renderCrystalSample(c, 1760.00, 0.16, 0.9, false)];
+  gemBuffers.slide = [renderCrystalSample(c, 1600.00, 0.20, 0.8, false)];
   gemBuffers.match = [renderAcousticStone(c, 480, 0.11, false)];
   gemBuffers.contact = [renderCrystalSample(c, 1567.98, 0.36, 1.1, true), renderAcousticStoneDouble(c, 510, 0.13)];
   gemBuffers.invalid = [renderAcousticStone(c, 290, 0.08, true, 1.6)];
   gemBuffers.hint = [renderCrystalSample(c, 2400.00, 0.22, 0.9, true), renderStoneChime(c, 520, 0.35)];
   gemBuffers.sparkle = [renderCrystalSample(c, 2093.00, 0.20, 0.8, false)];
 
-  // Foley samples fallback loader
+  // Fallback Foley enhancement
   const samplePacks = {
    tile: ['audio/tile_slide.mp3'],
    gem: ['audio/gem_clink.ogg', 'audio/gem_contact.ogg', 'audio/glass_3.ogg'],
@@ -189,122 +274,177 @@
   src.start(t);
  }
 
+ /* --- REAL-TIME GRANULAR PREVIEW ENGINE --- */
+ function preview(fnKey, optKey){
+  const c = ensure(); if(!c) return;
+  if(c.state === 'suspended') c.resume();
+
+  if(fnKey === 'select'){
+   if(optKey === 'gem') playGem('gem', 1.15, 0.44);
+   else if(optKey === 'tile') playGem('tile', 1.0, 0.48);
+   else if(optKey === 'crystal') playGem('crystal', 1.22, 0.42);
+   else if(optKey === 'stone') playGem('stone', 1.08, 0.45);
+   else if(optKey === 'soft') playGem('soft', 1.0, 0.44);
+   else if(optKey === 'wood') playGem('wood', 1.0, 0.48);
+  }else if(fnKey === 'slide'){
+   if(optKey === 'gem') playGem('gem', 1.0, 0.44);
+   else if(optKey === 'tile') playGem('tile', 1.0, 0.46);
+   else if(optKey === 'crystal') playGem('crystal', 1.0, 0.42);
+   else if(optKey === 'stone') playGem('stone', 1.0, 0.44);
+   else if(optKey === 'soft') playGem('soft', 1.0, 0.42);
+   else if(optKey === 'wood') playGem('wood', 1.0, 0.46);
+  }else if(fnKey === 'contact'){
+   if(optKey === 'gem'){ playGem('contact', 1.0, 0.42); playGem('sparkle', 1.25, 0.28, 0.02); }
+   else if(optKey === 'stone') playGem('contact', 1.0, 0.46);
+   else if(optKey === 'crystal'){ playGem('crystal', 1.12, 0.44); playGem('sparkle', 1.3, 0.28, 0.02); }
+   else if(optKey === 'soft') playGem('soft', 1.0, 0.42);
+  }else if(fnKey === 'fusion'){
+   if(optKey === 'pop') playFusionPop(c, 1.0);
+   else if(optKey === 'zen') playFusionZen(c, 1.0);
+   else if(optKey === 'sparkle') playFusionSparkle(c, 1.0);
+   else if(optKey === 'taiko') playFusionTaiko(c, 1.0);
+  }else if(fnKey === 'invalid'){
+   if(optKey === 'gem') playGem('gem', 0.80, 0.35);
+   else if(optKey === 'stone') playGem('invalid', 0.72, 0.38);
+   else if(optKey === 'soft') playGem('soft', 0.75, 0.35);
+  }else if(fnKey === 'hint'){
+   if(optKey === 'sparkle'){ playGem('hint', 1.0, 0.46); playGem('sparkle', 1.15, 0.32, 0.05); }
+   else if(optKey === 'stone'){ playGem('stone', 1.1, 0.42); playGem('contact', 1.2, 0.30, 0.05); }
+   else if(optKey === 'bell') playGem('bell', 1.0, 0.48);
+  }else if(fnKey === 'win'){
+   if(optKey === 'pop') playWinPop(c);
+   else if(optKey === 'zen') playWinZen(c);
+   else if(optKey === 'crystal') playWinCrystal(c);
+  }else if(fnKey === 'bgm'){
+   previewBgmRiff(optKey);
+  }else if(fnKey === 'voice'){
+   speak('休む（やすむ）');
+  }
+ }
+
+ /* --- GAMEPLAY HOOKS (READING FROM customAudioMap) --- */
  function select(){
   haptic(4);
-  if(soundProfile === 'gem' || soundProfile === 'crystal') playGem('gem', 1.15, 0.32);
-  else if(soundProfile === 'tile') playGem('select', 1.0, 0.35);
-  else if(soundProfile === 'stone') playGem('stone', 1.08, 0.35);
-  else playGem('soft', 1.0, 0.32);
+  const style = customAudioMap.select || 'gem';
+  preview('select', style);
  }
 
  function invalid(){
   haptic([6,16,6]);
-  if(soundProfile === 'gem' || soundProfile === 'crystal') playGem('gem', 0.80, 0.26);
-  else playGem('invalid', 0.72, 0.30);
+  const style = customAudioMap.invalid || 'gem';
+  preview('invalid', style);
  }
 
  function slide(willMatch=false){
   haptic(willMatch?[6,14,12]:5);
-  const c=ensure();if(!c)return;
+  const style = customAudioMap.slide || 'gem';
   if(willMatch){
-   if(soundProfile === 'gem' || soundProfile === 'crystal'){
-    playGem('gem', 1.1, 0.44);
-    playGem('sparkle', 1.3, 0.26, 0.035);
-   }else if(soundProfile === 'tile'){
-    playGem('tile', 1.0, 0.48);
-    playGem('contact', 1.10, 0.30, 0.035);
-   }else if(soundProfile === 'stone'){
-    playGem('stone', 1.05, 0.45);
-    playGem('contact', 1.10, 0.28, 0.03);
-   }else{
-    playGem('soft', 1.0, 0.42);
-    playGem('contact', 1.05, 0.26, 0.03);
-   }
+   preview('slide', style);
+   playGem('sparkle', 1.25, 0.25, 0.035);
   }else{
-   if(soundProfile === 'gem') playGem('gem', 1.0, 0.40);
-   else if(soundProfile === 'crystal') playGem('crystal', 1.0, 0.38);
-   else if(soundProfile === 'tile') playGem('tile', 1.0, 0.44);
-   else if(soundProfile === 'stone') playGem('stone', 1.0, 0.40);
-   else playGem('soft', 1.0, 0.38);
+   preview('slide', style);
   }
  }
-
- function setSoundProfile(name){
-  if(['gem','tile','crystal','stone','soft'].includes(name)){
-   soundProfile = name;
-   try{ localStorage.setItem('kanji-pop-sound-profile', name); }catch{}
-   slide(false);
-  }
- }
-
- function getSoundProfile(){ return soundProfile; }
 
  function contact(pair=0){
   haptic([12,20,18]);
-  const rootPitch = 0.96 + (pair % 5) * 0.04;
-  if(soundProfile === 'gem' || soundProfile === 'crystal'){
-   playGem('contact', rootPitch, 0.38);
-   playGem('sparkle', rootPitch * 1.2, 0.25, 0.02);
-  }else{
-   playGem('contact', rootPitch, 0.45);
-  }
+  const style = customAudioMap.contact || 'gem';
+  preview('contact', style);
  }
 
  function fusion(pair=0, combo=1){
   haptic([14,28,22,38]);
-  const c=ensure();if(!c)return;
+  const c = ensure(); if(!c) return;
   const pitchMult = Math.pow(1.04, Math.min(4, Math.max(0, combo-1)));
+  const style = customAudioMap.fusion || 'pop';
 
-  if(soundProfile === 'gem' || soundProfile === 'crystal'){
-   // Original Sparkling Gemstone cascade
-   const scale=[1046.50, 1318.51, 1567.98, 1975.53, 2349.32, 3135.96];
-   scale.forEach((f, i)=>{
-    const t = c.currentTime + 0.04 + i * 0.085;
-    const o = c.createOscillator(), g = c.createGain();
-    o.type = 'sine'; o.frequency.setValueAtTime(f * pitchMult, t);
-    g.gain.setValueAtTime(0.0001, t);
-    g.gain.linearRampToValueAtTime(0.038 + i*0.005, t + 0.003);
-    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.16);
-    o.connect(g); g.connect(sfxBus);
-    o.start(t); o.stop(t + 0.18);
-   });
-   playGem('match', 1.15 * pitchMult, 0.50, 0.70);
-   playGem('contact', 1.20 * pitchMult, 0.35, 0.72);
-   playGem('sparkle', 1.35 * pitchMult, 0.28, 0.74);
-  }else{
-   // Organic stone clatter + Lithophone chord bloom
-   playGem('contact', 1.0 * pitchMult, 0.45, 0.02);
-   playGem('match', 1.08 * pitchMult, 0.50, 0.08);
+  if(style === 'pop') playFusionPop(c, pitchMult);
+  else if(style === 'zen') playFusionZen(c, pitchMult);
+  else if(style === 'sparkle') playFusionSparkle(c, pitchMult);
+  else if(style === 'taiko') playFusionTaiko(c, pitchMult);
+ }
 
-   const stoneChord = [196.00, 293.66, 392.00, 493.88, 587.33];
-   stoneChord.forEach((f, i)=>{
-    const t = c.currentTime + 0.16 + i * 0.04;
-    const o = c.createOscillator(), g = c.createGain();
-    o.type = 'sine';
-    o.frequency.setValueAtTime(f * pitchMult, t);
+ function playFusionPop(c, pitchMult=1.0){
+  const scale=[1046.50, 1318.51, 1567.98, 1975.53, 2349.32, 3135.96];
+  scale.forEach((f, i)=>{
+   const t = c.currentTime + 0.04 + i * 0.085;
+   const o = c.createOscillator(), g = c.createGain();
+   o.type = 'sine'; o.frequency.setValueAtTime(f * pitchMult, t);
+   g.gain.setValueAtTime(0.0001, t);
+   g.gain.linearRampToValueAtTime(0.038 + i*0.005, t + 0.003);
+   g.gain.exponentialRampToValueAtTime(0.0001, t + 0.16);
+   o.connect(g); g.connect(sfxBus);
+   o.start(t); o.stop(t + 0.18);
+  });
+  playGem('match', 1.15 * pitchMult, 0.50, 0.70);
+  playGem('contact', 1.20 * pitchMult, 0.35, 0.72);
+  playGem('sparkle', 1.35 * pitchMult, 0.28, 0.74);
+ }
 
-    const o2 = c.createOscillator(), g2 = c.createGain();
-    o2.type = 'sine';
-    o2.frequency.setValueAtTime(f * 1.46 * pitchMult, t);
+ function playFusionZen(c, pitchMult=1.0){
+  playGem('contact', 1.0 * pitchMult, 0.45, 0.02);
+  playGem('match', 1.08 * pitchMult, 0.50, 0.08);
+  const stoneChord = [196.00, 293.66, 392.00, 493.88, 587.33];
+  stoneChord.forEach((f, i)=>{
+   const t = c.currentTime + 0.16 + i * 0.04;
+   const o = c.createOscillator(), g = c.createGain();
+   o.type = 'sine'; o.frequency.setValueAtTime(f * pitchMult, t);
+   const o2 = c.createOscillator(), g2 = c.createGain();
+   o2.type = 'sine'; o2.frequency.setValueAtTime(f * 1.46 * pitchMult, t);
 
-    g.gain.setValueAtTime(0.0001, t);
-    g.gain.linearRampToValueAtTime(0.055, t + 0.012);
-    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.65);
+   g.gain.setValueAtTime(0.0001, t);
+   g.gain.linearRampToValueAtTime(0.055, t + 0.012);
+   g.gain.exponentialRampToValueAtTime(0.0001, t + 0.65);
 
-    g2.gain.setValueAtTime(0.0001, t);
-    g2.gain.linearRampToValueAtTime(0.018, t + 0.012);
-    g2.gain.exponentialRampToValueAtTime(0.0001, t + 0.42);
+   g2.gain.setValueAtTime(0.0001, t);
+   g2.gain.linearRampToValueAtTime(0.018, t + 0.012);
+   g2.gain.exponentialRampToValueAtTime(0.0001, t + 0.42);
 
-    o.connect(g); g.connect(sfxBus); o.start(t); o.stop(t + 0.68);
-    o2.connect(g2); g2.connect(sfxBus); o2.start(t); o2.stop(t + 0.45);
-   });
-   playGem('match', 1.0 * pitchMult, 0.60, 0.42);
-  }
+   o.connect(g); g.connect(sfxBus); o.start(t); o.stop(t + 0.68);
+   o2.connect(g2); g2.connect(sfxBus); o2.start(t); o2.stop(t + 0.45);
+  });
+  playGem('match', 1.0 * pitchMult, 0.60, 0.42);
+ }
+
+ function playFusionSparkle(c, pitchMult=1.0){
+  const scale = [1318.51, 1567.98, 1975.53, 2349.32, 2637.02, 3135.96, 3951.07];
+  scale.forEach((f, i)=>{
+   const t = c.currentTime + 0.03 + i * 0.055;
+   const o = c.createOscillator(), g = c.createGain();
+   o.type = 'sine'; o.frequency.setValueAtTime(f * pitchMult, t);
+   g.gain.setValueAtTime(0.0001, t);
+   g.gain.linearRampToValueAtTime(0.045, t + 0.003);
+   g.gain.exponentialRampToValueAtTime(0.0001, t + 0.22);
+   o.connect(g); g.connect(sfxBus);
+   o.start(t); o.stop(t + 0.24);
+  });
+  playGem('sparkle', 1.4 * pitchMult, 0.45, 0.42);
+  playGem('crystal', 1.2 * pitchMult, 0.35, 0.44);
+ }
+
+ function playFusionTaiko(c, pitchMult=1.0){
+  const bellFreqs = [196.00, 480.00, 1020.00];
+  bellFreqs.forEach((f, i)=>{
+   const t = c.currentTime + 0.02;
+   const o = c.createOscillator(), g = c.createGain();
+   o.type = 'sine'; o.frequency.setValueAtTime(f * pitchMult, t);
+   g.gain.setValueAtTime(0.0001, t);
+   g.gain.linearRampToValueAtTime(i === 0 ? 0.08 : 0.03, t + 0.01);
+   g.gain.exponentialRampToValueAtTime(0.0001, t + (i === 0 ? 0.9 : 0.45));
+   o.connect(g); g.connect(sfxBus);
+   o.start(t); o.stop(t + 0.95);
+  });
+  playGem('wood', 1.0 * pitchMult, 0.55, 0.05);
+  playGem('stone', 1.1 * pitchMult, 0.48, 0.08);
  }
 
  function win(){
   haptic([20,30,25,35,30,45]);
-  const c=ensure();if(!c)return;
+  const style = customAudioMap.win || 'pop';
+  preview('win', style);
+ }
+
+ function playWinPop(c){
   const triad=[523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98];
   triad.forEach((f, i)=>{
    const t = c.currentTime + i * 0.09;
@@ -320,11 +460,42 @@
   playGem('sparkle', 1.2, 0.40, 0.45);
  }
 
+ function playWinZen(c){
+  const pentatonic=[261.63, 392.00, 523.25, 587.33, 659.25, 783.99, 1046.50];
+  pentatonic.forEach((f, i)=>{
+   const t = c.currentTime + i * 0.10;
+   const o = c.createOscillator(), g = c.createGain();
+   o.type = 'sine'; o.frequency.setValueAtTime(f, t);
+   g.gain.setValueAtTime(0.0001, t);
+   g.gain.linearRampToValueAtTime(0.055, t + 0.008);
+   g.gain.exponentialRampToValueAtTime(0.0001, t + 0.60);
+   o.connect(g); g.connect(sfxBus);
+   o.start(t); o.stop(t + 0.64);
+  });
+  playGem('stone', 1.0, 0.55, 0.35);
+  playGem('bell', 1.0, 0.45, 0.42);
+ }
+
+ function playWinCrystal(c){
+  const scale=[1046.50, 1318.51, 1567.98, 2093.00, 2637.02, 3135.96];
+  scale.forEach((f, i)=>{
+   const t = c.currentTime + i * 0.08;
+   const o = c.createOscillator(), g = c.createGain();
+   o.type = 'sine'; o.frequency.setValueAtTime(f, t);
+   g.gain.setValueAtTime(0.0001, t);
+   g.gain.linearRampToValueAtTime(0.060, t + 0.005);
+   g.gain.exponentialRampToValueAtTime(0.0001, t + 0.55);
+   o.connect(g); g.connect(sfxBus);
+   o.start(t); o.stop(t + 0.58);
+  });
+  playGem('crystal', 1.0, 0.60, 0.40);
+  playGem('sparkle', 1.3, 0.45, 0.45);
+ }
+
  function hint(){
   haptic(8);
-  const c=ensure();if(!c)return;
-  playGem('hint', 1.0, 0.45);
-  playGem('sparkle', 1.15, 0.30, 0.05);
+  const style = customAudioMap.hint || 'sparkle';
+  preview('hint', style);
  }
 
  /* --- BGM COMPOSITION & ENGINES --- */
@@ -350,7 +521,7 @@
   880.00, 0, 987.77, 1046.5,  0, 1174.66, 0, 0
  ];
 
- /* 1. POP ENGINE FUNCTIONS (126 BPM) */
+ /* POP SYNTHESIS (126 BPM) */
  function playFmChord(c, notes, time, dur=0.18, vol=0.024){
   notes.forEach((f, i)=>{
    const t = time + i * 0.004;
@@ -420,7 +591,7 @@
   o.start(t); o.stop(t + dur + 0.02);
  }
 
- /* 2. ZEN ENGINE FUNCTIONS (118 BPM) */
+ /* ZEN SYNTHESIS (118 BPM) */
  function playStoneMarimbaChord(c, notes, time, dur=0.22, vol=0.065){
   notes.forEach((f, i)=>{
    const t = time + i * 0.006;
@@ -495,13 +666,48 @@
   o2.start(t); o2.stop(t + dur + 0.02);
  }
 
+ function previewBgmRiff(style){
+  const c = ensure(); if(!c) return;
+  if(c.state === 'suspended') c.resume();
+  if(style === 'none'){
+   playGem('soft', 0.9, 0.3);
+   return;
+  }
+  const stepDur = style === 'zen' ? 0.127 : 0.119;
+  const numSteps = 16; // 2 bars
+  for(let s=0; s<numSteps; s++){
+   const barIdx = Math.floor(s / 8) % chords.length;
+   const subStep = s % 8;
+   const t = c.currentTime + s * stepDur;
+   const chord = chords[barIdx];
+
+   if(style === 'zen'){
+    if(subStep === 0 || subStep === 4) playStoneMalletThump(c, t);
+    if(subStep === 2 || subStep === 6) playStoneClickPercussion(c, t);
+    if(subStep === 0) playAcousticBass(c, chord.bass, t, 0.20);
+    else if(subStep === 3) playAcousticBass(c, chord.bass * 1.5, t, 0.15);
+    if(subStep === 1 || subStep === 4) playStoneMarimbaChord(c, chord.notes, t, 0.18, 0.060);
+    const mel = leadMelody[s];
+    if(mel && mel > 0) playStoneKalimbaLead(c, mel, t, 0.30);
+   }else{
+    if(subStep === 0 || subStep === 4) playPopKick(c, t);
+    if(subStep === 2 || subStep === 6) playPopClap(c, t);
+    if(subStep === 0) playPopBass(c, chord.bass, t, 0.16);
+    else if(subStep === 3) playPopBass(c, chord.bass * 1.5, t, 0.12);
+    if(subStep === 1 || subStep === 4) playFmChord(c, chord.notes, t, 0.14, 0.022);
+    const mel = leadMelody[s];
+    if(mel && mel > 0) playCelesta(c, mel, t, 0.22);
+   }
+  }
+ }
+
  function scheduleBgm(){
   clearTimeout(bgmTimer);
-  if(!enabled || !bgmActive || document.hidden || bgmStyle === 'none') return;
+  const curBgm = customAudioMap.bgm || 'pop';
+  if(!enabled || !bgmActive || document.hidden || curBgm === 'none') return;
   const c = ensure(); if(!c) return;
 
-  if(bgmStyle === 'zen'){
-   // 118 BPM Zen Lithophone Chill
+  if(curBgm === 'zen'){
    const stepDur = 0.127;
    const batchSteps = 4;
    for(let s=0; s<batchSteps; s++){
@@ -526,7 +732,6 @@
    bgmStep = (bgmStep + batchSteps) % 64;
    bgmTimer = setTimeout(scheduleBgm, batchSteps * stepDur * 1000 - 25);
   }else{
-   // 126 BPM Joyful Japanese Pop Groove (Original Default)
    const stepDur = 0.119;
    const batchSteps = 4;
    for(let s=0; s<batchSteps; s++){
@@ -564,9 +769,9 @@
    const c = ensure();
    if(c && c.state === 'suspended'){
     c.resume().then(()=>{
-     if(bgmActive && bgmStyle !== 'none') scheduleBgm();
+     if(bgmActive && (customAudioMap.bgm !== 'none')) scheduleBgm();
     }).catch(()=>{});
-   }else if(bgmActive && bgmStyle !== 'none'){
+   }else if(bgmActive && (customAudioMap.bgm !== 'none')){
     scheduleBgm();
    }
   }
@@ -574,7 +779,7 @@
 
  function setBgm(on){
   bgmActive = !!on;
-  if(bgmActive && enabled && bgmStyle !== 'none'){
+  if(bgmActive && enabled && (customAudioMap.bgm !== 'none')){
    scheduleBgm();
   }else{
    clearTimeout(bgmTimer);
@@ -583,30 +788,78 @@
 
  function setBgmStyle(style){
   if(['pop','zen','none'].includes(style)){
-   bgmStyle = style;
+   customAudioMap.bgm = style;
    try{ localStorage.setItem('kp-bgm-style', style); }catch{}
+   saveAudioMap(customAudioMap);
    clearTimeout(bgmTimer);
    bgmStep = 0;
-   if(bgmActive && enabled && bgmStyle !== 'none'){
+   if(bgmActive && enabled && style !== 'none'){
     scheduleBgm();
    }
   }
  }
 
- function getBgmStyle(){ return bgmStyle; }
+ function getBgmStyle(){ return customAudioMap.bgm || 'pop'; }
+
+ function setSoundProfile(name){
+  if(['gem','tile','crystal','stone','soft','wood'].includes(name)){
+   customAudioMap.select = name;
+   customAudioMap.slide = name;
+   saveAudioMap(customAudioMap);
+   slide(false);
+  }
+ }
+
+ function getSoundProfile(){ return customAudioMap.slide || 'gem'; }
+
+ function getAudioMap(){
+  return Object.assign({}, customAudioMap);
+ }
+
+ function setAudioMap(newMap){
+  if(!newMap || typeof newMap !== 'object') return;
+  customAudioMap = Object.assign({}, defaultAudioMap, customAudioMap, newMap);
+  saveAudioMap(customAudioMap);
+  if(customAudioMap.bgm){
+   clearTimeout(bgmTimer);
+   bgmStep = 0;
+   if(bgmActive && enabled && customAudioMap.bgm !== 'none') scheduleBgm();
+  }
+ }
+
+ function saveAudioMap(map){
+  try{
+   localStorage.setItem('kp-custom-audio-map', JSON.stringify(map));
+   if(map.bgm) localStorage.setItem('kp-bgm-style', map.bgm);
+   if(map.slide) localStorage.setItem('kanji-pop-sound-profile', map.slide);
+   if(map.voice) localStorage.setItem('kp-voice-enabled', map.voice === 'on' ? 'true' : 'false');
+  }catch{}
+ }
+
+ function getPresets(){
+  return JSON.parse(JSON.stringify(audioPresets));
+ }
+
+ function applyPreset(presetKey){
+  if(audioPresets[presetKey]){
+   setAudioMap(audioPresets[presetKey].map);
+   return true;
+  }
+  return false;
+ }
 
  /* Native Japanese TTS Engine */
  function setVoiceEnabled(on){
-  voiceEnabled = !!on;
-  try{ localStorage.setItem('kp-voice-enabled', voiceEnabled ? 'true' : 'false'); }catch{}
+  customAudioMap.voice = on ? 'on' : 'off';
+  saveAudioMap(customAudioMap);
  }
 
  function isVoiceEnabled(){
-  return voiceEnabled;
+  return customAudioMap.voice !== 'off';
  }
 
  function speak(text){
-  if(!voiceEnabled || !text || typeof window === 'undefined' || !window.speechSynthesis) return;
+  if(!isVoiceEnabled() || !text || typeof window === 'undefined' || !window.speechSynthesis) return;
   try{
    window.speechSynthesis.cancel();
    const utt = new SpeechSynthesisUtterance(text);
@@ -624,7 +877,7 @@
   document.addEventListener('visibilitychange', ()=>{
    if(document.hidden){
     clearTimeout(bgmTimer);
-   }else if(enabled && bgmActive && bgmStyle !== 'none'){
+   }else if(enabled && bgmActive && (customAudioMap.bgm !== 'none')){
     scheduleBgm();
    }
   });
@@ -645,6 +898,11 @@
   haptic,
   setSoundProfile,
   getSoundProfile,
+  getAudioMap,
+  setAudioMap,
+  getPresets,
+  applyPreset,
+  preview,
   speak,
   setVoiceEnabled,
   isVoiceEnabled
