@@ -642,99 +642,79 @@ function showAudioStudio(){
   
   const audioFunctions = [
     {
-      key: 'select',
-      title: '👆 Chạm / Chọn khối',
-      desc: 'Âm thanh khi ngón tay chạm hoặc chọn một khối đá',
+      key: 'tileTap',
+      title: '🪨 1. Tương tác khối (Chạm · Trượt · Tiếp xúc)',
+      desc: 'Âm thanh xúc giác khi chạm khối, trượt vào ô trống và 2 khối chạm nhau (Đã gộp thống nhất)',
       options: [
-        { val: 'gem', label: '💎 Đá quý chạm trong (Bản gốc - Nảy giòn)' },
-        { val: 'tile', label: '🪨 Phiến đá lướt êm (Tile tap)' },
-        { val: 'crystal', label: '✨ Pha lê ngân cao (Crystal chime)' },
-        { val: 'stone', label: '⚫ Quân cờ vây lách cách (Go stone)' },
-        { val: 'soft', label: '🎋 Ngọc bích dịu tai (Soft jade)' },
-        { val: 'wood', label: '🪵 Gõ mộc bản ấm (Wood block)' }
-      ]
-    },
-    {
-      key: 'slide',
-      title: '↔️ Trượt khối vào ô trống',
-      desc: 'Âm thanh khi khối trượt di chuyển trên bàn cờ',
-      options: [
-        { val: 'gem', label: '💎 Đá quý lướt giòn tan (Bản gốc)' },
-        { val: 'tile', label: '🪨 Trượt phiến đá êm dịu' },
-        { val: 'crystal', label: '✨ Trượt pha lê ngân nhẹ' },
-        { val: 'stone', label: '⚫ Cờ vây lướt bàn cờ' },
-        { val: 'soft', label: '🎋 Trượt ngọc bích êm tai' },
-        { val: 'wood', label: '🪵 Trượt mộc ấm áp' }
-      ]
-    },
-    {
-      key: 'contact',
-      title: '💥 Hai khối cùng loại chạm nhau',
-      desc: 'Âm thanh khi hai viên cùng Kanji chạm cạnh nhau trước khi ghép',
-      options: [
-        { val: 'gem', label: '💎 Đá quý va chạm + tia sáng (Bản gốc)' },
-        { val: 'stone', label: '🪨 Hai khối đá gõ cạch đanh' },
-        { val: 'crystal', label: '✨ Pha lê chạm ngân chuông' },
-        { val: 'soft', label: '🎋 Hai khối ngọc chạm khẽ' }
+        { val: 'tile', label: '🪨 ① Phiến đá mộc êm (Slate Tile - Đề xuất)' },
+        { val: 'gem', label: '💎 ② Đá quý & Pha lê trong vắt (Gem Clink)' },
+        { val: 'wood', label: '🪵 ③ Mộc bản Marimba ấm áp (Warm Wood)' },
+        { val: 'stone', label: '⚫ ④ Quân cờ vây lách cách (Go Stone)' },
+        { val: 'soft', label: '🎋 ⑤ Ngọc bích cổ phong dịu nhẹ (Soft Jade)' },
+        { val: 'porcelain', label: '🍶 ⑥ Gốm sứ tráng men thanh tao (Porcelain)' },
+        { val: 'metal', label: '🔔 ⑦ Kim khí vi mô ngân nhẹ (Metallic Clink)' },
+        { val: 'quartz', label: '🔮 ⑧ Thạch anh tím vang nhẹ (Quartz Chime)' },
+        { val: 'bamboo', label: '🌿 ⑨ Đốt tre mộc lách cách (Bamboo Snap)' },
+        { val: 'water', label: '💧 ⑩ Giọt nước thanh thoát (Water Droplet)' }
       ]
     },
     {
       key: 'fusion',
-      title: '🌟 Ghép thành công chữ Kanji',
-      desc: 'Hiệu ứng âm thanh khi hợp thể thành chữ Kanji hoàn chỉnh',
+      title: '🌟 2. Ghép thành công chữ Kanji (Fusion / Match)',
+      desc: 'Hiệu ứng âm thanh khi hợp thể thành chữ Kanji hoàn chỉnh (10 phong cách)',
       options: [
-        { val: 'pop', label: '🎵 Thác ngọc Celesta & J-Pop rực rỡ (Bản gốc - Hân hoan)' },
-        { val: 'zen', label: '🍃 Đàn đá Lithophone & Mộc cầm thiền (Ấm áp, thanh tịnh)' },
-        { val: 'sparkle', label: '✨ Mưa sao băng pha lê lấp lánh (Huyền ảo, lung linh)' },
-        { val: 'taiko', label: '🔔 Chuông chùa Nhật Bản & Taiko trầm hùng (Trang nghiêm)' }
-      ]
-    },
-    {
-      key: 'invalid',
-      title: '⚠️ Nước đi không hợp lệ',
-      desc: 'Âm thanh khi chạm khối bị chặn hoặc trượt sai hướng',
-      options: [
-        { val: 'gem', label: '💎 Gõ kính trầm nhẹ (Bản gốc)' },
-        { val: 'stone', label: '🪨 Tiếng đá trầm mộc (Stone bump)' },
-        { val: 'soft', label: '🎋 Tiếng ngọc bích đục (Muted jade)' }
-      ]
-    },
-    {
-      key: 'hint',
-      title: '💡 Gợi ý nước đi',
-      desc: 'Âm thanh kích hoạt khi bấm nút Gợi ý',
-      options: [
-        { val: 'sparkle', label: '✨ Chuông sao lấp lánh (Sparkle Chime)' },
-        { val: 'stone', label: '🍃 Chuông đá thanh tao (Stone Chime)' },
-        { val: 'bell', label: '🔔 Chuông đồng nhỏ (Brass Bell)' }
+        { val: 'pop', label: '🎵 ① Thác ngọc Celesta & J-Pop (Bản gốc - Hân hoan)' },
+        { val: 'zen', label: '🍃 ② Đàn đá Lithophone thiền viện (Ấm áp, thanh tịnh)' },
+        { val: 'sparkle', label: '✨ ③ Mưa sao băng pha lê (Huyền ảo, lung linh)' },
+        { val: 'taiko', label: '🥁 ④ Trống Taiko & Chuông đền (Trang nghiêm)' },
+        { val: 'koto', label: '🌸 ⑤ Đàn tranh Koto cổ phong (Nhã nhặn truyền thống)' },
+        { val: 'thunder', label: '⚡ ⑥ Sét ma thuật nổ tanh tách (Thunder Spark)' },
+        { val: 'water', label: '🌊 ⑦ Sóng nước dâng trào (Ocean Ripple)' },
+        { val: 'arcade', label: '🎮 ⑧ Retro 8-Bit Powerup (Pixel Arcade)' },
+        { val: 'strings', label: '🎻 ⑨ Dàn dây du dương nở rộ (Strings Blossom)' },
+        { val: 'cosmic', label: '🔮 ⑩ Cổng không gian vũ trụ (Cosmic Portal)' }
       ]
     },
     {
       key: 'win',
-      title: '🏆 Chiến thắng màn chơi',
-      desc: 'Giai điệu ăn mừng khi hoàn thành mục tiêu màn chơi',
+      title: '🏆 3. Hoàn thành màn chơi (Win Fanfare)',
+      desc: 'Giai điệu chiến thắng khi đạt mục tiêu màn chơi (10 phong cách)',
       options: [
-        { val: 'pop', label: '🎺 Khúc ca J-Pop rộn ràng (Pop Fanfare)' },
-        { val: 'zen', label: '🍃 Đại hợp âm đàn đá & mộc cầm (Grand Harmony)' },
-        { val: 'crystal', label: '✨ Ánh hào quang ngân vang (Celestial Bloom)' }
+        { val: 'pop', label: '🎺 ① J-Pop Joyful Fanfare (Hân hoan tột đỉnh - Bản gốc)' },
+        { val: 'zen', label: '🍃 ② Đại hợp âm đàn đá & mộc cầm (Grand Harmony)' },
+        { val: 'crystal', label: '✨ ③ Ánh sáng thiên đường (Celestial Chime)' },
+        { val: 'matsuri', label: '🥁 ④ Lễ hội Matsuri rộn rã (Festival Taiko)' },
+        { val: 'sakura', label: '🌸 ⑤ Khúc hoa anh đào (Sakura Serenade)' },
+        { val: 'arcade', label: '🎮 ⑥ Phá đảo Arcade 8-Bit (Stage Clear)' },
+        { val: 'brass', label: '👑 ⑦ Kèn đồng hoàng gia khải hoàn (Victory Brass)' },
+        { val: 'cathedral', label: '🔔 ⑧ Chuông hòa âm đa tầng (Chime Cathedral)' },
+        { val: 'cosmic', label: '🌌 ⑨ Vụ nổ siêu tân tinh (Cosmic Supernova)' },
+        { val: 'circus', label: '🎪 ⑩ Khúc ca tưng bừng vui nhộn (Circus Fanfare)' }
       ]
     },
     {
       key: 'bgm',
-      title: '🎵 Nhạc nền (BGM)',
-      desc: 'Giai điệu âm nhạc phát xuyên suốt trò chơi',
+      title: '🎵 4. Nhạc nền (BGM)',
+      desc: 'Giai điệu âm nhạc phát xuyên suốt màn chơi (10 phong cách)',
       options: [
-        { val: 'pop', label: '🎵 Pop Nhật Bản vui tươi 126 BPM (Bản gốc)' },
-        { val: 'zen', label: '🍃 Zen Chill 118 BPM (Đàn đá Lithophone & Marimba)' },
-        { val: 'none', label: '🔇 Tắt nhạc nền (Chỉ giữ hiệu ứng)' }
+        { val: 'pop', label: '🎵 ① Pop Nhật Bản vui tươi 126 BPM (Bản gốc sôi động)' },
+        { val: 'zen', label: '🍃 ② Zen Chill 118 BPM (Đàn đá & mộc cầm thư thái)' },
+        { val: 'lofi', label: '☕ ③ Lofi Study Cafe 84 BPM (Ấm cúng, thư giãn)' },
+        { val: 'koto', label: '🌸 ④ Cổ phong trà đạo Koto (Phong vị Nhật Bản)' },
+        { val: 'citypop', label: '🌆 ⑤ City Pop Tokyo 122 BPM (Hào hứng thập niên 80)' },
+        { val: 'chiptune', label: '🎮 ⑥ 8-Bit Chiptune Arcade 130 BPM (Game 4 nút NES)' },
+        { val: 'ocean', label: '🌊 ⑦ Sóng biển êm đềm Ambient (Thư thái không lời)' },
+        { val: 'synthwave', label: '🌌 ⑧ Cosmic Synthwave 115 BPM (Vũ trụ kỳ ảo)' },
+        { val: 'piano', label: '🌧️ ⑨ Đàn Piano đêm mưa (Du dương lãng mạn)' },
+        { val: 'none', label: '🔇 ⑩ Tắt nhạc nền (Chỉ nghe tiếng gõ khối & đọc chữ)' }
       ]
     },
     {
       key: 'voice',
-      title: '🗣️ Phát âm tiếng Nhật (TTS)',
+      title: '🗣️ 5. Phát âm tiếng Nhật (TTS)',
       desc: 'Giọng đọc native chuẩn tiếng Nhật phát âm Kanji và ví dụ khi ghép',
       options: [
-        { val: 'on', label: '🔊 Bật tự động phát âm khi ghép chữ' },
+        { val: 'on', label: '🔊 Bật tự động phát âm khi ghép chữ (Đề xuất)' },
         { val: 'off', label: '🔇 Tắt giọng đọc tiếng Nhật' }
       ]
     }
@@ -761,7 +741,7 @@ function showAudioStudio(){
   `).join('');
 
   const presetBtnsHtml = Object.entries(presets).map(([k, p]) => `
-    <button type="button" class="audio-preset-btn ${p.map.bgm === curMap.bgm && p.map.select === curMap.select ? 'active' : ''}" data-preset-btn="${k}">
+    <button type="button" class="audio-preset-btn ${p.map.bgm === curMap.bgm && p.map.tileTap === curMap.tileTap ? 'active' : ''}" data-preset-btn="${k}">
       <strong>${p.name}</strong><br><small style="color:#5f829d;font-size:10.5px">${p.desc}</small>
     </button>
   `).join('');
@@ -770,7 +750,7 @@ function showAudioStudio(){
     <section class="kp-modal audio-studio-modal" role="dialog" aria-modal="true">
       <div class="kp-modal-title">PHÒNG THỬ ÂM THANH</div>
       <p class="audio-studio-desc">
-        Bấm nút <strong>▷ Nghe thử</strong> ở từng dòng để nghe thực tế và tự do phối ghép âm thanh cho từng chức năng theo đúng sở thích của bạn!
+        Mỗi mục có <strong>10 lựa chọn phong phú</strong>. Bấm nút <strong>▷ Nghe thử</strong> ở từng dòng để nghe thực tế và tự do phối ghép theo ý bạn!
       </p>
       <div class="audio-preset-box">
         <span class="preset-box-title">Bộ phối mẫu nhanh:</span>
