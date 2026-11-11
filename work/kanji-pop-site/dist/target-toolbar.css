@@ -24,15 +24,20 @@
  #kanji-pop#kanji-pop .target-toolbar .kp-tools{grid-column:2;grid-row:1}
 }
 @media(min-width:900px){
- #kanji-pop .target-toolbar{display:grid;grid-template-columns:minmax(0,1fr) 94px;gap:10px 8px;margin-bottom:10px}
+ #kanji-pop .target-toolbar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(8px,0.8vw,14px);margin-bottom:clamp(10px,1vh,16px)}
  #kanji-pop .target-toolbar .mission-stack,#kanji-pop .target-toolbar #mission-cards{display:contents}
  #kanji-pop .target-toolbar .mission{grid-column:1/-1;grid-row:1;margin:0}
- #kanji-pop .target-toolbar .objective-current{grid-column:1;grid-row:2;min-width:0;padding:3px 6px;gap:5px;margin:0}
- #kanji-pop .target-toolbar .objective-preview{width:40px;height:44px;flex-basis:40px;--gem-glyph-size:17px}
- #kanji-pop .target-toolbar .objective-current strong{font-size:12px}
- #kanji-pop .target-toolbar .objective-current div>span{display:none}
- #kanji-pop#kanji-pop .target-toolbar .kp-tools{grid-column:2;grid-row:2}
+ #kanji-pop .target-toolbar .objective-current{grid-column:1;grid-row:2;min-width:0;padding:clamp(4px,0.4vw,8px) clamp(6px,0.6vw,12px);gap:clamp(6px,0.6vw,10px);border-radius:14px}
+ #kanji-pop .target-toolbar .objective-preview{width:clamp(42px,2.7vw,56px);height:clamp(46px,2.9vw,60px);flex-basis:clamp(42px,2.7vw,56px);--gem-glyph-size:clamp(18px,1.2vw,24px)}
+ #kanji-pop .target-toolbar .objective-current strong{font-size:clamp(13px,0.9vw,16px)}
+ #kanji-pop .target-toolbar .objective-current div>span{display:block;font-size:clamp(10px,0.7vw,12px);opacity:.85}
+ #kanji-pop#kanji-pop .target-toolbar .kp-tools{grid-column:2;grid-row:2;gap:clamp(6px,0.6vw,10px)}
+ #kanji-pop#kanji-pop .target-toolbar .kp-tool{flex:none;width:clamp(48px,3.2vw,62px);height:clamp(50px,3.3vw,64px);min-width:clamp(48px,3.2vw,62px);min-height:clamp(50px,3.3vw,64px);font-size:clamp(11px,0.75vw,14px);border-radius:clamp(12px,0.9vw,16px);padding:clamp(3px,0.3vw,6px)}
+ #kanji-pop#kanji-pop .target-toolbar .kp-tool-icon{width:clamp(22px,1.4vw,28px);height:clamp(22px,1.4vw,28px)}
+ #kanji-pop#kanji-pop .target-toolbar .kp-tool-icon svg{width:clamp(22px,1.4vw,28px);height:clamp(22px,1.4vw,28px)}
+ #kanji-pop#kanji-pop .target-toolbar .kp-tool>span:last-child{font-size:clamp(11px,0.75vw,14px);line-height:1.2}
  #kanji-pop .target-toolbar .objective-route{grid-column:1/-1;grid-row:3}
+ #kanji-pop .target-toolbar .objective-route li{width:clamp(24px,1.6vw,34px);height:clamp(26px,1.7vw,36px);flex-basis:clamp(24px,1.6vw,34px);font-size:clamp(13px,0.9vw,17px);border-radius:8px}
  #kanji-pop .mobile-play-menu{width:min(420px,calc(100vw - 28px));padding:24px;background:var(--cream);color:var(--ink);border:3px solid #20b4eb;border-radius:24px;text-align:center}
  #kanji-pop .mobile-play-menu h2{margin:0 0 12px}
  #kanji-pop .mobile-menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
