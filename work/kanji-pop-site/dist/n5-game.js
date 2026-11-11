@@ -160,19 +160,70 @@
  }
  let mapChapter=null,mapSelected=null;
  function renderMap(){
-  const next=unlocked(),ongoing=state.status==='playing'&&(state.moves>0||state.pending)&&state.level<=next;
-  const recommended=ongoing?state.level:Math.min(next,C.levels.length-1);
-  if(mapChapter===null)mapChapter=C.levels[recommended].chapter;
-  const chapter=C.chapters[mapChapter],levels=C.levels.filter(l=>l.chapter===mapChapter),done=levels.filter(l=>profile.results[l.id]).length;
-  if(!levels.some(l=>l.id===mapSelected))mapSelected=levels.some(l=>l.id===recommended)?recommended:levels.find(l=>!profile.results[l.id])?.id??levels.at(-1).id;
-  const selectedLevel=C.levels[mapSelected],locked=mapSelected>next,resume=ongoing&&mapSelected===state.level,result=profile.results[mapSelected];
-  const action=resume?'resume':mapSelected,label=locked?'Hoàn thành chương trước':(resume?'Tiếp tục':result?'Chơi lại':'Chơi')+' màn '+String(mapSelected+1).padStart(2,'0');
-  const rows=[5,4,3,2,1],cols=[3,8,5,8,5],paths=['M35 90 C35 79 85 81 85 70','M85 70 C85 59 55 61 55 50','M55 50 C55 39 85 41 85 30','M85 30 C85 19 55 21 55 10'];
-  $('#map-screen').innerHTML=`<div class="grade-toggle-bar"><button type="button" class="grade-pill ${currentGrade==='N5'?'active':''}" data-switch-grade="N5"><span class="grade-tag">JLPT N5</span> Sơ cấp</button><button type="button" class="grade-pill ${currentGrade==='N4'?'active':''}" data-switch-grade="N4"><span class="grade-tag">JLPT N4</span> Mới ✦</button></div><div class="journey-toolbar"><span class="journey-eyebrow">HÀNH TRÌNH ${currentGrade}</span><div><button class="journey-album" data-journey-album aria-label="Album: ${profile.collected.length} trên 24 chữ"><i data-lucide="book-open" aria-hidden="true"></i><span>${profile.collected.length}<small> / 24</small></span></button><button class="journey-menu" data-journey-menu aria-label="Menu hành trình"><i data-lucide="ellipsis" aria-hidden="true"></i></button></div></div>
-  <div class="journey-layout" data-chapter="${mapChapter}"><aside class="journey-overview"><div class="journey-chapter-switch"><button data-chapter-step="-1" aria-label="Chương trước" ${mapChapter===0?'disabled':''}><i data-lucide="chevron-left" aria-hidden="true"></i></button><div><span class="journey-eyebrow">CHƯƠNG ${String(mapChapter+1).padStart(2,'0')} <span>/ 03</span></span><h1 tabindex="-1">${chapter.name}</h1></div><button data-chapter-step="1" aria-label="Chương tiếp theo" ${mapChapter===2?'disabled':''}><i data-lucide="chevron-right" aria-hidden="true"></i></button></div><p class="journey-subtitle">${chapter.subtitle}</p><div class="journey-chapter-progress" aria-label="Đã hoàn thành ${done} trên 5 màn"><span>${done}/5 màn hoàn thành</span><div aria-hidden="true">${levels.map(l=>'<i class="'+(profile.results[l.id]?'done':'')+'"></i>').join('')}</div></div><div class="journey-desktop-note"><i data-lucide="${chapter.icon}" aria-hidden="true"></i><p>Từng mảnh nhỏ.<br>Một khám phá mới.</p><span>Ghép đá, khám phá chữ và lưu lại trong album của bạn.</span></div></aside>
-  <div class="journey-constellation" role="group" aria-label="Các màn của chương ${mapChapter+1}"><div class="journey-map-aura" aria-hidden="true"></div><svg class="journey-trail" viewBox="0 0 120 100" preserveAspectRatio="none" aria-hidden="true">${paths.map((d,i)=>'<path d="'+d+'" class="'+(profile.results[levels[i].id]?'traveled':'')+'"/>').join('')}</svg>${levels.map((l,i)=>{const r=profile.results[l.id],isLocked=l.id>next,current=l.id===mapSelected;return `<button class="journey-stop ${r?'completed':''} ${current?'selected':''} ${i===4?'treasure':''}" style="--stop-row:${rows[i]};--stop-column:${cols[i]}" data-journey-level="${l.id}" ${isLocked?'disabled':''} aria-pressed="${current}" aria-label="Màn ${l.id+1}: ${l.title}${isLocked?', chưa mở khóa':r?', '+r.stars+' sao':''}"><span class="journey-stop-body"><span>${String(l.id+1).padStart(2,'0')}</span>${isLocked?'<i class="journey-lock" data-lucide="lock" aria-hidden="true"></i>':''}</span><span class="journey-stop-caption">${r?'<span class="journey-stars" aria-hidden="true">'+'★'.repeat(r.stars)+'<span>'+'★'.repeat(3-r.stars)+'</span></span>':current?'ĐANG CHỌN':i===4?'KHO BÁU':isLocked?'CHƯA MỞ':'KHÁM PHÁ'}</span></button>`;}).join('')}</div>
-  <div class="journey-launch"><div class="journey-selection" aria-live="polite"><span>${locked?'CHƯA MỞ KHÓA':selectedLevel.review?'MÀN ÔN TẬP':'SẴN SÀNG KHÁM PHÁ'}</span><h2>${selectedLevel.title}</h2><p>${locked?'Chơi tiếp lộ trình để mở khu vực này.':selectedLevel.targets.length+' chữ mục tiêu · Không giới hạn thời gian'}</p></div><button class="kp-action journey-play" data-main="${action}" ${locked?'disabled':''}><i data-lucide="${locked?'lock':'play'}" aria-hidden="true"></i>${label}</button></div></div>`;
- }
+ const next=unlocked(),ongoing=state.status==='playing'&&(state.moves>0||state.pending)&&state.level<=next;
+ const recommended=ongoing?state.level:Math.min(next,C.levels.length-1);
+ if(mapChapter===null)mapChapter=C.levels[recommended].chapter;
+ const chapter=C.chapters[mapChapter],levels=C.levels.filter(l=>l.chapter===mapChapter),done=levels.filter(l=>profile.results[l.id]).length;
+ if(!levels.some(l=>l.id===mapSelected))mapSelected=levels.some(l=>l.id===recommended)?recommended:levels.find(l=>!profile.results[l.id])?.id??levels.at(-1).id;
+ const selectedLevel=C.levels[mapSelected],locked=mapSelected>next,resume=ongoing&&mapSelected===state.level,result=profile.results[mapSelected];
+ const action=resume?'resume':mapSelected,label=locked?'Hoàn thành chương trước':(resume?'Tiếp tục':result?'Chơi lại':'Chơi')+' màn '+String(mapSelected+1).padStart(2,'0');
+ const rows=[5,4,3,2,1],cols=[3,8,5,8,5],paths=['M35 90 C35 79 85 81 85 70','M85 70 C85 59 55 61 55 50','M55 50 C55 39 85 41 85 30','M85 30 C85 19 55 21 55 10'];
+
+ // Chapter Kanji Shelf (8 characters)
+ const chapterChars=C.ids.filter(id=>C.recipes[id].chapter===mapChapter);
+ const chapterCollectedCount=chapterChars.filter(id=>profile.collected.includes(id)).length;
+ const chapterTotalStars=levels.reduce((acc,l)=>acc+(profile.results[l.id]?.stars||0),0);
+ const maxChapterStars=levels.length*3;
+
+ const shelfCards=chapterChars.map(id=>{
+  const r=C.recipes[id],known=profile.collected.includes(id),intro=C.levels.find(l=>l.newChars&&l.newChars.includes(id));
+  const lvl=intro?intro.id+1:(mapChapter*5+1);
+  return `<button type="button" class="shelf-gem-card ${known?'unlocked':'locked'}" data-kanji-preview="${id}" aria-label="${known?id+' — '+(r.hanViet||r.meaning):'Chưa mở khóa, màn '+lvl}"><span class="shelf-gem-icon" lang="ja">${known?id:'?'}</span><span class="shelf-gem-name">${known?(r.hanViet||r.meaning):'Màn '+String(lvl).padStart(2,'0')}</span></button>`;
+ }).join('');
+
+ const targetPills=selectedLevel.targets.map(ch=>{
+  const isKnown=profile.collected.includes(ch);
+  return `<span class="target-mini-pill ${isKnown?'collected':''}"><b lang="ja">${ch}</b>${isKnown?' ✓':''}</span>`;
+ }).join('');
+
+ $('#map-screen').innerHTML=`<div class="grade-toggle-bar"><button type="button" class="grade-pill ${currentGrade==='N5'?'active':''}" data-switch-grade="N5"><span class="grade-tag">JLPT N5</span> Sơ cấp</button><button type="button" class="grade-pill ${currentGrade==='N4'?'active':''}" data-switch-grade="N4"><span class="grade-tag">JLPT N4</span> Mới ✦</button></div><div class="journey-toolbar"><span class="journey-eyebrow">HÀNH TRÌNH ${currentGrade} · CHƯƠNG ${mapChapter+1}</span><div><button class="journey-album" data-journey-album aria-label="Album: ${profile.collected.length} trên 24 chữ"><i data-lucide="book-open" aria-hidden="true"></i><span>${profile.collected.length}<small> / 24</small></span></button><button class="journey-menu" data-journey-menu aria-label="Menu hành trình"><i data-lucide="ellipsis" aria-hidden="true"></i></button></div></div>
+ <div class="journey-layout" data-chapter="${mapChapter}">
+  <aside class="journey-overview">
+   <div class="journey-chapter-switch">
+    <button data-chapter-step="-1" aria-label="Chương trước" ${mapChapter===0?'disabled':''}><i data-lucide="chevron-left" aria-hidden="true"></i></button>
+    <div><span class="journey-eyebrow">CHƯƠNG ${String(mapChapter+1).padStart(2,'0')} <span>/ 03</span></span><h1 tabindex="-1">${chapter.name}</h1></div>
+    <button data-chapter-step="1" aria-label="Chương tiếp theo" ${mapChapter===2?'disabled':''}><i data-lucide="chevron-right" aria-hidden="true"></i></button>
+   </div>
+   <p class="journey-subtitle">${chapter.subtitle}</p>
+   <div class="journey-chapter-progress" aria-label="Đã hoàn thành ${done} trên 5 màn"><span>${done}/5 màn · ★ ${chapterTotalStars}/${maxChapterStars} sao</span><div aria-hidden="true">${levels.map(l=>'<i class="'+(profile.results[l.id]?'done':'')+'"></i>').join('')}</div></div>
+   
+   <div class="journey-kanji-shelf">
+    <div class="shelf-header"><span>MỤC TIÊU CHƯƠNG ${mapChapter+1}</span><span class="shelf-count-badge">${chapterCollectedCount} / 8 ĐÃ MỞ</span></div>
+    <div class="shelf-grid">${shelfCards}</div>
+    <p class="shelf-tip">🌿 Chạm thẻ đã mở để xem phát âm, bộ thủ và từ vựng.</p>
+   </div>
+
+   <div class="journey-launch">
+    <div class="journey-selection" aria-live="polite">
+     <span>${locked?'CHƯA MỞ KHÓA':selectedLevel.review?'MÀN ÔN TẬP':'SẴN SÀNG KHÁM PHÁ'}</span>
+     <h2>${selectedLevel.title}</h2>
+     <p>${locked?'Chơi tiếp lộ trình để mở khu vực này.':selectedLevel.targets.length+' chữ mục tiêu · Không giới hạn thời gian'}</p>
+     ${locked?'':`<div class="selected-targets-preview"><span>Mục tiêu màn:</span>${targetPills}</div>`}
+    </div>
+    <button class="kp-action journey-play" data-main="${action}" ${locked?'disabled':''}><i data-lucide="${locked?'lock':'play'}" aria-hidden="true"></i>${label}</button>
+   </div>
+  </aside>
+
+  <div class="journey-constellation" role="group" aria-label="Các màn của chương ${mapChapter+1}">
+   <div class="journey-map-aura" aria-hidden="true"></div>
+   <svg class="journey-trail" viewBox="0 0 120 100" preserveAspectRatio="none" aria-hidden="true">${paths.map((d,i)=>'<path d="'+d+'" class="'+(profile.results[levels[i].id]?'traveled':'')+'"/>').join('')}</svg>
+   ${levels.map((l,i)=>{
+    const r=profile.results[l.id],isLocked=l.id>next,current=l.id===mapSelected;
+    return `<div class="journey-node-base" style="--stop-row:${rows[i]};--stop-column:${cols[i]}" aria-hidden="true"></div><button class="journey-stop ${r?'completed':''} ${current?'selected':''} ${i===4?'treasure':''}" style="--stop-row:${rows[i]};--stop-column:${cols[i]}" data-journey-level="${l.id}" ${isLocked?'disabled':''} aria-pressed="${current}" aria-label="Màn ${l.id+1}: ${l.title}${isLocked?', chưa mở khóa':r?', '+r.stars+' sao':''}"><span class="journey-stop-body"><span>${String(l.id+1).padStart(2,'0')}</span>${isLocked?'<i class="journey-lock" data-lucide="lock" aria-hidden="true"></i>':''}</span><span class="journey-stop-caption">${r?'<span class="journey-stars" aria-hidden="true">'+'★'.repeat(r.stars)+'<span>'+'★'.repeat(3-r.stars)+'</span></span>':current?'ĐANG CHỌN':i===4?'KHO BÁU':isLocked?'CHƯA MỞ':'KHÁM PHÁ'}</span></button>`;
+   }).join('')}
+  </div>
+ </div>`;
+}
  function showJourneyMenu(){modalOpen('<section class="kp-modal journey-options" role="dialog" aria-modal="true"><h2>Hành trình của bạn</h2><p>24 chữ ghép tuyển chọn · 3 chương · 15 màn.<br>Đây là bộ sơ cấp tham khảo, chưa phải toàn bộ Kanji N5.</p><button class="kp-secondary" data-settings><i data-lucide="settings" aria-hidden="true"></i>Tùy chỉnh & chơi thử</button><button class="kp-secondary" data-progress><i data-lucide="save" aria-hidden="true"></i>Sao lưu tiến trình</button><button class="kp-secondary" data-about><i data-lucide="info" aria-hidden="true"></i>Bộ chữ & nguồn tham khảo</button><button class="kp-action" data-action="close">Về hành trình</button></section>','Menu hành trình');}
  function renderAlbum(){
   $('#album-screen').innerHTML=`<div class="album-head"><div class="grade-toggle-bar"><button type="button" class="grade-pill ${currentGrade==='N5'?'active':''}" data-switch-grade="N5"><span class="grade-tag">JLPT N5</span> Sơ cấp</button><button type="button" class="grade-pill ${currentGrade==='N4'?'active':''}" data-switch-grade="N4"><span class="grade-tag">JLPT N4</span> Mới ✦</button></div><span class="course-badge">BỘ SƯU TẬP ${currentGrade}</span><h1>Những chữ bạn đã gặp</h1><p><strong>${profile.collected.length}/24</strong> thẻ đã thu thập · Chạm thẻ để xem lại</p></div>`+C.chapters.map((ch,c)=>`<section class="album-group ${chaptersDone()[c]?'chapter-earned':''}" data-chapter="${c}"><h2>${c+1}. ${ch.name}</h2>${chaptersDone()[c]?'<p class="album-seal">✦ TRANG SAO · HOÀN THÀNH CHƯƠNG</p>':''}<div class="album-grid">`+C.ids.filter(id=>C.recipes[id].chapter===c).map(id=>{const r=C.recipes[id],known=profile.collected.includes(id),intro=C.levels.find(l=>l.newChars.includes(id));return `<button class="album-card" data-card="${id}" ${known?'':'disabled'} aria-label="${known?id+' — '+r.meaning:'Chưa khám phá, màn '+(intro.id+1)}"><strong lang="ja">${known?id:'?'}</strong><span>${known?r.meaning:'Chưa khám phá'}</span><small>${known?(X.data.reviewed[id]?'ĐÃ ÔN · '+X.data.reviewed[id]+' LẦN':'ĐÃ KHÁM PHÁ'):'Mốc luyện: màn '+(intro.id+1)}</small></button>`;}).join('')+'</div></section>').join('')+rewardsMarkup()+'<p class="scope-note">Bạn có thể khám phá chữ trước mốc luyện tập. Đã ôn ghi nhận lần gặp lại, không khẳng định đã thuộc.<br>Thu thập ghi nhận chữ bạn đã khám phá. Chơi lại các màn ôn để luyện nhớ cấu tạo và nghĩa.</p>';
@@ -190,7 +241,7 @@
   $('#kp-points').textContent=state.score;$('#moves').textContent=state.moves;$('#pair-count').textContent=state.matches;$('#free-spaces').textContent=state.board.filter(x=>x===null).length;
   $('#slide-board').style.setProperty('--rows',state.rows);$('#slide-board').style.setProperty('--cols',state.cols);$('#slide-board').dataset.cols=state.cols;$('#slide-board').classList.toggle('tall',state.rows>=5);$('.kp-board-tab').textContent='GHÉP CHỮ · '+state.cols+' × '+state.rows;
   const b=$('#kp-sound');b.setAttribute('aria-pressed',String(sound));b.setAttribute('aria-label',sound?'Tắt âm thanh':'Bật âm thanh');b.innerHTML=`<i data-lucide="${sound?'volume-2':'volume-x'}" aria-hidden="true"></i>`;
-  A?.setEnabled(sound);A?.setBgm(sound&&view==='play');
+  A?.setEnabled(sound);A?.setBgm(sound&&(view==='play'||view==='map'));
   if(view==='map')renderMap();if(view==='album')renderAlbum();draw();controls();icons();requestAnimationFrame(()=>{syncSummaryHeight();fitMobileBoard();});
  }
  function alignDeviceLayout(){
@@ -374,7 +425,51 @@
  $('#hint').addEventListener('click',showHint);$('#help').addEventListener('click',showMobileMenu);$('#kp-home').addEventListener('click',()=>changeView('map'));
  $('#nav-map').addEventListener('click',()=>changeView('map'));$('#nav-album').addEventListener('click',()=>changeView('album'));$('#nav-play').addEventListener('click',()=>changeView('play'));
  $('#kp-sound').addEventListener('click',()=>{sound=!sound;save();render();if(sound)A?.hint();});
- $('#map-screen').addEventListener('click',e=>{if(busy)return;const chapterButton=e.target.closest('[data-chapter-step]');if(chapterButton&&!chapterButton.disabled){mapChapter=Math.max(0,Math.min(2,mapChapter+Number(chapterButton.dataset.chapterStep)));mapSelected=null;renderMap();icons();$('#map-screen h1').focus({preventScroll:true});return;}const node=e.target.closest('[data-journey-level]');if(node&&!node.disabled){mapSelected=Number(node.dataset.journeyLevel);renderMap();icons();$('#map-screen [data-journey-level="'+mapSelected+'"]').focus({preventScroll:true});return;}if(e.target.closest('[data-journey-album]')){changeView('album');return;}if(e.target.closest('[data-journey-menu]')){showJourneyMenu();return;}const button=e.target.closest('[data-main]');if(button&&!button.disabled){const main=button.dataset.main;if(main==='resume')changeView('play');else if(main==='album')changeView('album');else startLevel(Number(main));}});
+ $('#map-screen').addEventListener('click',e=>{
+  if(busy)return;
+  const prev=e.target.closest('[data-kanji-preview]');
+  if(prev){
+   A?.select();
+   const id=prev.dataset.kanjiPreview;
+   const r=C.recipes[id];
+   if(r&&profile.collected.includes(id)){
+    modalOpen(`<section class="kp-modal reveal-modal" role="dialog" aria-modal="true"><div class="kp-modal-title">THẺ KANJI ĐÃ THU THẬP</div>${revealBody(r)}<button class="kp-action" data-action="close">Về hành trình</button></section>`,r.id+' — '+(r.hanViet||r.meaning));
+   }else if(r){
+    const intro=C.levels.find(l=>l.newChars&&l.newChars.includes(id));
+    say('Chữ '+id+' ('+(r.hanViet||r.meaning)+') sẽ xuất hiện tại Màn '+(intro?intro.id+1:'?')+'. Hãy chơi màn để mở khóa!');
+    A?.hint();
+   }
+   return;
+  }
+  const chapterButton=e.target.closest('[data-chapter-step]');
+  if(chapterButton&&!chapterButton.disabled){
+   A?.select();
+   mapChapter=Math.max(0,Math.min(2,mapChapter+Number(chapterButton.dataset.chapterStep)));
+   mapSelected=null;
+   renderMap();icons();
+   $('#map-screen h1').focus({preventScroll:true});
+   return;
+  }
+  const node=e.target.closest('[data-journey-level]');
+  if(node&&!node.disabled){
+   A?.select();
+   mapSelected=Number(node.dataset.journeyLevel);
+   renderMap();icons();
+   $('#map-screen [data-journey-level="'+mapSelected+'"]').focus({preventScroll:true});
+   return;
+  }
+  if(e.target.closest('[data-journey-album]')){A?.select();changeView('album');return;}
+  if(e.target.closest('[data-journey-menu]')){A?.select();showJourneyMenu();return;}
+  const button=e.target.closest('[data-main]');
+  if(button&&!button.disabled){
+   A?.select();
+   const main=button.dataset.main;
+   if(main==='resume')changeView('play');
+   else if(main==='album')changeView('album');
+   else startLevel(Number(main));
+   return;
+  }
+ });
  $('#album-screen').addEventListener('click',e=>{const b=e.target.closest('[data-card]');if(!b||b.disabled)return;const r=C.recipes[b.dataset.card];modalOpen(`<section class="kp-modal reveal-modal" role="dialog" aria-modal="true"><div class="kp-modal-title">THẺ ĐÃ THU THẬP</div>${revealBody(r)}<button class="kp-action" data-action="close">Về album</button></section>`,r.id+' — '+r.meaning);});
  $('#modal').addEventListener('click',e=>{if(e.target.closest('[data-mobile-help]')){showHelp();return;}if(e.target.closest('[data-mobile-restart]')){startLevel(state.level);return;}const a=e.target.closest('[data-action]')?.dataset.action;if(a==='begin-level')beginLevel();if(a==='continue')continueGame();if(a==='next')startLevel(state.level+1);if(a==='map')changeView('map');if(a==='album')changeView('album');if(a==='close')closeModal();});
  const board=$('#slide-board');
