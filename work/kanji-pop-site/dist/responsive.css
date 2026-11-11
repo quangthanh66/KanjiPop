@@ -116,8 +116,8 @@
  #kanji-pop .level-node>small{margin-top:7px;font-size:10px}
  #kanji-pop #map-screen>.scope-note{grid-column:1/-1;font-size:11px;margin:3px 0 -10px}
  #kanji-pop #map-screen>.scope-link{grid-column:1/-1;min-height:34px;font-size:11px}
- #kanji-pop #play-screen{display:grid;grid-template-columns:clamp(280px,21vw,420px) minmax(0,1fr);column-gap:clamp(24px,3vw,56px);align-items:start;align-content:center;max-width:min(2100px,calc(100vw - 32px));padding-top:0}
- #kanji-pop .play-summary{display:block;background:#e4f9ffad;border:2px solid #ffffffb3;border-radius:clamp(24px,1.8vw,32px);padding:clamp(18px,1.6vw,28px);margin:0;align-self:start}
+ #kanji-pop #play-screen{display:flex;justify-content:center;align-items:start;gap:clamp(16px,1.8vw,30px);width:100%;max-width:100%;padding-top:0;margin:0 auto}
+ #kanji-pop .play-summary{flex:0 0 clamp(280px,21vw,420px);width:clamp(280px,21vw,420px);max-width:100%;box-sizing:border-box;display:block;background:#e4f9ffad;border:2px solid #ffffffb3;border-radius:clamp(24px,1.8vw,32px);padding:clamp(18px,1.6vw,28px);margin:0;align-self:start}
  #kanji-pop .play-summary .kp-level{margin:0 0 clamp(16px,1.8vh,26px);gap:10px}
  #kanji-pop .kp-ribbon{padding:clamp(6px,0.6vh,9px) clamp(16px,1.1vw,22px);font-size:clamp(17px,1.1vw,22px);border-radius:12px}
  #kanji-pop .kp-pill{min-height:clamp(34px,2.2vw,42px);font-size:clamp(16px,1vw,20px);padding:3px clamp(12px,0.9vw,18px)}
@@ -136,8 +136,8 @@
  #kanji-pop .desktop-guide progress{height:clamp(11px,0.8vh,15px)}
  #kanji-pop .desktop-guide .desktop-tip{font-size:clamp(11px,0.8vw,14px);margin-bottom:0;line-height:1.5;display:flex;gap:8px;align-items:flex-start}
  #kanji-pop .desktop-tip svg{width:clamp(18px,1.1vw,22px);height:clamp(18px,1.1vw,22px);flex:none}
- #kanji-pop .play-stage{width:100%;max-width:clamp(680px,calc((100dvh - 230px) * 1.4 + 32px),1600px);justify-self:center;align-self:start;min-width:0;margin-top:0;display:flex;flex-direction:column;align-items:center}
- #kanji-pop .slide-panel{width:fit-content;max-width:100%;box-sizing:border-box;padding:clamp(16px,1.8vh,24px) 16px 10px;border-radius:30px;margin-top:0;display:flex;flex-direction:column;align-items:center}
+ #kanji-pop .play-stage{flex:0 1 auto;width:auto;max-width:clamp(680px,calc((100dvh - 230px) * 1.4 + 32px),1600px);justify-self:start;align-self:start;min-width:0;margin:0;display:flex;flex-direction:column;align-items:center}
+ #kanji-pop .slide-panel{width:fit-content;max-width:100%;box-sizing:border-box;padding:clamp(16px,1.8vh,24px) 16px 10px;border-radius:30px;margin:0;display:flex;flex-direction:column;align-items:center}
  #kanji-pop#kanji-pop .slide-board,#kanji-pop#kanji-pop .slide-board.tall{--board-max-h:clamp(350px,calc(100dvh - clamp(270px,calc(200px + 6vh),290px)),min(72vh,1040px));width:calc(var(--board-max-h) * var(--cols,7) / var(--rows,5))!important;max-width:100%!important;aspect-ratio:var(--cols,7)/var(--rows,5)!important;height:auto!important;min-height:0!important}
  #kanji-pop .board-tile{font-size:clamp(36px,3.5vw,50px);border-radius:14px}
  #kanji-pop .board-tile .part-glyph{width:51px;height:54px}
@@ -180,7 +180,8 @@
  #kanji-pop .chapter-count{font-size:9px}
  #kanji-pop .level-node>span{width:42px;height:44px}
  #kanji-pop .level-path{gap:2px}
- #kanji-pop #play-screen{grid-template-columns:280px minmax(0,1fr);gap:30px}
+ #kanji-pop #play-screen{gap:clamp(14px,1.6vw,20px)}
+ #kanji-pop .play-summary{flex:0 0 280px;width:280px}
  #kanji-pop .play-summary{padding:18px}
 }
 @media(min-width:900px) and (max-height:740px){
@@ -276,10 +277,10 @@
 /* Rebalance the wider PC composition around the enlarged board. */
 @media(min-width:900px){
  #kanji-pop[data-view="play"]{row-gap:clamp(10px,1.5vh,18px);align-content:center}
- #kanji-pop #play-screen{max-width:min(2100px,calc(100vw - 32px));grid-template-columns:clamp(280px,21vw,420px) minmax(0,1fr);column-gap:clamp(24px,3vw,56px);align-items:start;align-content:center;padding-top:0}
- #kanji-pop .play-stage{width:100%;max-width:clamp(680px,calc((100dvh - 230px) * 1.4 + 32px),1600px);justify-self:center;align-self:start;display:flex;flex-direction:column;align-items:center}
- #kanji-pop .slide-panel{width:fit-content;max-width:100%;box-sizing:border-box;padding:clamp(16px,1.8vh,24px) 16px 10px;border-radius:30px;display:flex;flex-direction:column;align-items:center;margin:0 auto}
- #kanji-pop .play-summary{align-self:start;padding:24px}
+ #kanji-pop #play-screen{display:flex;justify-content:center;align-items:start;gap:clamp(16px,1.8vw,30px);width:100%;max-width:100%;padding-top:0;margin:0 auto}
+ #kanji-pop .play-stage{flex:0 1 auto;width:auto;max-width:clamp(680px,calc((100dvh - 230px) * 1.4 + 32px),1600px);justify-self:start;align-self:start;display:flex;flex-direction:column;align-items:center;margin:0}
+ #kanji-pop .slide-panel{width:fit-content;max-width:100%;box-sizing:border-box;padding:clamp(16px,1.8vh,24px) 16px 10px;border-radius:30px;display:flex;flex-direction:column;align-items:center;margin:0}
+ #kanji-pop .play-summary{flex:0 0 clamp(280px,21vw,420px);width:clamp(280px,21vw,420px);max-width:100%;box-sizing:border-box;align-self:start;padding:24px}
  #kanji-pop #mission-cards{gap:10px}
  #kanji-pop .mission-card{width:42px;height:46px;font-size:23px}
  #kanji-pop .board-info{font-size:clamp(13px,0.9vw,17px);min-height:clamp(42px,3.6vh,52px)}
@@ -303,8 +304,8 @@
  #kanji-pop .kp-tool-icon{width:68px;height:60px;border-radius:20px}
  #kanji-pop .kp-tool-icon svg{width:28px;height:28px}
  #kanji-pop .play-summary{padding:26px}
- #kanji-pop .desktop-guide h2{font-size:31px}
- #kanji-pop .desktop-guide p{font-size:14px}
+ #kanji-pop .desktop-guide h2{font-size:clamp(22px,1.6vw,31px);margin:clamp(8px,1vh,14px) 0 clamp(4px,0.6vh,8px)}
+ #kanji-pop .desktop-guide p{font-size:clamp(12px,0.85vw,14px);margin:0 0 clamp(8px,1vh,14px)}
 }
 
 /* Directional prompts appear only when a selected block has multiple legal moves. */

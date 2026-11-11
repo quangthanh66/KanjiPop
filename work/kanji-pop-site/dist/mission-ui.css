@@ -18,8 +18,10 @@
  #kanji-pop .play-summary .mission{margin-bottom:10px}
  #kanji-pop .play-summary .kp-level{margin-bottom:16px}
  #kanji-pop .desktop-guide{padding-top:12px}
- #kanji-pop .desktop-guide h2,#kanji-pop .desktop-guide>p,#kanji-pop .desktop-guide .course-badge{display:none}
  #kanji-pop .desktop-guide .journey-progress{margin-bottom:10px}
+}
+@media(min-width:900px) and (max-height:849px){
+ #kanji-pop .desktop-guide h2,#kanji-pop .desktop-guide>p,#kanji-pop .desktop-guide .course-badge{display:none}
 }
 @media(max-width:899px){
  #kanji-pop .play-summary{grid-template-columns:minmax(0,1fr);gap:4px;margin-bottom:17px}
