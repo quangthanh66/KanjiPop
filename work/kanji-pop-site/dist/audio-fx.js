@@ -497,5 +497,34 @@
   else if(enabled && bgmActive)scheduleBgm();
  });
 
- window.KanjiAudio={setEnabled, setBgm, select, invalid, slide, contact, fusion, win, hint, haptic, setSoundProfile, getSoundProfile};
+ 
+ let voiceEnabled = true;
+ function setVoiceEnabled(flag){ voiceEnabled = !!flag; }
+ function isVoiceEnabled(){ return voiceEnabled; }
+
+ function speak(text, lang = 'ja-JP'){
+  if(!voiceEnabled || !text || typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+  try {
+   window.speechSynthesis.cancel();
+   const u = new SpeechSynthesisUtterance(text);
+   u.lang = lang;
+   u.rate = 0.88; // Calm, clear, chill pronunciation
+   u.pitch = 1.02;
+   u.volume = 0.95;
+   const voices = window.speechSynthesis.getVoices();
+   const ja = voices.find(v => v.lang === 'ja-JP' || v.lang === 'ja_JP' || (v.lang && v.lang.startsWith('ja')));
+   if(ja) u.voice = ja;
+   window.speechSynthesis.speak(u);
+  } catch(e) {
+   console.warn('SpeechSynthesis error:', e);
+  }
+ }
+
+ if(typeof window !== 'undefined' && 'speechSynthesis' in window) {
+  window.speechSynthesis.onvoiceschanged = () => {
+   try { window.speechSynthesis.getVoices(); } catch(e) {}
+  };
+ }
+
+ window.KanjiAudio={setEnabled, setBgm, select, invalid, slide, contact, fusion, win, hint, haptic, setSoundProfile, getSoundProfile, speak, setVoiceEnabled, isVoiceEnabled};
 })();

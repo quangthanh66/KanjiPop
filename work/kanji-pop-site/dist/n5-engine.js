@@ -1,6 +1,7 @@
 (function(host){
  'use strict';
- const C=host.KanjiCourse||(typeof require!=='undefined'?require('./n5-data.js'):null),COLS=3;
+ let C=host.KanjiCourse||(typeof require!=='undefined'?require('./n5-data.js'):null); const COLS=3;
+ function setCourse(newCourse){ if(newCourse){ C=newCourse; if(host.KanjiN5)host.KanjiN5.C=newCourse; } }
  const directions=['left','right','up','down'],clone=x=>JSON.parse(JSON.stringify(x));
  function destination(at,dir,rows=5,cols=3){if(!Number.isInteger(at)||at<0||at>=rows*cols||!directions.includes(dir))return -1;const r=Math.floor(at/cols),c=at%cols;if(dir==='left'&&!c||dir==='right'&&c===cols-1||dir==='up'&&!r||dir==='down'&&r===rows-1)return -1;return at+{left:-1,right:1,up:-cols,down:cols}[dir];}
  const neighbors=(at,rows,cols=3)=>directions.map(d=>destination(at,d,rows,cols)).filter(i=>i>=0);
@@ -294,6 +295,6 @@
    return true;
   }catch{return false;}
  }
- host.KanjiN5={C,COLS,directions,clone,destination,neighbors,distance,walkDistance:(s,a,b)=>distance(a,b,s.cols),hasContact,fresh,layoutFor,reorient,upgrade,legalDirections,directionToBlank,complete,currentTarget,targetAnchor,move,resume,hint,valid};if(typeof module!=='undefined')module.exports=host.KanjiN5;
+ host.KanjiN5={C,COLS,directions,clone,destination,neighbors,distance,walkDistance:(s,a,b)=>distance(a,b,s.cols),hasContact,fresh,layoutFor,reorient,upgrade,legalDirections,directionToBlank,complete,currentTarget,targetAnchor,move,resume,hint,valid,setCourse};if(typeof module!=='undefined')module.exports=host.KanjiN5;
 })(globalThis);
 
