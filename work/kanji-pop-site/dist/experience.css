@@ -63,5 +63,4 @@
 #kanji-pop .reward-shelf{grid-column:1/-1}
 #kanji-pop .album-group.chapter-earned{background:linear-gradient(140deg,#fff6dacc,#eefaffb8);border:2px solid #fff3ab;border-radius:22px;padding:16px}
 #kanji-pop .album-seal{font-size:10px;font-weight:900;letter-spacing:.4px;color:#876118;margin:-7px 0 13px}
-@media(min-width:900px){#kanji-pop .play-stage{width:min(100%,1040px,max(620px,calc((100dvh - 200px)*1.4 + 28px)))} }
 @media(max-width:899px){#kanji-pop .play-stage{width:min(100%,max(240px,calc((100dvh - 435px)*.8)));margin-inline:auto}#kanji-pop .play-objective{line-height:1.25}#kanji-pop #coach{gap:4px;font-size:10px;line-height:1.35}}
