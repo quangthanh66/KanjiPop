@@ -1,135 +1,146 @@
-/* Studio-grade Acoustic Slate Stone & Chill Zen-Pop Audio Engine.
-   Physical modeling of acoustic slate stones (Go/Mahjong/Pebbles),
-   tuned Lithophone stone chimes, wooden marimba, and peaceful chill BGM. */
+/* Studio-grade Dual-Style Audio Engine for Kanji Pop.
+   Physical modeling of Sparkling Gemstones & Acoustic Slate Stones
+   Dual BGM: 126 BPM Joyful Japanese Pop Groove + 118 BPM Zen Lithophone Chill
+   Full TTS Japanese Speech Synthesis integration. */
 (()=>{
  'use strict';
  let ctx=null,master=null,sfxBus=null,bgmBus=null,bgmTimer=0,enabled=false,bgmActive=false,bgmStep=0;
  const gemBuffers={};
 
- // -------------------------------------------------------------
- // 1. PHYSICAL ACOUSTIC SYNTHESIS ENGINES
- // -------------------------------------------------------------
-
- // Physical acoustic synthesis of dense polished slate stone (Go / Mahjong / River stone):
- // Warm fundamental body resonance (450-620Hz) with rapid physical damping, zero glass/metallic ring.
- function renderAcousticStone(c, f0=520, dur=0.10, isSettle=true, dampingMult=1.0){
-  const sr=c.sampleRate, len=Math.floor(sr*dur), buf=c.createBuffer(2, len, sr);
-  const left=buf.getChannelData(0), right=buf.getChannelData(1);
-  const dMult = dampingMult * (isSettle ? 1.25 : 1.0);
-  const modes=[
-   {r:1.00, a:1.00, d:46.0 * dMult}, // Fundamental stone body resonance
-   {r:1.46, a:0.42, d:62.0 * dMult}, // Stone shear mode
-   {r:2.08, a:0.20, d:95.0 * dMult}, // Surface edge mode
-   {r:0.58, a:0.55, d:52.0 * dMult}  // Solid board / table sub-thud
-  ];
-  for(let ch=0; ch<2; ch++){
-   const panPhase = ch === 0 ? 0 : 0.0004;
-   for(let i=0; i<len; i++){
-    const t=i/sr;
-    // Rounded 1.8ms physical contact wavefront (prevents harsh/piercing click)
-    const imp = t < 0.0018 ? Math.sin(Math.PI * t / 0.0018) * 0.32 : 0;
-    let s = imp;
-    for(let m=0; m<modes.length; m++){
-     const f = f0 * modes[m].r;
-     const env = Math.exp(-t * modes[m].d);
-     s += Math.sin(2 * Math.PI * f * (t + panPhase)) * modes[m].a * env;
-    }
-    const out = Math.tanh(s * 0.52);
-    if(ch===0) left[i]=out; else right[i]=out;
-   }
-  }
-  return buf;
- }
-
- // Double stone click (two polished stones kissing and settling together)
- function renderAcousticStoneDouble(c, f0=500, dur=0.14){
-  const sr=c.sampleRate, len=Math.floor(sr*dur), buf=c.createBuffer(2, len, sr);
-  const left=buf.getChannelData(0), right=buf.getChannelData(1);
-  for(let ch=0; ch<2; ch++){
-   const panPhase = ch === 0 ? 0 : 0.0005;
-   for(let i=0; i<len; i++){
-    const t=i/sr;
-    // First strike at t=0
-    const imp1 = t < 0.0016 ? Math.sin(Math.PI * t / 0.0016) * 0.28 : 0;
-    let s = imp1;
-    const f1 = f0;
-    s += Math.sin(2 * Math.PI * f1 * (t + panPhase)) * Math.exp(-t * 50);
-    s += Math.sin(2 * Math.PI * f1 * 1.46 * (t + panPhase)) * 0.35 * Math.exp(-t * 70);
-    s += Math.sin(2 * Math.PI * f1 * 0.58 * (t + panPhase)) * 0.45 * Math.exp(-t * 55);
-
-    // Second settle strike at t=0.024s (higher pitch, settling stone)
-    if(t > 0.024){
-     const t2 = t - 0.024;
-     const imp2 = t2 < 0.0014 ? Math.sin(Math.PI * t2 / 0.0014) * 0.24 : 0;
-     const f2 = f0 * 1.18;
-     s += imp2;
-     s += Math.sin(2 * Math.PI * f2 * (t2 - panPhase)) * 0.75 * Math.exp(-t2 * 60);
-     s += Math.sin(2 * Math.PI * f2 * 1.46 * (t2 - panPhase)) * 0.25 * Math.exp(-t2 * 85);
-    }
-    const out = Math.tanh(s * 0.50);
-    if(ch===0) left[i]=out; else right[i]=out;
-   }
-  }
-  return buf;
- }
-
- // Tuned Lithophone / Stone Chime Bar (Vietnamese Đàn Đá / Japanese temple stone chime):
- // Pure, tranquil, warm stone bar bell tone.
- function renderStoneChime(c, f0, dur=0.55){
-  const sr=c.sampleRate, len=Math.floor(sr*dur), buf=c.createBuffer(2, len, sr);
-  const left=buf.getChannelData(0), right=buf.getChannelData(1);
-  const modes=[
-   {r:1.00, a:1.00, d:7.5},  // Fundamental tuned stone chime
-   {r:1.48, a:0.32, d:14.0}, // Lithophone bar shear mode
-   {r:2.76, a:0.18, d:22.0}, // Upper chime sparkle
-   {r:0.50, a:0.15, d:12.0}  // Soft mallet strike undertone
-  ];
-  for(let ch=0; ch<2; ch++){
-   const panPhase = ch === 0 ? 0 : 0.0006;
-   for(let i=0; i<len; i++){
-    const t=i/sr;
-    const imp = t < 0.002 ? Math.sin(Math.PI * t / 0.002) * 0.22 : 0;
-    let s = imp;
-    for(let m=0; m<modes.length; m++){
-     const f = f0 * modes[m].r;
-     const env = Math.exp(-t * modes[m].d);
-     s += Math.sin(2 * Math.PI * f * (t + panPhase)) * modes[m].a * env;
-    }
-    const out = Math.tanh(s * 0.45);
-    if(ch===0) left[i]=out; else right[i]=out;
-   }
-  }
-  return buf;
- }
-
  let soundProfile = (()=>{
-  try{ return localStorage.getItem('kanji-pop-sound-profile') || 'tile'; }catch{ return 'tile'; }
+  try{ return localStorage.getItem('kanji-pop-sound-profile') || 'gem'; }catch{ return 'gem'; }
  })();
 
+ let bgmStyle = (()=>{
+  try{ return localStorage.getItem('kp-bgm-style') || 'pop'; }catch{ return 'pop'; }
+ })();
+
+ let voiceEnabled = (()=>{
+  try{ return localStorage.getItem('kp-voice-enabled') !== 'false'; }catch{ return true; }
+ })();
+
+ /* Synthesis: High-frequency Sparkling Resonant Modal Gemstone / Crystal */
+ function renderCrystalSample(c, f0, dur, sparkle=1, double=false){
+  const sr=c.sampleRate, len=Math.floor(sr*dur), buf=c.createBuffer(2, len, sr);
+  const left=buf.getChannelData(0), right=buf.getChannelData(1);
+  const modes=[
+   {r:1.000, a:1.00, d:12.0},
+   {r:1.583, a:0.65*sparkle, d:26.0},
+   {r:2.241, a:0.45*sparkle, d:42.0},
+   {r:3.125, a:0.28*sparkle, d:68.0},
+   {r:4.820, a:0.16*sparkle, d:110.0}
+  ];
+  for(let i=0; i<len; i++){
+   const t=i/sr;
+   let s=0;
+   for(let m=0; m<modes.length; m++){
+    const md=modes[m];
+    s += md.a * Math.sin(2*Math.PI * f0 * md.r * t) * Math.exp(-md.d * t);
+   }
+   if(double && t > 0.038){
+    const t2 = t - 0.038;
+    for(let m=0; m<modes.length; m++){
+     const md=modes[m];
+     s += 0.55 * md.a * Math.sin(2*Math.PI * f0 * 1.12 * md.r * t2) * Math.exp(-md.d * 1.3 * t2);
+    }
+   }
+   const noise = (Math.random()*2 - 1) * Math.exp(-180.0 * t) * 0.12;
+   const env = Math.min(1.0, t/0.0015);
+   const val = (s + noise) * env * 0.42;
+   left[i] = val * 0.98;
+   right[i] = val * 1.02;
+  }
+  return buf;
+ }
+
+ /* Synthesis: Acoustic Slate Stone Physics (Mahjong / Go Stone / Slate Tile) */
+ function renderAcousticStone(c, f0, dur, double=false, damping=1.0){
+  const sr=c.sampleRate, len=Math.floor(sr*dur), buf=c.createBuffer(2, len, sr);
+  const left=buf.getChannelData(0), right=buf.getChannelData(1);
+  const modes=[
+   {r:1.00, a:1.00, d:34.0*damping},
+   {r:1.46, a:0.75, d:58.0*damping},
+   {r:2.18, a:0.45, d:92.0*damping},
+   {r:3.22, a:0.25, d:140.0*damping},
+   {r:4.60, a:0.12, d:210.0*damping}
+  ];
+  for(let i=0; i<len; i++){
+   const t=i/sr;
+   let s=0;
+   for(let m=0; m<modes.length; m++){
+    const md=modes[m];
+    s += md.a * Math.sin(2*Math.PI * f0 * md.r * t) * Math.exp(-md.d * t);
+   }
+   if(double && t > 0.024){
+    const t2 = t - 0.024;
+    for(let m=0; m<modes.length; m++){
+     const md=modes[m];
+     s += 0.52 * md.a * Math.sin(2*Math.PI * f0 * 1.06 * md.r * t2) * Math.exp(-md.d * 1.2 * t2);
+    }
+   }
+   const impactNoise = (Math.random()*2 - 1) * Math.exp(-420.0 * t) * 0.48;
+   const env = Math.min(1.0, t/0.001);
+   const val = (s * 0.55 + impactNoise) * env * 0.60;
+   left[i] = val;
+   right[i] = val;
+  }
+  return buf;
+ }
+
+ function renderAcousticStoneDouble(c, f0, dur){
+  return renderAcousticStone(c, f0, dur, true, 1.15);
+ }
+
+ function renderStoneChime(c, f0, dur){
+  const sr=c.sampleRate, len=Math.floor(sr*dur), buf=c.createBuffer(2, len, sr);
+  const left=buf.getChannelData(0), right=buf.getChannelData(1);
+  const modes=[
+   {r:1.00, a:1.00, d:7.5},
+   {r:1.46, a:0.55, d:14.0},
+   {r:2.72, a:0.25, d:32.0},
+   {r:4.25, a:0.10, d:65.0}
+  ];
+  for(let i=0; i<len; i++){
+   const t=i/sr;
+   let s=0;
+   for(let m=0; m<modes.length; m++){
+    const md=modes[m];
+    s += md.a * Math.sin(2*Math.PI * f0 * md.r * t) * Math.exp(-md.d * t);
+   }
+   const impact = (Math.random()*2 - 1) * Math.exp(-350.0 * t) * 0.18;
+   const env = Math.min(1.0, t/0.002);
+   const val = (s * 0.75 + impact) * env * 0.45;
+   left[i] = val;
+   right[i] = val;
+  }
+  return buf;
+ }
+
  function buildGemLibrary(c){
-  // All default sound buffers synthesized with acoustic slate stone physics:
+  gemBuffers.gem = [renderCrystalSample(c, 1760.00, 0.22, 0.85, false)];
+  gemBuffers.crystal = [renderCrystalSample(c, 2489.02, 0.18, 1.1, false)];
   gemBuffers.tile = [renderAcousticStone(c, 520, 0.09, true)];
   gemBuffers.stone = [renderAcousticStone(c, 540, 0.08, true)];
   gemBuffers.soft = [renderAcousticStone(c, 460, 0.10, true)];
-  gemBuffers.select = [renderAcousticStone(c, 580, 0.065, true, 1.2)]; // Crisp snappy tap
-  gemBuffers.slide = [renderAcousticStone(c, 520, 0.09, true)]; // The exact beloved stone slide
+  gemBuffers.select = [renderAcousticStone(c, 580, 0.065, true, 1.2)];
+  gemBuffers.slide = [renderAcousticStone(c, 520, 0.09, true)];
   gemBuffers.match = [renderAcousticStone(c, 480, 0.11, false)];
-  gemBuffers.contact = [renderAcousticStoneDouble(c, 510, 0.13)]; // Two stones clicking together
-  gemBuffers.invalid = [renderAcousticStone(c, 290, 0.08, true, 1.6)]; // Soft low-pitched muted bump
-  gemBuffers.hint = [renderStoneChime(c, 520, 0.35)]; // Gentle stone chime harmonic
-  gemBuffers.sparkle = [renderStoneChime(c, 784, 0.25)];
+  gemBuffers.contact = [renderCrystalSample(c, 1567.98, 0.36, 1.1, true), renderAcousticStoneDouble(c, 510, 0.13)];
+  gemBuffers.invalid = [renderAcousticStone(c, 290, 0.08, true, 1.6)];
+  gemBuffers.hint = [renderCrystalSample(c, 2400.00, 0.22, 0.9, true), renderStoneChime(c, 520, 0.35)];
+  gemBuffers.sparkle = [renderCrystalSample(c, 2093.00, 0.20, 0.8, false)];
 
-  // Asynchronously load real recorded acoustic stone & tile Foley audio samples
+  // Foley samples fallback loader
   const samplePacks = {
-   tile: ['audio/tile_slide.mp3', 'audio/stone_slide.ogg'],
-   slide: ['audio/tile_slide.mp3', 'audio/stone_slide.ogg'],
-   select: ['audio/stone_tap.ogg', 'audio/go_stone_1.mp3', 'audio/go_stone_2.mp3'],
+   tile: ['audio/tile_slide.mp3'],
+   gem: ['audio/gem_clink.ogg', 'audio/gem_contact.ogg', 'audio/glass_3.ogg'],
    stone: ['audio/go_stone_1.mp3', 'audio/go_stone_2.mp3', 'audio/go_stone_3.mp3'],
-   match: ['audio/stone_match.ogg', 'audio/go_stone_3.mp3', 'audio/go_stone_4.mp3'],
-   contact: ['audio/stone_tap.ogg', 'audio/go_stone_2.mp3', 'audio/go_stone_1.mp3'],
+   select: ['audio/tile_slide.mp3', 'audio/gem_clink.ogg', 'audio/go_stone_1.mp3'],
+   match: ['audio/go_stone_0.mp3', 'audio/go_stone_4.mp3', 'audio/gem_contact.ogg'],
+   contact: ['audio/go_capture_0.mp3', 'audio/gem_clink.ogg'],
    invalid: ['audio/go_stone_0.mp3'],
-   hint: ['audio/plate_1.ogg', 'audio/plate_3.ogg'],
-   sparkle: ['audio/stone_tap.ogg', 'audio/plate_1.ogg']
+   hint: ['audio/bell_1.ogg', 'audio/gem_clink.ogg'],
+   sparkle: ['audio/gem_contact.ogg', 'audio/glass_1.ogg']
   };
 
   const loadedPacks = {};
@@ -147,183 +158,176 @@
  }
 
  function ensure(){
-  if(!enabled)return null;
-  try{
-   if(!ctx){
-    const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;
-    ctx=new AC();
-
-    // Master bus with gentle limiter
-    const comp=ctx.createDynamicsCompressor();
-    comp.threshold.value=-8;comp.knee.value=12;comp.ratio.value=3.0;comp.attack.value=.002;comp.release.value=.15;
-    master=ctx.createGain();master.gain.value=0.96;
-
-    // SFX bus: Warm, natural acoustic response
-    const sfxFilter=ctx.createBiquadFilter();sfxFilter.type='lowpass';sfxFilter.frequency.value=5600;
-    sfxBus=ctx.createGain();sfxBus.gain.value=0.92;
-    sfxBus.connect(sfxFilter);sfxFilter.connect(comp);
-
-    // BGM bus: Master volume boosted from 0.19 to 0.56, pleasant warm 3800Hz lowpass for cozy ambiance
-    const bgmFilter=ctx.createBiquadFilter();bgmFilter.type='lowpass';bgmFilter.frequency.value=3800;
-    bgmBus=ctx.createGain();bgmBus.gain.value=0.56;
-    bgmBus.connect(bgmFilter);bgmFilter.connect(comp);
-
-    comp.connect(master);master.connect(ctx.destination);
-    buildGemLibrary(ctx);
-   }
-   if(ctx.state==='suspended')ctx.resume();
-   return ctx;
-  }catch{return null;}
+  if(ctx) return ctx;
+  const AC = window.AudioContext || window.webkitAudioContext;
+  if(!AC) return null;
+  ctx = new AC();
+  master = ctx.createGain(); master.gain.value = 0.85; master.connect(ctx.destination);
+  sfxBus = ctx.createGain(); sfxBus.gain.value = 1.0; sfxBus.connect(master);
+  bgmBus = ctx.createGain(); bgmBus.gain.value = 0.55; bgmBus.connect(master);
+  buildGemLibrary(ctx);
+  return ctx;
  }
 
- function haptic(pattern){
-  try{if(navigator.vibrate&&!matchMedia('(prefers-reduced-motion:reduce)').matches)navigator.vibrate(pattern);}catch{}
+ function haptic(pattern=10){
+  if(typeof navigator !== 'undefined' && navigator.vibrate){
+   try{ navigator.vibrate(pattern); }catch{}
+  }
  }
 
- // Play pre-rendered or real recorded stone buffer
  function playGem(name, pitch=1.0, gain=1.0, delay=0){
   const c=ensure();if(!c)return;
   const list=gemBuffers[name];if(!list||!list.length)return;
-  // If real recorded samples are loaded, pick from them
   const buf=list.length > 1 ? list[1 + Math.floor(Math.random()*(list.length - 1))] : list[0];
   const t=c.currentTime+delay;
   const src=c.createBufferSource();
   src.buffer=buf;
-  // Natural micro-variation (+-2.0%) so each move feels alive and organic
   src.playbackRate.setValueAtTime(pitch * (0.98 + Math.random()*0.04), t);
   const g=c.createGain();
   g.gain.setValueAtTime(gain, t);
-  src.connect(g);g.connect(sfxBus);
+  src.connect(g); g.connect(sfxBus);
   src.start(t);
  }
 
- // 1. Select / Tap: crisp, satisfying acoustic stone tap
  function select(){
   haptic(4);
-  playGem('select', 1.05, 0.42);
+  if(soundProfile === 'gem' || soundProfile === 'crystal') playGem('gem', 1.15, 0.32);
+  else if(soundProfile === 'tile') playGem('select', 1.0, 0.35);
+  else if(soundProfile === 'stone') playGem('stone', 1.08, 0.35);
+  else playGem('soft', 1.0, 0.32);
  }
 
- // 2. Invalid tap: gentle warm bump on table, zero jarring harshness
  function invalid(){
   haptic([6,16,6]);
-  playGem('invalid', 0.85, 0.35);
+  if(soundProfile === 'gem' || soundProfile === 'crystal') playGem('gem', 0.80, 0.26);
+  else playGem('invalid', 0.72, 0.30);
  }
 
- // 3. Slide stone: the authentic acoustic slate stone slide clink
  function slide(willMatch=false){
   haptic(willMatch?[6,14,12]:5);
   const c=ensure();if(!c)return;
   if(willMatch){
-   // When leading to a match: clean stone slide + subtle resonant clink
-   playGem('tile', 1.0, 0.48);
-   playGem('contact', 1.10, 0.30, 0.035);
+   if(soundProfile === 'gem' || soundProfile === 'crystal'){
+    playGem('gem', 1.1, 0.44);
+    playGem('sparkle', 1.3, 0.26, 0.035);
+   }else if(soundProfile === 'tile'){
+    playGem('tile', 1.0, 0.48);
+    playGem('contact', 1.10, 0.30, 0.035);
+   }else if(soundProfile === 'stone'){
+    playGem('stone', 1.05, 0.45);
+    playGem('contact', 1.10, 0.28, 0.03);
+   }else{
+    playGem('soft', 1.0, 0.42);
+    playGem('contact', 1.05, 0.26, 0.03);
+   }
   }else{
-   // Normal move: clean, satisfying stone slide
-   playGem('tile', 1.0, 0.44);
+   if(soundProfile === 'gem') playGem('gem', 1.0, 0.40);
+   else if(soundProfile === 'crystal') playGem('crystal', 1.0, 0.38);
+   else if(soundProfile === 'tile') playGem('tile', 1.0, 0.44);
+   else if(soundProfile === 'stone') playGem('stone', 1.0, 0.40);
+   else playGem('soft', 1.0, 0.38);
   }
  }
 
  function setSoundProfile(name){
-  if(['tile','gem','crystal','stone','soft'].includes(name)){
+  if(['gem','tile','crystal','stone','soft'].includes(name)){
    soundProfile = name;
-   try{localStorage.setItem('kanji-pop-sound-profile', name);}catch{}
+   try{ localStorage.setItem('kanji-pop-sound-profile', name); }catch{}
    slide(false);
   }
  }
 
  function getSoundProfile(){ return soundProfile; }
 
- // 4. Two matching stones touch on board: real acoustic stone kiss & double clink
  function contact(pair=0){
   haptic([12,20,18]);
   const rootPitch = 0.96 + (pair % 5) * 0.04;
-  playGem('contact', rootPitch, 0.45);
+  if(soundProfile === 'gem' || soundProfile === 'crystal'){
+   playGem('contact', rootPitch, 0.38);
+   playGem('sparkle', rootPitch * 1.2, 0.25, 0.02);
+  }else{
+   playGem('contact', rootPitch, 0.45);
+  }
  }
 
- // 5. Fusion & Kanji Forge: Deep resonant stone lithophone chime + solid stone locking impact
  function fusion(pair=0, combo=1){
   haptic([14,28,22,38]);
   const c=ensure();if(!c)return;
   const pitchMult = Math.pow(1.04, Math.min(4, Math.max(0, combo-1)));
 
-  // Phase A: Rapid organic stone clatter as blocks rush together
-  playGem('contact', 1.0 * pitchMult, 0.45, 0.02);
-  playGem('match', 1.08 * pitchMult, 0.50, 0.08);
+  if(soundProfile === 'gem' || soundProfile === 'crystal'){
+   // Original Sparkling Gemstone cascade
+   const scale=[1046.50, 1318.51, 1567.98, 1975.53, 2349.32, 3135.96];
+   scale.forEach((f, i)=>{
+    const t = c.currentTime + 0.04 + i * 0.085;
+    const o = c.createOscillator(), g = c.createGain();
+    o.type = 'sine'; o.frequency.setValueAtTime(f * pitchMult, t);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.linearRampToValueAtTime(0.038 + i*0.005, t + 0.003);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.16);
+    o.connect(g); g.connect(sfxBus);
+    o.start(t); o.stop(t + 0.18);
+   });
+   playGem('match', 1.15 * pitchMult, 0.50, 0.70);
+   playGem('contact', 1.20 * pitchMult, 0.35, 0.72);
+   playGem('sparkle', 1.35 * pitchMult, 0.28, 0.74);
+  }else{
+   // Organic stone clatter + Lithophone chord bloom
+   playGem('contact', 1.0 * pitchMult, 0.45, 0.02);
+   playGem('match', 1.08 * pitchMult, 0.50, 0.08);
 
-  // Phase B: Peaceful, warm Stone Lithophone chord bloom (G major / Pentatonic temple chime)
-  // G3 (196Hz - warm resonant body), D4 (293.7Hz), G4 (392Hz), B4 (493.9Hz), D5 (587.3Hz)
-  const stoneChord = [196.00, 293.66, 392.00, 493.88, 587.33];
-  stoneChord.forEach((f, i)=>{
-   const t = c.currentTime + 0.16 + i * 0.04;
-   // Fundamental stone bar oscillator
-   const o = c.createOscillator(), g = c.createGain();
-   o.type = 'sine';
-   o.frequency.setValueAtTime(f * pitchMult, t);
+   const stoneChord = [196.00, 293.66, 392.00, 493.88, 587.33];
+   stoneChord.forEach((f, i)=>{
+    const t = c.currentTime + 0.16 + i * 0.04;
+    const o = c.createOscillator(), g = c.createGain();
+    o.type = 'sine';
+    o.frequency.setValueAtTime(f * pitchMult, t);
 
-   // Inharmonic shear mode (1.46 ratio for stone bar ring)
-   const o2 = c.createOscillator(), g2 = c.createGain();
-   o2.type = 'sine';
-   o2.frequency.setValueAtTime(f * 1.46 * pitchMult, t);
+    const o2 = c.createOscillator(), g2 = c.createGain();
+    o2.type = 'sine';
+    o2.frequency.setValueAtTime(f * 1.46 * pitchMult, t);
 
-   g.gain.setValueAtTime(0.0001, t);
-   g.gain.linearRampToValueAtTime(0.055, t + 0.012);
-   g.gain.exponentialRampToValueAtTime(0.0001, t + 0.65);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.linearRampToValueAtTime(0.055, t + 0.012);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.65);
 
-   g2.gain.setValueAtTime(0.0001, t);
-   g2.gain.linearRampToValueAtTime(0.018, t + 0.012);
-   g2.gain.exponentialRampToValueAtTime(0.0001, t + 0.42);
+    g2.gain.setValueAtTime(0.0001, t);
+    g2.gain.linearRampToValueAtTime(0.018, t + 0.012);
+    g2.gain.exponentialRampToValueAtTime(0.0001, t + 0.42);
 
-   o.connect(g); g.connect(sfxBus); o.start(t); o.stop(t + 0.68);
-   o2.connect(g2); g2.connect(sfxBus); o2.start(t); o2.stop(t + 0.45);
-  });
-
-  // Phase C: Solid, decisive stone lock "TOCK" as the Kanji character is forged
-  playGem('tile', 1.0 * pitchMult, 0.52, 0.48);
+    o.connect(g); g.connect(sfxBus); o.start(t); o.stop(t + 0.68);
+    o2.connect(g2); g2.connect(sfxBus); o2.start(t); o2.stop(t + 0.45);
+   });
+   playGem('match', 1.0 * pitchMult, 0.60, 0.42);
+  }
  }
 
- // 6. Win / Chapter complete: Joyful acoustic stone marimba / lithophone fanfare
  function win(){
-  haptic([20,35,20,35,50]);
+  haptic([20,30,25,35,30,45]);
   const c=ensure();if(!c)return;
-  // Pentatonic stone chime sequence (C4, D4, E4, G4, A4, C5, D5, E5)
-  const melody = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 659.25];
-  melody.forEach((f, i)=>{
-   const t = c.currentTime + i * 0.075;
-   playGem('select', f / 520, 0.65, i * 0.075);
-   const o = c.createOscillator(), g = c.createGain();
-   o.type = 'sine';
-   o.frequency.setValueAtTime(f, t);
-   g.gain.setValueAtTime(0.0001, t);
-   g.gain.linearRampToValueAtTime(0.060, t + 0.010);
-   g.gain.exponentialRampToValueAtTime(0.0001, t + 0.70);
-   o.connect(g); g.connect(sfxBus);
-   o.start(t); o.stop(t + 0.75);
-  });
- }
-
- // 7. Hint: gentle acoustic stone chime harmonic (5th interval)
- function hint(){
-  haptic(8);
-  const c=ensure();if(!c)return;
-  playGem('select', 1.0, 0.45);
-  const chord = [520.00, 780.00];
-  chord.forEach((f, i)=>{
-   const t = c.currentTime + i * 0.03;
+  const triad=[523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98];
+  triad.forEach((f, i)=>{
+   const t = c.currentTime + i * 0.09;
    const o = c.createOscillator(), g = c.createGain();
    o.type = 'sine'; o.frequency.setValueAtTime(f, t);
    g.gain.setValueAtTime(0.0001, t);
-   g.gain.linearRampToValueAtTime(0.045, t + 0.01);
-   g.gain.exponentialRampToValueAtTime(0.0001, t + 0.45);
-   o.connect(g); g.connect(sfxBus); o.start(t); o.stop(t + 0.48);
+   g.gain.linearRampToValueAtTime(0.065, t + 0.006);
+   g.gain.exponentialRampToValueAtTime(0.0001, t + 0.48);
+   o.connect(g); g.connect(sfxBus);
+   o.start(t); o.stop(t + 0.52);
   });
+  playGem('match', 1.0, 0.60, 0.40);
+  playGem('sparkle', 1.2, 0.40, 0.45);
  }
 
- // -------------------------------------------------------------
- // CHILL ACOUSTIC STONE & MARIMBA BGM (116 BPM)
- // Royal Road Progression (IV - V - iii - vi): Fmaj7 -> G7 -> Em7 -> Am7
- // Featuring: Warm Acoustic Stone Marimba, Rhythmic Stone Clicks,
- // Round Wooden Bass, and Soft Kalimba Melody.
- // -------------------------------------------------------------
+ function hint(){
+  haptic(8);
+  const c=ensure();if(!c)return;
+  playGem('hint', 1.0, 0.45);
+  playGem('sparkle', 1.15, 0.30, 0.05);
+ }
+
+ /* --- BGM COMPOSITION & ENGINES --- */
  const chords = [
   { bass: 174.61, notes: [349.23, 440.00, 523.25, 659.25] }, // Fmaj7
   { bass: 196.00, notes: [392.00, 493.88, 587.33, 698.46] }, // G7
@@ -336,221 +340,313 @@
  ];
 
  const leadMelody = [
-  // Bar 1 (Fmaj7): playful peaceful motif
   659.25, 0, 783.99, 880.00,  0, 1046.5, 0, 880.00,
-  // Bar 2 (G7): relaxing resolve
   783.99, 0, 659.25, 587.33,  0, 783.99, 0, 0,
-  // Bar 3 (Em7): sweet gentle descent
   587.33, 0, 659.25, 783.99,  0, 987.77, 0, 783.99,
-  // Bar 4 (Am7): cozy chill run
   659.25, 0, 523.25, 587.33,  0, 659.25, 0, 0,
-  // Bar 5 (Dm7): uplifting melody
   587.33, 0, 659.25, 880.00,  0, 1046.5, 0, 1174.66,
-  // Bar 6 (G6): gentle soaring chime
   1318.51, 0, 1174.66, 1046.5, 0, 987.77, 0, 880.00,
-  // Bar 7 (Cmaj7): serene resolution
   1046.5, 0, 783.99, 659.25,  0, 523.25, 659.25, 783.99,
-  // Bar 8 (Turn): peaceful turnaround
   880.00, 0, 987.77, 1046.5,  0, 1174.66, 0, 0
  ];
 
- // Warm Acoustic Stone Marimba Chords (Rich, organic, wooden/stone resonance)
- function playStoneMarimbaChord(c, notes, time, dur=0.22, vol=0.065){
+ /* 1. POP ENGINE FUNCTIONS (126 BPM) */
+ function playFmChord(c, notes, time, dur=0.18, vol=0.024){
   notes.forEach((f, i)=>{
-   const t = time + i * 0.006; // natural strum spread
-   const o = c.createOscillator(), g = c.createGain();
-   o.type = 'sine'; o.frequency.setValueAtTime(f, t);
-
-   // Inharmonic stone mode for warm organic marimba timbre
-   const o2 = c.createOscillator(), g2 = c.createGain();
-   o2.type = 'sine'; o2.frequency.setValueAtTime(f * 1.48, t);
-
-   g.gain.setValueAtTime(0.0001, t);
-   g.gain.linearRampToValueAtTime(vol, t + 0.008);
-   g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-
-   g2.gain.setValueAtTime(0.0001, t);
-   g2.gain.linearRampToValueAtTime(vol * 0.32, t + 0.008);
-   g2.gain.exponentialRampToValueAtTime(0.0001, t + dur * 0.7);
-
-   o.connect(g); g.connect(bgmBus);
-   o2.connect(g2); g2.connect(bgmBus);
-   o.start(t); o.stop(t + dur + 0.03);
-   o2.start(t); o2.stop(t + dur + 0.03);
+   const t = time + i * 0.004;
+   const car = c.createOscillator(), mod = c.createOscillator();
+   const modGain = c.createGain(), carGain = c.createGain();
+   car.type = 'sine'; car.frequency.setValueAtTime(f, t);
+   mod.type = 'sine'; mod.frequency.setValueAtTime(f * 2.0, t);
+   modGain.gain.setValueAtTime(f * 0.45, t);
+   modGain.gain.exponentialRampToValueAtTime(0.01, t + dur * 0.85);
+   carGain.gain.setValueAtTime(0.0001, t);
+   carGain.gain.linearRampToValueAtTime(vol, t + 0.006);
+   carGain.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+   mod.connect(modGain); modGain.connect(car.frequency);
+   car.connect(carGain); carGain.connect(bgmBus);
+   car.start(t); car.stop(t + dur + 0.02);
+   mod.start(t); mod.stop(t + dur + 0.02);
   });
  }
 
- // Round Acoustic Thumb Piano / Bass (Warm, deep, punchy)
- function playAcousticBass(c, freq, time, dur=0.18){
+ function playPopBass(c, freq, time, dur=0.14){
   const t = time;
   const o = c.createOscillator(), g = c.createGain();
   o.type = 'sine'; o.frequency.setValueAtTime(freq, t);
-  o.frequency.exponentialRampToValueAtTime(freq * 0.88, t + dur);
+  o.frequency.exponentialRampToValueAtTime(freq * 0.85, t + dur);
   g.gain.setValueAtTime(0.0001, t);
-  g.gain.linearRampToValueAtTime(0.082, t + 0.006);
+  g.gain.linearRampToValueAtTime(0.048, t + 0.004);
   g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
   o.connect(g); g.connect(bgmBus);
   o.start(t); o.stop(t + dur + 0.02);
  }
 
- // Rhythmic Acoustic Stone Click (Polished river stone percussion on beats 2 & 4)
- function playStoneClickPercussion(c, time){
+ function playPopClap(c, time){
   const t = time;
-  // Two layered stone micro-clicks for organic woodblock/stone tap
-  [0, 0.012].forEach((flam, idx)=>{
+  [0, 0.011, 0.022].forEach((flam, idx)=>{
    const ft = t + flam;
-   const o = c.createOscillator(), g = c.createGain();
-   o.type = 'triangle';
-   o.frequency.setValueAtTime(idx === 0 ? 540 : 880, ft);
-   o.frequency.exponentialRampToValueAtTime(idx === 0 ? 220 : 380, ft + 0.035);
-   g.gain.setValueAtTime(0.0001, ft);
-   g.gain.linearRampToValueAtTime(idx === 0 ? 0.038 : 0.026, ft + 0.002);
-   g.gain.exponentialRampToValueAtTime(0.0001, ft + 0.04);
-   o.connect(g); g.connect(bgmBus);
-   o.start(ft); o.stop(ft + 0.045);
+   const rate = c.sampleRate, len = Math.floor(rate * 0.045), buf = c.createBuffer(1, len, rate), d = buf.getChannelData(0);
+   for(let i=0; i<len; i++) d[i] = (Math.random()*2 - 1) * Math.exp(-i / (rate * 0.015));
+   const src = c.createBufferSource(); src.buffer = buf;
+   const flt = c.createBiquadFilter(); flt.type = 'bandpass'; flt.frequency.setValueAtTime(1600, ft); flt.Q.value = 1.8;
+   const g = c.createGain(); g.gain.setValueAtTime(idx === 2 ? 0.028 : 0.014, ft);
+   src.connect(flt); flt.connect(g); g.connect(bgmBus);
+   src.start(ft);
   });
  }
 
- // Soft Acoustic Mallet Thump (Low cajon / table kick on beats 1 & 3)
+ function playPopKick(c, time){
+  const t = time;
+  const o = c.createOscillator(), g = c.createGain();
+  o.type = 'sine';
+  o.frequency.setValueAtTime(115, t);
+  o.frequency.exponentialRampToValueAtTime(42, t + 0.08);
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.linearRampToValueAtTime(0.065, t + 0.003);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + 0.11);
+  o.connect(g); g.connect(bgmBus);
+  o.start(t); o.stop(t + 0.12);
+ }
+
+ function playCelesta(c, freq, time, dur=0.22){
+  const t = time;
+  const o = c.createOscillator(), g = c.createGain();
+  o.type = 'sine'; o.frequency.setValueAtTime(freq, t);
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.linearRampToValueAtTime(0.028, t + 0.008);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  o.connect(g); g.connect(bgmBus);
+  o.start(t); o.stop(t + dur + 0.02);
+ }
+
+ /* 2. ZEN ENGINE FUNCTIONS (118 BPM) */
+ function playStoneMarimbaChord(c, notes, time, dur=0.22, vol=0.065){
+  notes.forEach((f, i)=>{
+   const t = time + i * 0.006;
+   const o = c.createOscillator(), g = c.createGain();
+   o.type = 'sine'; o.frequency.setValueAtTime(f, t);
+   const o2 = c.createOscillator(), g2 = c.createGain();
+   o2.type = 'sine'; o2.frequency.setValueAtTime(f * 1.48, t);
+   g.gain.setValueAtTime(0.0001, t);
+   g.gain.linearRampToValueAtTime(vol, t + 0.008);
+   g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+   g2.gain.setValueAtTime(0.0001, t);
+   g2.gain.linearRampToValueAtTime(vol * 0.28, t + 0.008);
+   g2.gain.exponentialRampToValueAtTime(0.0001, t + dur * 0.65);
+   o.connect(g); g.connect(bgmBus);
+   o2.connect(g2); g2.connect(bgmBus);
+   o.start(t); o.stop(t + dur + 0.02);
+   o2.start(t); o2.stop(t + dur + 0.02);
+  });
+ }
+
+ function playAcousticBass(c, freq, time, dur=0.20){
+  const t = time;
+  const o = c.createOscillator(), g = c.createGain();
+  o.type = 'sine'; o.frequency.setValueAtTime(freq, t);
+  o.frequency.exponentialRampToValueAtTime(freq * 0.92, t + dur);
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.linearRampToValueAtTime(0.09, t + 0.008);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  o.connect(g); g.connect(bgmBus);
+  o.start(t); o.stop(t + dur + 0.02);
+ }
+
+ function playStoneClickPercussion(c, time){
+  const t = time;
+  const rate = c.sampleRate, len = Math.floor(rate * 0.04), buf = c.createBuffer(1, len, rate), d = buf.getChannelData(0);
+  for(let i=0; i<len; i++) d[i] = (Math.random()*2 - 1) * Math.exp(-i / (rate * 0.006));
+  const src = c.createBufferSource(); src.buffer = buf;
+  const flt = c.createBiquadFilter(); flt.type = 'bandpass'; flt.frequency.setValueAtTime(1450, t); flt.Q.value = 3.2;
+  const g = c.createGain(); g.gain.setValueAtTime(0.045, t);
+  src.connect(flt); flt.connect(g); g.connect(bgmBus);
+  src.start(t);
+ }
+
  function playStoneMalletThump(c, time){
   const t = time;
   const o = c.createOscillator(), g = c.createGain();
   o.type = 'sine';
   o.frequency.setValueAtTime(95, t);
-  o.frequency.exponentialRampToValueAtTime(45, t + 0.09);
+  o.frequency.exponentialRampToValueAtTime(38, t + 0.12);
   g.gain.setValueAtTime(0.0001, t);
-  g.gain.linearRampToValueAtTime(0.075, t + 0.004);
-  g.gain.exponentialRampToValueAtTime(0.0001, t + 0.13);
+  g.gain.linearRampToValueAtTime(0.11, t + 0.005);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + 0.15);
   o.connect(g); g.connect(bgmBus);
-  o.start(t); o.stop(t + 0.14);
+  o.start(t); o.stop(t + 0.16);
  }
 
- // Sweet Kalimba / Stone Chime Lead Melody
- function playStoneKalimbaLead(c, freq, time, dur=0.28){
+ function playStoneKalimbaLead(c, freq, time, dur=0.32){
   const t = time;
   const o = c.createOscillator(), g = c.createGain();
   o.type = 'sine'; o.frequency.setValueAtTime(freq, t);
-  // Overtone mode for kalimba tine ringing
   const o2 = c.createOscillator(), g2 = c.createGain();
   o2.type = 'sine'; o2.frequency.setValueAtTime(freq * 2.76, t);
-
   g.gain.setValueAtTime(0.0001, t);
-  g.gain.linearRampToValueAtTime(0.068, t + 0.007);
+  g.gain.linearRampToValueAtTime(0.055, t + 0.006);
   g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-
   g2.gain.setValueAtTime(0.0001, t);
-  g2.gain.linearRampToValueAtTime(0.016, t + 0.005);
-  g2.gain.exponentialRampToValueAtTime(0.0001, t + dur * 0.45);
-
+  g2.gain.linearRampToValueAtTime(0.016, t + 0.004);
+  g2.gain.exponentialRampToValueAtTime(0.0001, t + 0.12);
   o.connect(g); g.connect(bgmBus);
   o2.connect(g2); g2.connect(bgmBus);
-  o.start(t); o.stop(t + dur + 0.03);
-  o2.start(t); o2.stop(t + dur + 0.03);
+  o.start(t); o.stop(t + dur + 0.02);
+  o2.start(t); o2.stop(t + dur + 0.02);
  }
 
  function scheduleBgm(){
   clearTimeout(bgmTimer);
-  if(!enabled || !bgmActive || document.hidden)return;
-  const c = ensure(); if(!c)return;
+  if(!enabled || !bgmActive || document.hidden || bgmStyle === 'none') return;
+  const c = ensure(); if(!c) return;
 
-  // 118 BPM: relaxing, chill, cozy tempo
-  // 1 beat = 508ms; 1 eighth = 254ms; 1 sixteenth = 127ms
-  const stepDur = 0.127;
-  const batchSteps = 4; // drift-free batches
+  if(bgmStyle === 'zen'){
+   // 118 BPM Zen Lithophone Chill
+   const stepDur = 0.127;
+   const batchSteps = 4;
+   for(let s=0; s<batchSteps; s++){
+    const step = (bgmStep + s) % 64;
+    const barIdx = Math.floor(step / 8) % chords.length;
+    const subStep = step % 8;
+    const t = c.currentTime + s * stepDur;
+    const chord = chords[barIdx];
 
-  for(let s=0; s<batchSteps; s++){
-   const step = (bgmStep + s) % 64; // 8 bars * 8 sixteenths
-   const barIdx = Math.floor(step / 8) % chords.length;
-   const subStep = step % 8;
-   const t = c.currentTime + s * stepDur;
-   const chord = chords[barIdx];
+    if(subStep === 0 || subStep === 4) playStoneMalletThump(c, t);
+    if(subStep === 2 || subStep === 6) playStoneClickPercussion(c, t);
 
-   // 1. ACOUSTIC STONE PERCUSSION (Soft mallet kick + pebble clink)
-   if(subStep === 0 || subStep === 4){
-    playStoneMalletThump(c, t); // Warm mallet thump on 1 & 3
+    if(subStep === 0) playAcousticBass(c, chord.bass, t, 0.20);
+    else if(subStep === 3) playAcousticBass(c, chord.bass * 1.5, t, 0.15);
+    else if(subStep === 5) playAcousticBass(c, chord.bass * 2.0, t, 0.17);
+
+    if(subStep === 1 || subStep === 4) playStoneMarimbaChord(c, chord.notes, t, 0.18, 0.060);
+
+    const mel = leadMelody[step];
+    if(mel && mel > 0) playStoneKalimbaLead(c, mel, t, 0.30);
    }
-   if(subStep === 2 || subStep === 6){
-    playStoneClickPercussion(c, t); // Gentle stone click on 2 & 4
-   }
+   bgmStep = (bgmStep + batchSteps) % 64;
+   bgmTimer = setTimeout(scheduleBgm, batchSteps * stepDur * 1000 - 25);
+  }else{
+   // 126 BPM Joyful Japanese Pop Groove (Original Default)
+   const stepDur = 0.119;
+   const batchSteps = 4;
+   for(let s=0; s<batchSteps; s++){
+    const step = (bgmStep + s) % 64;
+    const barIdx = Math.floor(step / 8) % chords.length;
+    const subStep = step % 8;
+    const t = c.currentTime + s * stepDur;
+    const chord = chords[barIdx];
 
-   // 2. ROUND ACOUSTIC BASS
-   if(subStep === 0){
-    playAcousticBass(c, chord.bass, t, 0.20);
-   }else if(subStep === 3){
-    playAcousticBass(c, chord.bass * 1.5, t, 0.15);
-   }else if(subStep === 5){
-    playAcousticBass(c, chord.bass * 2.0, t, 0.17);
-   }
+    if(subStep === 0 || subStep === 4) playPopKick(c, t);
+    if(subStep === 2 || subStep === 6) playPopClap(c, t);
 
-   // 3. WARM ACOUSTIC STONE MARIMBA CHORDS
-   if(subStep === 1 || subStep === 4){
-    playStoneMarimbaChord(c, chord.notes, t, 0.18, 0.060);
-   }
+    if(subStep === 0) playPopBass(c, chord.bass, t, 0.16);
+    else if(subStep === 3) playPopBass(c, chord.bass * 1.5, t, 0.12);
+    else if(subStep === 5) playPopBass(c, chord.bass * 2.0, t, 0.14);
 
-   // 4. PEACEFUL KALIMBA / LITHOPHONE LEAD MELODY
-   const mel = leadMelody[step];
-   if(mel && mel > 0){
-    playStoneKalimbaLead(c, mel, t, 0.26);
+    if(subStep === 1 || subStep === 4) playFmChord(c, chord.notes, t, 0.14, 0.022);
+
+    const mel = leadMelody[step];
+    if(mel && mel > 0) playCelesta(c, mel, t, 0.22);
    }
+   bgmStep = (bgmStep + batchSteps) % 64;
+   bgmTimer = setTimeout(scheduleBgm, batchSteps * stepDur * 1000 - 25);
   }
-
-  bgmStep = (bgmStep + batchSteps) % 64;
-  bgmTimer = setTimeout(scheduleBgm, batchSteps * stepDur * 1000 - 25);
  }
 
- function setEnabled(flag){
-  enabled=!!flag;
+ function setEnabled(on){
+  enabled = !!on;
   if(!enabled){
    clearTimeout(bgmTimer);
-   if(ctx && ctx.state==='running')ctx.suspend().catch(()=>{});
+   if(ctx && ctx.state === 'running'){
+    try{ ctx.suspend(); }catch{}
+   }
   }else{
-   ensure();
-   if(bgmActive)scheduleBgm();
+   const c = ensure();
+   if(c && c.state === 'suspended'){
+    c.resume().then(()=>{
+     if(bgmActive && bgmStyle !== 'none') scheduleBgm();
+    }).catch(()=>{});
+   }else if(bgmActive && bgmStyle !== 'none'){
+    scheduleBgm();
+   }
   }
  }
 
- function setBgm(flag){
-  const was=bgmActive;bgmActive=!!flag;
-  if(enabled && bgmActive){
-   if(!was)scheduleBgm();
+ function setBgm(on){
+  bgmActive = !!on;
+  if(bgmActive && enabled && bgmStyle !== 'none'){
+   scheduleBgm();
   }else{
    clearTimeout(bgmTimer);
   }
  }
 
- document.addEventListener('visibilitychange', ()=>{
-  if(document.hidden)clearTimeout(bgmTimer);
-  else if(enabled && bgmActive)scheduleBgm();
- });
-
- // Japanese Web Speech API pronunciation engine
- let voiceEnabled = true;
- function setVoiceEnabled(flag){ voiceEnabled = !!flag; }
- function isVoiceEnabled(){ return voiceEnabled; }
-
- function speak(text, lang = 'ja-JP'){
-  if(!voiceEnabled || !text || typeof window === 'undefined' || !('speechSynthesis' in window)) return;
-  try {
-   window.speechSynthesis.cancel();
-   const u = new SpeechSynthesisUtterance(text);
-   u.lang = lang;
-   u.rate = 0.88; // Calm, clear, chill pronunciation
-   u.pitch = 1.02;
-   u.volume = 0.95;
-   const voices = window.speechSynthesis.getVoices();
-   const ja = voices.find(v => v.lang === 'ja-JP' || v.lang === 'ja_JP' || (v.lang && v.lang.startsWith('ja')));
-   if(ja) u.voice = ja;
-   window.speechSynthesis.speak(u);
-  } catch(e) {
-   console.warn('SpeechSynthesis error:', e);
+ function setBgmStyle(style){
+  if(['pop','zen','none'].includes(style)){
+   bgmStyle = style;
+   try{ localStorage.setItem('kp-bgm-style', style); }catch{}
+   clearTimeout(bgmTimer);
+   bgmStep = 0;
+   if(bgmActive && enabled && bgmStyle !== 'none'){
+    scheduleBgm();
+   }
   }
  }
 
- if(typeof window !== 'undefined' && 'speechSynthesis' in window) {
-  window.speechSynthesis.onvoiceschanged = () => {
-   try { window.speechSynthesis.getVoices(); } catch(e) {}
-  };
+ function getBgmStyle(){ return bgmStyle; }
+
+ /* Native Japanese TTS Engine */
+ function setVoiceEnabled(on){
+  voiceEnabled = !!on;
+  try{ localStorage.setItem('kp-voice-enabled', voiceEnabled ? 'true' : 'false'); }catch{}
  }
 
- window.KanjiAudio={setEnabled, setBgm, select, invalid, slide, contact, fusion, win, hint, haptic, setSoundProfile, getSoundProfile, speak, setVoiceEnabled, isVoiceEnabled};
+ function isVoiceEnabled(){
+  return voiceEnabled;
+ }
+
+ function speak(text){
+  if(!voiceEnabled || !text || typeof window === 'undefined' || !window.speechSynthesis) return;
+  try{
+   window.speechSynthesis.cancel();
+   const utt = new SpeechSynthesisUtterance(text);
+   utt.lang = 'ja-JP';
+   utt.rate = 0.88;
+   utt.pitch = 1.02;
+   const voices = window.speechSynthesis.getVoices();
+   const jaVoice = voices.find(v => v.lang === 'ja-JP' || v.lang.startsWith('ja'));
+   if(jaVoice) utt.voice = jaVoice;
+   window.speechSynthesis.speak(utt);
+  }catch{}
+ }
+
+ if(typeof document !== 'undefined'){
+  document.addEventListener('visibilitychange', ()=>{
+   if(document.hidden){
+    clearTimeout(bgmTimer);
+   }else if(enabled && bgmActive && bgmStyle !== 'none'){
+    scheduleBgm();
+   }
+  });
+ }
+
+ window.KanjiAudio = {
+  setEnabled,
+  setBgm,
+  setBgmStyle,
+  getBgmStyle,
+  select,
+  invalid,
+  slide,
+  contact,
+  fusion,
+  win,
+  hint,
+  haptic,
+  setSoundProfile,
+  getSoundProfile,
+  speak,
+  setVoiceEnabled,
+  isVoiceEnabled
+ };
 })();
