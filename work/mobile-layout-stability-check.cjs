@@ -1,4 +1,4 @@
-const {chromium}=require('C:/Users/Admin/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {chromium}=require('C:/Users/Windows/Downloads/Bomb/node_modules/playwright');
 const assert=require('node:assert/strict');
 (async()=>{const b=await chromium.launch({headless:true,executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe'});try{
  for(const [width,height,gutter] of [[495,900,false],[495,900,true],[390,844,false],[320,568,false],[810,540,false],[1440,900,false]]){
@@ -15,3 +15,4 @@ const assert=require('node:assert/strict');
   await p.screenshot({path:__dirname+`/layout-stable-${width}${gutter?'-gutter':''}.png`});console.log(`${width}x${height}${gutter?' reserved scrollbar':''}: ${result.samples.length} frames, 6 moves, stable HUD/board/buttons, no horizontal overflow`);await p.close();
  }
 }finally{await b.close();}})().catch(e=>{console.error(e);process.exitCode=1;});
+

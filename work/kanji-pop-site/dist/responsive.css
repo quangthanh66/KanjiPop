@@ -80,8 +80,8 @@
 @media(min-width:900px){
  html,body{min-height:100%;background:#69cef3}
  body{padding:0}
- #kp-preview{padding:0;display:block}
- #kanji-pop{width:100%;max-width:none;min-height:100dvh;padding:24px clamp(28px,4.5vw,88px) 22px;border:0;border-radius:0;box-shadow:none;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;gap:24px 32px;align-content:start;overflow:clip;background:radial-gradient(ellipse at 70% 25%,#c2f3ff 0,transparent 70%),linear-gradient(125deg,#6dd7fa,#62c4f2)}
+ #kp-preview{padding:0;display:flex;justify-content:center;min-height:100dvh;width:100%;background:radial-gradient(ellipse at 70% 25%,#c2f3ff 0,transparent 70%),linear-gradient(125deg,#6dd7fa,#62c4f2)}
+ #kanji-pop{width:100%;max-width:1200px;min-height:100dvh;padding:24px 20px 22px;border:0;border-radius:0;box-shadow:none;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;gap:20px 24px;align-content:start;background:none}
  #kanji-pop .kp-header{grid-column:1;grid-row:1;width:350px;max-width:100%;margin:0;justify-content:flex-start;gap:22px}
  #kanji-pop .kp-logo{font-size:28px}
  #kanji-pop .kp-logo span{font-size:32px}
@@ -90,7 +90,7 @@
  #kanji-pop .course-nav button{flex:none;padding:0 20px;min-height:46px;font-size:13px;gap:9px;border-radius:15px}
  #kanji-pop .course-nav svg{width:20px;height:20px}
  #kanji-pop .course-nav b{font-size:11px;padding:2px 7px}
- #kanji-pop #map-screen,#kanji-pop #album-screen,#kanji-pop #play-screen{grid-column:1/-1;grid-row:2;width:100%;max-width:1440px;justify-self:center;min-width:0}
+ #kanji-pop #map-screen,#kanji-pop #album-screen,#kanji-pop #play-screen{grid-column:1/-1;grid-row:2;width:100%;max-width:1200px;justify-self:center;min-width:0}
  #kanji-pop #map-screen{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px 24px}
  #kanji-pop .course-hero{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) 350px;gap:9px 60px;align-content:center;text-align:left;padding:20px 0 22px;margin:0}
  #kanji-pop .course-hero .course-badge{grid-column:1;grid-row:1;justify-self:start}
@@ -116,7 +116,7 @@
  #kanji-pop .level-node>small{margin-top:7px;font-size:10px}
  #kanji-pop #map-screen>.scope-note{grid-column:1/-1;font-size:11px;margin:3px 0 -10px}
  #kanji-pop #map-screen>.scope-link{grid-column:1/-1;min-height:34px;font-size:11px}
- #kanji-pop #play-screen{display:grid;grid-template-columns:minmax(260px,340px) minmax(0,1fr);column-gap:clamp(45px,7vw,120px);align-items:start;max-width:1240px;padding-top:13px}
+ #kanji-pop #play-screen{display:grid;grid-template-columns:minmax(280px,340px) minmax(0,1fr);column-gap:clamp(28px,4vw,60px);align-items:start;max-width:1200px;padding-top:13px}
  #kanji-pop .play-summary{display:block;background:#e4f9ffad;border:2px solid #ffffffb3;border-radius:27px;padding:22px;margin:0}
  #kanji-pop .play-summary .kp-level{margin:0 0 26px;gap:10px}
  #kanji-pop .kp-ribbon{padding:7px 17px;font-size:17px}
@@ -134,10 +134,10 @@
  #kanji-pop .desktop-guide .journey-progress div{font-size:11px}
  #kanji-pop .desktop-guide .desktop-tip{font-size:11px;margin-bottom:0;line-height:1.5;display:flex;gap:8px;align-items:flex-start}
  #kanji-pop .desktop-tip svg{width:18px;height:18px;flex:none}
- #kanji-pop .play-stage{width:min(100%,540px);justify-self:center;min-width:0;margin-top:4px}
+ #kanji-pop .play-stage{width:min(100%,680px);justify-self:center;min-width:0;margin-top:4px}
  #kanji-pop .slide-panel{padding:26px 14px 8px;border-radius:30px;margin-top:4px}
- #kanji-pop .slide-board{height:clamp(290px,calc(100dvh - 325px),460px)}
- #kanji-pop .slide-board.tall{height:clamp(330px,calc(100dvh - 310px),550px)}
+ #kanji-pop .slide-board{height:clamp(320px,calc(100dvh - 300px),490px)}
+ #kanji-pop .slide-board.tall{height:clamp(350px,calc(100dvh - 280px),560px)}
  #kanji-pop .board-tile{font-size:clamp(36px,3.5vw,50px);border-radius:14px}
  #kanji-pop .board-tile .part-glyph{width:51px;height:54px}
  #kanji-pop .pair-mark{font-size:12px;right:7px;bottom:5px}
