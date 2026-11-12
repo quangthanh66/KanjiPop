@@ -502,11 +502,11 @@ Major brand evolution and UX upgrades across all presentation layers:
   - Added dedicated favicon and app icon (`favicon.svg`, `kanjidle-icon.svg`, `kanjidle-icon.png`).
   - Clickable logo in header returns players immediately to the home screen, removing redundant home button.
 
-- **4K Concept Art Map Screen (Option 1)**:
-  - Replaced linear roadmap with a 4K Hybrid CSS/SVG concept art landscape (`concept-map-clean.png`, `dist/journey-map.css`).
-  - 5 floating 3D cloud islands (`sp-cloudStd.png`, `sp-cloud5.png`, `sp-rockLeft.png`, `sp-rockRight.png`) with razor-sharp 4K SVG vector badges and numbers.
-  - Multi-scale wavelet bilateral filtering and clean CSS hotspot integration, preventing 4K large-screen artifacts.
-  - Interactive top buttons for language switching (`[data-concept-lang]`) and audio toggle (`[data-concept-sound]`).
+- **3D Crystal Gemstone & Glassmorphism Main Screen**:
+  - Rebuilt main journey screen matching the exact glossy 3D crystal gem style of the Kanjidle Twin Gem logo.
+  - 5 themed 3D faceted crystal gemstone pedestals (Sapphire, Emerald, Amber, Amethyst, Crown Diamond) with specular highlights, physical bottom bevels, and active target aura rings.
+  - Frosted glassmorphism overview console (`backdrop-filter: blur(16px)`), luminous trail path, and instant zero-overhead loading (pure CSS3/SVG, eliminating heavy raster textures).
+  - Responsive layout: Panoramic 2-column island on desktop, streamlined vertical path on mobile with thumb-friendly touch pedestals.
 
 - **Bilingual i18n & Native Japanese Audio**:
   - Introduced `dist/i18n.js` providing seamless Vietnamese $\leftrightarrow$ English (`VI` / `EN`) localization across all UI, menus, maps, settings, and learning cards.

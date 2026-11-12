@@ -44,7 +44,7 @@
 ## 🌟 Tính Năng Nổi Bật
 
 * 🧩 **Cơ chế Trượt & Ghép độc đáo (Sliding & Fusion)**: Bàn cờ 35 ô gồm 17 cặp ngọc cùng 1 ô trống duy nhất. Trượt các viên đá đồng màu, đồng dáng chạm cạnh nhau để kích hoạt hợp nhất Kanji.
-* 🗺️ **Bản đồ 4K Concept Art (Cloud Islands Map)**: Bản đồ nghệ thuật 4K với 5 đảo mây 3D bồng bềnh, nhãn vector sắc nét, hỗ trợ mượt mà từ điện thoại di động đến màn hình 4K.
+* 🗺️ **Màn hình chính 3D Crystal Gemstone & Glassmorphism**: Bám sát ngôn ngữ thiết kế của logo Kanjidle Twin Gem Fusion, các đài ngọc 3D đa diện (Sapphire, Emerald, Amber, Amethyst, Crown Diamond), hiệu ứng hào quang mục tiêu 3 lớp, console hành trình kính mờ sắc nét 4K/Retina và tải nhanh tức thì (0MB asset ngoài).
 * 🌐 **Đa ngôn ngữ song ngữ tức thì (i18n VI ↔ EN)**: Chuyển đổi 1-click giữa Tiếng Việt và Tiếng Anh cho toàn bộ giao diện, lộ trình, thẻ học và cài đặt.
 * 🗣️ **Phát âm tiếng Nhật chuẩn (Native Audio TTS)**: Nút loa phát âm giọng Nhật bản xứ cho mọi chữ Kanji và từ vựng ví dụ.
 * 📅 **Thử thách hàng ngày (Daily Kanji Puzzle)**: Mỗi ngày một câu đố chữ Hán phong cách Wordle/Kanjidle, tự động tạo thẻ chia sẻ chuỗi thắng cùng bạn bè.

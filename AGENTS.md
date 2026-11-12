@@ -19,7 +19,7 @@
 | Hệ thống / Tính năng | Trạng thái | Ghi chú kỹ thuật |
 | :--- | :---: | :--- |
 | **Thương hiệu & Nhận diện (Kanjidle Brand)** | ✅ Hoàn thành | Đổi tên sang **Kanjidle**, Logo 3D Mẫu 4 Twin Gem Fusion, Favicon SVG/PNG, Clickable Logo về trang chủ. |
-| **Bản đồ 4K Concept Art (Option 1 Map)** | ✅ Hoàn thành | Giao diện bản đồ 4K Hybrid CSS/SVG mây trôi cực đẹp (`concept-map-clean.png`), 5 đảo mây 3D nhãn vector sắc nét. |
+| **Màn hình chính 3D Crystal Gemstone** | ✅ Hoàn thành | Giao diện màn hình chính 3D Faceted Crystal Gemstone & Glassmorphism: Pure CSS3/SVG 60fps, bám sát nhận diện logo Kanjidle Twin Gem Fusion (Sapphire, Emerald, Amber, Amethyst, Crown Diamond), hào quang mục tiêu 3 lớp, console thẻ học kính mờ, 0MB phụ tải. |
 | **Đa ngôn ngữ (i18n VI $\leftrightarrow$ EN)** | ✅ Hoàn thành | `dist/i18n.js` chuyển đổi song ngữ tức thì (Tiếng Việt & English) 1-click cho toàn bộ UI, menu và thẻ học. |
 | **Phát âm tiếng Nhật (Native Audio TTS)** | ✅ Hoàn thành | Nút loa trên thẻ học phát âm chuẩn tiếng Nhật từ vựng và chữ Hán (`KanjiAudio.speak(text, lang)`). |
 | **Thử thách hàng ngày (Daily Kanji Puzzle)** | ✅ Hoàn thành | Chế độ Wordle-style đố chữ mỗi ngày (`.grade-pill.daily-pill`), tự động sinh bảng chia sẻ kết quả chuỗi thắng. |
@@ -160,8 +160,8 @@ Các script kiểm thử sử dụng Playwright headless để kiểm tra trực
 
 1. **Lỗi đường dẫn Playwright khác nhau giữa các thiết bị**:
    - Khi clone sang máy khác, đường dẫn Playwright có thể khác nhau (ví dụ: `C:/Users/Admin/.cache/...` vs `C:/Users/Windows/Downloads/...`). Luôn bọc require trong vòng lặp fallback thử nhiều đường dẫn để không bị gãy test.
-2. **Giao diện Bản đồ 4K Concept Art ẩn Header (`[data-view="map"]`)**:
-   - Khi ở màn hình bản đồ (`data-view="map"`), thanh `.kp-header` và `.course-nav` cũ được ẩn bằng CSS `1px x 1px clip`. Thay vào đó, nút Chuyển ngôn ngữ là `[data-concept-lang]`, Âm thanh là `[data-concept-sound]`, Logo là `[data-concept-logo]`, và 5 màn chơi là các nút đám mây `[data-concept-level="..."]`.
+2. **Màn hình chính Journey Map thuần CSS3/SVG 60fps**:
+   - Màn hình chính sử dụng kiến trúc CSS Grid/Flexbox responsive thuần (không dùng ảnh raster 3MB nặng nề). Header dùng `#kp-logo` (clickable logo Kanjidle), Grade Switcher `.grade-toggle-bar`, Console hành trình `.journey-overview` và lộ trình chòm sao 3D `.journey-constellation`. Các nút màn chơi dùng `[data-journey-level="..."]`, nút chơi dùng `[data-main="..."]` hoặc `[data-hero-play="..."]`.
 3. **Lỗi âm thanh kép (Double audio on tile slide)**:
    - Trong `audio-fx.js`, hàm `slide()` xử lý một âm duy nhất tương ứng với profile được chọn. Chỉ phát âm thanh hợp nhất sau khi hai viên đã tiếp xúc xong.
 4. **Tràn ngang màn hình Mobile (Horizontal Scrollbar Overflow)**:

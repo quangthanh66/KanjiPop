@@ -10,7 +10,7 @@
  const gemBuffers={};
 
  const defaultAudioMap = {
-  tileTap: 'tile',
+  tileTap: 'gem',
   fusion: 'pop',
   win: 'pop',
   bgm: 'pop',
@@ -61,12 +61,12 @@
    const saved = localStorage.getItem('kp-custom-audio-map');
    if(saved) return Object.assign({}, defaultAudioMap, JSON.parse(saved));
   }catch{}
-  let b = 'pop', p = 'tile', v = true;
+  let b = 'pop', p = 'gem', v = true;
   try{ b = localStorage.getItem('kp-bgm-style') || 'pop'; }catch{}
-  try{ p = localStorage.getItem('kanji-pop-sound-profile') || 'tile'; }catch{}
+  try{ p = localStorage.getItem('kanji-pop-sound-profile') || 'gem'; }catch{}
   try{ v = localStorage.getItem('kp-voice-enabled') !== 'false'; }catch{}
   return {
-   tileTap: ['tile','gem','wood','stone','soft','porcelain','metal','quartz','bamboo','water'].includes(p)?p:'tile',
+   tileTap: ['tile','gem','wood','stone','soft','porcelain','metal','quartz','bamboo','water'].includes(p)?p:'gem',
    fusion: b === 'zen' ? 'zen' : 'pop',
    win: b === 'zen' ? 'zen' : 'pop',
    bgm: b,
@@ -873,7 +873,7 @@
   select();
  }
 
- function getSoundProfile(){ return customAudioMap.tileTap || 'tile'; }
+ function getSoundProfile(){ return customAudioMap.tileTap || 'gem'; }
 
  function getAudioMap(){
   return Object.assign({}, customAudioMap);

@@ -403,241 +403,32 @@
   return `<button type="button" class="shelf-gem-card ${known?'unlocked':'locked'}" data-kanji-preview="${id}" aria-label="${known?id+' — '+(r.hanViet||I18N.getRecipeMeaning(r)):'Chưa mở khóa, màn '+lvl}"><span class="shelf-gem-icon" lang="ja">${known?id:'?'}</span><span class="shelf-gem-name">${known?(r.hanViet||I18N.getRecipeMeaning(r)):'Màn '+String(lvl).padStart(2,'0')}</span></button>`;
  }).join('');
 
-  const conceptStageHtml=`<div class="concept-art-stage" role="group" aria-label="Bản đồ Kanjidle">
-   <svg class="hyb-sky-svg" viewBox="0 0 1376 768" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <defs>
-     <linearGradient id="hybSkyGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#1991eb"/>
-      <stop offset="48%" stop-color="#33adf6"/>
-      <stop offset="100%" stop-color="#58c8fa"/>
-     </linearGradient>
-     <radialGradient id="hybLogoGlow" cx="20%" cy="18%" r="24%">
-      <stop offset="0%" stop-color="#c8f6ff" stop-opacity="0.72"/>
-      <stop offset="55%" stop-color="#7be0ff" stop-opacity="0.28"/>
-      <stop offset="100%" stop-color="#33adf6" stop-opacity="0"/>
-     </radialGradient>
-     <radialGradient id="hybCloud3Glow" cx="50%" cy="55.5%" r="16.5%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.96"/>
-      <stop offset="42%" stop-color="#a2f5ff" stop-opacity="0.72"/>
-      <stop offset="75%" stop-color="#4dd2ff" stop-opacity="0.25"/>
-      <stop offset="100%" stop-color="#33adf6" stop-opacity="0"/>
-     </radialGradient>
-     <radialGradient id="hybChestGlow" cx="86.9%" cy="50.5%" r="13%">
-      <stop offset="0%" stop-color="#fffbe0" stop-opacity="0.78"/>
-      <stop offset="55%" stop-color="#ffe999" stop-opacity="0.30"/>
-      <stop offset="100%" stop-color="#33adf6" stop-opacity="0"/>
-     </linearGradient>
-     <linearGradient id="hybCornerCloudTop" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#ffffff"/>
-      <stop offset="70%" stop-color="#e8f6ff"/>
-      <stop offset="100%" stop-color="#c9e9fc"/>
-     </linearGradient>
-     <linearGradient id="hybCornerCloudBot" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#ffffff"/>
-      <stop offset="65%" stop-color="#e6f5ff"/>
-      <stop offset="100%" stop-color="#c4e6fb"/>
-     </linearGradient>
-     <linearGradient id="hybStarGold" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#fff380"/>
-      <stop offset="55%" stop-color="#ffcc29"/>
-      <stop offset="100%" stop-color="#f09819"/>
-     </linearGradient>
-     <linearGradient id="hybCyanDisk" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#6cf0ff"/>
-      <stop offset="48%" stop-color="#22c5ff"/>
-      <stop offset="100%" stop-color="#0b86e6"/>
-     </linearGradient>
-     <filter id="hybCloudSoft" x="-10%" y="-10%" width="120%" height="120%">
-      <feGaussianBlur stdDeviation="2.2"/>
-     </filter>
-     <g id="hybSparkle">
-      <path d="M0,-16 C2,-4 4,-2 16,0 C4,2 2,4 0,16 C-2,4 -4,2 -16,0 C-4,-2 -2,-4 0,-16 Z" fill="#fff6a8"/>
-      <circle cx="0" cy="0" r="3.5" fill="#ffffff"/>
-     </g>
-     <g id="hybStar3D">
-      <path d="M0,-28 L8.5,-9.5 L28.5,-6.5 L14,8 L17.5,28 L0,18.5 L-17.5,28 L-14,8 L-28.5,-6.5 L-8.5,-9.5 Z" fill="url(#hybStarGold)" stroke="#b8650a" stroke-width="3" stroke-linejoin="round"/>
-      <path d="M0,-23 L6.5,-7.5 L22,-5 L10.5,6.5 L13.5,22 L0,14.5" fill="#ffe761" opacity="0.65"/>
-      <ellipse cx="-5" cy="-11" rx="4" ry="2.2" transform="rotate(-25 -5 -11)" fill="#ffffff" opacity="0.85"/>
-     </g>
-    </defs>
-    <rect width="1376" height="768" fill="url(#hybSkyGrad)"/>
-    <rect width="1376" height="768" fill="url(#hybLogoGlow)"/>
-    <rect width="1376" height="768" fill="url(#hybCloud3Glow)"/>
-    <rect width="1376" height="768" fill="url(#hybChestGlow)"/>
+  const gemCutClasses = ['gem-sapphire', 'gem-emerald', 'gem-amber', 'gem-amethyst', 'gem-crown'];
 
-    <!-- Unified Seamless Vector Corner Clouds (opacity on group only, so zero overlapping circle seams!) -->
-    <g opacity="0.92" filter="url(#hybCloudSoft)">
-     <!-- Top-Right Cloud Bank -->
-     <g fill="#bae2fc" transform="translate(-4, 6)">
-      <circle cx="985" cy="-18" r="76"/><circle cx="1078" cy="8" r="86"/><circle cx="1188" cy="25" r="95"/><circle cx="1312" cy="42" r="114"/><circle cx="1388" cy="132" r="94"/>
-     </g>
-     <g fill="url(#hybCornerCloudTop)">
-      <circle cx="985" cy="-18" r="76"/><circle cx="1078" cy="8" r="86"/><circle cx="1188" cy="25" r="95"/><circle cx="1312" cy="42" r="114"/><circle cx="1388" cy="132" r="94"/>
-     </g>
-
-     <!-- Bottom-Left Cloud Bank -->
-     <g fill="#bae2fc" transform="translate(4, -6)">
-      <circle cx="-12" cy="598" r="94"/><circle cx="65" cy="668" r="108"/><circle cx="175" cy="728" r="104"/><circle cx="290" cy="768" r="94"/><circle cx="405" cy="788" r="84"/>
-     </g>
-     <g fill="url(#hybCornerCloudBot)">
-      <circle cx="-12" cy="598" r="94"/><circle cx="65" cy="668" r="108"/><circle cx="175" cy="728" r="104"/><circle cx="290" cy="768" r="94"/><circle cx="405" cy="788" r="84"/>
-     </g>
-
-     <!-- Bottom-Right Cloud Bank -->
-     <g fill="#bae2fc" transform="translate(-4, -6)">
-      <circle cx="965" cy="792" r="84"/><circle cx="1075" cy="750" r="96"/><circle cx="1195" cy="718" r="110"/><circle cx="1325" cy="648" r="118"/><circle cx="1392" cy="538" r="94"/>
-     </g>
-     <g fill="url(#hybCornerCloudBot)">
-      <circle cx="965" cy="792" r="84"/><circle cx="1075" cy="750" r="96"/><circle cx="1195" cy="718" r="110"/><circle cx="1325" cy="648" r="118"/><circle cx="1392" cy="538" r="94"/>
-     </g>
-    </g>
-
-    <!-- Crisp Vector 4-Point Sparkles matching Concept Art -->
-    <use href="#hybSparkle" transform="translate(140,76) scale(0.95)"/>
-    <use href="#hybSparkle" transform="translate(105,115) scale(0.55)"/>
-    <use href="#hybSparkle" transform="translate(366,56) scale(0.65)"/>
-    <use href="#hybSparkle" transform="translate(408,85) scale(0.9)"/>
-    <use href="#hybSparkle" transform="translate(358,108) scale(0.5)"/>
-    <use href="#hybSparkle" transform="translate(568,85) scale(1.35)"/>
-    <use href="#hybSparkle" transform="translate(136,277) scale(0.7)"/>
-    <use href="#hybSparkle" transform="translate(882,317) scale(0.85)"/>
-    <use href="#hybSparkle" transform="translate(1198,200) scale(1.25)"/>
-    <use href="#hybSparkle" transform="translate(1108,348) scale(0.65)"/>
-    <use href="#hybSparkle" transform="translate(1255,326) scale(0.6)"/>
-    <use href="#hybSparkle" transform="translate(1290,378) scale(0.8)"/>
-    <use href="#hybSparkle" transform="translate(225,585) scale(1.2)"/>
-    <use href="#hybSparkle" transform="translate(348,645) scale(0.55)"/>
-    <use href="#hybSparkle" transform="translate(56,725) scale(0.95)"/>
-    <use href="#hybSparkle" transform="translate(612,598) scale(0.55)"/>
-    <use href="#hybSparkle" transform="translate(625,705) scale(0.8)"/>
-    <use href="#hybSparkle" transform="translate(712,718) scale(0.65)"/>
-    <use href="#hybSparkle" transform="translate(1284,558) scale(0.75)"/>
-
-    <!-- 4 Crisp Vector 3D Glossy Yellow Stars -->
-    <use href="#hybStar3D" transform="translate(700,274) rotate(12) scale(0.96)"/>
-    <use href="#hybStar3D" transform="translate(1258,233) rotate(-8) scale(0.92)"/>
-    <use href="#hybStar3D" transform="translate(644,613) rotate(-14) scale(0.88)"/>
-    <use href="#hybStar3D" transform="translate(1038,671) rotate(10) scale(0.88)"/>
-
-    <!-- 2 Crisp Vector Faceted Gems at Bottom -->
-    <g transform="translate(562,668) rotate(18)">
-     <polygon points="-24,-22 24,-22 24,22 -24,22" fill="#1b76eb" stroke="#0d3b8c" stroke-width="3" stroke-linejoin="round"/>
-     <polygon points="-24,-22 24,-22 12,-10 -12,-10" fill="#8ce7ff"/>
-     <polygon points="-24,-22 -12,-10 -12,10 -24,22" fill="#4cc4ff"/>
-     <polygon points="-12,-10 12,-10 12,10 -12,10" fill="#2b95ff"/>
-     <polygon points="12,-10 24,-22 24,22 12,10" fill="#125bc4"/>
-     <circle cx="-10" cy="-10" r="3" fill="#ffffff"/>
-    </g>
-    <g transform="translate(928,724) rotate(-16)">
-     <polygon points="-22,-26 22,-26 34,-6 0,28 -34,-6" fill="#e02454" stroke="#7a0c2e" stroke-width="3" stroke-linejoin="round"/>
-     <polygon points="-22,-26 22,-26 12,-8 -12,-8" fill="#ff94b2"/>
-     <polygon points="-22,-26 -12,-8 -34,-6" fill="#ff5c8a"/>
-     <polygon points="-12,-8 12,-8 0,28" fill="#eb2f64"/>
-     <polygon points="12,-8 22,-26 34,-6 0,28" fill="#b31242"/>
-     <circle cx="-8" cy="-14" r="3.2" fill="#ffffff"/>
-    </g>
-   </svg>
-
-   <div class="hyb-scene">
-    <!-- 7 Crisp Vector 3D Kanji Tiles matching Concept Art -->
-    <div class="hyb-tile" style="left:44.8%;top:13.8%;transform:rotate(-13deg)"><span style="color:#c93b2b">日</span></div>
-    <div class="hyb-tile" style="left:52.8%;top:8.6%;transform:rotate(8deg)"><span style="color:#2b6ec2">月</span></div>
-    <div class="hyb-tile" style="left:60.0%;top:16.8%;transform:rotate(13deg)"><span style="color:#3e8924">木</span></div>
-
-    <div class="hyb-tile hyb-tile-lg" style="left:3.1%;top:73.5%;transform:rotate(-24deg)"><span style="color:#c93b2b">日</span></div>
-    <div class="hyb-tile hyb-tile-md" style="left:14.7%;top:81.8%;transform:rotate(12deg)"><span style="color:#3e8924">月</span></div>
-    <div class="hyb-tile hyb-tile-md" style="left:53.9%;top:77.8%;transform:rotate(18deg)"><span style="color:#1e74c9">水</span></div>
-    <div class="hyb-tile hyb-tile-lg" style="left:86.6%;top:76.0%;transform:rotate(21deg)"><span style="color:#c93b2b">火</span></div>
-
-    <!-- Floating Crystal Rock Islands (Clean Transparent Sprites) -->
-    <img src="sp-rockLeft.png?v=17" alt="" class="hyb-sprite" style="left:1.89%;top:33.59%;width:6.76%;height:16.54%" draggable="false">
-    <img src="sp-rockRight.png?v=17" alt="" class="hyb-sprite" style="left:69.62%;top:20.57%;width:10.54%;height:18.10%" draggable="false">
-
-    <!-- Top-Left KANJIDLE Logo (Clean Transparent Sprite + Interactive Hotspot) -->
-    <button type="button" class="hyb-sprite-btn hs-logo" data-concept-logo aria-label="Kanjidle — Về màn hình chính" title="Kanjidle" style="left:3.27%;top:4.95%;width:32.41%;height:24.87%">
-     <img src="sp-logo.png?v=17" alt="Kanjidle" draggable="false">
-    </button>
-
-    <!-- Top-Right Crisp 100% Vector 3D Gold/Blue Buttons (Language & Sound) -->
-    <button type="button" class="hyb-top-btn" data-concept-lang aria-label="Chuyển ngôn ngữ / Switch language" title="Ngôn ngữ / Language" style="left:83.0%;top:3.1%">
-     <svg viewBox="0 0 100 100" aria-hidden="true">
-      <circle cx="50" cy="52" r="46" fill="#b86b11"/>
-      <circle cx="50" cy="49" r="46" fill="url(#hybStarGold)" stroke="#8a4b08" stroke-width="2.5"/>
-      <circle cx="50" cy="49" r="37" fill="#1f97ed" stroke="#0d5c9e" stroke-width="2"/>
-      <ellipse cx="50" cy="34" rx="28" ry="16" fill="#6cd0ff" opacity="0.45"/>
-      <rect x="27" y="28" width="46" height="40" rx="9" fill="none" stroke="#ffffff" stroke-width="4.5"/>
-      <text x="41" y="53" fill="#ffffff" font-family="sans-serif" font-weight="900" font-size="22" text-anchor="middle">文</text>
-      <text x="61" y="62" fill="#ffffff" font-family="sans-serif" font-weight="900" font-size="18" text-anchor="middle">A</text>
-     </svg>
-    </button>
-
-    <button type="button" class="hyb-top-btn ${sound?'is-on':'is-muted'}" data-concept-sound aria-label="Bật / Tắt âm thanh" aria-pressed="${sound}" title="Âm thanh / Sound" style="left:90.8%;top:3.1%">
-     <svg viewBox="0 0 100 100" aria-hidden="true">
-      <circle cx="50" cy="52" r="46" fill="#b86b11"/>
-      <circle cx="50" cy="49" r="46" fill="url(#hybStarGold)" stroke="#8a4b08" stroke-width="2.5"/>
-      <circle cx="50" cy="49" r="37" fill="#1f97ed" stroke="#0d5c9e" stroke-width="2"/>
-      <ellipse cx="50" cy="34" rx="28" ry="16" fill="#6cd0ff" opacity="0.45"/>
-      <path d="M30,42 L41,42 L54,30 L54,68 L41,56 L30,56 Z" fill="#ffffff" stroke="#115c9c" stroke-width="2" stroke-linejoin="round"/>
-      <path d="M62,38 C67,43 67,55 62,60" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round"/>
-      <path d="M69,31 C77,40 77,58 69,67" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round"/>
-     </svg>
-    </button>
-
-    <!-- 5 Cloud Islands: Flawless Blank-Text 3D Cloud Sprites + 100% Razor-Sharp 4K SVG Vector Numbers & Labels -->
-    <button type="button" class="hyb-sprite-btn hyb-cloud-btn" data-concept-level="${levels[0].id}" aria-label="Level 01: ${levels[0].title}" title="Level 01: ${levels[0].title}" style="left:5.81%;top:50.00%;width:15.77%;height:20.96%">
-     <img src="sp-cloudStd.png?v=18" alt="" draggable="false">
-     <svg class="hyb-cloud-label-svg" viewBox="0 0 218 163" aria-hidden="true">
-      <text x="109" y="45" text-anchor="middle" class="hyb-podium-num">01</text>
-      <text x="109" y="121" text-anchor="middle" class="hyb-level-txt">Level 01</text>
-     </svg>
-    </button>
-
-    <button type="button" class="hyb-sprite-btn hyb-cloud-btn" data-concept-level="${levels[1].id}" aria-label="Level 02: ${levels[1].title}" title="Level 02: ${levels[1].title}" style="left:23.98%;top:56.90%;width:15.77%;height:20.96%">
-     <img src="sp-cloudStd.png?v=18" alt="" draggable="false">
-     <svg class="hyb-cloud-label-svg" viewBox="0 0 218 163" aria-hidden="true">
-      <text x="109" y="45" text-anchor="middle" class="hyb-podium-num">02</text>
-      <text x="109" y="121" text-anchor="middle" class="hyb-level-txt">Level 02</text>
-     </svg>
-    </button>
-
-    <button type="button" class="hyb-sprite-btn hyb-cloud-btn is-active" data-concept-level="${levels[2].id}" aria-label="Level 03: ${levels[2].title}" title="Level 03: ${levels[2].title}" style="left:42.10%;top:48.05%;width:15.80%;height:21.10%">
-     <img src="sp-cloudStd.png?v=18" alt="" draggable="false">
-     <svg class="hyb-cloud-label-svg" viewBox="0 0 218 163" aria-hidden="true">
-      <ellipse cx="109" cy="34.5" rx="52" ry="30.5" fill="url(#hybCyanDisk)" stroke="#0d6ec2" stroke-width="2"/>
-      <ellipse cx="109" cy="32" rx="45" ry="24" fill="none" stroke="#b5f8ff" stroke-width="3.5" opacity="0.8"/>
-      <text x="109" y="45" text-anchor="middle" class="hyb-podium-num is-cyan">03</text>
-      <text x="109" y="121" text-anchor="middle" class="hyb-level-txt">Level 03</text>
-     </svg>
-    </button>
-
-    <button type="button" class="hyb-sprite-btn hyb-cloud-btn" data-concept-level="${levels[3].id}" aria-label="Level 04: ${levels[3].title}" title="Level 04: ${levels[3].title}" style="left:60.61%;top:56.90%;width:15.77%;height:20.96%">
-     <img src="sp-cloudStd.png?v=18" alt="" draggable="false">
-     <svg class="hyb-cloud-label-svg" viewBox="0 0 218 163" aria-hidden="true">
-      <text x="109" y="45" text-anchor="middle" class="hyb-podium-num">04</text>
-      <text x="109" y="121" text-anchor="middle" class="hyb-level-txt">Level 04</text>
-     </svg>
-    </button>
-
-    <button type="button" class="hyb-sprite-btn hyb-cloud-btn" data-concept-level="${levels[4].id}" aria-label="Level 05: ${levels[4].title}" title="Level 05: ${levels[4].title}" style="left:78.78%;top:42.45%;width:16.35%;height:27.99%">
-     <img src="sp-cloud5.png?v=18" alt="" draggable="false">
-     <svg class="hyb-cloud-label-svg" viewBox="0 0 225 215" aria-hidden="true">
-      <text x="112.5" y="177" text-anchor="middle" class="hyb-level-txt">Level 05</text>
-     </svg>
-    </button>
-   </div>
-  </div>`;
-
-  $('#map-screen').innerHTML=conceptStageHtml+`<div class="grade-toggle-bar"><button type="button" class="grade-pill ${currentGrade==='N5'?'active':''}" data-switch-grade="N5"><span class="grade-tag">JLPT N5</span> Sơ cấp</button><button type="button" class="grade-pill ${currentGrade==='N4'?'active':''}" data-switch-grade="N4"><span class="grade-tag">JLPT N4</span> Mới ✦</button>${dailyPillHtml}</div><div class="journey-toolbar"><span class="journey-eyebrow">${I18N.t('journeyEyebrow')} ${currentGrade} · ${I18N.t('chapter')} ${mapChapter+1}</span><div><button class="journey-album" data-journey-album aria-label="Album: ${profile.collected.length} trên 24 chữ"><i data-lucide="book-open" aria-hidden="true"></i><span>${profile.collected.length}<small> / 24</small></span></button><button class="journey-menu" data-journey-menu aria-label="${I18N.t('menuTitle')}"><i data-lucide="ellipsis" aria-hidden="true"></i></button></div></div>
+  $('#map-screen').innerHTML = `<div class="grade-toggle-bar"><button type="button" class="grade-pill ${currentGrade==='N5'?'active':''}" data-switch-grade="N5"><span class="grade-tag">JLPT N5</span> Sơ cấp</button><button type="button" class="grade-pill ${currentGrade==='N4'?'active':''}" data-switch-grade="N4"><span class="grade-tag">JLPT N4</span> Mới ✦</button>${dailyPillHtml}</div><div class="journey-toolbar"><span class="journey-eyebrow">${I18N.t('journeyEyebrow')} ${currentGrade} · ${I18N.t('chapter')} ${mapChapter+1}</span><div><button class="journey-album" data-journey-album aria-label="Album: ${profile.collected.length} trên 24 chữ"><i data-lucide="book-open" aria-hidden="true"></i><span>${profile.collected.length}<small> / 24</small></span></button><button class="journey-menu" data-journey-menu aria-label="${I18N.t('menuTitle')}"><i data-lucide="ellipsis" aria-hidden="true"></i></button></div></div>
  <div class="journey-layout" data-chapter="${mapChapter}">
   <aside class="journey-overview">
-   <div class="journey-chapter-switch">
-    <button data-chapter-step="-1" aria-label="Chương trước" ${mapChapter===0?'disabled':''}><i data-lucide="chevron-left" aria-hidden="true"></i></button>
-    <div><span class="journey-eyebrow">${I18N.t('chapter')} ${String(mapChapter+1).padStart(2,'0')} <span>/ 03</span></span><h1 tabindex="-1">${chapter.name}</h1></div>
-    <button data-chapter-step="1" aria-label="Chương tiếp theo" ${mapChapter===2?'disabled':''}><i data-lucide="chevron-right" aria-hidden="true"></i></button>
+   <div class="journey-console-card">
+    <div class="journey-chapter-switch">
+     <button data-chapter-step="-1" aria-label="Chương trước" ${mapChapter===0?'disabled':''}><i data-lucide="chevron-left" aria-hidden="true"></i></button>
+     <div><span class="journey-eyebrow">${I18N.t('chapter')} ${String(mapChapter+1).padStart(2,'0')} <span>/ 03</span></span><h1 tabindex="-1">${chapter.name}</h1></div>
+     <button data-chapter-step="1" aria-label="Chương tiếp theo" ${mapChapter===2?'disabled':''}><i data-lucide="chevron-right" aria-hidden="true"></i></button>
+    </div>
+    <p class="journey-subtitle">${chapter.subtitle}</p>
+    <div class="journey-chapter-progress" aria-label="Đã hoàn thành ${done} trên 5 màn"><span>${done}/5 màn · ★ ${chapterTotalStars}/${maxChapterStars} sao</span><div aria-hidden="true">${levels.map(l=>'<i class="'+(profile.results[l.id]?'done':'')+'"></i>').join('')}</div></div>
+    
+    <div class="journey-hero-cta">
+     <button type="button" class="journey-hero-play-btn" data-hero-play="${action}" ${locked?'disabled':''}>
+      <span class="hero-play-gem" aria-hidden="true">💎</span>
+      <span class="hero-play-text">
+       <strong>${label}</strong>
+       <small>${locked?'Hoàn thành màn trước để mở khóa':selectedLevel.title}</small>
+      </span>
+      <span class="hero-play-arrow" aria-hidden="true">▶</span>
+     </button>
+    </div>
    </div>
-   <p class="journey-subtitle">${chapter.subtitle}</p>
-   <div class="journey-chapter-progress" aria-label="Đã hoàn thành ${done} trên 5 màn"><span>${done}/5 màn · ★ ${chapterTotalStars}/${maxChapterStars} sao</span><div aria-hidden="true">${levels.map(l=>'<i class="'+(profile.results[l.id]?'done':'')+'"></i>').join('')}</div></div>
-   
+
    <div class="journey-kanji-shelf">
     <div class="shelf-header"><span>${I18N.t('shelfTitle')} ${mapChapter+1}</span><span class="shelf-count-badge">${chapterCollectedCount} / 8 ${I18N.t('shelfOpened')}</span></div>
     <div class="shelf-grid">${shelfCards}</div>
@@ -650,16 +441,22 @@
    <svg class="journey-trail" viewBox="0 0 120 100" preserveAspectRatio="none" aria-hidden="true">${paths.map((d,i)=>'<path d="'+d+'" class="'+(profile.results[levels[i].id]?'traveled':'')+'"/>').join('')}</svg>
    ${levels.map((l,i)=>{
     const r=profile.results[l.id],isLocked=l.id>next,current=l.id===mapSelected;
+    const gemCut=gemCutClasses[i]||'gem-sapphire';
+    const charChips=(l.newChars||[]).map(c=>`<span class="journey-char-chip" lang="ja">${c}</span>`).join('');
     let captionHtml='';
     const playText=action==='resume'?I18N.t('resume'):result?I18N.t('replay'):I18N.t('play');
     if(current){
      captionHtml=`<span role="button" tabindex="0" class="journey-node-play-btn journey-play" data-main="${action}" ${locked?'aria-disabled="true"':'aria-label="'+playText+' màn '+(l.id+1)+'"'}><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg><span>${playText}</span></span>`;
     }else if(r){
-     captionHtml=`<span class="journey-stop-caption"><span class="journey-stars" aria-hidden="true">${'★'.repeat(r.stars)}<span>${'★'.repeat(3-r.stars)}</span></span></span>`;
+     captionHtml=`<span class="journey-stop-caption completed-caption"><span class="journey-stars" aria-hidden="true">${'★'.repeat(r.stars)}<span>${'★'.repeat(3-r.stars)}</span></span></span>`;
+    }else if(charChips){
+     captionHtml=`<span class="journey-stop-caption chips-caption">${charChips}</span>`;
     }else{
      captionHtml=`<span class="journey-stop-caption">${i===4?I18N.t('treasure'):isLocked?I18N.t('locked'):I18N.t('unlocked')}</span>`;
     }
-    return `<div class="journey-node-base" style="--stop-row:${rows[i]};--stop-column:${cols[i]}" aria-hidden="true"></div><button class="journey-stop ${r?'completed':''} ${current?'selected':''} ${i===4?'treasure':''}" style="--stop-row:${rows[i]};--stop-column:${cols[i]}" data-journey-level="${l.id}" ${isLocked?'disabled':''} aria-pressed="${current}" aria-label="Màn ${l.id+1}: ${l.title}${isLocked?', chưa mở khóa':r?', '+r.stars+' sao':''}"><span class="journey-stop-body"><span>${String(l.id+1).padStart(2,'0')}</span>${isLocked?'<i class="journey-lock" data-lucide="lock" aria-hidden="true"></i>':''}</span>${captionHtml}</button>`;
+    const crownBadge=i===4?'<span class="journey-crown-crest" aria-hidden="true">👑</span>':'';
+    const activeAura=current?'<div class="journey-active-aura" aria-hidden="true"><span class="aura-ring aura-r1"></span><span class="aura-ring aura-r2"></span></div>':'';
+    return `<div class="journey-node-base" style="--stop-row:${rows[i]};--stop-column:${cols[i]}" aria-hidden="true"></div><button class="journey-stop ${gemCut} ${r?'completed':''} ${current?'selected':''} ${i===4?'treasure':''}" style="--stop-row:${rows[i]};--stop-column:${cols[i]}" data-journey-level="${l.id}" ${isLocked?'disabled':''} aria-pressed="${current}" aria-label="Màn ${l.id+1}: ${l.title}${isLocked?', chưa mở khóa':r?', '+r.stars+' sao':''}">${activeAura}<span class="journey-stop-body"><span class="gem-shine" aria-hidden="true"></span>${crownBadge}<span>${String(l.id+1).padStart(2,'0')}</span>${isLocked?'<i class="journey-lock" data-lucide="lock" aria-hidden="true"></i>':''}</span>${captionHtml}</button>`;
    }).join('')}
   </div>
  </div>`;
@@ -1076,10 +873,10 @@ function showSettings(){
   }
   if(e.target.closest('[data-journey-album]')){A?.select();changeView('album');return;}
   if(e.target.closest('[data-journey-menu]')){A?.select();showJourneyMenu();return;}
-  const mainBtn=e.target.closest('[data-main]');
+  const mainBtn=e.target.closest('[data-main],[data-hero-play]');
   if(mainBtn&&!mainBtn.hasAttribute('disabled')&&mainBtn.getAttribute('aria-disabled')!=='true'){
    A?.select();
-   const main=mainBtn.dataset.main;
+   const main=mainBtn.dataset.main||mainBtn.dataset.heroPlay;
    if(main==='resume')changeView('play');
    else if(main==='album')changeView('album');
    else startLevel(Number(main));
