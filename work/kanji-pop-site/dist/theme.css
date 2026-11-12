@@ -60,14 +60,33 @@
 
 
 
-/* Kanjidle Graphic Logo - Prominent Brand Scale */
-#kanji-pop .kp-logo {
+
+/* Kanjidle Graphic Logo - Home Button & Prominent Scale */
+#kanji-pop #kp-home {
+  display: none !important;
+}
+#kanji-pop .kp-logo,
+#kanji-pop button.kp-logo {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   transform: none;
   text-shadow: none;
   line-height: 1;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  border-radius: 16px;
+  user-select: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+#kanji-pop .kp-logo:focus-visible,
+#kanji-pop button.kp-logo:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 4px;
 }
 #kanji-pop .kp-logo-img {
   display: block;
@@ -78,12 +97,12 @@
   filter: drop-shadow(0 6px 18px rgba(7, 43, 89, 0.25));
   transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
   user-select: none;
-  cursor: pointer;
+  pointer-events: auto;
 }
-#kanji-pop .kp-logo-img:hover {
+#kanji-pop .kp-logo:hover .kp-logo-img {
   transform: scale(1.05);
 }
-#kanji-pop .kp-logo-img:active {
+#kanji-pop .kp-logo:active .kp-logo-img {
   transform: scale(0.96);
 }
 @media (max-width: 480px) {

@@ -31,7 +31,7 @@
    const rowGap=px('rowGap'),paddingY=px('paddingTop')+px('paddingBottom');
    // Reserve tutorial height when fitting, even when the compact footer is shown.
    // Hiding a tip can shrink the shell without resizing or moving the board.
-   const fixed=$('#kp-home').getBoundingClientRect().height+$('.target-toolbar').getBoundingClientRect().height+44+rowGap*3+paddingY+footer;
+   const fixed=($('#kp-home')?.getBoundingClientRect().height || 0)+$('.target-toolbar').getBoundingClientRect().height+44+rowGap*3+paddingY+footer;
    const minWidth=state.cols*minCell+(state.cols-1)*gap+inset+border;
    const minHeight=fixed+minWidth*state.rows/state.cols;
    const available=Math.max(innerHeight,minHeight)-fixed;
@@ -809,7 +809,8 @@ function showSettings(){
  });
  document.addEventListener('visibilitychange',()=>{if(document.hidden){activeFx?.cancel?.();audio?.suspend();save();}else if(sound)audio?.resume();});
 
- $('#hint').addEventListener('click',showHint);$('#help').addEventListener('click',showMobileMenu);$('#kp-home').addEventListener('click',()=>changeView('map'));
+ $('#hint').addEventListener('click',showHint);$('#help').addEventListener('click',showMobileMenu);$('#kp-home')?.addEventListener('click',()=>changeView('map'));
+  $('.kp-logo')?.addEventListener('click',()=>{A?.select?.();changeView('map');});
  $('#nav-map').addEventListener('click',()=>changeView('map'));$('#nav-album').addEventListener('click',()=>changeView('album'));$('#nav-play').addEventListener('click',()=>changeView('play'));
  $('#kp-sound').addEventListener('click',()=>{sound=!sound;save();render();if(sound)A?.hint();});
  $('#map-screen').addEventListener('click',e=>{
