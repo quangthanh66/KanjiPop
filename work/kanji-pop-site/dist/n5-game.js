@@ -413,6 +413,7 @@
     <div class="chapter-switch-title">
      <span class="journey-eyebrow">${I18N.t('chapter')} ${String(mapChapter+1).padStart(2,'0')} / 03</span>
      <h1 tabindex="-1">${chapter.name}</h1>
+     <p class="journey-subtitle">${chapter.subtitle}</p>
      <div class="journey-chapter-progress" aria-label="Đã hoàn thành ${done} trên 5 màn"><span>${done}/5 màn · ★ ${chapterTotalStars}/${maxChapterStars} sao</span><div aria-hidden="true">${levels.map(l=>'<i class="'+(profile.results[l.id]?'done':'')+'"></i>').join('')}</div></div>
     </div>
     <button data-chapter-step="1" aria-label="Chương tiếp theo" ${mapChapter===2?'disabled':''}><i data-lucide="chevron-right" aria-hidden="true"></i></button>

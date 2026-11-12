@@ -61,7 +61,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: min(94vw, 1160px);
+  max-width: min(94vw, 1040px);
   height: 48px;
   min-height: 48px;
   margin: 0 auto;
@@ -125,7 +125,7 @@
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  max-width: min(94vw, 1160px);
+  max-width: min(94vw, 1040px);
   margin: 0 auto;
   gap: 8px;
   min-height: 0;
@@ -248,37 +248,55 @@
 #kanji-pop .journey-menu { width: 36px; padding: 0; color: #154e7c; }
 #kanji-pop .journey-menu svg { width: 18px; height: 18px; }
 
-/* 4. Main Balanced Dashboard (.journey-layout) - Centered & Cohesive */
+/* 4. Unified Master Game Stage (.journey-layout) */
 #kanji-pop .journey-layout {
   display: grid;
-  grid-template-columns: minmax(380px, 440px) minmax(460px, 580px);
+  grid-template-columns: minmax(360px, 420px) minmax(460px, 600px);
   justify-content: center;
-  align-items: center;
-  gap: clamp(20px, 2.5vw, 36px);
+  align-items: stretch;
+  gap: 0;
   width: 100%;
-  max-width: min(94vw, 1160px);
+  max-width: min(94vw, 1040px);
+  height: clamp(420px, 58vh, 470px);
   margin: auto;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.82) 0%, rgba(235, 248, 255, 0.68) 100%);
+  border: 2.5px solid rgba(255, 255, 255, 0.98);
+  border-radius: 28px;
+  box-shadow: 0 16px 44px rgba(10, 50, 90, 0.12), inset 0 2px 3px #fff;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-sizing: border-box;
+  overflow: hidden;
   flex: 1;
   min-height: 0;
 }
 
-/* 5. Left Unified Glass Card: Switcher + Kanji Shelf + Hero Play Button */
+/* 5. Left Wing: Learning Deck & Chapter Controls */
 #kanji-pop .journey-overview {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
   height: 100%;
-  max-height: 450px;
-  background: rgba(255, 255, 255, 0.72);
-  border: 2px solid rgba(255, 255, 255, 0.95);
-  border-radius: 24px;
-  padding: 16px 18px;
-  box-shadow: 0 10px 32px rgba(10, 50, 90, 0.1), inset 0 1px 2px #fff;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  padding: 16px 20px 18px 20px;
+  border-right: 1.5px solid rgba(255, 255, 255, 0.75);
   box-sizing: border-box;
-  gap: 10px;
+  gap: 14px;
+  background: none;
+  border-top: none;
+  border-bottom: none;
+  border-left: none;
+  border-radius: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+#kanji-pop .journey-subtitle {
+  font-size: 11px;
+  font-weight: 700;
+  color: #4a7596;
+  margin: 0 0 3px;
 }
 
 #kanji-pop .journey-chapter-switch {
@@ -540,7 +558,7 @@
   color: #175200;
 }
 
-/* 6. Right Constellation Map - Glassmorphic Celestial Stage */
+/* 6. Right Wing: Constellation World Map */
 #kanji-pop .journey-constellation {
   position: relative;
   isolation: isolate;
@@ -548,19 +566,15 @@
   grid-template-columns: repeat(12, minmax(0, 1fr));
   grid-template-rows: repeat(5, minmax(0, 1fr));
   width: 100%;
-  max-width: 580px;
   height: 100%;
-  max-height: 450px;
-  justify-self: center;
-  align-self: center;
   box-sizing: border-box;
-  padding: 16px 18px 28px;
-  background: rgba(255, 255, 255, 0.45);
-  border: 2px solid rgba(255, 255, 255, 0.85);
-  border-radius: 24px;
-  box-shadow: 0 10px 32px rgba(10, 50, 90, 0.08), inset 0 1px 2px rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  padding: 16px 20px 48px 20px;
+  background: radial-gradient(circle at 65% 45%, rgba(255, 255, 255, 0.45) 0%, rgba(220, 245, 255, 0.18) 50%, transparent 75%);
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 #kanji-pop .journey-map-aura {
@@ -1066,6 +1080,14 @@
     margin: 0 auto;
     flex: 1;
     min-height: 0;
+    height: auto;
+    background: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    overflow: visible;
   }
 
   #kanji-pop .journey-overview {
@@ -1075,6 +1097,10 @@
     padding: 7px 10px 8px;
     gap: 4px;
     border-radius: 16px;
+    border-right: none;
+    background: rgba(255, 255, 255, 0.72);
+    border: 2px solid rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 14px rgba(10, 50, 90, 0.08);
   }
 
   #kanji-pop .journey-chapter-switch {
