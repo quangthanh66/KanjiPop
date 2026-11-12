@@ -1219,26 +1219,23 @@ body:has(#kanji-pop[data-view="map"]),
 
 #kanji-pop .concept-hotspot{
  position:absolute;
- background:transparent;
- border:0;
- padding:0;
- margin:0;
+ background:transparent!important;
+ border:0!important;
+ box-shadow:none!important;
+ padding:0!important;
+ margin:0!important;
  cursor:pointer;
  border-radius:44px;
- outline:none;
- transition:backdrop-filter .18s ease,-webkit-backdrop-filter .18s ease,transform .18s ease;
- -webkit-mask-image:radial-gradient(ellipse at center,#000 58%,transparent 82%);
- mask-image:radial-gradient(ellipse at center,#000 58%,transparent 82%);
+ outline:none!important;
+ transition:background .18s ease,transform .18s ease;
 }
 
 #kanji-pop .concept-hotspot:hover{
- backdrop-filter:brightness(1.12) saturate(1.06);
- -webkit-backdrop-filter:brightness(1.12) saturate(1.06);
+ background:radial-gradient(ellipse at center,rgba(255,255,255,.18) 0%,rgba(255,255,255,0) 70%)!important;
 }
 
 #kanji-pop .concept-hotspot:active{
- backdrop-filter:brightness(0.96);
- -webkit-backdrop-filter:brightness(0.96);
+ background:radial-gradient(ellipse at center,rgba(0,0,0,.08) 0%,rgba(0,0,0,0) 70%)!important;
 }
 
 /* Exact percentage coordinates on the 1376x768 Concept Art */
