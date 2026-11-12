@@ -1,59 +1,110 @@
 /* Journey Map & Celestial Constellation UI - 3D Crystal Gemstone & Glassmorphism Aesthetic */
 
-/* 1. Main View & Sky Atmosphere */
+/* 1. Main View & Sky Atmosphere - Compact No-Scroll Screen Fitting */
 #kanji-pop#kanji-pop[data-view="map"] {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: auto minmax(min-content, 1fr) auto;
-  gap: 12px;
-  min-height: 100dvh;
-  height: auto;
-  padding: 16px max(18px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left));
-  overflow-x: clip;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 100vw;
+  height: 100dvh;
+  max-height: 100dvh;
+  padding: 10px clamp(16px, 2vw, 32px) 8px;
+  overflow: hidden;
+  box-sizing: border-box;
   background:
-    radial-gradient(ellipse 90% 55% at 50% -5%, rgba(255, 255, 255, 0.85) 0%, transparent 60%),
-    radial-gradient(circle at 90% 18%, rgba(140, 235, 255, 0.45) 0%, transparent 45%),
-    radial-gradient(circle at 10% 32%, rgba(170, 215, 255, 0.4) 0%, transparent 45%),
-    radial-gradient(ellipse 65% 30% at 80% 65%, rgba(255, 255, 255, 0.35) 0%, transparent 55%),
-    radial-gradient(ellipse 55% 25% at 15% 85%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
+    radial-gradient(ellipse 90% 50% at 50% -5%, rgba(255, 255, 255, 0.85) 0%, transparent 60%),
+    radial-gradient(circle at 6% 45%, rgba(255, 255, 255, 0.4) 0%, rgba(200, 240, 255, 0.18) 35%, transparent 65%),
+    radial-gradient(circle at 94% 45%, rgba(255, 255, 255, 0.4) 0%, rgba(200, 240, 255, 0.18) 35%, transparent 65%),
+    radial-gradient(circle at 88% 18%, rgba(140, 235, 255, 0.45) 0%, transparent 40%),
+    radial-gradient(circle at 12% 20%, rgba(170, 215, 255, 0.4) 0%, transparent 40%),
+    radial-gradient(ellipse 65% 30% at 85% 75%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
+    radial-gradient(ellipse 55% 25% at 15% 85%, rgba(255, 255, 255, 0.25) 0%, transparent 45%),
     linear-gradient(180deg, #4dc6f8 0%, #32a1ed 40%, #1c7fdc 100%);
   position: relative;
 }
 
-/* 2. Top Header & Actions */
+/* Atmospheric Floating Cloud Framing on Widescreen (Eliminates empty blue side columns) */
+@media (min-width: 1100px) {
+  #kanji-pop#kanji-pop[data-view="map"]::before {
+    content: '';
+    position: absolute;
+    left: -40px;
+    top: 25%;
+    width: clamp(140px, 15vw, 240px);
+    height: clamp(240px, 45vh, 400px);
+    background: radial-gradient(ellipse at 15% 50%, rgba(255, 255, 255, 0.6) 0%, rgba(230, 250, 255, 0.35) 45%, transparent 75%);
+    filter: blur(18px);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  #kanji-pop#kanji-pop[data-view="map"]::after {
+    content: '';
+    position: absolute;
+    right: -40px;
+    top: 25%;
+    width: clamp(140px, 15vw, 240px);
+    height: clamp(240px, 45vh, 400px);
+    background: radial-gradient(ellipse at 85% 50%, rgba(255, 255, 255, 0.6) 0%, rgba(230, 250, 255, 0.35) 45%, transparent 75%);
+    filter: blur(18px);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+/* 2. Top Header - Unified & Compact */
 #kanji-pop#kanji-pop[data-view="map"] .kp-header {
-  grid-column: 1;
-  grid-row: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin: 0;
+  max-width: min(94vw, 1160px);
+  height: 48px;
+  min-height: 48px;
+  margin: 0 auto;
   gap: 16px;
   z-index: 10;
+  flex: none;
 }
 
 #kanji-pop#kanji-pop[data-view="map"] #kp-home { display: none !important; }
+
+#kanji-pop#kanji-pop[data-view="map"] .kp-logo {
+  height: 46px;
+  padding: 0;
+  cursor: pointer;
+}
+
+#kanji-pop#kanji-pop[data-view="map"] .kp-logo .kp-logo-img {
+  height: 46px;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+}
+
 #kanji-pop .kp-header-actions { display: flex; align-items: center; gap: 8px; }
 
 #kanji-pop .kp-lang-btn,
 #kanji-pop#kanji-pop[data-view="map"] #kp-sound {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   border: 2px solid rgba(255, 255, 255, 0.95);
-  border-radius: 16px;
+  border-radius: 14px;
   background: linear-gradient(145deg, #7beaff, #029fe7 55%, #0077c2 100%);
   color: white;
   font-family: inherit;
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 800;
   letter-spacing: .5px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 0 #005c96, 0 6px 16px rgba(2, 159, 231, 0.35), inset 0 2px 2px rgba(255, 255, 255, 0.85);
-  transition: transform .12s ease, filter .15s ease, box-shadow .12s ease;
+  box-shadow: 0 3px 0 #005c96, 0 4px 12px rgba(2, 159, 231, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.85);
+  transition: transform .12s ease, filter .15s ease;
   user-select: none;
 }
 
@@ -64,33 +115,57 @@
 
 #kanji-pop .kp-lang-btn:active,
 #kanji-pop#kanji-pop[data-view="map"] #kp-sound:active {
-  transform: translateY(3px);
-  box-shadow: 0 1px 0 #005c96, 0 3px 8px rgba(2, 159, 231, 0.3);
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #005c96;
 }
 
-/* 3. Screen Container & Grade Bar */
+/* 3. Screen Container & Subbar */
 #kanji-pop#kanji-pop #map-screen {
-  grid-column: 1;
-  grid-row: 2;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  min-height: 0;
-  max-width: none;
+  justify-content: space-between;
   width: 100%;
+  max-width: min(94vw, 1160px);
+  margin: 0 auto;
+  gap: 8px;
+  min-height: 0;
+  flex: 1;
+}
+
+/* Map Top Subbar: Eyebrow + Grade Pills + Action Buttons in 1 Line */
+#kanji-pop .map-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  height: 38px;
+  min-height: 38px;
+  flex: none;
+}
+
+#kanji-pop .journey-eyebrow-chip {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  color: #0b416c;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
 }
 
 #kanji-pop .grade-toggle-bar {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  margin: 0 auto 4px;
-  padding: 5px 8px;
-  background: rgba(255, 255, 255, 0.72);
+  gap: 5px;
+  margin: 0;
+  padding: 3px 6px;
+  background: rgba(255, 255, 255, 0.75);
   border: 1.5px solid rgba(255, 255, 255, 0.95);
   border-radius: 999px;
-  box-shadow: 0 6px 20px rgba(10, 50, 90, 0.1), inset 0 1px rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 14px rgba(10, 50, 90, 0.08), inset 0 1px rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
@@ -98,62 +173,48 @@
 #kanji-pop .grade-pill {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 6px 14px;
+  gap: 6px;
+  padding: 4px 12px;
   border-radius: 999px;
   border: 1px solid transparent;
   background: transparent;
   color: #164670;
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 800;
   cursor: pointer;
-  transition: all .18s ease;
+  transition: all .16s ease;
 }
 
 #kanji-pop .grade-pill:hover {
   background: rgba(255, 255, 255, 0.55);
-  color: #0f3555;
 }
 
 #kanji-pop .grade-pill.active {
   background: linear-gradient(135deg, #ffffff, #e6f6ff);
   color: #0c3e68;
   border-color: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 4px 14px rgba(15, 60, 100, 0.15), inset 0 1px #fff;
+  box-shadow: 0 3px 10px rgba(15, 60, 100, 0.12);
 }
 
 #kanji-pop .grade-pill .grade-tag {
   display: inline-block;
-  padding: 2px 8px;
+  padding: 2px 7px;
   border-radius: 999px;
   background: #205c8a;
   color: #fff;
-  font-size: 9.5px;
+  font-size: 9px;
   font-weight: 800;
-  letter-spacing: .5px;
+  letter-spacing: .4px;
 }
 
 #kanji-pop .grade-pill.active .grade-tag {
   background: linear-gradient(135deg, #0284c7, #0369a1);
-  box-shadow: 0 2px 6px rgba(2, 132, 199, 0.35);
 }
 
-/* 4. Journey Toolbar */
-#kanji-pop .journey-toolbar {
-  display: flex;
+#kanji-pop .journey-toolbar-actions {
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  min-height: 40px;
-}
-
-#kanji-pop .journey-toolbar > div { display: flex; align-items: center; gap: 8px; }
-#kanji-pop .journey-eyebrow {
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 1.8px;
-  color: #0f446f;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.6);
+  gap: 8px;
 }
 
 #kanji-pop .journey-album,
@@ -161,264 +222,184 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  min-height: 40px;
-  background: rgba(255, 255, 255, 0.68);
+  gap: 6px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.7);
   color: #12456e;
-  padding: 0 14px;
-  border-radius: 16px;
-  box-shadow: 0 4px 14px rgba(10, 50, 90, 0.08), inset 0 1px rgba(255, 255, 255, 0.9);
+  padding: 0 12px;
+  border-radius: 14px;
+  box-shadow: 0 3px 10px rgba(10, 50, 90, 0.06), inset 0 1px rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1.5px solid rgba(255, 255, 255, 0.9);
   cursor: pointer;
-  transition: all .16s ease;
+  transition: all .15s ease;
 }
 
 #kanji-pop .journey-album:hover,
 #kanji-pop .journey-menu:hover {
-  background: rgba(255, 255, 255, 0.88);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(10, 50, 90, 0.12);
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-1px);
 }
 
-#kanji-pop .journey-album svg { width: 18px; height: 18px; color: #7c4dff; }
-#kanji-pop .journey-album span { font-size: 14.5px; font-weight: 800; font-variant-numeric: tabular-nums; }
-#kanji-pop .journey-album small { font-size: 11.5px; color: #3b749d; }
-#kanji-pop .journey-menu { width: 40px; padding: 0; color: #154e7c; }
-#kanji-pop .journey-menu svg { width: 20px; height: 20px; }
+#kanji-pop .journey-album svg { width: 16px; height: 16px; color: #7c4dff; }
+#kanji-pop .journey-album span { font-size: 13.5px; font-weight: 800; }
+#kanji-pop .journey-album small { font-size: 11px; color: #3b749d; }
+#kanji-pop .journey-menu { width: 36px; padding: 0; color: #154e7c; }
+#kanji-pop .journey-menu svg { width: 18px; height: 18px; }
 
-/* 5. Main Responsive Layout */
+/* 4. Main Balanced Dashboard (.journey-layout) - Centered & Cohesive */
 #kanji-pop .journey-layout {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(380px, 440px) minmax(460px, 580px);
+  justify-content: center;
+  align-items: center;
+  gap: clamp(20px, 2.5vw, 36px);
+  width: 100%;
+  max-width: min(94vw, 1160px);
+  margin: auto;
   flex: 1;
+  min-height: 0;
 }
 
-/* Mobile-first ordering: Console Card -> Constellation Map -> Kanji Shelf */
-@media (max-width: 899px) {
-  #kanji-pop .journey-overview {
-    display: contents;
-  }
-  #kanji-pop .journey-console-card {
-    order: 1;
-  }
-  #kanji-pop .journey-constellation {
-    order: 2;
-    margin: 6px 0;
-  }
-  #kanji-pop .journey-kanji-shelf {
-    order: 3;
-  }
-}
-
-/* 6. Console Card: Chapter Switcher, Progress, Hero CTA */
-#kanji-pop .journey-console-card {
+/* 5. Left Unified Glass Card: Switcher + Kanji Shelf + Hero Play Button */
+#kanji-pop .journey-overview {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  max-height: 450px;
   background: rgba(255, 255, 255, 0.72);
   border: 2px solid rgba(255, 255, 255, 0.95);
   border-radius: 24px;
   padding: 16px 18px;
-  box-shadow: 0 8px 28px rgba(10, 50, 90, 0.1), inset 0 1px 2px rgba(255, 255, 255, 0.95);
+  box-shadow: 0 10px 32px rgba(10, 50, 90, 0.1), inset 0 1px 2px #fff;
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
+  box-sizing: border-box;
+  gap: 10px;
 }
 
 #kanji-pop .journey-chapter-switch {
   display: grid;
-  grid-template-columns: 44px minmax(0, 1fr) 44px;
+  grid-template-columns: 38px minmax(0, 1fr) 38px;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   text-align: center;
 }
 
 #kanji-pop .journey-chapter-switch button {
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
+  width: 38px;
+  height: 38px;
   border: 1.5px solid rgba(255, 255, 255, 0.95);
   background: linear-gradient(135deg, #ffffff, #eaf6ff);
   color: #175483;
   border-radius: 50%;
-  box-shadow: 0 4px 12px rgba(10, 50, 90, 0.1), inset 0 1px #fff;
+  box-shadow: 0 3px 8px rgba(10, 50, 90, 0.08);
   cursor: pointer;
-  transition: all .16s ease;
+  transition: all .15s ease;
 }
 
 #kanji-pop .journey-chapter-switch button:hover:not(:disabled) {
   background: #ffffff;
-  transform: scale(1.08);
-  box-shadow: 0 6px 18px rgba(10, 50, 90, 0.16);
+  transform: scale(1.06);
 }
 
 #kanji-pop .journey-chapter-switch button:disabled {
-  opacity: .28;
+  opacity: .25;
   cursor: default;
 }
 
-#kanji-pop .journey-chapter-switch svg { width: 20px; height: 20px; }
+#kanji-pop .journey-chapter-switch svg { width: 18px; height: 18px; }
 
-#kanji-pop .journey-chapter-switch h1 {
-  font-size: clamp(20px, 4.5vw, 26px);
-  letter-spacing: -.6px;
-  line-height: 1.2;
-  font-weight: 900;
-  color: #0c3e68;
-  margin: 4px 0 0;
-  outline: 0;
+#kanji-pop .chapter-switch-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-#kanji-pop .journey-subtitle {
-  text-align: center;
-  color: #1e5a84;
-  font-size: 13px;
-  margin: 2px 0 4px;
-  font-weight: 600;
+#kanji-pop .chapter-switch-title .journey-eyebrow {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #0284c7;
+}
+
+#kanji-pop .chapter-switch-title h1 {
+  font-size: clamp(17px, 1.8vw, 22px);
+  letter-spacing: -.4px;
+  line-height: 1.15;
+  font-weight: 900;
+  color: #0c3e68;
+  margin: 2px 0 3px;
+  outline: 0;
 }
 
 #kanji-pop .journey-chapter-progress {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 12px;
-  font-size: 11.5px;
-  color: #21618d;
+  justify-content: center;
+  gap: 8px;
+  font-size: 11px;
+  color: #1f618d;
   font-weight: 800;
 }
 
-#kanji-pop .journey-chapter-progress > div { display: flex; gap: 6px; }
+#kanji-pop .journey-chapter-progress > div { display: flex; gap: 4px; }
 #kanji-pop .journey-chapter-progress i {
   display: block;
-  width: 20px;
-  height: 5px;
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  width: 14px;
+  height: 4px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.85);
 }
 
 #kanji-pop .journey-chapter-progress i.done {
   background: linear-gradient(90deg, #10b981, #059669);
   border-color: #34d399;
-  box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.45);
 }
 
-/* 7. Hero Play CTA Button */
-#kanji-pop .journey-hero-cta {
-  width: 100%;
-  margin: 4px 0 2px;
-}
-
-#kanji-pop .journey-hero-play-btn {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 12px 18px;
-  border-radius: 20px;
-  background: linear-gradient(135deg, #a3f443 0%, #52c902 48%, #369b00 100%);
-  color: #134200;
-  border: 2px solid #ffffff;
-  box-shadow: 0 5px 0 #257500, 0 8px 22px rgba(54, 155, 0, 0.35), inset 0 2px 2px rgba(255, 255, 255, 0.9);
-  cursor: pointer;
-  transition: transform .12s ease, box-shadow .12s ease, filter .15s ease;
-  user-select: none;
-  text-align: left;
-}
-
-#kanji-pop .journey-hero-play-btn:hover:not(:disabled) {
-  filter: brightness(1.06);
-  transform: translateY(-2px);
-  box-shadow: 0 7px 0 #257500, 0 12px 28px rgba(54, 155, 0, 0.45), inset 0 2px 2px #fff;
-}
-
-#kanji-pop .journey-hero-play-btn:active:not(:disabled) {
-  transform: translateY(3px);
-  box-shadow: 0 2px 0 #257500, 0 4px 10px rgba(54, 155, 0, 0.3), inset 0 1px #fff;
-}
-
-#kanji-pop .journey-hero-play-btn:disabled {
-  background: #a9d4e5;
-  border-color: rgba(255, 255, 255, 0.8);
-  color: #427494;
-  box-shadow: none;
-  cursor: default;
-}
-
-#kanji-pop .hero-play-gem {
-  font-size: 24px;
-  line-height: 1;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
-}
-
-#kanji-pop .hero-play-text {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-#kanji-pop .hero-play-text strong {
-  font-size: 15px;
-  font-weight: 900;
-  letter-spacing: .3px;
-  line-height: 1.25;
-}
-
-#kanji-pop .hero-play-text small {
-  font-size: 11.5px;
-  font-weight: 700;
-  opacity: .85;
-}
-
-#kanji-pop .hero-play-arrow {
-  font-size: 16px;
-  font-weight: 900;
-  color: #175200;
-}
-
-/* 8. Chapter Kanji Shelf */
+/* Compact 8-Kanji Shelf */
 #kanji-pop .journey-kanji-shelf {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 14px 16px;
-  background: rgba(255, 255, 255, 0.65);
-  border: 2px solid rgba(255, 255, 255, 0.92);
-  border-radius: 22px;
-  box-shadow: 0 6px 20px rgba(10, 50, 90, 0.08);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1.5px solid rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  padding: 8px 12px 10px;
+  box-shadow: 0 4px 14px rgba(10, 50, 90, 0.04);
 }
 
 #kanji-pop .shelf-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 800;
-  letter-spacing: 1px;
+  letter-spacing: .8px;
   color: #164972;
 }
 
 #kanji-pop .shelf-count-badge {
   display: inline-block;
-  padding: 2px 8px;
+  padding: 1px 7px;
   border-radius: 999px;
   background: rgba(2, 132, 199, 0.12);
   color: #0284c7;
-  font-size: 10.5px;
+  font-size: 10px;
   font-weight: 800;
 }
 
 #kanji-pop .shelf-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 8px;
+  gap: 6px;
 }
 
 #kanji-pop .shelf-gem-card {
@@ -426,26 +407,26 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 8px 4px 6px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.7);
+  padding: 5px 3px 4px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.72);
   border: 1.5px solid rgba(255, 255, 255, 0.95);
-  box-shadow: 0 3px 8px rgba(10, 50, 90, 0.06);
+  box-shadow: 0 2px 6px rgba(10, 50, 90, 0.05);
   cursor: pointer;
-  transition: all .16s ease;
+  transition: all .14s ease;
   text-align: center;
 }
 
 #kanji-pop .shelf-gem-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(10, 50, 90, 0.14);
-  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 5px 12px rgba(10, 50, 90, 0.12);
+  background: #ffffff;
 }
 
 #kanji-pop .shelf-gem-card.unlocked {
   background: linear-gradient(145deg, #ffffff 0%, #eaf6ff 100%);
   border-color: #ffffff;
-  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.12), inset 0 1px #fff;
+  box-shadow: 0 3px 10px rgba(2, 132, 199, 0.12), inset 0 1px #fff;
 }
 
 #kanji-pop .shelf-gem-card.locked {
@@ -455,9 +436,9 @@
 }
 
 #kanji-pop .shelf-gem-icon {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 900;
-  line-height: 1.15;
+  line-height: 1.1;
   color: #0c3e68;
 }
 
@@ -471,11 +452,11 @@
 }
 
 #kanji-pop .shelf-gem-name {
-  font-size: 9.5px;
+  font-size: 9px;
   font-weight: 800;
-  letter-spacing: .3px;
+  letter-spacing: .2px;
   color: #1f5a84;
-  margin-top: 2px;
+  margin-top: 1px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -486,16 +467,80 @@
   color: #0284c7;
 }
 
-#kanji-pop .shelf-tip {
-  font-size: 11px;
-  line-height: 1.45;
-  color: #21618d;
-  margin: 2px 0 0;
-  font-style: italic;
-  text-align: center;
+/* Unified Hero Play CTA Button */
+#kanji-pop .journey-hero-cta {
+  width: 100%;
+  margin-top: 2px;
 }
 
-/* 9. Constellation Area & Floating Pedestals */
+#kanji-pop .journey-hero-play-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #a3f443 0%, #52c902 48%, #369b00 100%);
+  color: #134200;
+  border: 2px solid #ffffff;
+  box-shadow: 0 4px 0 #257500, 0 8px 20px rgba(54, 155, 0, 0.35), inset 0 2px 2px rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease, filter .14s ease;
+  user-select: none;
+  text-align: left;
+}
+
+#kanji-pop .journey-hero-play-btn:hover:not(:disabled) {
+  filter: brightness(1.06);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #257500, 0 10px 24px rgba(54, 155, 0, 0.45), inset 0 2px 2px #fff;
+}
+
+#kanji-pop .journey-hero-play-btn:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #257500;
+}
+
+#kanji-pop .journey-hero-play-btn:disabled {
+  background: #a9d4e5;
+  border-color: rgba(255, 255, 255, 0.8);
+  color: #427494;
+  box-shadow: none;
+  cursor: default;
+}
+
+#kanji-pop .hero-play-gem {
+  font-size: 22px;
+  line-height: 1;
+}
+
+#kanji-pop .hero-play-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#kanji-pop .hero-play-text strong {
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: .2px;
+  line-height: 1.2;
+}
+
+#kanji-pop .hero-play-text small {
+  font-size: 11px;
+  font-weight: 700;
+  opacity: .85;
+}
+
+#kanji-pop .hero-play-arrow {
+  font-size: 15px;
+  font-weight: 900;
+  color: #175200;
+}
+
+/* 6. Right Constellation Map - Glassmorphic Celestial Stage */
 #kanji-pop .journey-constellation {
   position: relative;
   isolation: isolate;
@@ -503,16 +548,24 @@
   grid-template-columns: repeat(12, minmax(0, 1fr));
   grid-template-rows: repeat(5, minmax(0, 1fr));
   width: 100%;
-  min-height: 360px;
-  max-width: 520px;
-  padding-bottom: 56px;
+  max-width: 580px;
+  height: 100%;
+  max-height: 450px;
   justify-self: center;
   align-self: center;
+  box-sizing: border-box;
+  padding: 16px 18px 28px;
+  background: rgba(255, 255, 255, 0.45);
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  border-radius: 24px;
+  box-shadow: 0 10px 32px rgba(10, 50, 90, 0.08), inset 0 1px 2px rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 #kanji-pop .journey-map-aura {
   position: absolute;
-  inset: -16px;
+  inset: -12px;
   z-index: -1;
   pointer-events: none;
   background: radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.45) 0%, transparent 70%);
@@ -523,17 +576,17 @@
   grid-row: var(--stop-row);
   justify-self: center;
   align-self: center;
-  width: 110px;
-  height: 40px;
+  width: 95px;
+  height: 34px;
   border-radius: 50%;
   background: radial-gradient(ellipse at 50% 30%, rgba(255, 255, 255, 0.95) 0%, rgba(220, 245, 255, 0.7) 45%, rgba(160, 220, 250, 0.3) 70%, transparent 85%);
-  filter: drop-shadow(0 8px 16px rgba(10, 50, 90, 0.2));
-  transform: translateY(26px);
+  filter: drop-shadow(0 6px 14px rgba(10, 50, 90, 0.18));
+  transform: translateY(22px);
   pointer-events: none;
   z-index: 0;
 }
 
-/* 10. Luminous Connecting Trail */
+/* Connecting Luminous Trail */
 #kanji-pop .journey-trail {
   position: absolute;
   inset: 0;
@@ -547,20 +600,20 @@
 #kanji-pop .journey-trail path {
   fill: none;
   stroke: rgba(255, 255, 255, 0.85);
-  stroke-width: 4;
-  stroke-dasharray: 4 8;
+  stroke-width: 3.5;
+  stroke-dasharray: 4 7;
   stroke-linecap: round;
   vector-effect: non-scaling-stroke;
 }
 
 #kanji-pop .journey-trail path.traveled {
   stroke: #4ade80;
-  stroke-width: 4.5;
+  stroke-width: 4;
   stroke-dasharray: none;
   filter: drop-shadow(0 0 8px rgba(74, 222, 128, 0.65));
 }
 
-/* 11. 3D Crystal Gemstone Nodes */
+/* 7. 3D Crystal Gemstone Nodes */
 #kanji-pop#kanji-pop button.journey-stop {
   grid-column: var(--stop-column) / span 3;
   grid-row: var(--stop-row);
@@ -569,8 +622,8 @@
   position: relative;
   display: grid;
   place-items: center;
-  width: 76px;
-  height: 68px;
+  width: 70px;
+  height: 64px;
   background: none;
   border: 0;
   padding: 0;
@@ -588,11 +641,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 60px;
-  height: 60px;
-  border-radius: 20px;
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
   border: 2.5px solid rgba(255, 255, 255, 0.98);
-  font-size: 23px;
+  font-size: 22px;
   font-weight: 900;
   line-height: 1;
   color: #ffffff;
@@ -601,13 +654,13 @@
   user-select: none;
 }
 
-/* Specular Facet Gloss Reflection */
+/* Specular Facet Reflection */
 #kanji-pop .gem-shine {
   position: absolute;
   top: 3px;
   left: 12%;
   width: 76%;
-  height: 40%;
+  height: 38%;
   border-radius: 12px 12px 6px 6px;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.1) 100%);
   pointer-events: none;
@@ -615,52 +668,46 @@
 }
 
 /* 5 Themed Crystal Gemstone Styles */
-
-/* 1) Sapphire (Blue / Cyan) */
 #kanji-pop .gem-sapphire .journey-stop-body {
   --gem-shadow: #005aa3;
   --gem-glow: rgba(0, 140, 255, 0.35);
   background: radial-gradient(circle at 35% 25%, #8ae9ff 0%, #1595eb 48%, #006ec0 100%);
-  box-shadow: 0 7px 0 var(--gem-shadow), 0 12px 24px var(--gem-glow), inset 0 2px 2px rgba(255, 255, 255, 0.95);
+  box-shadow: 0 6px 0 var(--gem-shadow), 0 10px 20px var(--gem-glow), inset 0 2px 2px rgba(255, 255, 255, 0.95);
 }
 
-/* 2) Emerald (Vivid Green Jade) */
 #kanji-pop .gem-emerald .journey-stop-body {
   --gem-shadow: #036b47;
   --gem-glow: rgba(16, 185, 129, 0.35);
   background: radial-gradient(circle at 35% 25%, #96ffb9 0%, #10b981 48%, #047857 100%);
-  box-shadow: 0 7px 0 var(--gem-shadow), 0 12px 24px var(--gem-glow), inset 0 2px 2px rgba(255, 255, 255, 0.95);
+  box-shadow: 0 6px 0 var(--gem-shadow), 0 10px 20px var(--gem-glow), inset 0 2px 2px rgba(255, 255, 255, 0.95);
 }
 
-/* 3) Amber / Citrine (Golden Sunstone) */
 #kanji-pop .gem-amber .journey-stop-body {
   --gem-shadow: #994c00;
   --gem-glow: rgba(245, 158, 11, 0.38);
   background: radial-gradient(circle at 35% 25%, #fff085 0%, #f59e0b 48%, #c26100 100%);
-  box-shadow: 0 7px 0 var(--gem-shadow), 0 12px 24px var(--gem-glow), inset 0 2px 2px rgba(255, 255, 255, 0.95);
+  box-shadow: 0 6px 0 var(--gem-shadow), 0 10px 20px var(--gem-glow), inset 0 2px 2px rgba(255, 255, 255, 0.95);
 }
 
-/* 4) Amethyst / Ruby (Royal Purple) */
 #kanji-pop .gem-amethyst .journey-stop-body {
   --gem-shadow: #6b1494;
   --gem-glow: rgba(168, 85, 247, 0.38);
   background: radial-gradient(circle at 35% 25%, #ff9eec 0%, #b84df4 48%, #7e16b5 100%);
-  box-shadow: 0 7px 0 var(--gem-shadow), 0 12px 24px var(--gem-glow), inset 0 2px 2px rgba(255, 255, 255, 0.95);
+  box-shadow: 0 6px 0 var(--gem-shadow), 0 10px 20px var(--gem-glow), inset 0 2px 2px rgba(255, 255, 255, 0.95);
 }
 
-/* 5) Celestial Prismatic Diamond Crown (Level 5 Finale) */
 #kanji-pop .gem-crown .journey-stop-body,
 #kanji-pop .journey-stop.treasure .journey-stop-body {
   --gem-shadow: #1b5380;
   --gem-glow: rgba(110, 220, 255, 0.5);
   background: radial-gradient(circle at 35% 20%, #ffffff 0%, #a5f3fc 35%, #38bdf8 65%, #1d4ed8 100%);
-  box-shadow: 0 7px 0 var(--gem-shadow), 0 12px 26px var(--gem-glow), inset 0 2px 2px rgba(255, 255, 255, 0.98);
+  box-shadow: 0 6px 0 var(--gem-shadow), 0 10px 22px var(--gem-glow), inset 0 2px 2px rgba(255, 255, 255, 0.98);
 }
 
 #kanji-pop .journey-crown-crest {
   position: absolute;
-  top: -14px;
-  font-size: 18px;
+  top: -12px;
+  font-size: 17px;
   line-height: 1;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
   animation: crownBob 2.4s ease-in-out infinite;
@@ -671,18 +718,17 @@
   50% { transform: translateY(-3px); }
 }
 
-/* Hover & Active Press Effects */
 #kanji-pop .journey-stop:hover:not(:disabled) .journey-stop-body {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   filter: brightness(1.08);
 }
 
 #kanji-pop .journey-stop:active:not(:disabled) .journey-stop-body {
-  transform: translateY(4px);
-  box-shadow: 0 3px 0 var(--gem-shadow), 0 6px 14px var(--gem-glow), inset 0 1px #fff;
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 var(--gem-shadow), 0 4px 10px var(--gem-glow), inset 0 1px #fff;
 }
 
-/* Locked Gemstone: Preserves Rich Jewel Hue Under Translucent Frost */
+/* Locked Gemstone */
 #kanji-pop#kanji-pop .journey-stop:disabled {
   cursor: default;
   opacity: 1;
@@ -692,16 +738,16 @@
 #kanji-pop .journey-stop:disabled .journey-stop-body {
   filter: saturate(0.62) brightness(0.95) contrast(0.96);
   opacity: 0.88;
-  box-shadow: 0 5px 0 var(--gem-shadow), 0 8px 16px var(--gem-glow);
+  box-shadow: 0 4px 0 var(--gem-shadow), 0 6px 14px var(--gem-glow);
 }
 
 #kanji-pop .journey-lock {
   position: absolute;
   right: -5px;
   bottom: -4px;
-  width: 20px;
-  height: 20px;
-  padding: 3px;
+  width: 18px;
+  height: 18px;
+  padding: 2.5px;
   background: #ffffff;
   color: #1a517b;
   border-radius: 50%;
@@ -709,26 +755,25 @@
   box-shadow: 0 2px 6px rgba(10, 50, 90, 0.15);
 }
 
-/* Completed Gemstone */
 #kanji-pop .journey-stop.completed .journey-stop-body {
   border-color: #ffffff;
 }
 
-/* 12. Active Selected Node & Pulsing Aura Ring */
+/* 8. Active Selected Node & Pulsing Aura */
 #kanji-pop#kanji-pop button.journey-stop.selected {
-  width: 78px;
-  height: 72px;
+  width: 72px;
+  height: 66px;
 }
 
 #kanji-pop .journey-stop.selected .journey-stop-body {
-  transform: scale(1.1);
+  transform: scale(1.08);
   border-color: #ffffff;
-  box-shadow: 0 8px 0 var(--gem-shadow), 0 16px 32px var(--gem-glow), inset 0 2px 2px #fff;
+  box-shadow: 0 6px 0 var(--gem-shadow), 0 12px 26px var(--gem-glow), inset 0 2px 2px #fff;
 }
 
 #kanji-pop .journey-active-aura {
   position: absolute;
-  inset: -16px;
+  inset: -14px;
   pointer-events: none;
   z-index: 0;
   display: grid;
@@ -740,8 +785,8 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  border: 2.5px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 0 24px rgba(110, 230, 255, 0.85), inset 0 0 14px rgba(255, 255, 255, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 20px rgba(110, 230, 255, 0.8), inset 0 0 12px rgba(255, 255, 255, 0.5);
   animation: auraPulse 2.4s cubic-bezier(0.25, 1, 0.5, 1) infinite;
 }
 
@@ -750,53 +795,47 @@
 }
 
 @keyframes auraPulse {
-  0% {
-    transform: scale(0.9);
-    opacity: 0.9;
-  }
-  100% {
-    transform: scale(1.35);
-    opacity: 0;
-  }
+  0% { transform: scale(0.9); opacity: 0.9; }
+  100% { transform: scale(1.32); opacity: 0; }
 }
 
-/* 13. Play Button on Selected Node ("Chơi / Resume") */
+/* 9. Action Play Button on Selected Node */
 #kanji-pop .journey-node-play-btn {
   position: absolute;
-  top: calc(50% + 46px);
+  top: calc(50% + 40px);
   left: 50%;
   transform: translateX(-50%);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  min-height: 42px;
-  min-width: 84px;
-  padding: 6px 16px;
+  gap: 5px;
+  min-height: 38px;
+  min-width: 78px;
+  padding: 5px 14px;
   border-radius: 999px;
   background: linear-gradient(135deg, #a7f342 0%, #58cb02 48%, #369b00 100%);
   color: #113e00;
   border: 2px solid #ffffff;
-  box-shadow: 0 4px 0 #257500, 0 8px 20px rgba(88, 203, 2, 0.45), inset 0 2px 2px rgba(255, 255, 255, 0.9);
-  font-size: 13.5px;
+  box-shadow: 0 3px 0 #257500, 0 6px 16px rgba(88, 203, 2, 0.4), inset 0 2px 2px rgba(255, 255, 255, 0.9);
+  font-size: 13px;
   font-weight: 900;
-  letter-spacing: .5px;
+  letter-spacing: .4px;
   white-space: nowrap;
   cursor: pointer;
   z-index: 10;
-  transition: transform .12s ease, box-shadow .12s ease, filter .15s ease;
+  transition: transform .12s ease, box-shadow .12s ease, filter .14s ease;
   user-select: none;
 }
 
 #kanji-pop .journey-node-play-btn:hover:not(:disabled):not([aria-disabled="true"]) {
   filter: brightness(1.06);
   transform: translateX(-50%) translateY(-2px);
-  box-shadow: 0 6px 0 #257500, 0 12px 24px rgba(88, 203, 2, 0.55), inset 0 2px 2px #fff;
+  box-shadow: 0 5px 0 #257500, 0 8px 20px rgba(88, 203, 2, 0.5), inset 0 2px 2px #fff;
 }
 
 #kanji-pop .journey-node-play-btn:active:not(:disabled):not([aria-disabled="true"]) {
-  transform: translateX(-50%) translateY(3px);
-  box-shadow: 0 1px 0 #257500, 0 4px 10px rgba(88, 203, 2, 0.35);
+  transform: translateX(-50%) translateY(2px);
+  box-shadow: 0 1px 0 #257500;
 }
 
 #kanji-pop .journey-node-play-btn:disabled,
@@ -809,33 +848,28 @@
   pointer-events: none;
 }
 
-#kanji-pop .journey-node-play-btn svg {
-  width: 14px;
-  height: 14px;
-  fill: currentColor;
-  flex: none;
-}
+#kanji-pop .journey-node-play-btn svg { width: 13px; height: 13px; fill: currentColor; }
 
-/* 14. Node Captions, Chips & Stars */
+/* 10. Node Captions, Chips & Stars */
 #kanji-pop .journey-stop-caption {
   position: absolute;
-  top: calc(50% + 38px);
+  top: calc(50% + 35px);
   left: 50%;
   transform: translateX(-50%);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   white-space: nowrap;
-  font-size: 10px;
+  font-size: 9.5px;
   font-weight: 800;
-  letter-spacing: .6px;
+  letter-spacing: .5px;
   color: #124773;
-  padding: 3px 10px;
+  padding: 2.5px 9px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.95);
-  box-shadow: 0 2px 8px rgba(10, 50, 90, 0.1);
+  box-shadow: 0 2px 6px rgba(10, 50, 90, 0.1);
   pointer-events: none;
   z-index: 2;
 }
@@ -845,25 +879,25 @@
   align-items: center;
   gap: 3px;
   padding: 2px 6px;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.94);
   border: 1.5px solid rgba(255, 255, 255, 0.98);
-  box-shadow: 0 3px 10px rgba(10, 50, 90, 0.12);
+  box-shadow: 0 3px 8px rgba(10, 50, 90, 0.12);
 }
 
 #kanji-pop .journey-char-chip {
   display: inline-block;
   padding: 1px 4px;
-  border-radius: 6px;
+  border-radius: 5px;
   background: linear-gradient(135deg, #ffffff, #eaf6ff);
   color: #0c3e68;
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 900;
   line-height: 1.1;
   border: 1px solid rgba(2, 132, 199, 0.2);
 }
 
 #kanji-pop .journey-stars {
-  font-size: 11.5px;
+  font-size: 11px;
   letter-spacing: 2px;
   color: #ffb800;
   text-shadow: 0 1px #a46d00;
@@ -874,29 +908,34 @@
   text-shadow: none;
 }
 
-/* 15. Bottom Navigation Bar */
+/* 11. Bottom Nav - Compact Capsule */
 #kanji-pop#kanji-pop[data-view="map"] .course-nav {
-  grid-column: 1;
-  grid-row: 3;
   display: flex;
   justify-content: space-around;
   gap: 12px;
-  align-self: end;
-  border: 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.55);
-  padding: 8px 0 0;
-  margin: 0;
-  background: none;
+  width: min(100%, 380px);
+  height: 44px;
+  min-height: 44px;
+  margin: 0 auto;
+  padding: 4px 16px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(255, 255, 255, 0.9);
+  border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(10, 50, 90, 0.08);
+  flex: none;
+  box-sizing: border-box;
 }
 
 #kanji-pop#kanji-pop[data-view="map"] .course-nav button {
   position: relative;
   flex: 1;
   flex-direction: column;
-  gap: 4px;
-  min-height: 52px;
-  padding: 4px 0 7px;
-  font-size: 10.5px;
+  gap: 2px;
+  height: 100%;
+  padding: 2px 0 4px;
+  font-size: 10px;
   font-weight: 800;
   background: none;
   border: 0;
@@ -915,254 +954,276 @@
   content: '';
   position: absolute;
   bottom: 0;
-  left: calc(50% - 12px);
-  width: 24px;
-  height: 3.5px;
+  left: calc(50% - 10px);
+  width: 20px;
+  height: 3px;
   border-radius: 4px;
   background: #0284c7;
-  box-shadow: 0 0 8px rgba(2, 132, 199, 0.5);
 }
 
-#kanji-pop#kanji-pop[data-view="map"] .course-nav svg { width: 20px; height: 20px; }
+#kanji-pop#kanji-pop[data-view="map"] .course-nav svg { width: 17px; height: 17px; }
 #kanji-pop#kanji-pop[data-view="map"] .course-nav b { display: none; }
 
-/* 16. Options Modal */
-#kanji-pop .journey-options h2 { margin: 0 0 10px; font-size: 23px; color: #0c3e68; }
-#kanji-pop .journey-options p { font-size: 13px; line-height: 1.55; color: #21618d; margin-bottom: 20px; }
-#kanji-pop .journey-options .kp-secondary { width: 100%; display: flex; align-items: center; gap: 12px; padding: 12px; margin: 8px 0; font-size: 13px; text-align: left; }
-#kanji-pop .journey-options .kp-secondary svg { width: 20px; height: 20px; flex: none; }
-#kanji-pop .journey-options .kp-action { width: 100%; min-height: 48px; margin-top: 12px; }
+/* 12. Modal & Options */
+#kanji-pop .journey-options h2 { margin: 0 0 10px; font-size: 22px; color: #0c3e68; }
+#kanji-pop .journey-options p { font-size: 13px; line-height: 1.5; color: #21618d; margin-bottom: 18px; }
+#kanji-pop .journey-options .kp-secondary { width: 100%; display: flex; align-items: center; gap: 12px; padding: 11px; margin: 6px 0; font-size: 13px; text-align: left; }
+#kanji-pop .journey-options .kp-secondary svg { width: 18px; height: 18px; flex: none; }
+#kanji-pop .journey-options .kp-action { width: 100%; min-height: 46px; margin-top: 10px; }
 
 /* =============================================================
-   DESKTOP & 27-INCH WIDESCREEN RESPONSIVE HARMONIZATION
+   MOBILE & TABLET ADAPTIVE RULES (< 860px) - ZERO SCROLL FITTING
    ============================================================= */
-@media (min-width: 900px) {
+@media (max-width: 859px) {
   #kanji-pop#kanji-pop[data-view="map"] {
-    max-width: min(95vw, 1680px);
-    width: 100%;
-    min-height: 100dvh;
-    height: auto;
-    padding: clamp(16px, 2vh, 28px) clamp(20px, 2vw, 36px);
-    gap: 16px;
-    justify-items: center;
-    align-content: center;
+    height: 100dvh;
+    max-height: 100dvh;
+    overflow: hidden;
+    padding: 6px 10px 4px;
+    gap: 4px;
+    justify-content: space-between;
   }
 
   #kanji-pop#kanji-pop[data-view="map"] .kp-header {
-    max-width: 100%;
-    width: 100%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    height: 46px;
+    min-height: 46px;
+    margin: 0;
+  }
+
+  #kanji-pop#kanji-pop[data-view="map"] .kp-logo {
+    height: 44px;
+  }
+
+  #kanji-pop#kanji-pop[data-view="map"] .kp-logo .kp-logo-img {
+    height: 42px;
+    max-width: 125px;
+  }
+
+  #kanji-pop .kp-lang-btn,
+  #kanji-pop#kanji-pop[data-view="map"] #kp-sound {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    font-size: 13px;
   }
 
   #kanji-pop#kanji-pop #map-screen {
-    max-width: 100%;
-    width: 100%;
-    justify-self: center;
-    gap: 14px;
+    gap: 4px;
+    flex: 1;
+    min-height: 0;
+    justify-content: space-between;
   }
+
+  #kanji-pop .map-top-bar {
+    height: 30px;
+    min-height: 30px;
+    gap: 6px;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  #kanji-pop .journey-eyebrow-chip {
+    display: none;
+  }
+
+  #kanji-pop .grade-toggle-bar {
+    padding: 2px 4px;
+    gap: 3px;
+  }
+
+  #kanji-pop .grade-pill {
+    padding: 2px 7px;
+    font-size: 10px;
+    gap: 4px;
+  }
+
+  #kanji-pop .grade-pill .grade-tag {
+    font-size: 8px;
+    padding: 1px 4px;
+  }
+
+  #kanji-pop .journey-album,
+  #kanji-pop .journey-menu {
+    height: 28px;
+    padding: 0 8px;
+    border-radius: 10px;
+  }
+
+  #kanji-pop .journey-album span { font-size: 11px; }
+  #kanji-pop .journey-album small { font-size: 9px; }
+  #kanji-pop .journey-menu { width: 28px; padding: 0; }
+  #kanji-pop .journey-menu svg { width: 14px; height: 14px; }
 
   #kanji-pop .journey-layout {
-    display: grid;
-    grid-template-columns: minmax(460px, 520px) minmax(520px, 1.2fr);
-    grid-template-rows: 1fr;
-    column-gap: clamp(36px, 4.5vw, 72px);
-    min-height: min(720px, 82vh);
-    width: 100%;
-    align-items: center;
-  }
-
-  /* Left Column Console: Unified Glass Card */
-  #kanji-pop .journey-overview {
-    grid-column: 1;
-    grid-row: 1;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    justify-content: space-between;
+    gap: 4px;
     width: 100%;
-    align-self: center;
+    max-width: 420px;
+    margin: 0 auto;
+    flex: 1;
+    min-height: 0;
   }
 
-  #kanji-pop .journey-console-card {
-    padding: 22px 24px;
-    border-radius: 28px;
-    gap: 14px;
+  #kanji-pop .journey-overview {
+    flex: none;
+    height: auto;
+    max-height: none;
+    padding: 7px 10px 8px;
+    gap: 4px;
+    border-radius: 16px;
   }
 
-  #kanji-pop .journey-kanji-shelf {
-    padding: 16px 20px;
-    border-radius: 24px;
+  #kanji-pop .journey-chapter-switch {
+    grid-template-columns: 28px minmax(0, 1fr) 28px;
+    gap: 4px;
   }
 
-  #kanji-pop .journey-constellation {
-    grid-column: 2;
-    grid-row: 1;
-    min-height: 560px;
-    max-width: 640px;
-    width: 100%;
-    padding-bottom: 72px;
-    justify-self: center;
-    align-self: center;
+  #kanji-pop .journey-chapter-switch button {
+    width: 28px;
+    height: 28px;
   }
 
-  #kanji-pop .journey-chapter-switch h1 {
-    font-size: 28px;
-    line-height: 1.2;
+  #kanji-pop .journey-chapter-switch svg { width: 14px; height: 14px; }
+
+  #kanji-pop .chapter-switch-title .journey-eyebrow {
+    font-size: 8.5px;
+    letter-spacing: 1px;
   }
 
-  #kanji-pop .journey-subtitle {
-    font-size: 13.5px;
-    margin: 4px 0 6px;
+  #kanji-pop .chapter-switch-title h1 {
+    font-size: 14px;
+    margin: 1px 0;
   }
 
   #kanji-pop .journey-chapter-progress {
-    font-size: 12px;
-    margin-top: 4px;
+    font-size: 9.5px;
+    gap: 4px;
   }
 
   #kanji-pop .journey-chapter-progress i {
-    width: 22px;
-    height: 5px;
-  }
-
-  #kanji-pop .shelf-gem-card {
-    padding: 10px 4px 8px;
-  }
-
-  #kanji-pop .shelf-gem-icon {
-    font-size: 26px;
-  }
-
-  #kanji-pop .shelf-gem-name {
-    font-size: 10.5px;
-  }
-
-  /* Enhanced Desktop Gem Node Sizes */
-  #kanji-pop .journey-stop-body {
-    width: 76px;
-    height: 76px;
-    font-size: 28px;
-    border-radius: 24px;
-  }
-
-  #kanji-pop#kanji-pop button.journey-stop.selected {
-    width: 92px;
-    height: 92px;
-  }
-
-  #kanji-pop .journey-stop.selected .journey-stop-body {
-    transform: scale(1.15);
-  }
-
-  #kanji-pop .journey-active-aura {
-    inset: -18px;
-  }
-
-  #kanji-pop .journey-node-play-btn {
-    top: calc(50% + 58px);
-    min-height: 46px;
-    min-width: 92px;
-    padding: 8px 22px;
-    font-size: 15px;
-  }
-
-  #kanji-pop .journey-node-base {
-    width: 130px;
-    height: 44px;
-    transform: translateY(32px);
-  }
-
-  #kanji-pop .journey-stop-caption {
-    top: calc(50% + 50px);
-    font-size: 10.5px;
-    padding: 3px 12px;
-  }
-
-  #kanji-pop .journey-stars { font-size: 13.5px; }
-
-  #kanji-pop#kanji-pop[data-view="map"] .course-nav {
-    width: min(100%, 440px);
-    justify-self: center;
-    padding: 6px 18px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.65);
-    backdrop-filter: blur(12px);
-    border: 1.5px solid rgba(255, 255, 255, 0.9);
-    box-shadow: 0 6px 20px rgba(10, 50, 90, 0.08);
-  }
-}
-
-@media (min-width: 1800px) {
-  #kanji-pop#kanji-pop[data-view="map"] {
-    max-width: 1800px;
-    padding: 32px 48px;
-  }
-
-  #kanji-pop .journey-layout {
-    grid-template-columns: 580px 760px;
-    column-gap: 84px;
-    min-height: min(820px, 84vh);
-  }
-
-  #kanji-pop .journey-console-card {
-    padding: 28px 30px;
-    border-radius: 32px;
-    gap: 18px;
+    width: 10px;
+    height: 3px;
   }
 
   #kanji-pop .journey-kanji-shelf {
-    padding: 22px 24px;
-    border-radius: 28px;
+    padding: 4px 6px 5px;
+    gap: 3px;
+    border-radius: 10px;
   }
 
-  #kanji-pop .journey-chapter-switch h1 {
-    font-size: 34px;
+  #kanji-pop .shelf-header {
+    font-size: 9px;
   }
 
-  #kanji-pop .journey-subtitle {
-    font-size: 15px;
+  #kanji-pop .shelf-count-badge {
+    font-size: 8.5px;
+    padding: 0 5px;
   }
 
-  #kanji-pop .journey-constellation {
-    min-height: 680px;
-    max-width: 760px;
-    padding-bottom: 84px;
+  #kanji-pop .shelf-grid {
+    gap: 3px;
   }
 
   #kanji-pop .shelf-gem-card {
-    padding: 14px 6px 10px;
-    border-radius: 18px;
+    padding: 2px 2px;
+    border-radius: 6px;
   }
 
   #kanji-pop .shelf-gem-icon {
-    font-size: 30px;
+    font-size: 13px;
+    line-height: 1.1;
   }
 
   #kanji-pop .shelf-gem-name {
-    font-size: 12px;
+    font-size: 7.5px;
+  }
+
+  #kanji-pop .journey-hero-cta {
+    margin-top: 0;
+  }
+
+  #kanji-pop .journey-hero-play-btn {
+    padding: 5px 12px;
+    border-radius: 12px;
+    gap: 8px;
+  }
+
+  #kanji-pop .hero-play-gem { font-size: 16px; }
+  #kanji-pop .hero-play-text strong { font-size: 12px; }
+  #kanji-pop .hero-play-text small { font-size: 9.5px; }
+  #kanji-pop .hero-play-arrow { font-size: 12px; }
+
+  #kanji-pop .journey-constellation {
+    background: none;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    flex: 1;
+    min-height: 220px;
+    max-height: calc(100dvh - 310px);
+    height: auto;
+    padding: 0 0 34px;
+  }
+
+  #kanji-pop#kanji-pop button.journey-stop {
+    width: 52px;
+    height: 48px;
   }
 
   #kanji-pop .journey-stop-body {
-    width: 86px;
-    height: 86px;
-    font-size: 32px;
-    border-radius: 28px;
+    width: 44px;
+    height: 44px;
+    font-size: 17px;
+    border-radius: 13px;
+    border-width: 2px;
+  }
+
+  #kanji-pop .journey-node-base {
+    width: 70px;
+    height: 24px;
+    transform: translateY(16px);
+  }
+
+  #kanji-pop#kanji-pop button.journey-stop.selected {
+    width: 54px;
+    height: 50px;
   }
 
   #kanji-pop .journey-node-play-btn {
-    top: calc(50% + 68px);
-    min-height: 50px;
-    min-width: 104px;
-    padding: 8px 26px;
-    font-size: 16.5px;
+    top: calc(50% + 28px);
+    min-height: 28px;
+    min-width: 68px;
+    padding: 2px 10px;
+    font-size: 11px;
+    border-radius: 999px;
   }
 
   #kanji-pop .journey-stop-caption {
-    top: calc(50% + 58px);
-    font-size: 11px;
-    padding: 4px 14px;
+    top: calc(50% + 26px);
+    font-size: 8px;
+    padding: 1.5px 6px;
+  }
+
+  #kanji-pop .journey-crown-crest {
+    top: -9px;
+    font-size: 14px;
+  }
+
+  #kanji-pop#kanji-pop[data-view="map"] .course-nav {
+    height: 38px;
+    min-height: 38px;
+    padding: 2px 12px;
+    width: min(100%, 320px);
+    gap: 8px;
+  }
+
+  #kanji-pop#kanji-pop[data-view="map"] .course-nav button {
+    font-size: 9.5px;
   }
 }
 

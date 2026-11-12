@@ -405,34 +405,33 @@
 
   const gemCutClasses = ['gem-sapphire', 'gem-emerald', 'gem-amber', 'gem-amethyst', 'gem-crown'];
 
-  $('#map-screen').innerHTML = `<div class="grade-toggle-bar"><button type="button" class="grade-pill ${currentGrade==='N5'?'active':''}" data-switch-grade="N5"><span class="grade-tag">JLPT N5</span> Sơ cấp</button><button type="button" class="grade-pill ${currentGrade==='N4'?'active':''}" data-switch-grade="N4"><span class="grade-tag">JLPT N4</span> Mới ✦</button>${dailyPillHtml}</div><div class="journey-toolbar"><span class="journey-eyebrow">${I18N.t('journeyEyebrow')} ${currentGrade} · ${I18N.t('chapter')} ${mapChapter+1}</span><div><button class="journey-album" data-journey-album aria-label="Album: ${profile.collected.length} trên 24 chữ"><i data-lucide="book-open" aria-hidden="true"></i><span>${profile.collected.length}<small> / 24</small></span></button><button class="journey-menu" data-journey-menu aria-label="${I18N.t('menuTitle')}"><i data-lucide="ellipsis" aria-hidden="true"></i></button></div></div>
+  $('#map-screen').innerHTML = `<div class="map-top-bar"><div class="journey-eyebrow-chip"><span class="journey-eyebrow">${I18N.t('journeyEyebrow')} ${currentGrade} · ${I18N.t('chapter')} ${mapChapter+1}</span></div><div class="grade-toggle-bar"><button type="button" class="grade-pill ${currentGrade==='N5'?'active':''}" data-switch-grade="N5"><span class="grade-tag">JLPT N5</span> Sơ cấp</button><button type="button" class="grade-pill ${currentGrade==='N4'?'active':''}" data-switch-grade="N4"><span class="grade-tag">JLPT N4</span> Mới ✦</button>${dailyPillHtml}</div><div class="journey-toolbar-actions"><button class="journey-album" data-journey-album aria-label="Album: ${profile.collected.length} trên 24 chữ"><i data-lucide="book-open" aria-hidden="true"></i><span>${profile.collected.length}<small> / 24</small></span></button><button class="journey-menu" data-journey-menu aria-label="${I18N.t('menuTitle')}"><i data-lucide="ellipsis" aria-hidden="true"></i></button></div></div>
  <div class="journey-layout" data-chapter="${mapChapter}">
   <aside class="journey-overview">
-   <div class="journey-console-card">
-    <div class="journey-chapter-switch">
-     <button data-chapter-step="-1" aria-label="Chương trước" ${mapChapter===0?'disabled':''}><i data-lucide="chevron-left" aria-hidden="true"></i></button>
-     <div><span class="journey-eyebrow">${I18N.t('chapter')} ${String(mapChapter+1).padStart(2,'0')} <span>/ 03</span></span><h1 tabindex="-1">${chapter.name}</h1></div>
-     <button data-chapter-step="1" aria-label="Chương tiếp theo" ${mapChapter===2?'disabled':''}><i data-lucide="chevron-right" aria-hidden="true"></i></button>
+   <div class="journey-chapter-switch">
+    <button data-chapter-step="-1" aria-label="Chương trước" ${mapChapter===0?'disabled':''}><i data-lucide="chevron-left" aria-hidden="true"></i></button>
+    <div class="chapter-switch-title">
+     <span class="journey-eyebrow">${I18N.t('chapter')} ${String(mapChapter+1).padStart(2,'0')} / 03</span>
+     <h1 tabindex="-1">${chapter.name}</h1>
+     <div class="journey-chapter-progress" aria-label="Đã hoàn thành ${done} trên 5 màn"><span>${done}/5 màn · ★ ${chapterTotalStars}/${maxChapterStars} sao</span><div aria-hidden="true">${levels.map(l=>'<i class="'+(profile.results[l.id]?'done':'')+'"></i>').join('')}</div></div>
     </div>
-    <p class="journey-subtitle">${chapter.subtitle}</p>
-    <div class="journey-chapter-progress" aria-label="Đã hoàn thành ${done} trên 5 màn"><span>${done}/5 màn · ★ ${chapterTotalStars}/${maxChapterStars} sao</span><div aria-hidden="true">${levels.map(l=>'<i class="'+(profile.results[l.id]?'done':'')+'"></i>').join('')}</div></div>
-    
-    <div class="journey-hero-cta">
-     <button type="button" class="journey-hero-play-btn" data-hero-play="${action}" ${locked?'disabled':''}>
-      <span class="hero-play-gem" aria-hidden="true">💎</span>
-      <span class="hero-play-text">
-       <strong>${label}</strong>
-       <small>${locked?'Hoàn thành màn trước để mở khóa':selectedLevel.title}</small>
-      </span>
-      <span class="hero-play-arrow" aria-hidden="true">▶</span>
-     </button>
-    </div>
+    <button data-chapter-step="1" aria-label="Chương tiếp theo" ${mapChapter===2?'disabled':''}><i data-lucide="chevron-right" aria-hidden="true"></i></button>
    </div>
 
    <div class="journey-kanji-shelf">
     <div class="shelf-header"><span>${I18N.t('shelfTitle')} ${mapChapter+1}</span><span class="shelf-count-badge">${chapterCollectedCount} / 8 ${I18N.t('shelfOpened')}</span></div>
     <div class="shelf-grid">${shelfCards}</div>
-    <p class="shelf-tip">${I18N.t('shelfTip')}</p>
+   </div>
+
+   <div class="journey-hero-cta">
+    <button type="button" class="journey-hero-play-btn" data-hero-play="${action}" ${locked?'disabled':''}>
+     <span class="hero-play-gem" aria-hidden="true">💎</span>
+     <span class="hero-play-text">
+      <strong>${label}</strong>
+      <small>${locked?'Hoàn thành màn trước để mở khóa':selectedLevel.title}</small>
+     </span>
+     <span class="hero-play-arrow" aria-hidden="true">▶</span>
+    </button>
    </div>
   </aside>
 
