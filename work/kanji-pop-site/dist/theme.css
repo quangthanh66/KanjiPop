@@ -54,3 +54,49 @@
 @media(max-width:370px){#kp-preview{padding:12px 0}#kanji-pop{padding:17px 12px;border-radius:25px}#kanji-pop .kp-logo{font-size:20px}#kanji-pop .kp-logo span{font-size:25px}#kanji-pop .kp-grid{gap:10px}#kanji-pop .kp-board{padding-left:9px;padding-right:9px}#kanji-pop .kp-piece{height:76px}#kanji-pop .kp-pieces{gap:10px}#kanji-pop .kp-relax{font-size:10px}#kanji-pop .kp-modal-layer{padding:19px}}
 @media(prefers-reduced-motion:reduce){#kanji-pop *,#kanji-pop *:before{animation:none!important;transition:none!important}}
 
+
+
+/* Kanjidle Graphic Logo */
+#kanji-pop .kp-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform: none;
+  text-shadow: none;
+  line-height: 1;
+}
+#kanji-pop .kp-logo-img {
+  display: block;
+  height: 56px;
+  width: auto;
+  max-width: 200px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(7, 43, 89, 0.22));
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+  user-select: none;
+  cursor: pointer;
+}
+#kanji-pop .kp-logo-img:hover {
+  transform: scale(1.05) rotate(-1deg);
+}
+#kanji-pop .kp-logo-img:active {
+  transform: scale(0.96);
+}
+@media (max-width: 480px) {
+  #kanji-pop .kp-logo-img {
+    height: 50px;
+    max-width: 175px;
+  }
+}
+@media (max-width: 370px) {
+  #kanji-pop .kp-logo-img {
+    height: 44px;
+    max-width: 150px;
+  }
+}
+@media (min-width: 900px) {
+  #kanji-pop .kp-logo-img {
+    height: 68px;
+    max-width: 250px;
+  }
+}
