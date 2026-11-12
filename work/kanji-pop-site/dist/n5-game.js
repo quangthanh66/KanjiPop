@@ -397,32 +397,20 @@
   const dailyDone=!!dailyRec;
   const dailyPillHtml=`<button type="button" class="grade-pill daily-pill ${state?.isDaily?'active':''}" data-daily-play aria-label="${I18N.t('dailyTitle')}"><span class="grade-tag">📅 ${I18N.t('dailyBadge')}</span> ${dailyDone?'★':''}</button>`;
 
-  // 8 Pastel Candy color themes matching demo exactly
-  const candyThemes = [
-    { bg: 'linear-gradient(180deg, #f472b6, #ec4899)', shd: '#be185d' },
-    { bg: 'linear-gradient(180deg, #fb923c, #f97316)', shd: '#c2410c' },
-    { bg: 'linear-gradient(180deg, #facc15, #eab308)', shd: '#a16207' },
-    { bg: 'linear-gradient(180deg, #38bdf8, #0284c7)', shd: '#0369a1' },
-    { bg: 'linear-gradient(180deg, #4ade80, #16a34a)', shd: '#15803d' },
-    { bg: 'linear-gradient(180deg, #fb7185, #e11d48)', shd: '#be123c' },
-    { bg: 'linear-gradient(180deg, #60a5fa, #2563eb)', shd: '#1d4ed8' },
-    { bg: 'linear-gradient(180deg, #c084fc, #9333ea)', shd: '#7e22ce' }
-  ];
-
   const shelfCards=chapterChars.map((id, idx)=>{
    const r=C.recipes[id],known=profile.collected.includes(id),intro=C.levels.find(l=>l.newChars&&l.newChars.includes(id));
    const lvl=intro?intro.id+1:(mapChapter*5+1);
-   const t = candyThemes[idx % candyThemes.length];
-   return `<button type="button" class="shelf-gem-card kanji-key ${known?'unlocked':'locked'}" style="background: ${t.bg}; --k-shd: ${t.shd};" data-kanji-preview="${id}" aria-label="${known?id+' — '+(r.hanViet||I18N.getRecipeMeaning(r)):'Chưa mở khóa, màn '+lvl}"><span class="shelf-gem-icon" lang="ja">${id}</span></button>`;
+   const tileIdx = (idx % 8) + 1;
+   return `<button type="button" class="shelf-gem-card kanji-key ${known?'unlocked':'locked'}" style="background-image: url('cozy-tile-${tileIdx}.webp');" data-kanji-preview="${id}" aria-label="${known?id+' — '+(r.hanViet||I18N.getRecipeMeaning(r)):'Chưa mở khóa, màn '+lvl}"><span class="shelf-gem-icon" lang="ja">${id}</span></button>`;
   }).join('');
 
-  // Percentage coordinates matching 3D mountain path in demo:
+  // Exact percentage coordinates on cozy-mountain-stage.webp (1376x768)
   const nodeCoords = [
-    { left: '50.0%', top: '76.0%', cls: 'node-01' },
-    { left: '70.5%', top: '58.0%', cls: 'node-02' },
-    { left: '31.8%', top: '41.0%', cls: 'node-03' },
-    { left: '64.8%', top: '25.0%', cls: 'node-04' },
-    { left: '50.0%', top: '15.6%', cls: 'node-05' }
+    { left: '50.5%', top: '80.5%', cls: 'node-01', sprite: 'cozy-node-1.webp' },
+    { left: '31.5%', top: '68.5%', cls: 'node-02', sprite: 'cozy-node-2.webp' },
+    { left: '66.5%', top: '55.2%', cls: 'node-03', sprite: 'cozy-node-3.webp' },
+    { left: '35.5%', top: '41.8%', cls: 'node-04', sprite: 'cozy-node-4.webp' },
+    { left: '46.5%', top: '22.0%', cls: 'node-05', sprite: 'cozy-node-5.webp' }
   ];
 
    $('#map-screen').innerHTML = `<div class="chapter-bar">
@@ -433,7 +421,7 @@
     </div>
     <div class="chapter-nav-center">
       <button data-chapter-step="-1" aria-label="Chương trước" ${mapChapter===0?'disabled':''}><i data-lucide="chevron-left" aria-hidden="true"></i></button>
-      <span>${I18N.t('chapter')} ${String(mapChapter+1).padStart(2,'0')} · ${chapter.name.toUpperCase()}</span>
+      <span>${I18N.t('chapter')} ${String(mapChapter+1).padStart(2,'0')}</span>
       <button data-chapter-step="1" aria-label="Chương tiếp theo" ${mapChapter===2?'disabled':''}><i data-lucide="chevron-right" aria-hidden="true"></i></button>
     </div>
     <button type="button" class="hud-pill stars" data-journey-album aria-label="Tiến trình: ${chapterTotalStars}/${maxChapterStars} sao">★ ${chapterTotalStars}/${maxChapterStars}</button>
@@ -441,69 +429,24 @@
   </div>
 
   <div class="journey-layout cozy-layout" data-chapter="${mapChapter}">
-    <div class="mountain-area">
-      <!-- Fluffy 3D Background Clouds -->
-      <svg class="cloud" style="top: 4%; right: 4%; width: 22%; height: 12%;" viewBox="0 0 100 60"><path d="M 20 45 C 10 45 5 35 15 28 C 15 15 35 10 45 20 C 55 10 75 12 80 25 C 92 25 95 40 85 45 Z" fill="white" fill-opacity="0.9" filter="drop-shadow(0 4px 8px rgba(18, 89, 133, 0.1))"/></svg>
-      <svg class="cloud" style="top: 24%; left: 2%; width: 24%; height: 14%;" viewBox="0 0 100 60"><path d="M 20 45 C 10 45 5 35 15 28 C 15 15 35 10 45 20 C 55 10 75 12 80 25 C 92 25 95 40 85 45 Z" fill="white" fill-opacity="0.9" filter="drop-shadow(0 4px 8px rgba(18, 89, 133, 0.1))"/></svg>
-      <svg class="cloud" style="top: 60%; right: 2%; width: 20%; height: 11%;" viewBox="0 0 100 60"><path d="M 20 45 C 10 45 5 35 15 28 C 15 15 35 10 45 20 C 55 10 75 12 80 25 C 92 25 95 40 85 45 Z" fill="white" fill-opacity="0.9" filter="drop-shadow(0 4px 8px rgba(18, 89, 133, 0.1))"/></svg>
-
-      <!-- 3D Stepped Mountain SVG Ribbon -->
-      <svg class="mountain-svg" viewBox="0 0 440 500" preserveAspectRatio="xMidYMid meet">
-        <defs>
-          <linearGradient id="peach-top" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#ff9ebb"/>
-            <stop offset="50%" stop-color="#ffb1c4"/>
-            <stop offset="100%" stop-color="#ffa692"/>
-          </linearGradient>
-          <linearGradient id="cliff-dark" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#2d8cc5"/>
-            <stop offset="100%" stop-color="#3b9fd9"/>
-          </linearGradient>
-          <linearGradient id="cliff-light" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#4db4eb"/>
-            <stop offset="100%" stop-color="#6ec6f3"/>
-          </linearGradient>
-        </defs>
-
-        <!-- Base Mountain Shadow -->
-        <path d="M 220 380 C 290 350 320 330 310 290 C 290 250 120 260 140 205 C 155 165 300 170 285 125 C 265 90 240 85 220 78"
-              fill="none" stroke="#125985" stroke-opacity="0.18" stroke-width="88" stroke-linecap="round" stroke-linejoin="round" transform="translate(0, 34)"/>
-
-        <!-- 3D Cliff Lower Wall -->
-        <path d="M 220 380 C 290 350 320 330 310 290 C 290 250 120 260 140 205 C 155 165 300 170 285 125 C 265 90 240 85 220 78"
-              fill="none" stroke="url(#cliff-dark)" stroke-width="84" stroke-linecap="round" stroke-linejoin="round" transform="translate(0, 22)"/>
-
-        <!-- 3D Cliff Mid Wall -->
-        <path d="M 220 380 C 290 350 320 330 310 290 C 290 250 120 260 140 205 C 155 165 300 170 285 125 C 265 90 240 85 220 78"
-              fill="none" stroke="url(#cliff-light)" stroke-width="76" stroke-linecap="round" stroke-linejoin="round" transform="translate(0, 11)"/>
-
-        <!-- 3D Top Peach/Pink Plateau -->
-        <path d="M 220 380 C 290 350 320 330 310 290 C 290 250 120 260 140 205 C 155 165 300 170 285 125 C 265 90 240 85 220 78"
-              fill="none" stroke="url(#peach-top)" stroke-width="68" stroke-linecap="round" stroke-linejoin="round"/>
-
-        <!-- White Center Road -->
-        <path d="M 220 380 C 290 350 320 330 310 290 C 290 250 120 260 140 205 C 155 165 300 170 285 125 C 265 90 240 85 220 78"
-              fill="none" stroke="#ffffff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-
-      <!-- 5 Candy Nodes -->
-      ${levels.map((l, i) => {
-        const r = profile.results[l.id], isLocked = l.id > next, current = l.id === mapSelected;
-        const pos = nodeCoords[i];
-        const playText = action === 'resume' ? I18N.t('resume') : result ? I18N.t('replay') : I18N.t('play');
-        const crownBadge = i === 4 ? '<div class="crown-crest" aria-hidden="true">👑</div>' : '';
-        const playBubble = current ? `<div role="button" tabindex="0" class="play-bubble journey-node-play-btn" data-main="${action}" ${locked?'aria-disabled="true"':'aria-label="'+playText+' màn '+(l.id+1)+'"'}><span>${playText} ▶</span></div>` : '';
-        return `<button type="button" class="candy-node ${pos.cls} journey-stop ${r?'completed':''} ${current?'selected':''} ${i===4?'treasure':''}" style="left: ${pos.left}; top: ${pos.top};" data-journey-level="${l.id}" ${isLocked?'disabled':''} aria-pressed="${current}" aria-label="Màn ${l.id+1}: ${l.title}${isLocked?', chưa mở khóa':r?', '+r.stars+' sao':''}">
-          ${crownBadge}
-          ${playBubble}
-          <div class="pedestal" aria-hidden="true"></div>
-          <div class="dome"><span class="gem-shine" aria-hidden="true"></span><span>${String(l.id+1).padStart(2,'0')}</span></div>
-        </button>`;
-      }).join('')}
-
-      <!-- Foreground Clouds -->
-      <svg class="cloud cloud-fore" style="bottom: 2%; left: -6%; width: 34%; height: 18%;" viewBox="0 0 100 60"><path d="M 20 45 C 10 45 5 35 15 28 C 15 15 35 10 45 20 C 55 10 75 12 80 25 C 92 25 95 40 85 45 Z" fill="white" fill-opacity="0.95" filter="drop-shadow(0 6px 14px rgba(18, 89, 133, 0.15))"/></svg>
-      <svg class="cloud cloud-fore" style="bottom: 4%; right: -6%; width: 36%; height: 19%;" viewBox="0 0 100 60"><path d="M 20 45 C 10 45 5 35 15 28 C 15 15 35 10 45 20 C 55 10 75 12 80 25 C 92 25 95 40 85 45 Z" fill="white" fill-opacity="0.95" filter="drop-shadow(0 6px 14px rgba(18, 89, 133, 0.15))"/></svg>
+    <div class="mountain-stage-wrap">
+      <div class="mountain-area mountain-canvas">
+        <!-- 5 3D Candy Nodes on Winding Road -->
+        ${levels.map((l, i) => {
+          const r = profile.results[l.id], isLocked = l.id > next, current = l.id === mapSelected;
+          const pos = nodeCoords[i];
+          const playText = action === 'resume' ? I18N.t('resume') : result ? I18N.t('replay') : I18N.t('play');
+          const crownBadge = i === 4 ? '<img src="cozy-crown.webp" class="crown-crest-img" alt="" aria-hidden="true">' : '';
+          const playBubble = current ? `<div role="button" tabindex="0" class="play-bubble journey-node-play-btn" data-main="${action}" ${locked?'aria-disabled="true"':'aria-label="'+playText+' màn '+(l.id+1)+'"'}><span>${playText} ▶</span></div>` : '';
+          const starRow = r ? `<span class="node-stars" aria-hidden="true">${'★'.repeat(r.stars)}${'☆'.repeat(3-r.stars)}</span>` : '';
+          return `<button type="button" class="candy-node ${pos.cls} journey-stop ${r?'completed':''} ${current?'selected':''} ${i===4?'treasure':''}" style="left: ${pos.left}; top: ${pos.top}; background-image: url('${pos.sprite}');" data-journey-level="${l.id}" ${isLocked?'disabled':''} aria-pressed="${current}" aria-label="Màn ${l.id+1}: ${l.title}${isLocked?', chưa mở khóa':r?', '+r.stars+' sao':''}">
+            ${crownBadge}
+            ${playBubble}
+            <span class="dome-num">${String(l.id+1).padStart(2,'0')}</span>
+            ${starRow}
+          </button>`;
+        }).join('')}
+      </div>
     </div>
 
     <!-- Bottom Kanji Drawer -->

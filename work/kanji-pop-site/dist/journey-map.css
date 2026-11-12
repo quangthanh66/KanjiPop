@@ -1,6 +1,11 @@
-/* Journey Map & Celestial Constellation UI - 3D Crystal Gemstone & Glassmorphism Aesthetic */
+/* Journey Map - True 3D Clay & Candy Assets UI (Option 5 Cozy Casual World) */
 
-/* 1. Main View & Sky Atmosphere - Option 5 Cozy Casual 3D World */
+/* Hide wordmark outside map view */
+.kp-logo-wordmark {
+  display: none;
+}
+
+/* 1. Main View & Sky Atmosphere */
 #kanji-pop#kanji-pop[data-view="map"] {
   display: flex;
   flex-direction: column;
@@ -10,70 +15,44 @@
   max-width: 100vw;
   height: 100dvh;
   max-height: 100dvh;
-  padding: 8px clamp(12px, 3vw, 24px) 8px;
+  padding: 8px clamp(10px, 2.5vw, 24px) 8px;
   overflow: hidden;
   box-sizing: border-box;
-  background: linear-gradient(180deg, #cbe8ff 0%, #b3dcff 40%, #95cffc 100%);
+  background: #8ec9fc;
   position: relative;
 }
 
-/* Atmospheric Floating Cloud Framing */
-#kanji-pop#kanji-pop[data-view="map"]::before {
-  content: '';
-  position: absolute;
-  left: -30px;
-  top: 15%;
-  width: clamp(120px, 14vw, 220px);
-  height: clamp(200px, 40vh, 360px);
-  background: radial-gradient(ellipse at 20% 50%, rgba(255, 255, 255, 0.75) 0%, rgba(220, 245, 255, 0.4) 45%, transparent 75%);
-  filter: blur(20px);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-}
-
-#kanji-pop#kanji-pop[data-view="map"]::after {
-  content: '';
-  position: absolute;
-  right: -30px;
-  top: 15%;
-  width: clamp(120px, 14vw, 220px);
-  height: clamp(200px, 40vh, 360px);
-  background: radial-gradient(ellipse at 80% 50%, rgba(255, 255, 255, 0.75) 0%, rgba(220, 245, 255, 0.4) 45%, transparent 75%);
-  filter: blur(20px);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* 2. Top Header - Floating Capsule HUD matching demo */
+/* 2. Top Header - Unified Single Floating Capsule HUD matching Option 5 Demo */
 #kanji-pop#kanji-pop[data-view="map"] .kp-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 440px;
-  height: 48px;
-  min-height: 48px;
+  max-width: 860px;
+  height: 54px;
+  min-height: 54px;
   margin: 0 auto;
-  padding: 4px 12px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 2px solid #ffffff;
+  padding: 4px 10px 4px 16px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 2.5px solid #ffffff;
   border-radius: 999px;
-  box-shadow: 0 8px 24px rgba(18, 89, 133, 0.12), inset 0 2px 2px #ffffff;
+  box-shadow: 0 8px 24px rgba(18, 89, 133, 0.16), inset 0 2px 2px #ffffff;
   backdrop-filter: blur(12px);
   box-sizing: border-box;
   z-index: 25;
   flex: none;
+  position: relative;
 }
 
-#kanji-pop#kanji-pop[data-view="map"] #kp-home { display: none !important; }
+#kanji-pop#kanji-pop[data-view="map"] #kp-home {
+  display: none !important;
+}
 
 #kanji-pop#kanji-pop[data-view="map"] .kp-logo {
   display: flex;
   align-items: center;
-  gap: 8px;
-  height: 40px;
+  gap: 6px;
+  height: 42px;
   padding: 0;
   cursor: pointer;
   background: none;
@@ -82,9 +61,16 @@
 }
 
 #kanji-pop#kanji-pop[data-view="map"] .kp-logo-img {
-  height: 38px;
+  height: 36px;
   width: auto;
-  max-width: 110px;
+  max-width: 72px;
+  object-fit: contain;
+}
+
+#kanji-pop#kanji-pop[data-view="map"] .kp-logo-wordmark {
+  display: block;
+  height: 32px;
+  width: auto;
   object-fit: contain;
 }
 
@@ -104,50 +90,83 @@
   color: white;
   font-family: inherit;
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 900;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 3px 0 #005c96, 0 4px 10px rgba(2, 159, 231, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.85);
-  transition: transform .12s ease;
+  transition: transform 0.12s ease;
   user-select: none;
 }
 
-/* 3. Screen Container & Subbar */
+/* 3. Screen Container & Chapter Pill Bar */
 #kanji-pop#kanji-pop #map-screen {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 440px;
+  max-width: 860px;
   margin: 0 auto;
   gap: 4px;
   min-height: 0;
   flex: 1;
   position: relative;
-  z-index: 5;
+  z-index: auto;
+  pointer-events: none;
 }
 
-/* Chapter & Mode Capsule Bar */
-#kanji-pop .chapter-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 430px;
-  padding: 3px 10px;
-  background: rgba(255, 255, 255, 0.88);
-  border: 1.5px solid #ffffff;
-  border-radius: 999px;
-  box-shadow: 0 4px 14px rgba(18, 89, 133, 0.08);
-  font-size: 11px;
-  font-weight: 800;
-  color: #0c4a6e;
-  flex: none;
-  z-index: 20;
-  box-sizing: border-box;
+#kanji-pop#kanji-pop #map-screen > * {
+  pointer-events: auto;
+}
+
+/* On Desktop (>=860px), dock .chapter-bar seamlessly inside the center of .kp-header capsule! */
+@media (min-width: 860px) {
+  #kanji-pop .chapter-bar {
+    position: fixed;
+    top: 21px;
+    left: 50%;
+    transform: translateX(-42%);
+    width: auto;
+    max-width: 520px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    font-size: 11.5px;
+    font-weight: 800;
+    color: #0c4a6e;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 35;
+  }
+}
+
+/* Default / Mobile Chapter & Mode Capsule Bar */
+@media (max-width: 859px) {
+  #kanji-pop .chapter-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 420px;
+    padding: 3px 8px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid #ffffff;
+    border-radius: 999px;
+    box-shadow: 0 6px 18px rgba(18, 89, 133, 0.12);
+    backdrop-filter: blur(10px);
+    font-size: 10px;
+    font-weight: 800;
+    color: #0c4a6e;
+    flex: none;
+    z-index: 25;
+    box-sizing: border-box;
+    gap: 4px;
+  }
 }
 
 #kanji-pop .grade-toggle-group {
@@ -160,41 +179,37 @@
   display: inline-flex;
   align-items: center;
   gap: 3px;
-  padding: 3px 8px;
+  padding: 3.5px 9px;
   border-radius: 999px;
-  border: 1px solid transparent;
-  background: rgba(2, 132, 199, 0.08);
+  border: 1.5px solid transparent;
+  background: rgba(2, 132, 199, 0.1);
   color: #0369a1;
   font-size: 11px;
-  font-weight: 800;
+  font-weight: 900;
   cursor: pointer;
-  transition: all .14s ease;
+  transition: all 0.14s ease;
 }
 
 #kanji-pop .grade-pill.active {
-  background: linear-gradient(145deg, #38bdf8, #0284c7);
+  background: linear-gradient(180deg, #38bdf8, #0284c7);
   color: white;
+  border-color: #ffffff;
   box-shadow: 0 2px 0 #0369a1;
-}
-
-#kanji-pop .grade-pill.daily-pill {
-  background: linear-gradient(145deg, #fb923c, #ea580c);
-  color: white;
-  box-shadow: 0 2px 0 #c2410c;
 }
 
 #kanji-pop .chapter-nav-center {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   font-size: 11px;
   font-weight: 900;
   color: #0c4a6e;
+  white-space: nowrap;
 }
 
 #kanji-pop .chapter-nav-center button {
   background: #ffffff;
-  border: 1px solid #bae6fd;
+  border: 1.5px solid #bae6fd;
   border-radius: 50%;
   width: 22px;
   height: 22px;
@@ -204,9 +219,10 @@
   display: grid;
   place-items: center;
   padding: 0;
+  flex-shrink: 0;
 }
 #kanji-pop .chapter-nav-center button svg { width: 13px; height: 13px; }
-#kanji-pop .chapter-nav-center button:disabled { opacity: 0.3; cursor: default; }
+#kanji-pop .chapter-nav-center button:disabled { opacity: 0.35; cursor: default; }
 
 #kanji-pop .hud-pill.stars {
   display: inline-flex;
@@ -214,271 +230,291 @@
   gap: 4px;
   padding: 4px 10px;
   border-radius: 999px;
-  background: linear-gradient(145deg, #fef08a, #facc15);
-  color: #854d0e;
+  background: linear-gradient(180deg, #fde047, #eab308);
+  color: #713f12;
   font-size: 11.5px;
   font-weight: 900;
-  border: none;
+  border: 1.5px solid #ffffff;
   box-shadow: 0 2px 0 #ca8a04;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 #kanji-pop .journey-menu {
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   background: #ffffff;
-  border: 1px solid #bae6fd;
+  border: 1.5px solid #bae6fd;
   color: #0284c7;
   display: grid;
   place-items: center;
   cursor: pointer;
   padding: 0;
-  box-shadow: 0 1px 3px rgba(18, 89, 133, 0.08);
+  flex-shrink: 0;
+  box-shadow: 0 2px 4px rgba(18, 89, 133, 0.1);
 }
 #kanji-pop .journey-menu svg { width: 14px; height: 14px; }
 
-/* 4. Main Stage (.journey-layout) */
+/* 4. Main Stage (.journey-layout) & Full-Bleed 3D Mountain Stage */
 #kanji-pop .journey-layout {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   width: 100%;
-  max-width: 440px;
+  max-width: 560px;
   margin: 0 auto;
   background: none;
   border: none;
-  border-radius: 0;
   box-shadow: none;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
   box-sizing: border-box;
   overflow: visible;
   flex: 1;
   min-height: 0;
-}
-
-/* Mountain & 3D Road Stage */
-#kanji-pop .mountain-area {
-  position: relative;
-  width: 100%;
-  max-width: 440px;
-  aspect-ratio: 440 / 500;
-  flex: 1;
-  min-height: 0;
-  margin: auto 0;
-}
-
-#kanji-pop svg.mountain-svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
-
-#kanji-pop .cloud {
-  position: absolute;
   pointer-events: none;
-  z-index: 0;
-}
-#kanji-pop .cloud-fore {
-  z-index: 10;
 }
 
-/* 5. Candy Nodes & Buttons */
-#kanji-pop .candy-node {
-  position: absolute;
-  width: clamp(52px, 13vw, 60px);
-  height: clamp(52px, 13vw, 60px);
-  border-radius: 50%;
+/* Full-Viewport 3D Mountain Stage Layer */
+#kanji-pop .mountain-stage-wrap {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: translate(-50%, -50%);
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+
+#kanji-pop .mountain-canvas {
+  position: relative;
+  width: max(100vw, calc(100dvh * 1376 / 768));
+  height: max(100dvh, calc(100vw * 768 / 1376));
+  aspect-ratio: 1376 / 768;
+  flex-shrink: 0;
+  background: url('cozy-mountain-stage.webp') no-repeat center / 100% 100%;
+  pointer-events: auto;
+}
+
+/* 5. Real 3D Candy Nodes on Winding Road */
+#kanji-pop#kanji-pop button.candy-node {
+  position: absolute;
+  width: clamp(86px, 8.2vw, 118px);
+  aspect-ratio: 252 / 196;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -52%);
   cursor: pointer;
   user-select: none;
   z-index: 5;
-  transition: transform 0.15s ease;
-  border: none;
-  background: none;
+  transition: transform 0.15s ease, filter 0.15s ease;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
   padding: 0;
 }
 
 #kanji-pop .candy-node:hover:not(:disabled) {
-  transform: translate(-50%, -50%) scale(1.08);
+  transform: translate(-50%, -55%) scale(1.06);
+  filter: brightness(1.06);
 }
 
-#kanji-pop .candy-node .pedestal {
-  position: absolute;
-  inset: -6px;
-  border-radius: 50%;
-  background: linear-gradient(180deg, #fde68a 0%, #f59e0b 100%);
-  box-shadow: 0 5px 0 #b45309, 0 8px 16px rgba(0,0,0,0.18);
-  z-index: -1;
+#kanji-pop .candy-node.selected {
+  z-index: 12;
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.85));
 }
 
-#kanji-pop .candy-node .dome {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: clamp(20px, 5vw, 24px);
+#kanji-pop .candy-node .dome-num {
+  color: #ffffff;
+  font-size: clamp(20px, 2.1vw, 29px);
   font-weight: 900;
-  position: relative;
-  border: 2px solid rgba(255, 255, 255, 0.85);
-  box-shadow: inset 0 3px 3px rgba(255, 255, 255, 0.6), inset 0 -3px 3px rgba(0, 0, 0, 0.2);
-  text-shadow: 0 1px 2px rgba(0,0,0,0.25);
-}
-
-#kanji-pop .candy-node .dome::before {
-  content: '';
-  position: absolute;
-  top: 3px;
-  left: 20%;
-  width: 60%;
-  height: 30%;
-  border-radius: 50%;
-  background: linear-gradient(180deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0) 100%);
+  line-height: 1;
+  letter-spacing: -0.5px;
+  transform: translateY(-16%) scaleY(0.88);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.38), 0 0 2px rgba(0, 0, 0, 0.25);
   pointer-events: none;
 }
 
-#kanji-pop .node-01 .dome { background: linear-gradient(180deg, #34d399 0%, #059669 100%); box-shadow: 0 3px 0 #047857; }
-#kanji-pop .node-02 .dome { background: linear-gradient(180deg, #818cf8 0%, #4f46e5 100%); box-shadow: 0 3px 0 #3730a3; }
-#kanji-pop .node-03 .dome { background: linear-gradient(180deg, #c084fc 0%, #9333ea 100%); box-shadow: 0 3px 0 #7e22ce; }
-#kanji-pop .node-04 .dome { background: linear-gradient(180deg, #f472b6 0%, #db2777 100%); box-shadow: 0 3px 0 #be185d; }
-#kanji-pop .node-05 .dome { background: linear-gradient(180deg, #f87171 0%, #dc2626 100%); box-shadow: 0 3px 0 #b91c1c; }
-
-#kanji-pop .candy-node:disabled {
-  filter: saturate(0.6) brightness(0.92);
-  opacity: 0.88;
-}
-
-/* Crown on Node 05 */
-#kanji-pop .crown-crest {
+#kanji-pop .candy-node .node-stars {
   position: absolute;
-  top: -26px;
+  bottom: -8px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 28px;
-  filter: drop-shadow(0 3px 5px rgba(0,0,0,0.2));
-  z-index: 6;
+  background: rgba(15, 23, 42, 0.78);
+  color: #facc15;
+  font-size: 10px;
+  letter-spacing: 1px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  white-space: nowrap;
   pointer-events: none;
 }
 
-/* Play Bubble on Node 01 - Sits ABOVE Node 01 pointing down */
+#kanji-pop .candy-node:disabled {
+  filter: saturate(0.82) brightness(0.96);
+  opacity: 0.94;
+}
+
+/* 3D Golden Crown on Node 05 */
+#kanji-pop .crown-crest-img {
+  position: absolute;
+  bottom: 66%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 84%;
+  height: auto;
+  pointer-events: none;
+  z-index: 7;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.22));
+}
+
+/* 3D Play Speech Bubble on Active Node */
 #kanji-pop .play-bubble {
   position: absolute;
-  bottom: calc(100% + 8px) !important;
+  bottom: calc(92% + 2px) !important;
   top: auto !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
-  background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
+  background: linear-gradient(180deg, #4ade80 0%, #22c55e 45%, #16a34a 100%);
   color: white;
   font-weight: 900;
   font-size: 14px;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
   padding: 6px 18px 7px;
   border-radius: 999px;
   border: 2.5px solid #ffffff;
-  box-shadow: 0 3px 0 #15803d, 0 6px 16px rgba(22, 163, 74, 0.45);
+  box-shadow: 0 4px 0 #15803d, 0 8px 18px rgba(22, 163, 74, 0.48), inset 0 2px 2px rgba(255, 255, 255, 0.65);
   white-space: nowrap;
   cursor: pointer;
-  z-index: 15;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.25);
+  z-index: 20;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.28);
   animation: cozyGlowPulse 2.4s infinite ease-in-out;
+}
+
+/* If Node 05 is selected, place Play Bubble below so it doesn't cover the 3D Crown */
+#kanji-pop .node-05 .play-bubble {
+  bottom: auto !important;
+  top: calc(95% + 4px) !important;
 }
 
 #kanji-pop .play-bubble::after {
   content: '';
   position: absolute;
-  bottom: -6px;
+  bottom: -7px;
   left: 50%;
   transform: translateX(-50%);
   width: 0;
   height: 0;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 6px solid #ffffff;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid #ffffff;
+}
+
+#kanji-pop .node-05 .play-bubble::after {
+  bottom: auto;
+  top: -7px;
+  border-top: none;
+  border-bottom: 7px solid #ffffff;
 }
 
 @keyframes cozyGlowPulse {
   0%, 100% {
-    box-shadow: 0 3px 0 #15803d, 0 6px 16px rgba(22, 163, 74, 0.45);
+    box-shadow: 0 4px 0 #15803d, 0 6px 16px rgba(22, 163, 74, 0.45), inset 0 2px 2px rgba(255, 255, 255, 0.65);
   }
   50% {
-    box-shadow: 0 3px 0 #15803d, 0 8px 24px rgba(22, 163, 74, 0.7);
+    box-shadow: 0 4px 0 #15803d, 0 8px 24px rgba(22, 163, 74, 0.75), inset 0 2px 2px rgba(255, 255, 255, 0.85);
   }
 }
 
-/* 6. Bottom Kanji Drawer */
+/* 6. Bottom 8-Kanji Frosted Tray with Real 3D Clay Squircle Tiles */
 #kanji-pop .kanji-drawer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 420px;
-  padding: 6px 8px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 2px solid #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 6px 20px rgba(18, 89, 133, 0.12);
+  max-width: 520px;
+  padding: 7px 12px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 2.5px solid #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 8px 24px rgba(18, 89, 133, 0.16), inset 0 2px 2px #ffffff;
   backdrop-filter: blur(12px);
   box-sizing: border-box;
-  z-index: 20;
+  z-index: 25;
   gap: 6px;
   flex: none;
+  pointer-events: auto;
 }
 
-#kanji-pop .kanji-key {
+#kanji-pop#kanji-pop button.kanji-key {
   flex: 1;
-  height: clamp(40px, 10vw, 48px);
-  border-radius: 12px;
+  aspect-ratio: 1 / 1;
+  max-width: 56px;
+  height: auto;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: clamp(18px, 5vw, 22px);
+  font-size: clamp(18px, 2.2vw, 24px);
   font-weight: 900;
-  color: white;
-  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  color: #ffffff;
   cursor: pointer;
   user-select: none;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 1.5px 3px rgba(0, 0, 0, 0.28);
   position: relative;
-  box-shadow: 0 4px 0 var(--k-shd), 0 5px 8px rgba(0,0,0,0.08), inset 0 2px 2px rgba(255,255,255,0.7);
-  transition: transform 0.12s ease;
+  transition: transform 0.12s ease, filter 0.12s ease;
   padding: 0;
 }
 
-#kanji-pop .kanji-key:hover {
+#kanji-pop .kanji-key .shelf-gem-icon {
   transform: translateY(-2px);
+  display: block;
+}
+
+#kanji-pop .kanji-key:hover {
+  transform: translateY(-3px) scale(1.05);
+  filter: brightness(1.05);
 }
 
 #kanji-pop .kanji-key.locked {
-  opacity: 0.82;
+  opacity: 0.92;
 }
 
-/* Floating Bottom Navigation (.course-nav) */
+/* 7. Floating Bottom Navigation (.course-nav) */
 #kanji-pop#kanji-pop[data-view="map"] .course-nav {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
   width: min(100%, 340px);
-  height: 38px;
-  min-height: 38px;
-  margin: 2px auto 0;
+  height: 36px;
+  min-height: 36px;
+  margin: 4px auto 0;
   padding: 2px 14px;
   background: rgba(255, 255, 255, 0.9);
-  border: 1.5px solid #ffffff;
+  border: 2px solid #ffffff;
   border-radius: 999px;
-  box-shadow: 0 6px 18px rgba(18, 89, 133, 0.12);
+  box-shadow: 0 6px 18px rgba(18, 89, 133, 0.14);
   backdrop-filter: blur(12px);
-  z-index: 25;
+  z-index: 30;
   flex: none;
   box-sizing: border-box;
 }
@@ -496,7 +532,7 @@
   cursor: pointer;
   padding: 4px 10px;
   border-radius: 999px;
-  transition: all .15s ease;
+  transition: all 0.15s ease;
 }
 
 #kanji-pop#kanji-pop[data-view="map"] .course-nav button[aria-current="page"] {
@@ -505,7 +541,7 @@
   box-shadow: 0 2px 6px rgba(2, 132, 199, 0.35);
 }
 
-/* 12. Modal & Options */
+/* 8. Modal & Options */
 #kanji-pop .journey-options h2 { margin: 0 0 10px; font-size: 22px; color: #0c3e68; }
 #kanji-pop .journey-options p { font-size: 13px; line-height: 1.5; color: #21618d; margin-bottom: 18px; }
 #kanji-pop .journey-options .kp-secondary { width: 100%; display: flex; align-items: center; gap: 12px; padding: 11px; margin: 6px 0; font-size: 13px; text-align: left; }
@@ -520,26 +556,32 @@
     height: 100dvh;
     max-height: 100dvh;
     overflow: hidden;
-    padding: 6px 10px 4px;
+    padding: 6px 8px 4px;
     gap: 4px;
     justify-content: space-between;
   }
 
   #kanji-pop#kanji-pop[data-view="map"] .kp-header {
-    height: 44px;
-    min-height: 44px;
+    height: 46px;
+    min-height: 46px;
     margin: 0 auto;
     width: 100%;
     max-width: 420px;
+    padding: 2px 6px 2px 10px;
   }
 
   #kanji-pop#kanji-pop[data-view="map"] .kp-logo {
-    height: 42px;
+    height: 40px;
+    gap: 4px;
   }
 
   #kanji-pop#kanji-pop[data-view="map"] .kp-logo .kp-logo-img {
-    height: 40px;
-    max-width: 120px;
+    height: 32px;
+    max-width: 60px;
+  }
+
+  #kanji-pop#kanji-pop[data-view="map"] .kp-logo-wordmark {
+    height: 28px;
   }
 
   #kanji-pop .kp-lang-btn,
@@ -560,199 +602,103 @@
     margin: 0 auto;
   }
 
-  #kanji-pop .map-top-bar {
-    height: 30px;
-    min-height: 30px;
-    gap: 6px;
-    justify-content: space-between;
-    width: 100%;
+  #kanji-pop .chapter-bar {
+    padding: 3px 8px;
+    font-size: 10px;
+    gap: 4px;
     max-width: 420px;
-    margin: 0 auto;
-  }
-
-  #kanji-pop .journey-eyebrow-chip {
-    display: none;
-  }
-
-  #kanji-pop .grade-toggle-bar {
-    padding: 2px 4px;
-    gap: 3px;
   }
 
   #kanji-pop .grade-pill {
-    padding: 2px 7px;
-    font-size: 10px;
-    gap: 4px;
-  }
-
-  #kanji-pop .grade-pill .grade-tag {
-    font-size: 8px;
-    padding: 1px 4px;
-  }
-
-  #kanji-pop .journey-album,
-  #kanji-pop .journey-menu {
-    height: 28px;
-    padding: 0 8px;
-    border-radius: 10px;
-  }
-
-  #kanji-pop .journey-album span { font-size: 11px; }
-  #kanji-pop .journey-album small { font-size: 9px; }
-  #kanji-pop .journey-menu { width: 28px; padding: 0; }
-  #kanji-pop .journey-menu svg { width: 14px; height: 14px; }
-
-  #kanji-pop .journey-layout {
-    gap: 4px;
-    width: 100%;
-    max-width: 420px;
-    margin: 0 auto;
-  }
-
-  #kanji-pop .journey-chapter-switch {
-    grid-template-columns: 28px minmax(0, 1fr) 28px;
-    gap: 4px;
-    padding: 4px 10px 5px;
-    border-radius: 14px;
-  }
-
-  #kanji-pop .journey-chapter-switch button {
-    width: 28px;
-    height: 28px;
-  }
-
-  #kanji-pop .journey-chapter-switch svg { width: 14px; height: 14px; }
-
-  #kanji-pop .chapter-switch-title .journey-eyebrow {
-    font-size: 8.5px;
-    letter-spacing: 1px;
-  }
-
-  #kanji-pop .chapter-switch-title h1 {
-    font-size: 14px;
-    margin: 1px 0;
-  }
-
-  #kanji-pop .journey-chapter-progress {
+    padding: 2.5px 6px;
     font-size: 9.5px;
-    gap: 4px;
-  }
-
-  #kanji-pop .journey-chapter-progress i {
-    width: 10px;
-    height: 3px;
-  }
-
-  #kanji-pop .journey-kanji-shelf {
-    padding: 3px 6px 4px;
     gap: 2px;
-    border-radius: 12px;
   }
 
-  #kanji-pop .shelf-header {
-    font-size: 8.5px;
-  }
-
-  #kanji-pop .shelf-count-badge {
-    font-size: 8px;
-    padding: 0 5px;
-  }
-
-  #kanji-pop .shelf-grid {
+  #kanji-pop .chapter-nav-center {
+    font-size: 9.5px;
     gap: 3px;
   }
 
-  #kanji-pop .shelf-gem-card {
-    padding: 2px;
-    border-radius: 6px;
+  #kanji-pop .chapter-nav-center span {
+    max-width: 115px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  #kanji-pop .shelf-gem-icon {
-    font-size: 13px;
-    line-height: 1.1;
+  #kanji-pop .chapter-nav-center button {
+    width: 20px;
+    height: 20px;
   }
 
-  #kanji-pop .shelf-gem-name {
-    font-size: 7px;
+  #kanji-pop .hud-pill.stars {
+    padding: 2.5px 7px;
+    font-size: 10px;
   }
 
-  #kanji-pop .journey-constellation {
-    flex: 1;
-    min-height: 200px;
-    max-height: calc(100dvh - 290px);
-    height: auto;
-    padding: 0 0 34px;
-  }
-
-  #kanji-pop#kanji-pop button.journey-stop {
-    width: 52px;
-    height: 48px;
-  }
-
-  #kanji-pop .journey-stop-body {
-    width: 44px;
-    height: 44px;
-    font-size: 17px;
-    border-radius: 13px;
-    border-width: 2px;
-  }
-
-  #kanji-pop .journey-node-base {
-    width: 70px;
+  #kanji-pop .journey-menu {
+    width: 24px;
     height: 24px;
-    transform: translateY(16px);
   }
 
-  #kanji-pop#kanji-pop button.journey-stop.selected {
-    width: 54px;
-    height: 50px;
+  /* On portrait mobile, zoom the 3D mountain canvas horizontally so the entire S-curve road fills 100vw */
+  #kanji-pop .mountain-canvas {
+    width: 184vw;
+    height: 82dvh;
+    aspect-ratio: auto;
+    margin-top: 2dvh;
   }
 
-  #kanji-pop .journey-node-play-btn {
-    top: calc(50% + 26px);
-    min-height: 28px;
-    min-width: 72px;
-    padding: 2px 10px;
-    font-size: 11px;
-    border-radius: 999px;
+  #kanji-pop#kanji-pop button.candy-node {
+    width: clamp(68px, 19vw, 84px);
+    aspect-ratio: 252 / 196;
   }
 
-  #kanji-pop .journey-stop-caption {
-    top: calc(50% + 26px);
-    font-size: 8px;
-    padding: 1.5px 6px;
+  #kanji-pop .candy-node .dome-num {
+    font-size: clamp(17px, 4.8vw, 21px);
   }
 
-  #kanji-pop .journey-crown-crest {
-    top: -9px;
-    font-size: 14px;
+  #kanji-pop .play-bubble {
+    font-size: 12px;
+    padding: 4px 13px 5px;
+  }
+
+  #kanji-pop .kanji-drawer {
+    padding: 5px 8px;
+    gap: 4px;
+    border-radius: 18px;
+    max-width: 420px;
+  }
+
+  #kanji-pop .kanji-key {
+    font-size: clamp(16px, 4.5vw, 20px);
   }
 
   #kanji-pop#kanji-pop[data-view="map"] .course-nav {
-    height: 38px;
-    min-height: 38px;
-    padding: 2px 12px;
-    width: min(100%, 320px);
+    height: 34px;
+    min-height: 34px;
+    padding: 2px 10px;
+    width: min(100%, 310px);
     gap: 8px;
+    margin-top: 2px;
   }
 
   #kanji-pop#kanji-pop[data-view="map"] .course-nav button {
-    font-size: 9.5px;
+    font-size: 10px;
   }
 }
 
 /* Daily Challenge & Wordle-style Modal */
 #kanji-pop .grade-pill.daily-pill {
-  background: rgba(255, 230, 100, 0.28);
-  border: 1.5px solid rgba(255, 180, 0, 0.55);
-  color: #834700;
+  background: linear-gradient(145deg, #fb923c, #ea580c);
+  border: 1.5px solid #ffffff;
+  color: #ffffff;
+  box-shadow: 0 2px 0 #c2410c;
 }
 #kanji-pop .grade-pill.daily-pill:hover {
-  background: rgba(255, 235, 130, 0.5);
-  color: #613400;
+  filter: brightness(1.06);
 }
 #kanji-pop .grade-pill.daily-pill .grade-tag {
-  background: linear-gradient(135deg, #ff9800, #f57c00);
   color: #fff;
 }
 #kanji-pop .grade-pill.daily-pill.active {
@@ -760,10 +706,6 @@
   color: #fff;
   border-color: rgba(255, 255, 255, 0.9);
   box-shadow: 0 3px 12px rgba(245, 124, 0, 0.35);
-}
-#kanji-pop .grade-pill.daily-pill.active .grade-tag {
-  background: #fff;
-  color: #e65100;
 }
 
 #kanji-pop .daily-win-modal {
@@ -779,7 +721,7 @@
   color: #fff;
   font-weight: 800;
   font-size: 12px;
-  letter-spacing: .5px;
+  letter-spacing: 0.5px;
   margin-bottom: 8px;
   box-shadow: 0 2px 8px rgba(245, 124, 0, 0.3);
 }
@@ -917,7 +859,7 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
   opacity: 0;
   pointer-events: none;
-  transition: transform .25s cubic-bezier(0.16, 1, 0.3, 1), opacity .25s ease;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
   z-index: 999999;
 }
 .kp-share-toast.visible {
