@@ -1199,25 +1199,38 @@ body:has(#kanji-pop[data-view="map"]),
  height:100dvh;
  overflow:hidden;
  user-select:none;
+ display:flex;
+ align-items:center;
+ justify-content:center;
 }
 
-@media (max-aspect-ratio: 1/1){
- #kanji-pop .concept-art-stage{
-  width:100vw;
-  height:calc(100vw * 768 / 1376);
- }
-}
-
-#kanji-pop .concept-art-bg{
+#kanji-pop .hyb-sky-svg{
+ position:absolute;
+ inset:0;
  width:100%;
  height:100%;
  display:block;
- object-fit:fill;
  pointer-events:none;
- user-select:none;
 }
 
-#kanji-pop .concept-hotspot{
+#kanji-pop .hyb-scene{
+ position:relative;
+ width:100vw;
+ height:100dvh;
+ max-width:calc(100dvh * 1.92);
+ max-height:calc(100vw / 1.55);
+ pointer-events:none;
+}
+
+#kanji-pop .hyb-sprite{
+ position:absolute;
+ display:block;
+ pointer-events:none;
+ user-select:none;
+ filter:drop-shadow(0 8px 18px rgba(11,68,128,.16));
+}
+
+#kanji-pop .hyb-sprite-btn{
  position:absolute;
  background:transparent!important;
  border:0!important;
@@ -1225,67 +1238,146 @@ body:has(#kanji-pop[data-view="map"]),
  padding:0!important;
  margin:0!important;
  cursor:pointer;
- border-radius:44px;
  outline:none!important;
- transition:background .18s ease,transform .18s ease;
+ pointer-events:auto;
+ transition:transform .2s cubic-bezier(.22,1,.36,1),filter .2s ease;
 }
 
-#kanji-pop .concept-hotspot:hover{
- background:radial-gradient(ellipse at center,rgba(255,255,255,.18) 0%,rgba(255,255,255,0) 70%)!important;
+#kanji-pop .hyb-sprite-btn img{
+ width:100%;
+ height:100%;
+ display:block;
+ object-fit:contain;
+ pointer-events:none;
+ user-select:none;
 }
 
-#kanji-pop .concept-hotspot:active{
- background:radial-gradient(ellipse at center,rgba(0,0,0,.08) 0%,rgba(0,0,0,0) 70%)!important;
+#kanji-pop .hyb-cloud-label-svg{
+ position:absolute;
+ inset:0;
+ width:100%;
+ height:100%;
+ display:block;
+ pointer-events:none;
+ user-select:none;
+ overflow:visible;
 }
 
-/* Exact percentage coordinates on the 1376x768 Concept Art */
-#kanji-pop .hs-logo{
- left:3.2%;
- top:4.2%;
- width:32.5%;
- height:25.2%;
+#kanji-pop .hyb-podium-num{
+ font-family:"Arial Rounded MT Bold","Nunito","Trebuchet MS",sans-serif;
+ font-weight:900;
+ font-size:28px;
+ fill:#5a6577;
+ text-anchor:middle;
+ letter-spacing:0.5px;
+ filter:drop-shadow(0 1.5px 0 rgba(255,255,255,.85));
 }
-#kanji-pop .hs-lang{
- left:82.9%;
- top:3.0%;
- width:7.4%;
- height:13.4%;
- border-radius:50%;
+
+#kanji-pop .hyb-podium-num.is-cyan{
+ fill:#ffffff;
+ filter:drop-shadow(0 2px 3px rgba(10,95,155,.65));
 }
-#kanji-pop .hs-sound{
- left:90.7%;
- top:3.0%;
- width:7.4%;
- height:13.4%;
- border-radius:50%;
+
+#kanji-pop .hyb-level-txt{
+ font-family:"Arial Rounded MT Bold","Nunito","Trebuchet MS",sans-serif;
+ font-weight:900;
+ font-size:23px;
+ fill:#2e5b88;
+ text-anchor:middle;
+ stroke:#ffffff;
+ stroke-width:4px;
+ paint-order:stroke fill;
+ stroke-linejoin:round;
+ filter:drop-shadow(0 2px 4px rgba(24,78,136,.18));
 }
-#kanji-pop .hs-cloud-1{
- left:5.5%;
- top:49.0%;
- width:15.2%;
- height:21.0%;
+
+#kanji-pop .hyb-sprite-btn:hover{
+ transform:translateY(-4px) scale(1.03);
+ filter:brightness(1.06) drop-shadow(0 12px 22px rgba(10,72,138,.24));
 }
-#kanji-pop .hs-cloud-2{
- left:24.2%;
- top:54.5%;
- width:15.2%;
- height:21.2%;
+
+#kanji-pop .hyb-sprite-btn:active{
+ transform:translateY(1px) scale(.99);
 }
-#kanji-pop .hs-cloud-3{
- left:41.8%;
- top:45.8%;
- width:16.2%;
- height:23.4%;
+
+#kanji-pop .hyb-top-btn{
+ position:absolute;
+ width:7.2%;
+ aspect-ratio:1 / 1;
+ background:transparent!important;
+ border:0!important;
+ box-shadow:none!important;
+ padding:0!important;
+ margin:0!important;
+ cursor:pointer;
+ outline:none!important;
+ pointer-events:auto;
+ transition:transform .18s ease,filter .18s ease;
+ filter:drop-shadow(0 6px 12px rgba(12,68,125,.24));
 }
-#kanji-pop .hs-cloud-4{
- left:60.5%;
- top:54.5%;
- width:15.2%;
- height:21.2%;
+
+#kanji-pop .hyb-top-btn svg{
+ width:100%;
+ height:100%;
+ display:block;
 }
-#kanji-pop .hs-cloud-5{
- left:79.2%;
- top:42.0%;
- width:16.0%;
- height:27.8%;
+
+#kanji-pop .hyb-top-btn:hover{
+ transform:translateY(-2px) scale(1.05);
+ filter:brightness(1.08) drop-shadow(0 8px 16px rgba(12,68,125,.3));
+}
+
+#kanji-pop .hyb-top-btn.is-muted{
+ opacity:.82;
+}
+
+/* Crisp 3D Vector/HTML Kanji Tiles */
+#kanji-pop .hyb-tile{
+ position:absolute;
+ width:5.8%;
+ aspect-ratio:0.92 / 1;
+ background:linear-gradient(155deg,#fffefb 0%,#f7ead9 68%,#edd5bc 100%);
+ border-radius:22%;
+ border:2px solid #e2bfa0;
+ box-shadow:
+  0 7px 0 #c69870,
+  0 10px 18px rgba(14,66,120,.22),
+  inset 0 2px 3px rgba(255,255,255,.95);
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ pointer-events:none;
+ user-select:none;
+}
+
+#kanji-pop .hyb-tile span{
+ font-family:"Yu Gothic","Hiragino Kaku Gothic ProN","Noto Sans JP","Meiryo",sans-serif;
+ font-weight:900;
+ font-size:clamp(26px,3.8vw,60px);
+ line-height:1;
+ transform:translateY(-2%);
+}
+
+#kanji-pop .hyb-tile-lg{
+ width:8.8%;
+ box-shadow:
+  0 10px 0 #c69870,
+  0 14px 24px rgba(14,66,120,.25),
+  inset 0 3px 4px rgba(255,255,255,.95);
+}
+
+#kanji-pop .hyb-tile-lg span{
+ font-size:clamp(36px,5.6vw,88px);
+}
+
+#kanji-pop .hyb-tile-md{
+ width:7.5%;
+ box-shadow:
+  0 9px 0 #c69870,
+  0 12px 22px rgba(14,66,120,.24),
+  inset 0 2.5px 4px rgba(255,255,255,.95);
+}
+
+#kanji-pop .hyb-tile-md span{
+ font-size:clamp(30px,4.8vw,74px);
 }
