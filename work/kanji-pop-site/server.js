@@ -44,5 +44,5 @@ http.createServer((req, res) => {
     fs.createReadStream(file).pipe(res);
   });
 }).listen(port, host, () => {
-  process.stdout.write(`Kanji Pop running at http://${host}:${port}/\n`);
+  process.stdout.write(`Kanjidle running at http://${host}:${port}/\n`);
 });

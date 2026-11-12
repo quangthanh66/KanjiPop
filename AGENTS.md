@@ -1,4 +1,4 @@
-# 🤖 AI Agent Onboarding & Project Context — Kanji Pop!
+# 🤖 AI Agent Onboarding & Project Context — Kanjidle!
 
 > **Tài liệu chuẩn hóa dành riêng cho AI Agent (Antigravity, Cursor, Claude Code, GitHub Copilot, Codex, Aider, v.v.)**  
 > Khi bạn (AI) được khởi động trên bất kỳ thiết bị mới nào sau khi clone/pull repository này, hãy đọc kỹ tài liệu này. Toàn bộ kiến trúc, quy tắc bất biến, tiến độ thực tế, cách chạy server, test suite và các bài học kinh nghiệm đã được đóng gói đầy đủ dưới đây. Bạn có thể bắt đầu xử lý task tiếp theo ngay lập tức mà không cần hỏi lại người dùng về bối cảnh dự án.
@@ -7,7 +7,7 @@
 
 ## 1. 📌 Tổng Quan Dự Án (Project Mission)
 
-* **Tên dự án**: **Kanji Pop!**
+* **Tên dự án**: **Kanjidle!**
 * **Mục tiêu**: Trò chơi giải đố Web (Web-based Puzzle Game) kết hợp giữa cơ chế **Trượt gạch (Sliding Puzzle)** và **Hợp nhất nguyên tố (Elemental Fusion)** để hỗ trợ người mới bắt đầu học và ghi nhớ 24 chữ Hán tự (Kanji) sơ cấp cấp độ **JLPT N5**.
 * **Đối tượng người dùng**: Người học tiếng Nhật sơ cấp (đặc biệt là người Việt Nam), ưu tiên trải nghiệm thư giãn, mượt mà, phản hồi âm thanh và xúc giác sống động (tactile haptics & acoustics).
 * **Triết lý kỹ thuật**: **Zero-Build, Pure Vanilla**. Hoạt động độc lập 100% không cần bundler (Webpack, Vite, Rollup, Babel), không phụ thuộc npm dependencies lúc runtime, toàn bộ font chữ và tài nguyên âm thanh/hình ảnh lưu cục bộ (offline-first).

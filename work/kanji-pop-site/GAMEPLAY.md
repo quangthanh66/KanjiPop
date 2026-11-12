@@ -1,4 +1,4 @@
-# Kanji Pop: local N5 roadmap prototype
+# Kanjidle: local N5 roadmap prototype
 
 ## P0 local safeguards (2026-11-07)
 

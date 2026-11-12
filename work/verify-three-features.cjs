@@ -131,7 +131,7 @@ const path = require('path');
 
     const sharePre = await page.locator('.daily-share-preview pre').textContent();
     console.log('Generated Share Text:\n' + sharePre);
-    assert(sharePre.includes('Kanji Pop! Daily'), 'Share text must have game title');
+    assert(sharePre.includes('Kanjidle Daily'), 'Share text must have game title');
     assert(sharePre.includes('🟩'), 'Share text must contain Wordle-style emojis');
 
     // Click share button

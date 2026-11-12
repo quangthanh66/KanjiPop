@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🀄 Kanji Pop! — 漢字ポップ
+# 🀄 Kanjidle — The Daily Kanji Sliding Puzzle · 漢字ポップ
 
 ### *Trò chơi giải đố trượt đá quý & hợp nhất nguyên tố học 24 Kanji N5*
 
@@ -82,7 +82,7 @@
 
 ## 🎧 Hệ Thống Âm Thanh (Sound Profiles)
 
-Kanji Pop tích hợp bộ xử lý âm thanh **Web Audio API** chuyên nghiệp với hệ thống lọc đa tầng:
+Kanjidle tích hợp bộ xử lý âm thanh **Web Audio API** chuyên nghiệp với hệ thống lọc đa tầng:
 * `sfxBus`: Đi qua bộ lọc Lowpass 5200Hz giúp âm thanh va chạm đá ấm áp, loại bỏ tiếng chói gắt.
 * `bgmBus`: Đi qua bộ lọc Lowpass 4000Hz giữ cho giai điệu BGM vui tươi (126 BPM) luôn êm dịu, không lấn át tiếng trượt ngọc.
 * `masterBus`: Tích hợp bộ Dynamic Compressor chống méo tiếng / vỡ âm (clipping).
@@ -105,7 +105,7 @@ Trò chơi được chia làm **3 Chương (15 Màn chơi)** bám sát từ vự
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                              KANJI POP! N5                                  │
+│                               KANJIDLE N5                                   │
 ├───────────────────┬─────────────────────────────────────────────────────────┤
 │ CHƯƠNG 1 (Màn 1-5) │  休 (Hưu)   男 (Nam)   分 (Phân)   名 (Danh)               │
 │ Con người & Đời sống│  外 (Ngoại) 何 (Hà)    見 (Kiến)   国 (Quốc)               │

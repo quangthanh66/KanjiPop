@@ -57,7 +57,7 @@
    dailyMoves: 'Lượt giải',
    dailyShareBtn: 'Chia sẻ kết quả 📋',
    dailyCopied: 'Đã sao chép kết quả để chia sẻ!',
-   dailyShareTitle: 'Kanji Pop! Daily Puzzle',
+   dailyShareTitle: 'Kanjidle Daily Puzzle',
    langBtn: 'EN'
   },
   en: {
@@ -115,7 +115,7 @@
    dailyMoves: 'Moves taken',
    dailyShareBtn: 'Share Result 📋',
    dailyCopied: 'Result copied to clipboard!',
-   dailyShareTitle: 'Kanji Pop! Daily Puzzle',
+   dailyShareTitle: 'Kanjidle Daily Puzzle',
    langBtn: 'VI'
   }
  };

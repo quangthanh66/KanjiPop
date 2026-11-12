@@ -1,4 +1,4 @@
-/* Studio-grade Granular Audio Engine & Audition Studio for Kanji Pop.
+/* Studio-grade Granular Audio Engine & Audition Studio for Kanjidle.
    - Unified Tile Tap & Movement (10 tactile options for tap/slide/contact)
    - Zero invalid move penalty (free slide navigation)
    - Zero hint sound clutter

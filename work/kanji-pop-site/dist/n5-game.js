@@ -143,9 +143,9 @@
   const reading = r.reading || r.kunyomi || r.onyomi || '';
   const stars = moves <= 15 ? '🟩🟩🟩🟩' : moves <= 25 ? '🟩🟩🟨🟩' : '🟩🟨🟨🟩';
   if(lang === 'en'){
-   return `Kanji Pop! Daily · ${dateStr}\n✦ Secret Kanji: ${r.id} (${meaning} · ${reading})\n🎯 ${moves} moves · Solved!\n💎 ${stars}\n👉 Play: https://quangthanh66.github.io/kanjipop/`;
+   return `Kanjidle Daily · ${dateStr}\n✦ Secret Kanji: ${r.id} (${meaning} · ${reading})\n🎯 ${moves} moves · Solved!\n💎 ${stars}\n👉 Play: https://quangthanh66.github.io/kanjipop/`;
   }
-  return `Kanji Pop! Daily · ${dateStr}\n✦ Chữ bí mật: ${r.id} (${r.hanViet || meaning} · ${reading})\n🎯 ${moves} lượt đi · Hoàn thành!\n💎 ${stars}\n👉 Chơi tại: https://quangthanh66.github.io/kanjipop/`;
+  return `Kanjidle Daily · ${dateStr}\n✦ Chữ bí mật: ${r.id} (${r.hanViet || meaning} · ${reading})\n🎯 ${moves} lượt đi · Hoàn thành!\n💎 ${stars}\n👉 Chơi tại: https://quangthanh66.github.io/kanjipop/`;
  }
 
  function showToast(msg){
@@ -288,7 +288,7 @@
  }
  function previewProgress(value){stagedProgress=value;$('#progress-preview').hidden=false;$('#progress-summary').textContent='Bản sao: '+value.profile.collected.length+'/24 chữ · '+Object.keys(value.profile.results).length+'/15 màn hoàn thành · đang ở màn '+(value.state.level+1)+', '+value.state.moves+' lượt.';$('#progress-status').textContent='Bản sao hợp lệ. Chưa thay đổi tiến trình.';}
  function exportProgress(){
-  try{const payload=progressStore.pack(snapshot());$('#progress-export-label').hidden=false;$('#progress-export-json').value=payload;const url=URL.createObjectURL(new Blob([payload],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download='kanji-pop-progress-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);$('#progress-status').textContent='Đã yêu cầu tải bản sao. Nếu tải không được, hãy sao chép JSON bên trên.';}catch{$('#progress-status').textContent='Không xuất được. Tiến trình hiện tại vẫn được giữ trong phiên chơi.';}
+  try{const payload=progressStore.pack(snapshot());$('#progress-export-label').hidden=false;$('#progress-export-json').value=payload;const url=URL.createObjectURL(new Blob([payload],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download='kanjidle-progress-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);$('#progress-status').textContent='Đã yêu cầu tải bản sao. Nếu tải không được, hãy sao chép JSON bên trên.';}catch{$('#progress-status').textContent='Không xuất được. Tiến trình hiện tại vẫn được giữ trong phiên chơi.';}
  }
  saveNotice.addEventListener('click',showProgress);
  window.addEventListener('storage',e=>{if(e.key===key||e.key===null)storageNotice('conflict');});

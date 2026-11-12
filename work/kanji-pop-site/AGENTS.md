@@ -1,4 +1,4 @@
-# 🤖 AI Agent Local Pointer — Kanji Pop!
+# 🤖 AI Agent Local Pointer — Kanjidle!
 
 Tài liệu hướng dẫn và đặc tả toàn diện cho AI Agent hiện được đặt tại tệp gốc của dự án:
 👉 **[`../../AGENTS.md`](../../AGENTS.md)**
