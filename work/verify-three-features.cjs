@@ -1,4 +1,9 @@
-const { chromium } = require('C:/Users/Windows/Downloads/Bomb/node_modules/playwright');
+const { chromium } = (() => {
+  for (const p of ['playwright', 'C:/Users/Admin/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright', 'C:/Users/Windows/Downloads/Bomb/node_modules/playwright']) {
+    try { return require(p); } catch {}
+  }
+  throw new Error('Playwright not found');
+})();
 const assert = require('node:assert/strict');
 const path = require('path');
 

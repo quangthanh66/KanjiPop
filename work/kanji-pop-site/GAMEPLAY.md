@@ -491,3 +491,32 @@ Following user feedback on sound feedback feel and tactile immersion:
 - **Automated Validation**:
   - All test suites (`fusion-check.cjs`, `ui-shell-check.cjs`, `mobile-layout-stability-check.cjs`) pass 100%.
   - Verified across multiple viewports (320px to 1440px) with zero layout regressions and zero audio stutter.
+
+### Rebranding to Kanjidle, 4K Concept Art Map, Audio Studio & Bilingual i18n (2026-11-12)
+
+Major brand evolution and UX upgrades across all presentation layers:
+
+- **Rebranding to Kanjidle**:
+  - Official brand name updated to **Kanjidle** (*"The Daily Kanji Sliding Puzzle · 漢字ポップ"*).
+  - Deployed glossy 3D graphic logo (Mẫu 4 Twin Gem Fusion) without kanji character, uncropped with smooth radial alpha (`kanjidle-logo.png`, `sp-logo.png`).
+  - Added dedicated favicon and app icon (`favicon.svg`, `kanjidle-icon.svg`, `kanjidle-icon.png`).
+  - Clickable logo in header returns players immediately to the home screen, removing redundant home button.
+
+- **4K Concept Art Map Screen (Option 1)**:
+  - Replaced linear roadmap with a 4K Hybrid CSS/SVG concept art landscape (`concept-map-clean.png`, `dist/journey-map.css`).
+  - 5 floating 3D cloud islands (`sp-cloudStd.png`, `sp-cloud5.png`, `sp-rockLeft.png`, `sp-rockRight.png`) with razor-sharp 4K SVG vector badges and numbers.
+  - Multi-scale wavelet bilateral filtering and clean CSS hotspot integration, preventing 4K large-screen artifacts.
+  - Interactive top buttons for language switching (`[data-concept-lang]`) and audio toggle (`[data-concept-sound]`).
+
+- **Bilingual i18n & Native Japanese Audio**:
+  - Introduced `dist/i18n.js` providing seamless Vietnamese $\leftrightarrow$ English (`VI` / `EN`) localization across all UI, menus, maps, settings, and learning cards.
+  - Integrated native Japanese voice synthesis (`KanjiAudio.speak(text, lang)`) accessible via the speaker icon (`.btn-voice-speak`) on every Kanji card.
+
+- **Wordle-Style Daily Kanji Puzzle**:
+  - Added daily puzzle challenge (`.grade-pill.daily-pill`), presenting one unique Kanji puzzle every day.
+  - Automatic share card generation with streak tracking and move stats.
+
+- **Interactive Audio Studio**:
+  - Interactive Audio Studio modal accessible from Settings/Menu with real-time audition previews for all game sound categories.
+  - 10 distinct options per category (Tile Tap, Fusion Impact, Level Clear Fanfare, BGM style) with Japanese voice toggle.
+  - Restored Joyful J-Pop 126 BPM (`pop`) and sparkling gem sounds (`gem`) as defaults.

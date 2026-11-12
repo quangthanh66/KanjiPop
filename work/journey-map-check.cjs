@@ -1,4 +1,10 @@
-const{chromium}=require('C:/Users/Windows/Downloads/Bomb/node_modules/playwright'),assert=require('node:assert/strict');
+const { chromium } = (() => {
+  for (const p of ['playwright', 'C:/Users/Admin/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright', 'C:/Users/Windows/Downloads/Bomb/node_modules/playwright']) {
+    try { return require(p); } catch {}
+  }
+  throw new Error('Playwright not found');
+})();
+const assert = require('node:assert/strict');
 (async()=>{const b=await chromium.launch({headless:true,executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe'});try{for(const [width,height,continued] of [[390,844,false],[495,900,true],[320,568,true],[1440,900,true],[810,540,false]]){
  const p=await b.newPage({viewport:{width,height}}),errors=[];p.on('pageerror',e=>errors.push(e.message));await p.addInitScript(()=>{const f=sessionStorage.getItem('journey-fixture');if(f){localStorage.setItem('kanji-pop-n5-v1',f);sessionStorage.removeItem('journey-fixture');}});await p.goto('http://127.0.0.1:8765/');
  if(continued){await p.evaluate(()=>{const E=KanjiN5,mode=innerWidth>=900?'desktop':'mobile';let s=E.fresh(6,KanjiCoursePlans.modes[mode][6].seed,mode);const h=E.hint(s);s=E.move(s,h.at,h.dir).state;s.entryGuideSeen=true;sessionStorage.setItem('journey-fixture',JSON.stringify({course:E.C.id,state:s,profile:{collected:E.C.ids.slice(0,22),results:Object.fromEntries([0,1,2,3,4,5].map(id=>[id,{stars:1+id%3,moves:30}]))},history:[],undos:3,view:'map',sound:false}));});await p.reload();}

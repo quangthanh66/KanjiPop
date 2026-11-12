@@ -44,14 +44,18 @@
 ## 🌟 Tính Năng Nổi Bật
 
 * 🧩 **Cơ chế Trượt & Ghép độc đáo (Sliding & Fusion)**: Bàn cờ 35 ô gồm 17 cặp ngọc cùng 1 ô trống duy nhất. Trượt các viên đá đồng màu, đồng dáng chạm cạnh nhau để kích hoạt hợp nhất Kanji.
+* 🗺️ **Bản đồ 4K Concept Art (Cloud Islands Map)**: Bản đồ nghệ thuật 4K với 5 đảo mây 3D bồng bềnh, nhãn vector sắc nét, hỗ trợ mượt mà từ điện thoại di động đến màn hình 4K.
+* 🌐 **Đa ngôn ngữ song ngữ tức thì (i18n VI ↔ EN)**: Chuyển đổi 1-click giữa Tiếng Việt và Tiếng Anh cho toàn bộ giao diện, lộ trình, thẻ học và cài đặt.
+* 🗣️ **Phát âm tiếng Nhật chuẩn (Native Audio TTS)**: Nút loa phát âm giọng Nhật bản xứ cho mọi chữ Kanji và từ vựng ví dụ.
+* 📅 **Thử thách hàng ngày (Daily Kanji Puzzle)**: Mỗi ngày một câu đố chữ Hán phong cách Wordle/Kanjidle, tự động tạo thẻ chia sẻ chuỗi thắng cùng bạn bè.
+* 🎛️ **Phòng thu âm thanh tương tác (Audio Studio)**: Cho phép nghe thử và tùy biến 10 phong cách âm thanh cho từng hành động (Chạm gạch, Hợp nhất, Chiến thắng, Nhạc nền J-Pop 126 BPM).
 * 📱 **Bố cục thích ứng hoàn hảo (Smart Transposition)**:
   * **Mobile (< 900px)**: Bàn dọc $5 \times 7$ tối ưu thao tác 1 tay, phím bấm $\ge 44\text{px}$.
   * **Desktop ($\ge 900px$)**: Bàn ngang $7 \times 5$ hiển thị Kanji siêu lớn (~135px), không gian khoáng đạt.
   * Tự động hoán vị trục tọa độ khi xoay màn hình/resize mà **giữ nguyên 100% tiến trình chơi**.
 * 💎 **Đồ họa đá quý Hybrid Clear Crystal**: 7 dáng cắt ngọc kết hợp giữa độ trong quang học và diện mạo góc cạnh bóng bẩy (Round, Diamond, Hexagon, Triangle, Square, Pentagon, Point).
 * ✨ **Hiệu ứng Canvas VFX 8 nguyên tố ma thuật**: Hỏa (Lửa bốc), Thủy (Sóng cuộn), Băng (Pha lê tuyết), Sấm (Tia sét vàng), Mộc (Dây leo), Đất (Mảnh đá vỡ), Ma thuật (Vòng tròn ma pháp), Vũ trụ (Cực quang trôi).
-* 🔊 **Âm thanh Foley chân thực & 5 Sound Profiles**: Tích hợp bộ tổng hợp vật lý Web Audio API + mẫu thu âm thực tế tiếng đá va chạm, tiếng lướt gạch đá êm ái cùng BGM Pop Nhật Bản 126 BPM.
-* 📚 **Giáo trình 24 Kanji N5 có căn cứ khoa học**: 15 màn chơi qua 3 chương, cung cấp thẻ học toàn diện: Âm Hán Việt, Nghĩa, Công thức cấu tạo bộ thủ, Từ vựng thực tế và cách đọc Hiragana.
+* 📚 **Giáo trình 24 Kanji N5 có căn cứ khoa học**: 15 màn chơi qua 3 chương, cung cấp thẻ học toàn diện: Âm Hán Việt, Nghĩa, Công thức cấu tạo bộ thủ, Từ vựng thực tế và cách đọc Hiragana (đang mở rộng N4).
 * 🔒 **Bảo toàn dữ liệu Schema v11**: Lưu trữ tự động `localStorage`, khóa Web Locks API chống ghi đè đa tab, xoay vòng backup và hỗ trợ xuất/nhập JSON an toàn.
 * ⚡ **100% Zero-Build & Offline-First**: Chạy trực tiếp trên trình duyệt bằng ES Modules thuần, toàn bộ font chữ Noto Sans JP và Nunito lưu cục bộ WOFF2, không phụ thuộc internet.
 
