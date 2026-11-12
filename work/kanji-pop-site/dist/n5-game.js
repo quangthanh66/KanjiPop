@@ -384,30 +384,29 @@
  if(!levels.some(l=>l.id===mapSelected))mapSelected=levels.some(l=>l.id===recommended)?recommended:levels.find(l=>!profile.results[l.id])?.id??levels.at(-1).id;
  const selectedLevel=C.levels[mapSelected],locked=mapSelected>next,resume=ongoing&&mapSelected===state.level,result=profile.results[mapSelected];
  const action=resume?'resume':mapSelected,label=locked?'Hoàn thành chương trước':(resume?I18N.t('resume'):result?I18N.t('replay'):I18N.t('play'))+' màn '+String(mapSelected+1).padStart(2,'0');
- const rows=[5,4,3,2,1],cols=[3,8,5,8,5],paths=['M35 90 C35 79 85 81 85 70','M85 70 C85 59 55 61 55 50','M55 50 C55 39 85 41 85 30','M85 30 C85 19 55 21 55 10'];
+ const rows=[5,4,3,2,1],cols=[4,8,3,8,5],paths=['M 38 88 C 38 77 71 80 71 69','M 71 69 C 71 58 29 61 29 50','M 29 50 C 29 39 71 42 71 31','M 71 31 C 71 20 50 23 50 12'];
 
- // Chapter Kanji Shelf (8 characters)
- const chapterChars=C.ids.filter(id=>C.recipes[id].chapter===mapChapter);
- const chapterCollectedCount=chapterChars.filter(id=>profile.collected.includes(id)).length;
- const chapterTotalStars=levels.reduce((acc,l)=>acc+(profile.results[l.id]?.stars||0),0);
- const maxChapterStars=levels.length*3;
+  // Chapter Kanji Shelf (8 characters)
+  const chapterChars=C.ids.filter(id=>C.recipes[id].chapter===mapChapter);
+  const chapterCollectedCount=chapterChars.filter(id=>profile.collected.includes(id)).length;
+  const chapterTotalStars=levels.reduce((acc,l)=>acc+(profile.results[l.id]?.stars||0),0);
+  const maxChapterStars=levels.length*3;
 
- const todayKey=getDailyKey();
- const dailyRec=getDailyRecord(todayKey,currentGrade);
- const dailyDone=!!dailyRec;
- const dailyPillHtml=`<button type="button" class="grade-pill daily-pill ${state?.isDaily?'active':''}" data-daily-play aria-label="${I18N.t('dailyTitle')}"><span class="grade-tag">📅 ${I18N.t('dailyBadge')}</span> ${I18N.t('dailyTitle')} ${dailyDone?'★':''}</button>`;
+  const todayKey=getDailyKey();
+  const dailyRec=getDailyRecord(todayKey,currentGrade);
+  const dailyDone=!!dailyRec;
+  const dailyPillHtml=`<button type="button" class="grade-pill daily-pill ${state?.isDaily?'active':''}" data-daily-play aria-label="${I18N.t('dailyTitle')}"><span class="grade-tag">📅 ${I18N.t('dailyBadge')}</span> ${I18N.t('dailyTitle')} ${dailyDone?'★':''}</button>`;
 
- const shelfCards=chapterChars.map(id=>{
-  const r=C.recipes[id],known=profile.collected.includes(id),intro=C.levels.find(l=>l.newChars&&l.newChars.includes(id));
-  const lvl=intro?intro.id+1:(mapChapter*5+1);
-  return `<button type="button" class="shelf-gem-card ${known?'unlocked':'locked'}" data-kanji-preview="${id}" aria-label="${known?id+' — '+(r.hanViet||I18N.getRecipeMeaning(r)):'Chưa mở khóa, màn '+lvl}"><span class="shelf-gem-icon" lang="ja">${known?id:'?'}</span><span class="shelf-gem-name">${known?(r.hanViet||I18N.getRecipeMeaning(r)):'Màn '+String(lvl).padStart(2,'0')}</span></button>`;
- }).join('');
+  const shelfCards=chapterChars.map(id=>{
+   const r=C.recipes[id],known=profile.collected.includes(id),intro=C.levels.find(l=>l.newChars&&l.newChars.includes(id));
+   const lvl=intro?intro.id+1:(mapChapter*5+1);
+   return `<button type="button" class="shelf-gem-card ${known?'unlocked':'locked'}" data-kanji-preview="${id}" aria-label="${known?id+' — '+(r.hanViet||I18N.getRecipeMeaning(r)):'Chưa mở khóa, màn '+lvl}"><span class="shelf-gem-icon" lang="ja">${known?id:'?'}</span><span class="shelf-gem-name">${known?(r.hanViet||I18N.getRecipeMeaning(r)):'Màn '+String(lvl).padStart(2,'0')}</span></button>`;
+  }).join('');
 
-  const gemCutClasses = ['gem-sapphire', 'gem-emerald', 'gem-amber', 'gem-amethyst', 'gem-crown'];
+   const gemCutClasses = ['gem-sapphire', 'gem-emerald', 'gem-amber', 'gem-amethyst', 'gem-crown'];
 
-  $('#map-screen').innerHTML = `<div class="map-top-bar"><div class="journey-eyebrow-chip"><span class="journey-eyebrow">${I18N.t('journeyEyebrow')} ${currentGrade} · ${I18N.t('chapter')} ${mapChapter+1}</span></div><div class="grade-toggle-bar"><button type="button" class="grade-pill ${currentGrade==='N5'?'active':''}" data-switch-grade="N5"><span class="grade-tag">JLPT N5</span> Sơ cấp</button><button type="button" class="grade-pill ${currentGrade==='N4'?'active':''}" data-switch-grade="N4"><span class="grade-tag">JLPT N4</span> Mới ✦</button>${dailyPillHtml}</div><div class="journey-toolbar-actions"><button class="journey-album" data-journey-album aria-label="Album: ${profile.collected.length} trên 24 chữ"><i data-lucide="book-open" aria-hidden="true"></i><span>${profile.collected.length}<small> / 24</small></span></button><button class="journey-menu" data-journey-menu aria-label="${I18N.t('menuTitle')}"><i data-lucide="ellipsis" aria-hidden="true"></i></button></div></div>
- <div class="journey-layout" data-chapter="${mapChapter}">
-  <aside class="journey-overview">
+   $('#map-screen').innerHTML = `<div class="map-top-bar"><div class="journey-eyebrow-chip"><span class="journey-eyebrow">${I18N.t('journeyEyebrow')} ${currentGrade} · ${I18N.t('chapter')} ${mapChapter+1}</span></div><div class="grade-toggle-bar"><button type="button" class="grade-pill ${currentGrade==='N5'?'active':''}" data-switch-grade="N5"><span class="grade-tag">JLPT N5</span> Sơ cấp</button><button type="button" class="grade-pill ${currentGrade==='N4'?'active':''}" data-switch-grade="N4"><span class="grade-tag">JLPT N4</span> Mới ✦</button>${dailyPillHtml}</div><div class="journey-toolbar-actions"><button class="journey-album" data-journey-album aria-label="Album: ${profile.collected.length} trên 24 chữ"><i data-lucide="book-open" aria-hidden="true"></i><span>${profile.collected.length}<small> / 24</small></span></button><button class="journey-menu" data-journey-menu aria-label="${I18N.t('menuTitle')}"><i data-lucide="ellipsis" aria-hidden="true"></i></button></div></div>
+  <div class="journey-layout cozy-layout" data-chapter="${mapChapter}">
    <div class="journey-chapter-switch">
     <button data-chapter-step="-1" aria-label="Chương trước" ${mapChapter===0?'disabled':''}><i data-lucide="chevron-left" aria-hidden="true"></i></button>
     <div class="chapter-switch-title">
@@ -419,12 +418,44 @@
     <button data-chapter-step="1" aria-label="Chương tiếp theo" ${mapChapter===2?'disabled':''}><i data-lucide="chevron-right" aria-hidden="true"></i></button>
    </div>
 
-   <div class="journey-kanji-shelf">
+   <div class="journey-constellation cozy-path" role="group" aria-label="Các màn của chương ${mapChapter+1}">
+    <div class="journey-map-aura" aria-hidden="true"></div>
+    <svg class="journey-trail" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+     <defs>
+      <linearGradient id="road-grad-active" x1="0%" y1="100%" x2="0%" y2="0%">
+       <stop offset="0%" stop-color="#34d399"/>
+       <stop offset="100%" stop-color="#059669"/>
+      </linearGradient>
+     </defs>
+     ${paths.map((d,i)=>'<path d="'+d+'" class="road-shadow"/><path d="'+d+'" class="road-base"/><path d="'+d+'" class="road-centerline"/><path d="'+d+'" class="road-traveled '+(profile.results[levels[i].id]?'done':'')+'"/>').join('')}
+    </svg>
+    ${levels.map((l,i)=>{
+     const r=profile.results[l.id],isLocked=l.id>next,current=l.id===mapSelected;
+     const gemCut=gemCutClasses[i]||'gem-sapphire';
+     const charChips=(l.newChars||[]).map(c=>'<span class="journey-char-chip" lang="ja">'+c+'</span>').join('');
+     let captionHtml='';
+     const playText=action==='resume'?I18N.t('resume'):result?I18N.t('replay'):I18N.t('play');
+     if(current){
+      captionHtml='<span role="button" tabindex="0" class="journey-node-play-btn journey-play cozy-play-bubble" data-main="'+action+'" '+(locked?'aria-disabled="true"':'aria-label="'+playText+' màn '+(l.id+1)+'"')+'><span>'+playText+'</span></span>';
+     }else if(r){
+      captionHtml='<span class="journey-stop-caption completed-caption"><span class="journey-stars" aria-hidden="true">'+'★'.repeat(r.stars)+'<span>'+'★'.repeat(3-r.stars)+'</span></span></span>';
+     }else if(charChips){
+      captionHtml='<span class="journey-stop-caption chips-caption">'+charChips+'</span>';
+     }else{
+      captionHtml='<span class="journey-stop-caption">'+(i===4?I18N.t('treasure'):isLocked?I18N.t('locked'):I18N.t('unlocked'))+'</span>';
+     }
+     const crownBadge=i===4?'<span class="journey-crown-crest" aria-hidden="true">👑</span>':'';
+     const activeAura=current?'<div class="journey-active-aura" aria-hidden="true"><span class="aura-ring aura-r1"></span><span class="aura-ring aura-r2"></span></div>':'';
+     return '<div class="journey-node-base" style="--stop-row:'+rows[i]+';--stop-column:'+cols[i]+'" aria-hidden="true"></div><button class="journey-stop '+gemCut+' '+(r?'completed':'')+' '+(current?'selected':'')+' '+(i===4?'treasure':'')+'" style="--stop-row:'+rows[i]+';--stop-column:'+cols[i]+'" data-journey-level="'+l.id+'" '+(isLocked?'disabled':'')+' aria-pressed="'+current+'" aria-label="Màn '+(l.id+1)+': '+l.title+(isLocked?', chưa mở khóa':r?', '+r.stars+' sao':'')+'">'+activeAura+'<span class="journey-stop-body"><span class="gem-shine" aria-hidden="true"></span>'+crownBadge+'<span>'+String(l.id+1).padStart(2,'0')+'</span>'+(isLocked?'<i class="journey-lock" data-lucide="lock" aria-hidden="true"></i>':'')+'</span>'+captionHtml+'</button>';
+    }).join('')}
+   </div>
+
+   <div class="journey-kanji-shelf cozy-shelf">
     <div class="shelf-header"><span>${I18N.t('shelfTitle')} ${mapChapter+1}</span><span class="shelf-count-badge">${chapterCollectedCount} / 8 ${I18N.t('shelfOpened')}</span></div>
     <div class="shelf-grid">${shelfCards}</div>
    </div>
 
-   <div class="journey-hero-cta">
+   <div class="journey-hero-cta" style="display:none;" aria-hidden="true">
     <button type="button" class="journey-hero-play-btn" data-hero-play="${action}" ${locked?'disabled':''}>
      <span class="hero-play-gem" aria-hidden="true">💎</span>
      <span class="hero-play-text">
@@ -434,33 +465,8 @@
      <span class="hero-play-arrow" aria-hidden="true">▶</span>
     </button>
    </div>
-  </aside>
-
-  <div class="journey-constellation" role="group" aria-label="Các màn của chương ${mapChapter+1}">
-   <div class="journey-map-aura" aria-hidden="true"></div>
-   <svg class="journey-trail" viewBox="0 0 120 100" preserveAspectRatio="none" aria-hidden="true">${paths.map((d,i)=>'<path d="'+d+'" class="'+(profile.results[levels[i].id]?'traveled':'')+'"/>').join('')}</svg>
-   ${levels.map((l,i)=>{
-    const r=profile.results[l.id],isLocked=l.id>next,current=l.id===mapSelected;
-    const gemCut=gemCutClasses[i]||'gem-sapphire';
-    const charChips=(l.newChars||[]).map(c=>`<span class="journey-char-chip" lang="ja">${c}</span>`).join('');
-    let captionHtml='';
-    const playText=action==='resume'?I18N.t('resume'):result?I18N.t('replay'):I18N.t('play');
-    if(current){
-     captionHtml=`<span role="button" tabindex="0" class="journey-node-play-btn journey-play" data-main="${action}" ${locked?'aria-disabled="true"':'aria-label="'+playText+' màn '+(l.id+1)+'"'}><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg><span>${playText}</span></span>`;
-    }else if(r){
-     captionHtml=`<span class="journey-stop-caption completed-caption"><span class="journey-stars" aria-hidden="true">${'★'.repeat(r.stars)}<span>${'★'.repeat(3-r.stars)}</span></span></span>`;
-    }else if(charChips){
-     captionHtml=`<span class="journey-stop-caption chips-caption">${charChips}</span>`;
-    }else{
-     captionHtml=`<span class="journey-stop-caption">${i===4?I18N.t('treasure'):isLocked?I18N.t('locked'):I18N.t('unlocked')}</span>`;
-    }
-    const crownBadge=i===4?'<span class="journey-crown-crest" aria-hidden="true">👑</span>':'';
-    const activeAura=current?'<div class="journey-active-aura" aria-hidden="true"><span class="aura-ring aura-r1"></span><span class="aura-ring aura-r2"></span></div>':'';
-    return `<div class="journey-node-base" style="--stop-row:${rows[i]};--stop-column:${cols[i]}" aria-hidden="true"></div><button class="journey-stop ${gemCut} ${r?'completed':''} ${current?'selected':''} ${i===4?'treasure':''}" style="--stop-row:${rows[i]};--stop-column:${cols[i]}" data-journey-level="${l.id}" ${isLocked?'disabled':''} aria-pressed="${current}" aria-label="Màn ${l.id+1}: ${l.title}${isLocked?', chưa mở khóa':r?', '+r.stars+' sao':''}">${activeAura}<span class="journey-stop-body"><span class="gem-shine" aria-hidden="true"></span>${crownBadge}<span>${String(l.id+1).padStart(2,'0')}</span>${isLocked?'<i class="journey-lock" data-lucide="lock" aria-hidden="true"></i>':''}</span>${captionHtml}</button>`;
-   }).join('')}
-  </div>
- </div>`;
-}
+  </div>`;
+ }
  function showJourneyMenu(){modalOpen('<section class="kp-modal journey-options" role="dialog" aria-modal="true"><h2>Hành trình của bạn</h2><p>24 chữ ghép tuyển chọn · 3 chương · 15 màn.<br>Đây là bộ sơ cấp tham khảo, chưa phải toàn bộ Kanji N5.</p><button class="kp-secondary" data-audio-studio style="background:#f0f8ff;border-color:#53aadc;color:#0d5c8a"><i data-lucide="headphones" aria-hidden="true"></i>🎧 Phòng thử & chọn âm thanh từng chức năng</button><button class="kp-secondary" data-settings><i data-lucide="settings" aria-hidden="true"></i>Tùy chỉnh & chơi thử</button><button class="kp-secondary" data-progress><i data-lucide="save" aria-hidden="true"></i>Sao lưu tiến trình</button><button class="kp-secondary" data-about><i data-lucide="info" aria-hidden="true"></i>Bộ chữ & nguồn tham khảo</button><button class="kp-action" data-action="close">Về hành trình</button></section>','Menu hành trình');}
  function renderAlbum(){
   const todayKey=getDailyKey();
