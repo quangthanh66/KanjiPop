@@ -1,122 +1,117 @@
 /* Journey Map & Celestial Constellation UI - 3D Crystal Gemstone & Glassmorphism Aesthetic */
 
-/* 1. Main View & Sky Atmosphere - Compact No-Scroll Screen Fitting */
+/* 1. Main View & Sky Atmosphere - Option 5 Cozy Casual 3D World */
 #kanji-pop#kanji-pop[data-view="map"] {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   max-width: 100vw;
   height: 100dvh;
   max-height: 100dvh;
-  padding: 10px clamp(16px, 2vw, 32px) 8px;
+  padding: 8px clamp(12px, 3vw, 24px) 8px;
   overflow: hidden;
   box-sizing: border-box;
-  background:
-    radial-gradient(ellipse 90% 50% at 50% -5%, rgba(255, 255, 255, 0.85) 0%, transparent 60%),
-    radial-gradient(circle at 6% 45%, rgba(255, 255, 255, 0.4) 0%, rgba(200, 240, 255, 0.18) 35%, transparent 65%),
-    radial-gradient(circle at 94% 45%, rgba(255, 255, 255, 0.4) 0%, rgba(200, 240, 255, 0.18) 35%, transparent 65%),
-    radial-gradient(circle at 88% 18%, rgba(140, 235, 255, 0.45) 0%, transparent 40%),
-    radial-gradient(circle at 12% 20%, rgba(170, 215, 255, 0.4) 0%, transparent 40%),
-    radial-gradient(ellipse 65% 30% at 85% 75%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
-    radial-gradient(ellipse 55% 25% at 15% 85%, rgba(255, 255, 255, 0.25) 0%, transparent 45%),
-    linear-gradient(180deg, #4dc6f8 0%, #32a1ed 40%, #1c7fdc 100%);
+  background: linear-gradient(180deg, #cbe8ff 0%, #b3dcff 40%, #95cffc 100%);
   position: relative;
 }
 
-/* Atmospheric Floating Cloud Framing on Widescreen (Eliminates empty blue side columns) */
-@media (min-width: 1100px) {
-  #kanji-pop#kanji-pop[data-view="map"]::before {
-    content: '';
-    position: absolute;
-    left: -40px;
-    top: 25%;
-    width: clamp(140px, 15vw, 240px);
-    height: clamp(240px, 45vh, 400px);
-    background: radial-gradient(ellipse at 15% 50%, rgba(255, 255, 255, 0.6) 0%, rgba(230, 250, 255, 0.35) 45%, transparent 75%);
-    filter: blur(18px);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  #kanji-pop#kanji-pop[data-view="map"]::after {
-    content: '';
-    position: absolute;
-    right: -40px;
-    top: 25%;
-    width: clamp(140px, 15vw, 240px);
-    height: clamp(240px, 45vh, 400px);
-    background: radial-gradient(ellipse at 85% 50%, rgba(255, 255, 255, 0.6) 0%, rgba(230, 250, 255, 0.35) 45%, transparent 75%);
-    filter: blur(18px);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-  }
+/* Atmospheric Floating Cloud Framing */
+#kanji-pop#kanji-pop[data-view="map"]::before {
+  content: '';
+  position: absolute;
+  left: -30px;
+  top: 15%;
+  width: clamp(120px, 14vw, 220px);
+  height: clamp(200px, 40vh, 360px);
+  background: radial-gradient(ellipse at 20% 50%, rgba(255, 255, 255, 0.75) 0%, rgba(220, 245, 255, 0.4) 45%, transparent 75%);
+  filter: blur(20px);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
 }
 
-/* 2. Top Header - Unified & Compact */
+#kanji-pop#kanji-pop[data-view="map"]::after {
+  content: '';
+  position: absolute;
+  right: -30px;
+  top: 15%;
+  width: clamp(120px, 14vw, 220px);
+  height: clamp(200px, 40vh, 360px);
+  background: radial-gradient(ellipse at 80% 50%, rgba(255, 255, 255, 0.75) 0%, rgba(220, 245, 255, 0.4) 45%, transparent 75%);
+  filter: blur(20px);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 2. Top Header - Floating Capsule HUD matching demo */
 #kanji-pop#kanji-pop[data-view="map"] .kp-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: min(94vw, 540px);
+  max-width: 440px;
   height: 48px;
   min-height: 48px;
   margin: 0 auto;
-  gap: 16px;
-  z-index: 10;
+  padding: 4px 12px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #ffffff;
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(18, 89, 133, 0.12), inset 0 2px 2px #ffffff;
+  backdrop-filter: blur(12px);
+  box-sizing: border-box;
+  z-index: 25;
   flex: none;
 }
 
 #kanji-pop#kanji-pop[data-view="map"] #kp-home { display: none !important; }
 
 #kanji-pop#kanji-pop[data-view="map"] .kp-logo {
-  height: 46px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
   padding: 0;
   cursor: pointer;
+  background: none;
+  border: none;
+  text-decoration: none;
 }
 
-#kanji-pop#kanji-pop[data-view="map"] .kp-logo .kp-logo-img {
-  height: 46px;
+#kanji-pop#kanji-pop[data-view="map"] .kp-logo-img {
+  height: 38px;
   width: auto;
-  max-width: 140px;
+  max-width: 110px;
   object-fit: contain;
 }
 
-#kanji-pop .kp-header-actions { display: flex; align-items: center; gap: 8px; }
+#kanji-pop .kp-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
 #kanji-pop .kp-lang-btn,
 #kanji-pop#kanji-pop[data-view="map"] #kp-sound {
-  width: 40px;
-  height: 40px;
-  border: 2px solid rgba(255, 255, 255, 0.95);
+  width: 44px;
+  height: 44px;
+  border: 2px solid #ffffff;
   border-radius: 14px;
   background: linear-gradient(145deg, #7beaff, #029fe7 55%, #0077c2 100%);
   color: white;
   font-family: inherit;
   font-size: 13px;
   font-weight: 800;
-  letter-spacing: .5px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 3px 0 #005c96, 0 4px 12px rgba(2, 159, 231, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.85);
-  transition: transform .12s ease, filter .15s ease;
+  box-shadow: 0 3px 0 #005c96, 0 4px 10px rgba(2, 159, 231, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.85);
+  transition: transform .12s ease;
   user-select: none;
-}
-
-#kanji-pop .kp-lang-btn:hover,
-#kanji-pop#kanji-pop[data-view="map"] #kp-sound:hover {
-  filter: brightness(1.08);
-}
-
-#kanji-pop .kp-lang-btn:active,
-#kanji-pop#kanji-pop[data-view="map"] #kp-sound:active {
-  transform: translateY(2px);
-  box-shadow: 0 1px 0 #005c96;
 }
 
 /* 3. Screen Container & Subbar */
@@ -124,139 +119,133 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
-  max-width: min(94vw, 540px);
+  max-width: 440px;
   margin: 0 auto;
-  gap: 8px;
+  gap: 4px;
   min-height: 0;
   flex: 1;
+  position: relative;
+  z-index: 5;
 }
 
-/* Map Top Subbar: Eyebrow + Grade Pills + Action Buttons in 1 Line */
-#kanji-pop .map-top-bar {
+/* Chapter & Mode Capsule Bar */
+#kanji-pop .chapter-bar {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
   width: 100%;
-  gap: 10px;
-  height: 38px;
-  min-height: 38px;
-  flex: none;
-}
-
-#kanji-pop .journey-eyebrow-chip {
-  display: inline-flex;
-  align-items: center;
+  max-width: 430px;
+  padding: 3px 10px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1.5px solid #ffffff;
+  border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(18, 89, 133, 0.08);
   font-size: 11px;
   font-weight: 800;
-  letter-spacing: 1.2px;
-  color: #0b416c;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);
-  white-space: nowrap;
+  color: #0c4a6e;
+  flex: none;
+  z-index: 20;
+  box-sizing: border-box;
 }
 
-#kanji-pop .grade-toggle-bar {
-  display: inline-flex;
+#kanji-pop .grade-toggle-group {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 5px;
-  margin: 0;
-  padding: 3px 6px;
-  background: rgba(255, 255, 255, 0.75);
-  border: 1.5px solid rgba(255, 255, 255, 0.95);
-  border-radius: 999px;
-  box-shadow: 0 4px 14px rgba(10, 50, 90, 0.08), inset 0 1px rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  gap: 4px;
 }
 
 #kanji-pop .grade-pill {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 4px 12px;
+  gap: 3px;
+  padding: 3px 8px;
   border-radius: 999px;
   border: 1px solid transparent;
-  background: transparent;
-  color: #164670;
-  font-size: 12px;
+  background: rgba(2, 132, 199, 0.08);
+  color: #0369a1;
+  font-size: 11px;
   font-weight: 800;
   cursor: pointer;
-  transition: all .16s ease;
-}
-
-#kanji-pop .grade-pill:hover {
-  background: rgba(255, 255, 255, 0.55);
+  transition: all .14s ease;
 }
 
 #kanji-pop .grade-pill.active {
-  background: linear-gradient(135deg, #ffffff, #e6f6ff);
-  color: #0c3e68;
-  border-color: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 3px 10px rgba(15, 60, 100, 0.12);
+  background: linear-gradient(145deg, #38bdf8, #0284c7);
+  color: white;
+  box-shadow: 0 2px 0 #0369a1;
 }
 
-#kanji-pop .grade-pill .grade-tag {
-  display: inline-block;
-  padding: 2px 7px;
-  border-radius: 999px;
-  background: #205c8a;
-  color: #fff;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: .4px;
+#kanji-pop .grade-pill.daily-pill {
+  background: linear-gradient(145deg, #fb923c, #ea580c);
+  color: white;
+  box-shadow: 0 2px 0 #c2410c;
 }
 
-#kanji-pop .grade-pill.active .grade-tag {
-  background: linear-gradient(135deg, #0284c7, #0369a1);
-}
-
-#kanji-pop .journey-toolbar-actions {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-#kanji-pop .journey-album,
-#kanji-pop .journey-menu {
+#kanji-pop .chapter-nav-center {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 6px;
-  height: 36px;
-  background: rgba(255, 255, 255, 0.7);
-  color: #12456e;
-  padding: 0 12px;
-  border-radius: 14px;
-  box-shadow: 0 3px 10px rgba(10, 50, 90, 0.06), inset 0 1px rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1.5px solid rgba(255, 255, 255, 0.9);
+  font-size: 11px;
+  font-weight: 900;
+  color: #0c4a6e;
+}
+
+#kanji-pop .chapter-nav-center button {
+  background: #ffffff;
+  border: 1px solid #bae6fd;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
   cursor: pointer;
-  transition: all .15s ease;
+  font-weight: 900;
+  color: #0284c7;
+  display: grid;
+  place-items: center;
+  padding: 0;
+}
+#kanji-pop .chapter-nav-center button svg { width: 13px; height: 13px; }
+#kanji-pop .chapter-nav-center button:disabled { opacity: 0.3; cursor: default; }
+
+#kanji-pop .hud-pill.stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: linear-gradient(145deg, #fef08a, #facc15);
+  color: #854d0e;
+  font-size: 11.5px;
+  font-weight: 900;
+  border: none;
+  box-shadow: 0 2px 0 #ca8a04;
+  cursor: pointer;
 }
 
-#kanji-pop .journey-album:hover,
-#kanji-pop .journey-menu:hover {
-  background: rgba(255, 255, 255, 0.9);
-  transform: translateY(-1px);
+#kanji-pop .journey-menu {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid #bae6fd;
+  color: #0284c7;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  padding: 0;
+  box-shadow: 0 1px 3px rgba(18, 89, 133, 0.08);
 }
+#kanji-pop .journey-menu svg { width: 14px; height: 14px; }
 
-#kanji-pop .journey-album svg { width: 16px; height: 16px; color: #7c4dff; }
-#kanji-pop .journey-album span { font-size: 13.5px; font-weight: 800; }
-#kanji-pop .journey-album small { font-size: 11px; color: #3b749d; }
-#kanji-pop .journey-menu { width: 36px; padding: 0; color: #154e7c; }
-#kanji-pop .journey-menu svg { width: 18px; height: 18px; }
-
-/* 4. Modern Cozy Casual 3D Path Stage (.journey-layout) - Option 5 */
+/* 4. Main Stage (.journey-layout) */
 #kanji-pop .journey-layout {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  gap: 6px;
   width: 100%;
-  max-width: min(94vw, 520px);
+  max-width: 440px;
   margin: 0 auto;
   background: none;
   border: none;
@@ -270,704 +259,251 @@
   min-height: 0;
 }
 
-/* 5. Top Chapter Switcher Capsule */
-#kanji-pop .journey-chapter-switch {
-  display: grid;
-  grid-template-columns: 36px minmax(0, 1fr) 36px;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-  max-width: 520px;
-  margin: 0 auto;
-  padding: 6px 14px 7px;
-  background: rgba(255, 255, 255, 0.82);
-  border: 2px solid rgba(255, 255, 255, 0.98);
-  border-radius: 20px;
-  box-shadow: 0 6px 20px rgba(10, 50, 90, 0.08), inset 0 1px 1px #fff;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-sizing: border-box;
-  text-align: center;
-  flex: none;
-}
-
-#kanji-pop .journey-chapter-switch button {
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  border: 1.5px solid rgba(255, 255, 255, 0.95);
-  background: linear-gradient(135deg, #ffffff, #eaf6ff);
-  color: #175483;
-  border-radius: 50%;
-  box-shadow: 0 3px 8px rgba(10, 50, 90, 0.08);
-  cursor: pointer;
-  transition: all .15s ease;
-}
-
-#kanji-pop .journey-chapter-switch button:hover:not(:disabled) {
-  background: #ffffff;
-  transform: scale(1.08);
-  box-shadow: 0 4px 12px rgba(10, 50, 90, 0.14);
-}
-
-#kanji-pop .journey-chapter-switch button:disabled {
-  opacity: .25;
-  cursor: default;
-}
-
-#kanji-pop .journey-chapter-switch svg { width: 18px; height: 18px; }
-
-#kanji-pop .chapter-switch-title {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#kanji-pop .chapter-switch-title .journey-eyebrow {
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 1.2px;
-  color: #0284c7;
-}
-
-#kanji-pop .chapter-switch-title h1 {
-  font-size: clamp(16px, 1.6vw, 19px);
-  letter-spacing: -.3px;
-  line-height: 1.15;
-  font-weight: 900;
-  color: #0c3e68;
-  margin: 1px 0 2px;
-  outline: 0;
-}
-
-#kanji-pop .journey-subtitle {
-  font-size: 11px;
-  font-weight: 700;
-  color: #4a7596;
-  margin: 0 0 2px;
-}
-
-#kanji-pop .journey-chapter-progress {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-size: 11px;
-  color: #1f618d;
-  font-weight: 800;
-}
-
-#kanji-pop .journey-chapter-progress > div {
-  display: flex;
-  gap: 4px;
-}
-
-#kanji-pop .journey-chapter-progress i {
-  display: block;
-  width: 14px;
-  height: 4px;
-  border-radius: 3px;
-  background: rgba(180, 220, 245, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.85);
-}
-
-#kanji-pop .journey-chapter-progress i.done {
-  background: linear-gradient(90deg, #10b981, #059669);
-  border-color: #34d399;
-  box-shadow: 0 0 6px rgba(16, 185, 129, 0.45);
-}
-
-/* 6. Central 3D Serpentine Path (.journey-constellation) */
-#kanji-pop .journey-constellation {
+/* Mountain & 3D Road Stage */
+#kanji-pop .mountain-area {
   position: relative;
-  isolation: isolate;
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  grid-template-rows: repeat(5, minmax(0, 1fr));
   width: 100%;
   max-width: 440px;
-  margin: 0 auto;
+  aspect-ratio: 440 / 500;
   flex: 1;
-  min-height: 280px;
-  max-height: clamp(320px, 48vh, 440px);
-  box-sizing: border-box;
-  padding: 8px 10px 36px;
-  background: none;
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  min-height: 0;
+  margin: auto 0;
 }
 
-#kanji-pop .journey-map-aura {
-  position: absolute;
-  inset: -12px;
-  z-index: -1;
-  pointer-events: none;
-  background: radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.45) 0%, transparent 70%);
-}
-
-#kanji-pop .journey-node-base {
-  grid-column: var(--stop-column) / span 3;
-  grid-row: var(--stop-row);
-  justify-self: center;
-  align-self: center;
-  width: 90px;
-  height: 32px;
-  border-radius: 50%;
-  background: radial-gradient(ellipse at 50% 30%, rgba(255, 255, 255, 0.95) 0%, rgba(220, 245, 255, 0.7) 45%, rgba(160, 220, 250, 0.3) 70%, transparent 85%);
-  filter: drop-shadow(0 6px 14px rgba(10, 50, 90, 0.18));
-  transform: translateY(22px);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Level 05 Crown center alignment */
-#kanji-pop#kanji-pop button.journey-stop.treasure,
-#kanji-pop .journey-node-base:nth-of-type(5) {
-  grid-column: 5 / span 4;
-}
-
-/* 3D Road Ribbon in SVG */
-#kanji-pop .journey-trail {
+#kanji-pop svg.mountain-svg {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  z-index: 0;
-  overflow: visible;
-  pointer-events: none;
-}
-
-#kanji-pop .journey-trail path {
-  fill: none;
-}
-
-#kanji-pop .journey-trail path.road-shadow {
-  stroke: rgba(10, 45, 80, 0.12);
-  stroke-width: 26;
-  stroke-linecap: round;
-  vector-effect: non-scaling-stroke;
-  filter: blur(2px);
-}
-
-#kanji-pop .journey-trail path.road-base {
-  stroke: rgba(255, 255, 255, 0.88);
-  stroke-width: 20;
-  stroke-linecap: round;
-  vector-effect: non-scaling-stroke;
-  filter: drop-shadow(0 3px 8px rgba(10, 50, 90, 0.08));
-}
-
-#kanji-pop .journey-trail path.road-centerline {
-  stroke: rgba(160, 215, 245, 0.85);
-  stroke-width: 3.5;
-  stroke-linecap: round;
-  stroke-dasharray: 4 8;
-  vector-effect: non-scaling-stroke;
-}
-
-#kanji-pop .journey-trail path.road-traveled {
-  stroke: transparent;
-  stroke-width: 12;
-  stroke-linecap: round;
-  vector-effect: non-scaling-stroke;
-  transition: stroke 0.3s ease;
-}
-
-#kanji-pop .journey-trail path.road-traveled.done {
-  stroke: url(#road-grad-active);
-  filter: drop-shadow(0 0 8px rgba(52, 211, 153, 0.7));
-}
-
-/* Horizontal 8-Kanji Capsule Drawer */
-#kanji-pop .journey-kanji-shelf {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  width: 100%;
-  max-width: 520px;
-  margin: 0 auto;
-  background: rgba(255, 255, 255, 0.78);
-  border: 2px solid rgba(255, 255, 255, 0.95);
-  border-radius: 18px;
-  padding: 5px 10px 7px;
-  box-shadow: 0 6px 18px rgba(10, 50, 90, 0.06), inset 0 1px 1px rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-sizing: border-box;
-  flex: none;
-}
-
-#kanji-pop .shelf-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: .8px;
-  color: #164972;
-  padding: 0 2px;
-}
-
-#kanji-pop .shelf-count-badge {
-  display: inline-block;
-  padding: 1px 7px;
-  border-radius: 999px;
-  background: rgba(2, 132, 199, 0.12);
-  color: #0284c7;
-  font-size: 9.5px;
-  font-weight: 800;
-}
-
-#kanji-pop .shelf-grid {
-  display: grid;
-  grid-template-columns: repeat(8, minmax(0, 1fr));
-  gap: 5px;
-}
-
-#kanji-pop .shelf-gem-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 4px 2px 3px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.75);
-  border: 1.5px solid rgba(255, 255, 255, 0.95);
-  box-shadow: 0 2px 6px rgba(10, 50, 90, 0.05);
-  cursor: pointer;
-  transition: transform .14s ease, box-shadow .14s ease, background .14s ease;
-  text-align: center;
-  user-select: none;
-}
-
-#kanji-pop .shelf-gem-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(10, 50, 90, 0.12);
-  background: #ffffff;
-}
-
-#kanji-pop .shelf-gem-card.unlocked {
-  background: linear-gradient(145deg, #ffffff 0%, #eaf6ff 100%);
-  border-color: #ffffff;
-  box-shadow: 0 3px 8px rgba(2, 132, 199, 0.12), inset 0 1px #fff;
-}
-
-#kanji-pop .shelf-gem-card.locked {
-  opacity: .6;
-  background: rgba(255, 255, 255, 0.35);
-  border-style: dashed;
-}
-
-#kanji-pop .shelf-gem-icon {
-  font-size: 17px;
-  font-weight: 900;
-  line-height: 1.1;
-  color: #0c3e68;
-}
-
-#kanji-pop .shelf-gem-card.unlocked .shelf-gem-icon {
-  color: #0369a1;
-  text-shadow: 0 1px 2px rgba(2, 132, 199, 0.2);
-}
-
-#kanji-pop .shelf-gem-card.locked .shelf-gem-icon {
-  color: #6a9ab8;
-}
-
-#kanji-pop .shelf-gem-name {
-  font-size: 8px;
-  font-weight: 800;
-  letter-spacing: .2px;
-  color: #1f5a84;
-  margin-top: 1px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
-}
-
-#kanji-pop .shelf-gem-card.unlocked .shelf-gem-name {
-  color: #0284c7;
-}
-
-/* 7. 3D Crystal Gemstone Nodes */
-#kanji-pop#kanji-pop button.journey-stop {
-  grid-column: var(--stop-column) / span 3;
-  grid-row: var(--stop-row);
-  justify-self: center;
-  align-self: center;
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: 70px;
-  height: 64px;
-  background: none;
-  border: 0;
-  padding: 0;
-  box-shadow: none;
-  color: #ffffff;
-  overflow: visible;
-  cursor: pointer;
-  filter: none;
   z-index: 1;
 }
 
-#kanji-pop .journey-stop-body {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 58px;
-  height: 58px;
-  border-radius: 18px;
-  border: 2.5px solid rgba(255, 255, 255, 0.98);
-  font-size: 22px;
-  font-weight: 900;
-  line-height: 1;
-  color: #ffffff;
-  z-index: 2;
-  transition: transform .14s ease, box-shadow .14s ease, filter .14s ease;
-  user-select: none;
-}
-
-/* Specular Facet Reflection */
-#kanji-pop .gem-shine {
+#kanji-pop .cloud {
   position: absolute;
-  top: 3px;
-  left: 12%;
-  width: 76%;
-  height: 38%;
-  border-radius: 12px 12px 6px 6px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.1) 100%);
-  pointer-events: none;
-  z-index: 3;
-}
-
-/* 5 Themed Crystal Gemstone Styles */
-#kanji-pop .gem-sapphire .journey-stop-body {
-  --gem-shadow: #005aa3;
-  --gem-glow: rgba(0, 140, 255, 0.35);
-  background: radial-gradient(circle at 35% 25%, #8ae9ff 0%, #1595eb 48%, #006ec0 100%);
-  box-shadow: 0 6px 0 var(--gem-shadow), 0 10px 20px var(--gem-glow), inset 0 2px 2px rgba(255, 255, 255, 0.95);
-}
-
-#kanji-pop .gem-emerald .journey-stop-body {
-  --gem-shadow: #036b47;
-  --gem-glow: rgba(16, 185, 129, 0.35);
-  background: radial-gradient(circle at 35% 25%, #96ffb9 0%, #10b981 48%, #047857 100%);
-  box-shadow: 0 6px 0 var(--gem-shadow), 0 10px 20px var(--gem-glow), inset 0 2px 2px rgba(255, 255, 255, 0.95);
-}
-
-#kanji-pop .gem-amber .journey-stop-body {
-  --gem-shadow: #994c00;
-  --gem-glow: rgba(245, 158, 11, 0.38);
-  background: radial-gradient(circle at 35% 25%, #fff085 0%, #f59e0b 48%, #c26100 100%);
-  box-shadow: 0 6px 0 var(--gem-shadow), 0 10px 20px var(--gem-glow), inset 0 2px 2px rgba(255, 255, 255, 0.95);
-}
-
-#kanji-pop .gem-amethyst .journey-stop-body {
-  --gem-shadow: #6b1494;
-  --gem-glow: rgba(168, 85, 247, 0.38);
-  background: radial-gradient(circle at 35% 25%, #ff9eec 0%, #b84df4 48%, #7e16b5 100%);
-  box-shadow: 0 6px 0 var(--gem-shadow), 0 10px 20px var(--gem-glow), inset 0 2px 2px rgba(255, 255, 255, 0.95);
-}
-
-#kanji-pop .gem-crown .journey-stop-body,
-#kanji-pop .journey-stop.treasure .journey-stop-body {
-  --gem-shadow: #1b5380;
-  --gem-glow: rgba(110, 220, 255, 0.5);
-  background: radial-gradient(circle at 35% 20%, #ffffff 0%, #a5f3fc 35%, #38bdf8 65%, #1d4ed8 100%);
-  box-shadow: 0 6px 0 var(--gem-shadow), 0 10px 22px var(--gem-glow), inset 0 2px 2px rgba(255, 255, 255, 0.98);
-}
-
-#kanji-pop .journey-crown-crest {
-  position: absolute;
-  top: -12px;
-  font-size: 17px;
-  line-height: 1;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-  animation: crownBob 2.4s ease-in-out infinite;
-}
-
-@keyframes crownBob {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
-}
-
-#kanji-pop .journey-stop:hover:not(:disabled) .journey-stop-body {
-  transform: translateY(-2px);
-  filter: brightness(1.08);
-}
-
-#kanji-pop .journey-stop:active:not(:disabled) .journey-stop-body {
-  transform: translateY(3px);
-  box-shadow: 0 2px 0 var(--gem-shadow), 0 4px 10px var(--gem-glow), inset 0 1px #fff;
-}
-
-/* Locked Gemstone */
-#kanji-pop#kanji-pop .journey-stop:disabled {
-  cursor: default;
-  opacity: 1;
-  filter: none;
-}
-
-#kanji-pop .journey-stop:disabled .journey-stop-body {
-  filter: saturate(0.62) brightness(0.95) contrast(0.96);
-  opacity: 0.88;
-  box-shadow: 0 4px 0 var(--gem-shadow), 0 6px 14px var(--gem-glow);
-}
-
-#kanji-pop .journey-lock {
-  position: absolute;
-  right: -5px;
-  bottom: -4px;
-  width: 18px;
-  height: 18px;
-  padding: 2.5px;
-  background: #ffffff;
-  color: #1a517b;
-  border-radius: 50%;
-  border: 1.5px solid #d0ecf9;
-  box-shadow: 0 2px 6px rgba(10, 50, 90, 0.15);
-}
-
-#kanji-pop .journey-stop.completed .journey-stop-body {
-  border-color: #ffffff;
-}
-
-/* 8. Active Selected Node & Pulsing Aura */
-#kanji-pop#kanji-pop button.journey-stop.selected {
-  width: 72px;
-  height: 66px;
-}
-
-#kanji-pop .journey-stop.selected .journey-stop-body {
-  transform: scale(1.08);
-  border-color: #ffffff;
-  box-shadow: 0 6px 0 var(--gem-shadow), 0 12px 26px var(--gem-glow), inset 0 2px 2px #fff;
-}
-
-#kanji-pop .journey-active-aura {
-  position: absolute;
-  inset: -14px;
   pointer-events: none;
   z-index: 0;
-  display: grid;
-  place-items: center;
+}
+#kanji-pop .cloud-fore {
+  z-index: 10;
 }
 
-#kanji-pop .aura-ring {
+/* 5. Candy Nodes & Buttons */
+#kanji-pop .candy-node {
   position: absolute;
+  width: clamp(52px, 13vw, 60px);
+  height: clamp(52px, 13vw, 60px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  user-select: none;
+  z-index: 5;
+  transition: transform 0.15s ease;
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+#kanji-pop .candy-node:hover:not(:disabled) {
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+#kanji-pop .candy-node .pedestal {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #fde68a 0%, #f59e0b 100%);
+  box-shadow: 0 5px 0 #b45309, 0 8px 16px rgba(0,0,0,0.18);
+  z-index: -1;
+}
+
+#kanji-pop .candy-node .dome {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 0 20px rgba(110, 230, 255, 0.8), inset 0 0 12px rgba(255, 255, 255, 0.5);
-  animation: auraPulse 2.4s cubic-bezier(0.25, 1, 0.5, 1) infinite;
-}
-
-#kanji-pop .aura-r2 {
-  animation-delay: 1.2s;
-}
-
-@keyframes auraPulse {
-  0% { transform: scale(0.9); opacity: 0.9; }
-  100% { transform: scale(1.32); opacity: 0; }
-}
-
-/* 9. Action Play Button on Selected Node */
-#kanji-pop .journey-node-play-btn {
-  position: absolute;
-  top: calc(50% + 34px);
-  left: 50%;
-  transform: translateX(-50%);
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  min-height: 34px;
-  min-width: 82px;
-  padding: 4px 14px 5px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #a7f342 0%, #58cb02 48%, #369b00 100%);
-  color: #ffffff;
-  border: 2px solid #ffffff;
-  box-shadow: 0 3px 0 #257500, 0 6px 16px rgba(88, 203, 2, 0.4), inset 0 2px 2px rgba(255, 255, 255, 0.9);
-  font-size: 13px;
+  color: white;
+  font-size: clamp(20px, 5vw, 24px);
   font-weight: 900;
-  letter-spacing: .4px;
-  white-space: nowrap;
-  cursor: pointer;
-  z-index: 10;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-  animation: cozyGlowPulse 2.4s infinite ease-in-out;
-  transition: transform .12s ease, box-shadow .12s ease, filter .14s ease;
-  user-select: none;
+  position: relative;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  box-shadow: inset 0 3px 3px rgba(255, 255, 255, 0.6), inset 0 -3px 3px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.25);
 }
 
-#kanji-pop .journey-node-play-btn::before {
+#kanji-pop .candy-node .dome::before {
   content: '';
   position: absolute;
-  top: -5px;
+  top: 3px;
+  left: 20%;
+  width: 60%;
+  height: 30%;
+  border-radius: 50%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0) 100%);
+  pointer-events: none;
+}
+
+#kanji-pop .node-01 .dome { background: linear-gradient(180deg, #34d399 0%, #059669 100%); box-shadow: 0 3px 0 #047857; }
+#kanji-pop .node-02 .dome { background: linear-gradient(180deg, #818cf8 0%, #4f46e5 100%); box-shadow: 0 3px 0 #3730a3; }
+#kanji-pop .node-03 .dome { background: linear-gradient(180deg, #c084fc 0%, #9333ea 100%); box-shadow: 0 3px 0 #7e22ce; }
+#kanji-pop .node-04 .dome { background: linear-gradient(180deg, #f472b6 0%, #db2777 100%); box-shadow: 0 3px 0 #be185d; }
+#kanji-pop .node-05 .dome { background: linear-gradient(180deg, #f87171 0%, #dc2626 100%); box-shadow: 0 3px 0 #b91c1c; }
+
+#kanji-pop .candy-node:disabled {
+  filter: saturate(0.6) brightness(0.92);
+  opacity: 0.88;
+}
+
+/* Crown on Node 05 */
+#kanji-pop .crown-crest {
+  position: absolute;
+  top: -26px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 28px;
+  filter: drop-shadow(0 3px 5px rgba(0,0,0,0.2));
+  z-index: 6;
+  pointer-events: none;
+}
+
+/* Play Bubble on Node 01 - Sits ABOVE Node 01 pointing down */
+#kanji-pop .play-bubble {
+  position: absolute;
+  bottom: calc(100% + 8px) !important;
+  top: auto !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
+  color: white;
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  padding: 6px 18px 7px;
+  border-radius: 999px;
+  border: 2.5px solid #ffffff;
+  box-shadow: 0 3px 0 #15803d, 0 6px 16px rgba(22, 163, 74, 0.45);
+  white-space: nowrap;
+  cursor: pointer;
+  z-index: 15;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.25);
+  animation: cozyGlowPulse 2.4s infinite ease-in-out;
+}
+
+#kanji-pop .play-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
   left: 50%;
   transform: translateX(-50%);
   width: 0;
   height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-bottom: 5px solid #ffffff;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #ffffff;
 }
 
 @keyframes cozyGlowPulse {
   0%, 100% {
-    box-shadow: 0 3px 0 #257500, 0 6px 16px rgba(88, 203, 2, 0.4), inset 0 2px 2px rgba(255, 255, 255, 0.9);
+    box-shadow: 0 3px 0 #15803d, 0 6px 16px rgba(22, 163, 74, 0.45);
   }
   50% {
-    box-shadow: 0 3px 0 #257500, 0 8px 24px rgba(88, 203, 2, 0.7), inset 0 2px 2px rgba(255, 255, 255, 0.9);
+    box-shadow: 0 3px 0 #15803d, 0 8px 24px rgba(22, 163, 74, 0.7);
   }
 }
 
-#kanji-pop .journey-node-play-btn:hover:not(:disabled):not([aria-disabled="true"]) {
-  filter: brightness(1.06);
-  transform: translateX(-50%) translateY(-2px);
-  box-shadow: 0 5px 0 #257500, 0 8px 20px rgba(88, 203, 2, 0.5), inset 0 2px 2px #fff;
+/* 6. Bottom Kanji Drawer */
+#kanji-pop .kanji-drawer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 420px;
+  padding: 6px 8px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(18, 89, 133, 0.12);
+  backdrop-filter: blur(12px);
+  box-sizing: border-box;
+  z-index: 20;
+  gap: 6px;
+  flex: none;
 }
 
-#kanji-pop .journey-node-play-btn:active:not(:disabled):not([aria-disabled="true"]) {
-  transform: translateX(-50%) translateY(2px);
-  box-shadow: 0 1px 0 #257500;
-}
-
-#kanji-pop .journey-node-play-btn:disabled,
-#kanji-pop .journey-node-play-btn[aria-disabled="true"] {
-  background: #a9d4e5;
-  border-color: rgba(255, 255, 255, 0.75);
-  color: #42708f;
-  box-shadow: none;
-  cursor: default;
-  pointer-events: none;
-}
-
-#kanji-pop .journey-node-play-btn svg { width: 13px; height: 13px; fill: currentColor; }
-
-/* 10. Node Captions, Chips & Stars */
-#kanji-pop .journey-stop-caption {
-  position: absolute;
-  top: calc(50% + 35px);
-  left: 50%;
-  transform: translateX(-50%);
-  display: inline-flex;
+#kanji-pop .kanji-key {
+  flex: 1;
+  height: clamp(40px, 10vw, 48px);
+  border-radius: 12px;
+  display: flex;
   align-items: center;
   justify-content: center;
-  white-space: nowrap;
-  font-size: 9.5px;
-  font-weight: 800;
-  letter-spacing: .5px;
-  color: #124773;
-  padding: 2.5px 9px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.95);
-  box-shadow: 0 2px 6px rgba(10, 50, 90, 0.1);
-  pointer-events: none;
-  z-index: 2;
-}
-
-#kanji-pop .journey-stop-caption.chips-caption {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  padding: 2px 6px;
-  background: rgba(255, 255, 255, 0.94);
-  border: 1.5px solid rgba(255, 255, 255, 0.98);
-  box-shadow: 0 3px 8px rgba(10, 50, 90, 0.12);
-}
-
-#kanji-pop .journey-char-chip {
-  display: inline-block;
-  padding: 1px 4px;
-  border-radius: 5px;
-  background: linear-gradient(135deg, #ffffff, #eaf6ff);
-  color: #0c3e68;
-  font-size: 10.5px;
+  font-size: clamp(18px, 5vw, 22px);
   font-weight: 900;
-  line-height: 1.1;
-  border: 1px solid rgba(2, 132, 199, 0.2);
+  color: white;
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  user-select: none;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  position: relative;
+  box-shadow: 0 4px 0 var(--k-shd), 0 5px 8px rgba(0,0,0,0.08), inset 0 2px 2px rgba(255,255,255,0.7);
+  transition: transform 0.12s ease;
+  padding: 0;
 }
 
-#kanji-pop .journey-stars {
-  font-size: 11px;
-  letter-spacing: 2px;
-  color: #ffb800;
-  text-shadow: 0 1px #a46d00;
+#kanji-pop .kanji-key:hover {
+  transform: translateY(-2px);
 }
 
-#kanji-pop .journey-stars > span {
-  color: #a4d2e7;
-  text-shadow: none;
+#kanji-pop .kanji-key.locked {
+  opacity: 0.82;
 }
 
-/* 11. Bottom Nav - Compact Capsule */
+/* Floating Bottom Navigation (.course-nav) */
 #kanji-pop#kanji-pop[data-view="map"] .course-nav {
   display: flex;
-  justify-content: space-around;
+  align-items: center;
+  justify-content: center;
   gap: 12px;
-  width: min(100%, 380px);
-  height: 44px;
-  min-height: 44px;
-  margin: 0 auto;
-  padding: 4px 16px;
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1.5px solid rgba(255, 255, 255, 0.9);
+  width: min(100%, 340px);
+  height: 38px;
+  min-height: 38px;
+  margin: 2px auto 0;
+  padding: 2px 14px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1.5px solid #ffffff;
   border-radius: 999px;
-  box-shadow: 0 4px 14px rgba(10, 50, 90, 0.08);
+  box-shadow: 0 6px 18px rgba(18, 89, 133, 0.12);
+  backdrop-filter: blur(12px);
+  z-index: 25;
   flex: none;
   box-sizing: border-box;
 }
 
 #kanji-pop#kanji-pop[data-view="map"] .course-nav button {
-  position: relative;
-  flex: 1;
-  flex-direction: column;
-  gap: 2px;
-  height: 100%;
-  padding: 2px 0 4px;
-  font-size: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  color: #1b537d;
+  font-family: inherit;
+  font-size: 11px;
   font-weight: 800;
-  background: none;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-  color: #164e7a;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 999px;
+  transition: all .15s ease;
 }
 
-#kanji-pop#kanji-pop[data-view="map"] .course-nav button[aria-current=page] {
-  background: none;
-  box-shadow: none;
-  color: #0284c7;
+#kanji-pop#kanji-pop[data-view="map"] .course-nav button[aria-current="page"] {
+  background: linear-gradient(145deg, #0284c7, #0369a1);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(2, 132, 199, 0.35);
 }
-
-#kanji-pop#kanji-pop[data-view="map"] .course-nav button[aria-current=page]:after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: calc(50% - 10px);
-  width: 20px;
-  height: 3px;
-  border-radius: 4px;
-  background: #0284c7;
-}
-
-#kanji-pop#kanji-pop[data-view="map"] .course-nav svg { width: 17px; height: 17px; }
-#kanji-pop#kanji-pop[data-view="map"] .course-nav b { display: none; }
 
 /* 12. Modal & Options */
 #kanji-pop .journey-options h2 { margin: 0 0 10px; font-size: 22px; color: #0c3e68; }
