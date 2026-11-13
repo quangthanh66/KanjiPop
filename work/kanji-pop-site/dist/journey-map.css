@@ -336,27 +336,30 @@
 
 #kanji-pop .candy-node .dome-num {
   color: #ffffff;
-  font-size: clamp(20px, 2.1vw, 29px);
+  font-family: "Nunito", "Arial Rounded MT Bold", sans-serif;
+  font-size: clamp(20px, 2.2vw, 29px);
   font-weight: 900;
   line-height: 1;
   letter-spacing: -0.5px;
-  transform: translateY(-16%) scaleY(0.88);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.38), 0 0 2px rgba(0, 0, 0, 0.25);
+  transform: translateY(-24%);
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.24), 0 3px 6px rgba(0, 0, 0, 0.25);
   pointer-events: none;
 }
 
 #kanji-pop .candy-node .node-stars {
   position: absolute;
-  bottom: -8px;
+  bottom: -10px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(15, 23, 42, 0.78);
-  color: #facc15;
-  font-size: 10px;
+  background: linear-gradient(180deg, #fffdf5 0%, #fef0c7 100%);
+  color: #f59e0b;
+  font-size: 11px;
+  font-weight: 900;
   letter-spacing: 1px;
-  padding: 1px 7px;
+  padding: 2px 9px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 2px solid #ffffff;
+  box-shadow: 0 3px 0 #e5a93c, 0 5px 10px rgba(18, 89, 133, 0.18);
   white-space: nowrap;
   pointer-events: none;
 }
@@ -369,98 +372,99 @@
 /* 3D Golden Crown on Node 05 */
 #kanji-pop .crown-crest-img {
   position: absolute;
-  bottom: 66%;
+  bottom: 68%;
   left: 50%;
   transform: translateX(-50%);
-  width: 84%;
+  width: 68%;
   height: auto;
   pointer-events: none;
   z-index: 7;
-  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.22));
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.22));
 }
 
 /* 3D Play Speech Bubble on Active Node */
 #kanji-pop .play-bubble {
   position: absolute;
-  bottom: calc(92% + 2px) !important;
+  bottom: calc(95% + 4px) !important;
   top: auto !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
-  background: linear-gradient(180deg, #4ade80 0%, #22c55e 45%, #16a34a 100%);
+  background: linear-gradient(180deg, #6ef296 0%, #2dd466 48%, #16b34a 100%);
   color: white;
+  font-family: "Nunito", "Arial Rounded MT Bold", sans-serif;
   font-weight: 900;
-  font-size: 14px;
-  letter-spacing: 0.4px;
-  padding: 6px 18px 7px;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  padding: 8px 22px 9px;
   border-radius: 999px;
-  border: 2.5px solid #ffffff;
-  box-shadow: 0 4px 0 #15803d, 0 8px 18px rgba(22, 163, 74, 0.48), inset 0 2px 2px rgba(255, 255, 255, 0.65);
+  border: 3px solid #ffffff;
+  box-shadow: 0 5px 0 #128a39, 0 10px 22px rgba(18, 138, 57, 0.42), inset 0 3px 3px rgba(255, 255, 255, 0.72);
   white-space: nowrap;
   cursor: pointer;
   z-index: 20;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.28);
+  text-shadow: 0 1.5px 0 rgba(10, 90, 35, 0.45);
   animation: cozyGlowPulse 2.4s infinite ease-in-out;
 }
 
 /* If Node 05 is selected, place Play Bubble below so it doesn't cover the 3D Crown */
 #kanji-pop .node-05 .play-bubble {
   bottom: auto !important;
-  top: calc(95% + 4px) !important;
+  top: calc(96% + 6px) !important;
 }
 
 #kanji-pop .play-bubble::after {
   content: '';
   position: absolute;
-  bottom: -7px;
+  bottom: -9px;
   left: 50%;
   transform: translateX(-50%);
   width: 0;
   height: 0;
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  border-top: 7px solid #ffffff;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 9px solid #ffffff;
 }
 
 #kanji-pop .node-05 .play-bubble::after {
   bottom: auto;
-  top: -7px;
+  top: -9px;
   border-top: none;
-  border-bottom: 7px solid #ffffff;
+  border-bottom: 9px solid #ffffff;
 }
 
 @keyframes cozyGlowPulse {
   0%, 100% {
-    box-shadow: 0 4px 0 #15803d, 0 6px 16px rgba(22, 163, 74, 0.45), inset 0 2px 2px rgba(255, 255, 255, 0.65);
+    box-shadow: 0 5px 0 #128a39, 0 8px 18px rgba(22, 163, 74, 0.4), inset 0 3px 3px rgba(255, 255, 255, 0.72);
   }
   50% {
-    box-shadow: 0 4px 0 #15803d, 0 8px 24px rgba(22, 163, 74, 0.75), inset 0 2px 2px rgba(255, 255, 255, 0.85);
+    box-shadow: 0 5px 0 #128a39, 0 10px 26px rgba(22, 163, 74, 0.7), inset 0 3px 3px rgba(255, 255, 255, 0.9);
   }
 }
 
-/* 6. Bottom 8-Kanji Frosted Tray with Real 3D Clay Squircle Tiles */
+/* 6. Bottom 8-Kanji Frosted Sky-Blue 3D Pillowy Tray with Real 3D Clay Squircle Tiles */
 #kanji-pop .kanji-drawer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 520px;
-  padding: 7px 12px;
-  background: rgba(255, 255, 255, 0.88);
-  border: 2.5px solid #ffffff;
-  border-radius: 24px;
-  box-shadow: 0 8px 24px rgba(18, 89, 133, 0.16), inset 0 2px 2px #ffffff;
+  max-width: 560px;
+  padding: 9px 14px 10px;
+  background: linear-gradient(180deg, rgba(235, 247, 255, 0.94) 0%, rgba(206, 236, 255, 0.92) 100%);
+  border: 3px solid #ffffff;
+  border-radius: 28px;
+  box-shadow: 0 4px 0 rgba(164, 212, 244, 0.9), 0 12px 28px rgba(18, 89, 133, 0.18), inset 0 2px 3px #ffffff;
   backdrop-filter: blur(12px);
   box-sizing: border-box;
   z-index: 25;
-  gap: 6px;
+  gap: 8px;
   flex: none;
   pointer-events: auto;
 }
 
 #kanji-pop#kanji-pop button.kanji-key {
   flex: 1;
-  aspect-ratio: 1 / 1;
-  max-width: 56px;
+  aspect-ratio: 160 / 168;
+  max-width: 58px;
   height: auto;
   border: none !important;
   outline: none !important;
@@ -473,14 +477,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: clamp(18px, 2.2vw, 24px);
+  font-size: clamp(20px, 2.3vw, 26px);
   font-weight: 900;
   color: #ffffff;
   cursor: pointer;
   user-select: none;
-  text-shadow: 0 1.5px 3px rgba(0, 0, 0, 0.28);
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.16);
   position: relative;
-  transition: transform 0.12s ease, filter 0.12s ease;
+  transition: transform 0.14s cubic-bezier(0.22, 1, 0.36, 1), filter 0.14s ease;
   padding: 0;
 }
 
@@ -490,29 +494,33 @@
 }
 
 #kanji-pop .kanji-key:hover {
-  transform: translateY(-3px) scale(1.05);
+  transform: translateY(-4px) scale(1.06);
   filter: brightness(1.05);
 }
 
-#kanji-pop .kanji-key.locked {
-  opacity: 0.92;
+#kanji-pop .kanji-key:active {
+  transform: translateY(2px) scale(0.97);
 }
 
-/* 7. Floating Bottom Navigation (.course-nav) */
+#kanji-pop .kanji-key.locked {
+  opacity: 0.94;
+}
+
+/* 7. 3D Cozy Candy Bottom Navigation Dock (.course-nav) */
 #kanji-pop#kanji-pop[data-view="map"] .course-nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  width: min(100%, 340px);
-  height: 36px;
-  min-height: 36px;
-  margin: 4px auto 0;
-  padding: 2px 14px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 2px solid #ffffff;
+  gap: 8px;
+  width: min(100%, 380px);
+  height: 44px;
+  min-height: 44px;
+  margin: 4px auto 2px;
+  padding: 5px 10px;
+  background: linear-gradient(180deg, rgba(235, 247, 255, 0.94) 0%, rgba(206, 236, 255, 0.92) 100%);
+  border: 2.5px solid #ffffff;
   border-radius: 999px;
-  box-shadow: 0 6px 18px rgba(18, 89, 133, 0.14);
+  box-shadow: 0 4px 0 rgba(164, 212, 244, 0.85), 0 10px 22px rgba(18, 89, 133, 0.16), inset 0 2px 2px #ffffff;
   backdrop-filter: blur(12px);
   z-index: 30;
   flex: none;
@@ -522,23 +530,51 @@
 #kanji-pop#kanji-pop[data-view="map"] .course-nav button {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  background: none;
-  border: none;
-  color: #1b537d;
-  font-family: inherit;
-  font-size: 11px;
-  font-weight: 800;
+  justify-content: center;
+  gap: 6px;
+  background: linear-gradient(180deg, #ffffff 0%, #e9f6ff 100%);
+  border: 2px solid #ffffff;
+  color: #165682;
+  font-family: "Nunito", "Arial Rounded MT Bold", sans-serif;
+  font-size: 12px;
+  font-weight: 900;
   cursor: pointer;
-  padding: 4px 10px;
+  padding: 5px 14px;
   border-radius: 999px;
-  transition: all 0.15s ease;
+  box-shadow: 0 2.5px 0 #bae0f7, inset 0 1px 1px #ffffff;
+  transition: transform 0.12s ease, filter 0.12s ease;
+}
+
+#kanji-pop#kanji-pop[data-view="map"] .course-nav button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+}
+
+#kanji-pop#kanji-pop[data-view="map"] .course-nav button:active {
+  transform: translateY(1.5px);
 }
 
 #kanji-pop#kanji-pop[data-view="map"] .course-nav button[aria-current="page"] {
-  background: linear-gradient(145deg, #0284c7, #0369a1);
+  background: linear-gradient(180deg, #5fd0ff 0%, #0ea5e9 52%, #0284c7 100%);
   color: #ffffff;
-  box-shadow: 0 2px 6px rgba(2, 132, 199, 0.35);
+  border: 2px solid #ffffff;
+  box-shadow: 0 3px 0 #0369a1, 0 5px 12px rgba(2, 132, 199, 0.35), inset 0 2px 2px rgba(255, 255, 255, 0.7);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.22);
+}
+
+#kanji-pop#kanji-pop[data-view="map"] .course-nav #album-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #c084fc 0%, #9333ea 100%);
+  color: #ffffff;
+  font-size: 10.5px;
+  font-weight: 900;
+  box-shadow: 0 1.5px 0 #6b21a8;
 }
 
 /* 8. Modal & Options */
@@ -675,16 +711,18 @@
   }
 
   #kanji-pop#kanji-pop[data-view="map"] .course-nav {
-    height: 34px;
-    min-height: 34px;
-    padding: 2px 10px;
-    width: min(100%, 310px);
-    gap: 8px;
+    height: 40px;
+    min-height: 40px;
+    padding: 4px 8px;
+    width: min(100%, 350px);
+    gap: 6px;
     margin-top: 2px;
   }
 
   #kanji-pop#kanji-pop[data-view="map"] .course-nav button {
-    font-size: 10px;
+    font-size: 11px;
+    padding: 4px 10px;
+    white-space: nowrap;
   }
 }
 

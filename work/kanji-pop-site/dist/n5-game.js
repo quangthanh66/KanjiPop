@@ -406,11 +406,11 @@
 
   // Exact percentage coordinates on cozy-mountain-stage.webp (1376x768)
   const nodeCoords = [
-    { left: '50.5%', top: '80.5%', cls: 'node-01', sprite: 'cozy-node-1.webp' },
-    { left: '31.5%', top: '68.5%', cls: 'node-02', sprite: 'cozy-node-2.webp' },
-    { left: '66.5%', top: '55.2%', cls: 'node-03', sprite: 'cozy-node-3.webp' },
-    { left: '35.5%', top: '41.8%', cls: 'node-04', sprite: 'cozy-node-4.webp' },
-    { left: '46.5%', top: '22.0%', cls: 'node-05', sprite: 'cozy-node-5.webp' }
+    { left: '47.2%', top: '71.8%', cls: 'node-01', sprite: 'cozy-node-1.webp' },
+    { left: '33.6%', top: '57.6%', cls: 'node-02', sprite: 'cozy-node-2.webp' },
+    { left: '63.2%', top: '44.2%', cls: 'node-03', sprite: 'cozy-node-3.webp' },
+    { left: '37.5%', top: '29.8%', cls: 'node-04', sprite: 'cozy-node-4.webp' },
+    { left: '56.0%', top: '17.4%', cls: 'node-05', sprite: 'cozy-node-5.webp' }
   ];
 
    $('#map-screen').innerHTML = `<div class="chapter-bar">
