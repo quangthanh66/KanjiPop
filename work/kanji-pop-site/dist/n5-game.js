@@ -555,16 +555,13 @@
       <!-- 2. HERO 3D ASSET: Ancient Weathered Kanji Monolith Stele "道" with Glowing Crystals (Lower-Left Hill) -->
       <img src="anime-monolith.webp" class="anime-prop monolith-prop" alt="" aria-hidden="true">
 
-      <!-- 3. HERO 3D ASSET: Grand 3D Floating Sakura Island (Lower-Right) -->
-      <img src="anime-island-sakura.webp" class="anime-prop sakura-island-prop" alt="" aria-hidden="true">
+      <!-- 3. HERO 3D ASSET: Sacred 3D Shinto Torii Gate & Stone Lantern on Fluffy Cloud (Lower-Right Sky) -->
+      <img src="anime-torii-cloud.webp" class="anime-prop torii-prop" alt="" aria-hidden="true">
 
-      <!-- 4. 3D Torii Gate and Stone Lantern on Cloud (Mid-Right Sky) -->
-      <img src="anime-shrine-cloud.webp" class="anime-prop shrine-prop" alt="" aria-hidden="true">
-
-      <!-- 5. 3D Japanese Calligraphy Set: Brush, Inkstone & Unrolled Kanji Scroll (Mid-Left Trail) -->
+      <!-- 4. 3D Japanese Calligraphy Set: Brush, Inkstone & Unrolled Kanji Scroll (Mid-Left Trail) -->
       <img src="anime-brush.webp" class="anime-prop brush-prop" alt="" aria-hidden="true">
 
-      <!-- 6. 3D Grand Treasure Chest & Star Crystal (Near Summit Node 05 & Crown) -->
+      <!-- 5. 3D Grand Treasure Chest & Star Crystal (Near Summit Node 05 & Crown) -->
       <img src="anime-chest.webp" class="anime-prop chest-top" alt="" aria-hidden="true">
       <img src="anime-star-crystal.webp" class="anime-prop star-crystal-prop" alt="" aria-hidden="true">
 
