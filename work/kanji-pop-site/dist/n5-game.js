@@ -401,17 +401,38 @@
    const r=C.recipes[id],known=profile.collected.includes(id),intro=C.levels.find(l=>l.newChars&&l.newChars.includes(id));
    const lvl=intro?intro.id+1:(mapChapter*5+1);
    const tileIdx = (idx % 8) + 1;
-   return `<button type="button" class="shelf-gem-card kanji-key ${known?'unlocked':'locked'}" style="background-image: url('cozy-tile-${tileIdx}.webp');" data-kanji-preview="${id}" aria-label="${known?id+' — '+(r.hanViet||I18N.getRecipeMeaning(r)):'Chưa mở khóa, màn '+lvl}"><span class="shelf-gem-icon" lang="ja">${id}</span></button>`;
+   return `<button type="button" class="shelf-gem-card kanji-key ${known?'unlocked':'locked'}" style="background-image: url('anime-tile-${tileIdx}.webp');" data-kanji-preview="${id}" aria-label="${known?id+' — '+(r.hanViet||I18N.getRecipeMeaning(r)):'Chưa mở khóa, màn '+lvl}"><span class="shelf-gem-icon" lang="ja">${id}</span></button>`;
   }).join('');
 
-  // Exact percentage coordinates on 2D anime map background
+  // Exact percentage coordinates on 2D anime cloud-path background (anime-bg-stage.webp)
   const nodeCoords = [
-    { left: '55.5%', top: '68.5%', cls: 'node-01', sprite: 'cozy-node-1.webp' },
-    { left: '40.5%', top: '56.0%', cls: 'node-02', sprite: 'cozy-node-2.webp' },
-    { left: '56.5%', top: '42.2%', cls: 'node-03', sprite: 'cozy-node-3.webp' },
-    { left: '47.5%', top: '31.0%', cls: 'node-04', sprite: 'cozy-node-4.webp' },
-    { left: '50.2%', top: '21.0%', cls: 'node-05', sprite: 'cozy-node-5.webp' }
+    { left: '56.2%', top: '70.0%', cls: 'node-01', sprite: 'anime-node-1.webp' },
+    { left: '42.8%', top: '58.0%', cls: 'node-02', sprite: 'anime-node-2.webp' },
+    { left: '54.0%', top: '48.8%', cls: 'node-03', sprite: 'anime-node-3.webp' },
+    { left: '46.6%', top: '40.4%', cls: 'node-04', sprite: 'anime-node-4.webp' },
+    { left: '50.2%', top: '30.2%', cls: 'node-05', sprite: 'anime-node-5.webp' }
   ];
+
+  // Separate decorative 2D anime gemstones & floating Kanji charms in open sky flanks
+  const skyDecors = `
+    <div class="anime-sky-decors" aria-hidden="true">
+      <img src="anime-gem-1.webp" class="anime-float-gem g1" alt="">
+      <img src="anime-gem-2.webp" class="anime-float-gem g2" alt="">
+      <img src="anime-gem-3.webp" class="anime-float-gem g3" alt="">
+      <img src="anime-gem-4.webp" class="anime-float-gem g4" alt="">
+      <img src="anime-gem-5.webp" class="anime-float-gem g5" alt="">
+      <img src="anime-gem-6.webp" class="anime-float-gem g6" alt="">
+
+      <div class="anime-float-kanji k1" style="background-image:url('anime-tile-1.webp')" lang="ja">日</div>
+      <div class="anime-float-kanji k2" style="background-image:url('anime-tile-4.webp')" lang="ja">月</div>
+      <div class="anime-float-kanji k3" style="background-image:url('anime-tile-2.webp')" lang="ja">火</div>
+      <div class="anime-float-kanji k4" style="background-image:url('anime-tile-5.webp')" lang="ja">水</div>
+      <div class="anime-float-kanji k5" style="background-image:url('anime-tile-3.webp')" lang="ja">木</div>
+      <div class="anime-float-kanji k6" style="background-image:url('anime-tile-8.webp')" lang="ja">花</div>
+      <div class="anime-float-kanji k7" style="background-image:url('anime-tile-7.webp')" lang="ja">星</div>
+      <div class="anime-float-kanji k8" style="background-image:url('anime-tile-6.webp')" lang="ja">空</div>
+    </div>
+  `;
 
    $('#map-screen').innerHTML = `<div class="chapter-bar">
     <div class="grade-toggle-group">
@@ -431,12 +452,13 @@
   <div class="journey-layout cozy-layout" data-chapter="${mapChapter}">
     <div class="mountain-stage-wrap">
       <div class="mountain-area mountain-canvas">
-        <!-- 5 3D Candy Nodes on Winding Road -->
+        ${skyDecors}
+        <!-- 5 2D Anime Level Medallions on Winding Cloud Path -->
         ${levels.map((l, i) => {
           const r = profile.results[l.id], isLocked = l.id > next, current = l.id === mapSelected;
           const pos = nodeCoords[i];
           const playText = action === 'resume' ? I18N.t('resume') : result ? I18N.t('replay') : I18N.t('play');
-          const crownBadge = i === 4 ? '<img src="cozy-crown.webp" class="crown-crest-img" alt="" aria-hidden="true">' : '';
+          const crownBadge = i === 4 ? '<img src="anime-crown.webp" class="crown-crest-img" alt="" aria-hidden="true">' : '';
           const playBubble = current ? `<div role="button" tabindex="0" class="play-bubble journey-node-play-btn" data-main="${action}" ${locked?'aria-disabled="true"':'aria-label="'+playText+' màn '+(l.id+1)+'"'}><span>${playText} ▶</span></div>` : '';
           const starRow = r ? `<span class="node-stars" aria-hidden="true">${'★'.repeat(r.stars)}${'☆'.repeat(3-r.stars)}</span>` : '';
           return `<button type="button" class="candy-node ${pos.cls} journey-stop ${r?'completed':''} ${current?'selected':''} ${i===4?'treasure':''}" style="left: ${pos.left}; top: ${pos.top}; background-image: url('${pos.sprite}');" data-journey-level="${l.id}" ${isLocked?'disabled':''} aria-pressed="${current}" aria-label="Màn ${l.id+1}: ${l.title}${isLocked?', chưa mở khóa':r?', '+r.stars+' sao':''}">
