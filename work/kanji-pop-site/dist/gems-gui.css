@@ -30,13 +30,14 @@
   height: 100dvh;
   max-width: none !important;
   margin: 0 !important;
-  padding: clamp(8px, 1.8vh, 18px) 16px clamp(12px, 2vh, 22px) !important;
+  padding: clamp(6px, 1.5vh, 16px) clamp(6px, 1.5vw, 16px) clamp(8px, 1.8vh, 18px) !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
   align-items: center !important;
   overflow: hidden !important;
   gap: 0 !important;
+  box-sizing: border-box !important;
 }
 
 #kanji-pop #map-screen[hidden],
@@ -44,7 +45,7 @@
   display: none !important;
 }
 
-/* Clear any inherited button styles from other sheets */
+/* Clear any inherited button styles from other stylesheets (e.g. responsive.css double ID selector) */
 #kanji-pop#kanji-pop .gui-round-btn,
 #kanji-pop#kanji-pop .gui-dock-btn,
 #kanji-pop#kanji-pop .gui-nav-arrow {
@@ -55,7 +56,7 @@
   outline: none !important;
 }
 
-/* 3. Top HUD (Sound, Music, Hanging Title, Help, Settings) */
+/* 3. Top HUD (Sound, Music, Title Banner, Settings, Trophy) */
 #kanji-pop .gui-top-hud {
   width: 100%;
   max-width: 860px;
@@ -64,17 +65,19 @@
   align-items: center;
   z-index: 25;
   flex: none;
+  padding: 0 4px;
+  box-sizing: border-box;
 }
 
 #kanji-pop .gui-hud-group {
   display: flex;
   align-items: center;
-  gap: clamp(8px, 1.2vw, 14px);
+  gap: clamp(6px, 1.2vw, 14px);
 }
 
 /* Round Buttons (Sound, Music, Gear, Help) */
 #kanji-pop .gui-round-btn {
-  width: clamp(44px, 4.2vw, 56px);
+  width: clamp(38px, 4vw, 54px);
   aspect-ratio: 1 / 1;
   border: none;
   background: transparent;
@@ -84,6 +87,7 @@
   transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.15s ease;
   display: grid;
   place-items: center;
+  flex: none;
 }
 #kanji-pop .gui-round-btn img {
   width: 100%;
@@ -92,7 +96,7 @@
   pointer-events: none;
 }
 #kanji-pop .gui-round-btn:hover {
-  transform: scale(1.14) translateY(-2px);
+  transform: scale(1.12) translateY(-2px);
   filter: brightness(1.1) drop-shadow(0 6px 14px rgba(0,0,0,0.28));
 }
 #kanji-pop .gui-round-btn:active {
@@ -102,7 +106,7 @@
   filter: grayscale(0.8) opacity(0.65);
 }
 
-/* Center Hanging Title Logo */
+/* Center Title Logo */
 #kanji-pop .gui-title-wrap {
   display: flex;
   flex-direction: column;
@@ -110,41 +114,45 @@
   position: relative;
 }
 #kanji-pop .gui-title-img {
-  width: clamp(170px, 18vw, 250px);
+  width: clamp(160px, 18vw, 260px);
+  max-height: clamp(80px, 11vh, 140px);
   height: auto;
-  filter: drop-shadow(0 8px 18px rgba(76, 29, 149, 0.4));
+  object-fit: contain;
+  filter: drop-shadow(0 6px 16px rgba(76, 29, 149, 0.38));
   animation: titleFloat 4s ease-in-out infinite;
   pointer-events: none;
 }
 @keyframes titleFloat {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
+  50% { transform: translateY(-3px); }
 }
 
 /* Mode Pill directly below Title */
 #kanji-pop .gui-mode-pill {
-  margin-top: -10px;
+  margin-top: clamp(-7px, -1vw, -10px);
   background: linear-gradient(180deg, #ec4899 0%, #be185d 100%);
-  border: 2.5px solid #ffffff;
+  border: 2px solid #ffffff;
   border-radius: 9999px;
-  padding: 3px 16px 4px;
+  padding: 2px clamp(8px, 1.4vw, 15px) 3px;
   color: #ffffff;
   font-weight: 900;
-  font-size: clamp(11px, 1.1vw, 13.5px);
-  letter-spacing: 0.5px;
-  box-shadow: 0 4px 12px rgba(190, 24, 93, 0.45), inset 0 1px 2px rgba(255,255,255,0.7);
+  font-size: clamp(9.5px, 1.0vw, 12.5px);
+  letter-spacing: 0.4px;
+  box-shadow: 0 3px 10px rgba(190, 24, 93, 0.45), inset 0 1px 2px rgba(255,255,255,0.7);
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   cursor: pointer;
   transition: transform 0.14s ease;
   user-select: none;
+  white-space: nowrap !important;
+  z-index: 2;
 }
 #kanji-pop .gui-mode-pill:hover {
   transform: scale(1.05);
 }
 
-/* 4. Main Centerpiece: Hanging Level Selection Window */
+/* 4. Main Stage Centerpiece (Arrows + Level Card) */
 #kanji-pop .gui-stage-center {
   position: relative;
   display: flex;
@@ -152,9 +160,12 @@
   justify-content: center;
   flex: 1;
   width: 100%;
-  max-width: 840px;
+  max-width: 800px;
   min-height: 0;
-  margin: 4px 0;
+  margin: 2px 0;
+  padding: 0 4px;
+  box-sizing: border-box;
+  gap: clamp(4px, 1.2vw, 14px);
 }
 
 /* Navigation Arrows flanking the card */
@@ -163,100 +174,100 @@
   border: none;
   cursor: pointer;
   padding: 0;
-  filter: drop-shadow(0 4px 12px rgba(190, 24, 93, 0.45));
+  filter: drop-shadow(0 3px 10px rgba(190, 24, 93, 0.45));
   transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
   z-index: 15;
   flex: none;
+  width: clamp(24px, 3.2vw, 44px);
+  aspect-ratio: 70 / 100;
+  display: grid;
+  place-items: center;
 }
 #kanji-pop .gui-nav-arrow img {
-  width: clamp(36px, 3.8vw, 52px);
-  height: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   pointer-events: none;
 }
 #kanji-pop .gui-nav-arrow:hover:not(:disabled) {
-  transform: scale(1.22);
-  filter: drop-shadow(0 6px 18px rgba(190, 24, 93, 0.7));
+  transform: scale(1.18);
+  filter: drop-shadow(0 5px 15px rgba(190, 24, 93, 0.7));
 }
 #kanji-pop .gui-nav-arrow:active:not(:disabled) {
   transform: scale(0.92);
 }
 #kanji-pop .gui-nav-arrow:disabled {
-  opacity: 0.35;
+  opacity: 0.3;
   cursor: default;
   filter: grayscale(0.8);
+  pointer-events: none;
 }
 
-/* The Purple Hanging Level Selection Card */
+/* The Purple Level Selection Card (Scales smoothly to fit between arrows) */
 #kanji-pop .gui-card-box {
   position: relative;
-  width: 100%;
-  max-width: 650px;
+  flex: 1;
+  min-width: 0;
+  max-width: 580px;
   height: auto;
-  max-height: min(520px, 62vh);
+  max-height: min(490px, 58vh);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 18px 22px;
+  padding: clamp(14px, 2.2vw, 22px) clamp(8px, 1.6vw, 18px) clamp(8px, 1.4vw, 16px);
   background: radial-gradient(circle at 50% 35%, #6b3394 0%, #4a1d6d 75%, #351052 100%);
-  border: 4px solid #ffffff;
-  border-radius: 36px;
-  box-shadow: 0 18px 40px rgba(49, 13, 76, 0.48), 0 5px 0 #280a3d, inset 0 2px 4px rgba(255,255,255,0.4);
-  margin: 0 10px;
+  border: clamp(2.5px, 0.4vw, 4px) solid #ffffff;
+  border-radius: clamp(22px, 3.2vw, 36px);
+  box-shadow: 0 14px 34px rgba(49, 13, 76, 0.48), 0 4px 0 #280a3d, inset 0 2px 4px rgba(255,255,255,0.4);
+  box-sizing: border-box;
 }
 
-/* Hanging Strings & Bows at Top of Card */
-#kanji-pop .gui-card-box::before,
-#kanji-pop .gui-card-box::after {
-  content: '';
-  position: absolute;
-  top: -38px;
-  width: 3.5px;
-  height: 42px;
-  background: #ffffff;
-  box-shadow: 0 0 8px rgba(255,255,255,0.9);
-  pointer-events: none;
-}
-#kanji-pop .gui-card-box::before { left: 22%; }
-#kanji-pop .gui-card-box::after { right: 22%; }
-
+/* Decorative Bow Knots at Top of Card */
 #kanji-pop .gui-bow-knot {
   position: absolute;
-  top: -14px;
-  width: 26px;
-  height: 20px;
+  top: -12px;
+  width: clamp(20px, 2.5vw, 26px);
+  height: auto;
   pointer-events: none;
   z-index: 5;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
-#kanji-pop .gui-bow-knot.left { left: calc(22% - 12px); }
-#kanji-pop .gui-bow-knot.right { right: calc(22% - 12px); }
+#kanji-pop .gui-bow-knot.left { left: 16%; }
+#kanji-pop .gui-bow-knot.right { right: 16%; }
 
-/* Card Header: 3D Candy "Level Selection" Ribbon */
+/* Card Header: 3D Candy Ribbon */
 #kanji-pop .gui-card-header {
-  margin-top: -26px;
+  margin-top: clamp(-24px, -3.2vw, -30px);
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 10;
+  width: 90%;
+  max-width: 380px;
 }
 #kanji-pop .gui-header-ribbon {
   background: linear-gradient(180deg, #f43f5e 0%, #be123c 100%);
-  border: 3.5px solid #ffffff;
+  border: clamp(2px, 0.35vw, 3.5px) solid #ffffff;
   border-radius: 9999px;
-  padding: 6px 30px 7px;
-  box-shadow: 0 6px 18px rgba(159, 18, 57, 0.5), 0 3px 0 #881337, inset 0 2px 3px rgba(255,255,255,0.7);
+  padding: 4px clamp(12px, 2vw, 24px) 5px;
+  box-shadow: 0 5px 14px rgba(159, 18, 57, 0.5), 0 2.5px 0 #881337, inset 0 1.5px 2px rgba(255,255,255,0.7);
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  white-space: nowrap !important;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 #kanji-pop .gui-header-title {
-  font-size: clamp(15px, 1.7vw, 21px);
+  font-size: clamp(11px, 1.4vw, 16px);
   font-weight: 900;
   color: #ffffff;
-  letter-spacing: 1.2px;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
-  text-shadow: 0 2px 0 #881337, 0 0 10px rgba(255,255,255,0.4);
+  text-shadow: 0 1.5px 0 #881337, 0 0 8px rgba(255,255,255,0.4);
+  white-space: nowrap !important;
 }
 
 /* 15 Level Buttons Grid (3 rows x 5 cols) */
@@ -264,21 +275,23 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  gap: clamp(10px, 1.4vw, 18px) clamp(8px, 1.2vw, 16px);
+  gap: clamp(8px, 1.4vw, 16px) clamp(4px, 1.0vw, 12px);
   width: 100%;
   flex: 1;
-  padding: 10px 6px 6px;
+  padding: clamp(6px, 1vw, 10px) 2px 2px;
   align-items: center;
   justify-items: center;
+  box-sizing: border-box;
 }
 
 /* Individual Level Button */
 #kanji-pop .gui-lvl-btn {
   position: relative;
-  width: clamp(52px, 5.8vw, 74px);
+  width: 100%;
+  max-width: clamp(40px, 5.2vw, 68px);
   aspect-ratio: 1 / 1;
   background: radial-gradient(circle at 35% 25%, #a855f7 0%, #7e22ce 60%, #581c87 100%);
-  border: 3.5px solid #ffffff;
+  border: clamp(2px, 0.35vw, 3px) solid #ffffff;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
@@ -286,14 +299,14 @@
   align-items: center;
   justify-content: center;
   padding: 0;
-  box-shadow: 0 6px 14px rgba(24, 7, 38, 0.55), 0 3px 0 #3b0764, inset 0 2px 4px rgba(255,255,255,0.85);
+  box-shadow: 0 5px 12px rgba(24, 7, 38, 0.5), 0 2.5px 0 #3b0764, inset 0 1.5px 3px rgba(255,255,255,0.85);
   transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.15s ease, box-shadow 0.15s ease;
 }
 #kanji-pop .gui-lvl-btn::before {
   content: '';
   position: absolute;
   top: 3px;
-  left: 12px;
+  left: 20%;
   width: 38%;
   height: 28%;
   background: radial-gradient(ellipse at center, rgba(255,255,255,0.9) 0%, transparent 80%);
@@ -302,54 +315,54 @@
 }
 
 #kanji-pop .gui-lvl-btn:hover:not(:disabled) {
-  transform: scale(1.14) translateY(-4px);
-  filter: brightness(1.12);
-  box-shadow: 0 10px 22px rgba(24, 7, 38, 0.65), 0 4px 0 #3b0764;
+  transform: scale(1.12) translateY(-3px);
+  filter: brightness(1.1);
+  box-shadow: 0 8px 18px rgba(24, 7, 38, 0.6), 0 3px 0 #3b0764;
 }
 #kanji-pop .gui-lvl-btn:active:not(:disabled) {
-  transform: scale(0.95) translateY(2px);
+  transform: scale(0.95) translateY(1px);
 }
 
 #kanji-pop .gui-lvl-num {
   color: #ffffff;
-  font-size: clamp(18px, 2.0vw, 26px);
+  font-size: clamp(14px, 1.8vw, 22px);
   font-weight: 900;
   line-height: 1;
-  text-shadow: 0 2px 0 #3b0764, 0 0 6px rgba(0,0,0,0.4);
-  margin-top: -3px;
+  text-shadow: 0 1.5px 0 #3b0764, 0 0 5px rgba(0,0,0,0.4);
+  margin-top: -2px;
 }
 
 /* 3 Stars Rack Under Button */
 #kanji-pop .gui-lvl-stars {
   position: absolute;
-  bottom: -9px;
+  bottom: clamp(-8px, -1vw, -10px);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2px;
+  gap: 1.5px;
   pointer-events: none;
 }
 #kanji-pop .gui-lvl-stars img {
-  width: clamp(13px, 1.4vw, 17px);
+  width: clamp(10px, 1.2vw, 15px);
   height: auto;
-  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.4));
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
 }
 #kanji-pop .gui-lvl-stars img:nth-child(2) {
-  transform: translateY(-2px);
-  width: clamp(15px, 1.6vw, 19px);
+  transform: translateY(-1.5px);
+  width: clamp(11px, 1.35vw, 17px);
 }
 
 /* Selected / Active Playable Level Highlight */
 #kanji-pop .gui-lvl-btn.active {
   background: radial-gradient(circle at 35% 25%, #f43f5e 0%, #db2777 60%, #9d174d 100%);
   border-color: #fef08a;
-  box-shadow: 0 0 22px rgba(244, 63, 94, 0.85), 0 6px 14px rgba(24, 7, 38, 0.5), 0 3px 0 #831843;
+  box-shadow: 0 0 18px rgba(244, 63, 94, 0.85), 0 5px 12px rgba(24, 7, 38, 0.5), 0 2.5px 0 #831843;
   animation: pulseActive 2s ease-in-out infinite;
   z-index: 5;
 }
 @keyframes pulseActive {
-  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(253, 224, 71, 0.7)); }
-  50% { transform: scale(1.08); filter: drop-shadow(0 0 20px rgba(253, 224, 71, 1)); }
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px rgba(253, 224, 71, 0.7)); }
+  50% { transform: scale(1.06); filter: drop-shadow(0 0 16px rgba(253, 224, 71, 1)); }
 }
 
 /* Locked Level Button */
@@ -361,21 +374,22 @@
   box-shadow: 0 3px 8px rgba(0,0,0,0.3);
 }
 #kanji-pop .gui-lock-icon {
-  width: clamp(18px, 1.8vw, 24px);
+  width: clamp(15px, 1.6vw, 22px);
   height: auto;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
 }
 
-/* Pagination Dots at Bottom of Card */
+/* Pagination Dots below Grid */
 #kanji-pop .gui-pagination-dots {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  margin-top: 6px;
+  margin-top: 4px;
 }
 #kanji-pop .gui-dot {
-  width: 10px;
-  height: 10px;
+  width: clamp(7px, 1vw, 10px);
+  height: clamp(7px, 1vw, 10px);
   border-radius: 50%;
   background: rgba(255,255,255,0.4);
   box-shadow: inset 0 1px 2px rgba(0,0,0,0.4);
@@ -384,34 +398,36 @@
 }
 #kanji-pop .gui-dot.active {
   background: #facc15;
-  width: 12px;
-  height: 12px;
+  transform: scale(1.2);
   box-shadow: 0 0 8px #facc15;
 }
 
 /* 5. Bottom Action Dock */
 #kanji-pop .gui-bottom-dock {
   width: 100%;
-  max-width: 650px;
+  max-width: 580px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(12px, 3.2vw, 30px);
+  gap: clamp(10px, 2.8vw, 26px);
   z-index: 25;
   flex: none;
+  padding: 0 6px;
+  box-sizing: border-box;
 }
 
 #kanji-pop .gui-dock-btn {
-  width: clamp(56px, 6.5vw, 76px);
+  width: clamp(46px, 5.8vw, 68px);
   aspect-ratio: 1 / 1;
   border: none;
   background: transparent;
   padding: 0;
   cursor: pointer;
-  filter: drop-shadow(0 6px 14px rgba(42, 12, 64, 0.35));
+  filter: drop-shadow(0 5px 12px rgba(42, 12, 64, 0.35));
   transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.15s ease;
   display: grid;
   place-items: center;
+  flex: none;
 }
 #kanji-pop .gui-dock-btn img {
   width: 100%;
@@ -420,81 +436,83 @@
   pointer-events: none;
 }
 #kanji-pop .gui-dock-btn:hover {
-  transform: scale(1.14) translateY(-4px);
-  filter: brightness(1.1) drop-shadow(0 8px 18px rgba(42, 12, 64, 0.45));
+  transform: scale(1.12) translateY(-3px);
+  filter: brightness(1.1) drop-shadow(0 7px 16px rgba(42, 12, 64, 0.45));
 }
 #kanji-pop .gui-dock-btn:active {
-  transform: scale(0.94) translateY(2px);
+  transform: scale(0.94) translateY(1px);
 }
 
 /* The Big Pink Play Button */
 #kanji-pop .gui-dock-btn.play-btn {
-  width: clamp(74px, 8.5vw, 100px);
+  width: clamp(64px, 7.8vw, 90px);
   animation: playBob 2.2s ease-in-out infinite;
 }
 @keyframes playBob {
-  0%, 100% { transform: scale(1) translateY(0); filter: drop-shadow(0 6px 14px rgba(190, 24, 93, 0.45)); }
-  50% { transform: scale(1.06) translateY(-4px); filter: drop-shadow(0 10px 22px rgba(190, 24, 93, 0.7)); }
+  0%, 100% { transform: scale(1) translateY(0); filter: drop-shadow(0 5px 12px rgba(190, 24, 93, 0.45)); }
+  50% { transform: scale(1.05) translateY(-3px); filter: drop-shadow(0 8px 18px rgba(190, 24, 93, 0.7)); }
 }
 #kanji-pop .gui-dock-btn.play-btn:hover {
-  transform: scale(1.16) translateY(-6px);
+  transform: scale(1.14) translateY(-5px);
   animation: none;
 }
 
 /* 6. Mobile Responsiveness */
 @media (max-width: 600px) {
   #kanji-pop #map-screen {
-    padding: 8px 10px 14px !important;
+    padding: 6px 6px 10px !important;
   }
   #kanji-pop .gui-top-hud {
-    gap: 6px;
+    padding: 0 2px;
   }
   #kanji-pop .gui-round-btn {
-    width: 40px;
+    width: 36px;
   }
   #kanji-pop .gui-title-img {
-    width: 155px;
+    width: 135px;
   }
   #kanji-pop .gui-mode-pill {
-    padding: 2.5px 12px 3.5px;
-    font-size: 11px;
+    padding: 2px 10px 3px;
+    font-size: 10px;
+    gap: 4px;
   }
   #kanji-pop .gui-stage-center {
-    margin: 2px 0;
+    gap: 4px;
+    padding: 0 2px;
+  }
+  #kanji-pop .gui-nav-arrow {
+    width: 26px;
   }
   #kanji-pop .gui-card-box {
-    max-height: 430px;
-    padding: 10px 8px 14px;
-    border-radius: 28px;
-    margin: 0 4px;
-  }
-  #kanji-pop .gui-card-header {
-    margin-top: -20px;
+    max-height: 410px;
+    padding: 12px 6px 10px;
+    border-radius: 24px;
   }
   #kanji-pop .gui-header-ribbon {
-    padding: 4px 20px 5px;
+    padding: 3.5px 14px 4px;
   }
   #kanji-pop .gui-header-title {
-    font-size: 14px;
+    font-size: 11.5px;
+    letter-spacing: 0.5px;
   }
   #kanji-pop .gui-levels-grid {
-    gap: 14px 6px;
-    padding: 8px 4px 4px;
+    gap: 10px 4px;
+    padding: 4px 2px 2px;
   }
   #kanji-pop .gui-lvl-btn {
-    width: 48px;
-    border-width: 2.5px;
+    max-width: 44px;
   }
   #kanji-pop .gui-lvl-num {
-    font-size: 16px;
+    font-size: 15px;
   }
   #kanji-pop .gui-bottom-dock {
-    gap: 12px;
+    gap: 10px;
+    padding: 0 4px;
   }
   #kanji-pop .gui-dock-btn {
-    width: 50px;
+    width: 44px;
   }
   #kanji-pop .gui-dock-btn.play-btn {
-    width: 68px;
+    width: 60px;
   }
 }

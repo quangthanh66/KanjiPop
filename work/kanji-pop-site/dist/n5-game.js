@@ -438,7 +438,7 @@
         <!-- 3D Header Ribbon -->
         <div class="gui-card-header">
           <div class="gui-header-ribbon">
-            <span class="gui-header-title">${I18N.t('chapter')} ${String(mapChapter+1).padStart(2,'0')} · CHỌN MÀN CHƠI</span>
+            <span class="gui-header-title">${I18N.t('chapter')} ${String(mapChapter+1).padStart(2,'0')} · CHỌN MÀN</span>
           </div>
         </div>
 
