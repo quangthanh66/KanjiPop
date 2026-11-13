@@ -549,30 +549,36 @@
       <span class="anime-sparkle s9" style="left: 50%; top: 13%;">✨</span>
       <span class="anime-sparkle s10" style="right: 10%; top: 62%;">✦</span>
 
-      <!-- 6 High-Res 3D Lucky Charms (Daruma, Koi, Star Crystal, Origami Crane, Furin, Suzu Bell) -->
-      <img src="anime-daruma.webp" class="anime-prop daruma-prop" alt="">
-      <img src="anime-koi.webp" class="anime-prop koi-prop" alt="">
-      <img src="anime-star-crystal.webp" class="anime-prop star-crystal-prop" alt="">
-      <img src="anime-crane.webp" class="anime-prop crane-prop" alt="">
-      <img src="anime-furin.webp" class="anime-prop furin-prop" alt="">
-      <img src="anime-suzu.webp" class="anime-prop suzu-prop" alt="">
+      <!-- 1. HERO 3D ASSET: Grand Japanese Pagoda Sanctuary on Floating Island (Upper-Left Sky) -->
+      <img src="anime-pagoda.webp" class="anime-prop pagoda-prop" alt="" aria-hidden="true">
 
-      <!-- 3D Treasure Chest & Japanese Cultural Charms -->
-      <img src="anime-chest.webp" class="anime-prop chest-top" alt="">
-      <img src="anime-omamori.webp" class="anime-prop omamori-prop" alt="">
-      <img src="anime-lantern.webp" class="anime-prop lantern-prop" alt="">
-      <img src="anime-sakura.webp" class="anime-prop sakura-1" alt="">
-      <img src="anime-sakura.webp" class="anime-prop sakura-2" alt="">
-      <img src="anime-star.webp" class="anime-prop star-1" alt="">
-      <img src="anime-star.webp" class="anime-prop star-2" alt="">
+      <!-- 2. HERO 3D ASSET: Ancient Weathered Kanji Monolith Stele "道" with Glowing Crystals (Lower-Left Hill) -->
+      <img src="anime-monolith.webp" class="anime-prop monolith-prop" alt="" aria-hidden="true">
+
+      <!-- 3. HERO 3D ASSET: Grand 3D Floating Sakura Island (Lower-Right) -->
+      <img src="anime-island-sakura.webp" class="anime-prop sakura-island-prop" alt="" aria-hidden="true">
+
+      <!-- 4. 3D Torii Gate and Stone Lantern on Cloud (Mid-Right Sky) -->
+      <img src="anime-shrine-cloud.webp" class="anime-prop shrine-prop" alt="" aria-hidden="true">
+
+      <!-- 5. 3D Japanese Calligraphy Set: Brush, Inkstone & Unrolled Kanji Scroll (Mid-Left Trail) -->
+      <img src="anime-brush.webp" class="anime-prop brush-prop" alt="" aria-hidden="true">
+
+      <!-- 6. 3D Grand Treasure Chest & Star Crystal (Near Summit Node 05 & Crown) -->
+      <img src="anime-chest.webp" class="anime-prop chest-top" alt="" aria-hidden="true">
+      <img src="anime-star-crystal.webp" class="anime-prop star-crystal-prop" alt="" aria-hidden="true">
+
+      <!-- Floating Sakura Petals -->
+      <img src="anime-sakura.webp" class="anime-prop sakura-1" alt="" aria-hidden="true">
+      <img src="anime-sakura.webp" class="anime-prop sakura-2" alt="" aria-hidden="true">
 
       <!-- 6 Colorful Faceted 3D Gemstones -->
-      <img src="anime-gem-1.webp" class="anime-float-gem g1" alt="">
-      <img src="anime-gem-2.webp" class="anime-float-gem g2" alt="">
-      <img src="anime-gem-3.webp" class="anime-float-gem g3" alt="">
-      <img src="anime-gem-4.webp" class="anime-float-gem g4" alt="">
-      <img src="anime-gem-5.webp" class="anime-float-gem g5" alt="">
-      <img src="anime-gem-6.webp" class="anime-float-gem g6" alt="">
+      <img src="anime-gem-1.webp" class="anime-float-gem g1" alt="" aria-hidden="true">
+      <img src="anime-gem-2.webp" class="anime-float-gem g2" alt="" aria-hidden="true">
+      <img src="anime-gem-3.webp" class="anime-float-gem g3" alt="" aria-hidden="true">
+      <img src="anime-gem-4.webp" class="anime-float-gem g4" alt="" aria-hidden="true">
+      <img src="anime-gem-5.webp" class="anime-float-gem g5" alt="" aria-hidden="true">
+      <img src="anime-gem-6.webp" class="anime-float-gem g6" alt="" aria-hidden="true">
 
       <!-- 8 Floating 3D Kanji Charms -->
       <div class="anime-float-kanji k1" style="background-image:url('anime-tile-1.webp')" lang="ja">日</div>
