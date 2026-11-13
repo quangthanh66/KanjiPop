@@ -413,37 +413,142 @@
     { left: '50.5%', top: '23.5%', cls: 'node-05', sprite: 'anime-node-5.webp' }
   ];
 
-  // Pure CSS/SVG Smooth Gradient Sky + S-Curve Cloud Ribbon Path (Zero Diagonal Lines, Clean Backdrop)
+  // Multi-Layered Stylized 3D Vector Landscape (Mountains, Clay Hills, S-Curve Trail & Cloud Balcony)
   const skyVectorLayer = `
     <svg class="anime-gradient-sky-svg" viewBox="0 0 1376 768" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <defs>
+        <!-- Sky Gradient -->
         <linearGradient id="animeSkyGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#5ec6ff"/>
-          <stop offset="35%" stop-color="#8fdbff"/>
-          <stop offset="70%" stop-color="#c9eeff"/>
-          <stop offset="100%" stop-color="#ebf8ff"/>
+          <stop offset="0%" stop-color="#3b9eff"/>
+          <stop offset="28%" stop-color="#72c4ff"/>
+          <stop offset="55%" stop-color="#b8e4fe"/>
+          <stop offset="85%" stop-color="#e3f4fe"/>
+          <stop offset="100%" stop-color="#f2f9ff"/>
+        </linearGradient>
+
+        <!-- Summit Celestial Sun Glow -->
+        <radialGradient id="summitAura" cx="50.5%" cy="23.5%" r="28%">
+          <stop offset="0%" stop-color="#fffbeb" stop-opacity="0.9"/>
+          <stop offset="35%" stop-color="#fef08a" stop-opacity="0.4"/>
+          <stop offset="70%" stop-color="#bae6fd" stop-opacity="0.15"/>
+          <stop offset="100%" stop-color="#bae6fd" stop-opacity="0"/>
+        </radialGradient>
+
+        <!-- Distant Mountains -->
+        <linearGradient id="distMountainGrad1" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#9bbdf0"/>
+          <stop offset="50%" stop-color="#c1d9f8"/>
+          <stop offset="100%" stop-color="#e0edfc"/>
+        </linearGradient>
+        <linearGradient id="distMountainGrad2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#a8bdf5"/>
+          <stop offset="60%" stop-color="#cbd8f9"/>
+          <stop offset="100%" stop-color="#ecf2fe"/>
+        </linearGradient>
+
+        <!-- Left Clay Ridge: Sunlit Mint Clay -->
+        <linearGradient id="clayHillLeft" x1="0" y1="0" x2="0.6" y2="1">
+          <stop offset="0%" stop-color="#8ee6d8"/>
+          <stop offset="30%" stop-color="#60cfbe"/>
+          <stop offset="70%" stop-color="#3bb3a1"/>
+          <stop offset="100%" stop-color="#289686"/>
+        </linearGradient>
+
+        <!-- Right Clay Ridge: Gentle Teal Clay -->
+        <linearGradient id="clayHillRight" x1="1" y1="0" x2="0.3" y2="1">
+          <stop offset="0%" stop-color="#9be6dc"/>
+          <stop offset="35%" stop-color="#6fd3c4"/>
+          <stop offset="75%" stop-color="#46b7a6"/>
+          <stop offset="100%" stop-color="#2f9b8b"/>
+        </linearGradient>
+
+        <!-- Road Base Bevel & Ribbon -->
+        <linearGradient id="roadBevelGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#0c4a75" stop-opacity="0.28"/>
+          <stop offset="100%" stop-color="#0c4a75" stop-opacity="0.08"/>
         </linearGradient>
         <linearGradient id="animeRoadRibbon" x1="0" y1="1" x2="0" y2="0">
-          <stop offset="0%" stop-color="#ffffff" stop-opacity="0.96"/>
-          <stop offset="50%" stop-color="#fef9ef" stop-opacity="0.96"/>
-          <stop offset="100%" stop-color="#fff4e6" stop-opacity="0.92"/>
+          <stop offset="0%" stop-color="#ffffff" stop-opacity="0.98"/>
+          <stop offset="50%" stop-color="#fdf9f0" stop-opacity="0.98"/>
+          <stop offset="100%" stop-color="#fff5e8" stop-opacity="0.95"/>
         </linearGradient>
+
+        <!-- Cloud Sea Pillow Gradient -->
+        <linearGradient id="cloudPuffGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#ffffff"/>
+          <stop offset="60%" stop-color="#f4f9fd"/>
+          <stop offset="100%" stop-color="#cbe5f9"/>
+        </linearGradient>
+
+        <!-- Filters -->
+        <filter id="hillShadow" x="-15%" y="-15%" width="130%" height="135%">
+          <feDropShadow dx="0" dy="16" stdDeviation="22" flood-color="#0e4b77" flood-opacity="0.22"/>
+        </filter>
+        <filter id="cloudShadow" x="-15%" y="-15%" width="130%" height="135%">
+          <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#145282" flood-opacity="0.18"/>
+        </filter>
       </defs>
+
+      <!-- 1. Sky Base -->
       <rect width="1376" height="768" fill="url(#animeSkyGrad)"/>
 
-      <!-- Crisp Vector S-Curve Journey Trail connecting 01 -> 02 -> 03 -> 04 -> 05 -->
+      <!-- 2. Summit Glow behind Stage 05 & Crown -->
+      <circle cx="695" cy="180" r="230" fill="url(#summitAura)"/>
+
+      <!-- 3. Distant Mountains (2 Layers) -->
+      <path d="M -60,430 C 120,330 250,340 380,380 C 520,420 620,320 780,290 C 940,260 1100,320 1250,340 C 1350,350 1420,330 1440,340 L 1440,768 L -60,768 Z" fill="url(#distMountainGrad2)" opacity="0.6"/>
+      <path d="M -60,490 C 160,390 320,410 490,450 C 650,490 770,390 940,370 C 1110,350 1280,410 1440,430 L 1440,768 L -60,768 Z" fill="url(#distMountainGrad1)" opacity="0.65"/>
+
+      <!-- 4. Midground Rolling 3D Clay Hills -->
+      <path d="M -70,550 C 90,430 240,440 390,490 C 530,540 640,600 700,768 L -70,768 Z" fill="url(#clayHillLeft)" filter="url(#hillShadow)"/>
+      <path d="M -70,550 C 90,430 240,440 390,490 C 530,540 640,600 700,768" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="5" stroke-linecap="round"/>
+
+      <path d="M 680,768 C 750,580 850,500 1020,460 C 1190,420 1310,480 1440,510 L 1440,768 Z" fill="url(#clayHillRight)" filter="url(#hillShadow)"/>
+      <path d="M 680,768 C 750,580 850,500 1020,460 C 1190,420 1310,480 1440,510" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="5" stroke-linecap="round"/>
+
+      <!-- 5. 3D Tactile S-Curve Journey Trail -->
       <path d="M 700,660 C 780,610 785,565 764,534 C 735,490 595,485 571,442 C 545,395 740,395 764,349 C 785,305 635,300 612,265 C 590,232 660,205 695,180"
-            fill="none" stroke="#a6d8fa" stroke-width="58" stroke-linecap="round" opacity="0.65"/>
+            fill="none" stroke="url(#roadBevelGrad)" stroke-width="68" stroke-linecap="round"/>
       <path d="M 700,660 C 780,610 785,565 764,534 C 735,490 595,485 571,442 C 545,395 740,395 764,349 C 785,305 635,300 612,265 C 590,232 660,205 695,180"
-            fill="none" stroke="url(#animeRoadRibbon)" stroke-width="46" stroke-linecap="round"/>
+            fill="none" stroke="#ffffff" stroke-width="52" stroke-linecap="round"/>
       <path d="M 700,660 C 780,610 785,565 764,534 C 735,490 595,485 571,442 C 545,395 740,395 764,349 C 785,305 635,300 612,265 C 590,232 660,205 695,180"
-            fill="none" stroke="#f9a8d4" stroke-width="6" stroke-dasharray="14 14" stroke-linecap="round" opacity="0.85"/>
+            fill="none" stroke="url(#animeRoadRibbon)" stroke-width="44" stroke-linecap="round"/>
+      <path d="M 700,660 C 780,610 785,565 764,534 C 735,490 595,485 571,442 C 545,395 740,395 764,349 C 785,305 635,300 612,265 C 590,232 660,205 695,180"
+            fill="none" stroke="#f472b6" stroke-width="6" stroke-dasharray="14 14" stroke-linecap="round" opacity="0.9"/>
+
+      <!-- 6. Foreground Celestial Cloud Terrace Base -->
+      <path d="M -50,768 C -50,680 30,640 140,660 C 240,680 320,720 380,768 Z" fill="url(#cloudPuffGrad)" filter="url(#cloudShadow)"/>
+      <circle cx="140" cy="670" r="75" fill="url(#cloudPuffGrad)"/>
+      <circle cx="230" cy="710" r="65" fill="url(#cloudPuffGrad)"/>
+      <circle cx="60" cy="700" r="65" fill="url(#cloudPuffGrad)"/>
+
+      <path d="M 990,768 C 1050,710 1150,650 1260,660 C 1350,670 1430,710 1430,768 Z" fill="url(#cloudPuffGrad)" filter="url(#cloudShadow)"/>
+      <circle cx="1230" cy="670" r="75" fill="url(#cloudPuffGrad)"/>
+      <circle cx="1140" cy="710" r="65" fill="url(#cloudPuffGrad)"/>
+      <circle cx="1320" cy="700" r="65" fill="url(#cloudPuffGrad)"/>
+
+      <path d="M 460,768 C 530,705 630,680 700,700 C 770,715 850,700 930,768 Z" fill="#ffffff" opacity="0.96" filter="url(#cloudShadow)"/>
+      <circle cx="600" cy="725" r="55" fill="#ffffff" opacity="0.95"/>
+      <circle cx="700" cy="720" r="60" fill="#ffffff" opacity="0.95"/>
+      <circle cx="800" cy="725" r="55" fill="#ffffff" opacity="0.95"/>
     </svg>
   `;
 
-  // Stylized 3D Decorative Charms (Chest, Props, Stars, Sakura, 3D Gems & Floating 3D Kanji)
+  // Stylized 3D Decorative Charms, Sparkles & Floating 3D Kanji
   const skyDecors = `
     <div class="anime-sky-decors" aria-hidden="true">
+      <!-- Magic Shimmering Sparkles -->
+      <span class="anime-sparkle s1" style="left: 14%; top: 20%;">✦</span>
+      <span class="anime-sparkle s2" style="left: 31%; top: 26%;">✧</span>
+      <span class="anime-sparkle s3" style="left: 20%; top: 48%;">✦</span>
+      <span class="anime-sparkle s4" style="left: 33%; top: 58%;">✧</span>
+      <span class="anime-sparkle s5" style="right: 12%; top: 28%;">✦</span>
+      <span class="anime-sparkle s6" style="right: 22%; top: 22%;">✧</span>
+      <span class="anime-sparkle s7" style="right: 32%; top: 44%;">✦</span>
+      <span class="anime-sparkle s8" style="right: 21%; top: 52%;">✧</span>
+      <span class="anime-sparkle s9" style="left: 50%; top: 13%;">✨</span>
+      <span class="anime-sparkle s10" style="right: 10%; top: 62%;">✦</span>
+
       <!-- 6 High-Res 3D Lucky Charms (Daruma, Koi, Star Crystal, Origami Crane, Furin, Suzu Bell) -->
       <img src="anime-daruma.webp" class="anime-prop daruma-prop" alt="">
       <img src="anime-koi.webp" class="anime-prop koi-prop" alt="">
@@ -508,7 +613,8 @@
           const playText = action === 'resume' ? I18N.t('resume') : result ? I18N.t('replay') : I18N.t('play');
           const crownBadge = i === 4 ? '<img src="anime-crown.webp" class="crown-crest-img" alt="" aria-hidden="true">' : '';
           const playBubble = current ? `<div role="button" tabindex="0" class="play-bubble journey-node-play-btn" data-main="${action}" ${locked?'aria-disabled="true"':'aria-label="'+playText+' màn '+(l.id+1)+'"'}><span>${playText} ▶</span></div>` : '';
-          const starRow = r ? `<span class="node-stars" aria-hidden="true">${'★'.repeat(r.stars)}${'☆'.repeat(3-r.stars)}</span>` : '';
+          const starCount = r ? r.stars : 0;
+          const starRow = `<span class="node-stars ${r ? 'scored' : 'unplayed'}" aria-hidden="true">${'<span class="star-mini filled">★</span>'.repeat(starCount) + '<span class="star-mini empty">★</span>'.repeat(3 - starCount)}</span>`;
           return `<button type="button" class="candy-node ${pos.cls} journey-stop ${r?'completed':''} ${current?'selected':''} ${i===4?'treasure':''}" style="left: ${pos.left}; top: ${pos.top}; background-image: url('${pos.sprite}');" data-journey-level="${l.id}" ${isLocked?'disabled':''} aria-pressed="${current}" aria-label="Màn ${l.id+1}: ${l.title}${isLocked?', chưa mở khóa':r?', '+r.stars+' sao':''}">
             ${crownBadge}
             ${playBubble}

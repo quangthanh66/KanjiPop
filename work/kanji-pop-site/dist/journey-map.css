@@ -508,6 +508,75 @@
   box-shadow: 0 3px 0 #e5a93c, 0 5px 10px rgba(18, 89, 133, 0.18);
   white-space: nowrap;
   pointer-events: none;
+  display: inline-flex;
+  gap: 2px;
+  align-items: center;
+}
+
+#kanji-pop .candy-node .node-stars .star-mini {
+  display: inline-block;
+  line-height: 1;
+}
+
+#kanji-pop .candy-node .node-stars .star-mini.filled {
+  color: #f59e0b;
+  text-shadow: 0 1px 2px rgba(245, 158, 11, 0.5);
+}
+
+#kanji-pop .candy-node .node-stars .star-mini.empty {
+  color: #cbd5e1;
+  opacity: 0.65;
+}
+
+#kanji-pop .candy-node .node-stars.unplayed {
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 6px rgba(18, 89, 133, 0.12);
+}
+
+#kanji-pop .candy-node.selected::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 220, 60, 0.85);
+  box-shadow: 0 0 16px rgba(255, 215, 0, 0.7);
+  animation: nodeRipplePulse 2.2s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes nodeRipplePulse {
+  0% { transform: scale(0.96); opacity: 0.95; }
+  60% { transform: scale(1.22); opacity: 0.2; }
+  100% { transform: scale(1.28); opacity: 0; }
+}
+
+/* Magic Shimmering Sparkles */
+#kanji-pop .anime-sparkle {
+  position: absolute;
+  color: #fff6c8;
+  font-size: clamp(14px, 1.4vw, 20px);
+  text-shadow: 0 0 8px rgba(255, 230, 120, 0.95), 0 0 16px rgba(255, 200, 50, 0.65);
+  pointer-events: none;
+  user-select: none;
+  animation: animeSparkleTwinkle 3.2s ease-in-out infinite;
+  z-index: 2;
+}
+
+#kanji-pop .anime-sparkle.s1 { animation-delay: 0s; }
+#kanji-pop .anime-sparkle.s2 { animation-delay: -0.7s; }
+#kanji-pop .anime-sparkle.s3 { animation-delay: -1.4s; }
+#kanji-pop .anime-sparkle.s4 { animation-delay: -2.1s; }
+#kanji-pop .anime-sparkle.s5 { animation-delay: -0.3s; }
+#kanji-pop .anime-sparkle.s6 { animation-delay: -1.1s; }
+#kanji-pop .anime-sparkle.s7 { animation-delay: -1.8s; }
+#kanji-pop .anime-sparkle.s8 { animation-delay: -2.5s; }
+#kanji-pop .anime-sparkle.s9 { animation-delay: -0.9s; }
+#kanji-pop .anime-sparkle.s10 { animation-delay: -1.6s; }
+
+@keyframes animeSparkleTwinkle {
+  0%, 100% { transform: scale(0.7) rotate(0deg); opacity: 0.35; }
+  50% { transform: scale(1.25) rotate(15deg); opacity: 1; }
 }
 
 #kanji-pop .candy-node:disabled {
