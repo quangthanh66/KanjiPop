@@ -406,135 +406,140 @@
 
   // Exact percentage coordinates matching SVG S-curve journey path (1376x768)
   const nodeCoords = [
-    { left: '55.5%', top: '69.5%', cls: 'node-01', sprite: 'anime-node-1.webp' },
-    { left: '41.5%', top: '57.5%', cls: 'node-02', sprite: 'anime-node-2.webp' },
-    { left: '55.5%', top: '45.5%', cls: 'node-03', sprite: 'anime-node-3.webp' },
-    { left: '44.5%', top: '34.5%', cls: 'node-04', sprite: 'anime-node-4.webp' },
-    { left: '50.5%', top: '23.5%', cls: 'node-05', sprite: 'anime-node-5.webp' }
+    { left: '56.0%', top: '74.5%', cls: 'node-01', sprite: 'anime-node-1.webp' },
+    { left: '40.0%', top: '61.0%', cls: 'node-02', sprite: 'anime-node-2.webp' },
+    { left: '58.0%', top: '46.0%', cls: 'node-03', sprite: 'anime-node-3.webp' },
+    { left: '42.0%', top: '31.0%', cls: 'node-04', sprite: 'anime-node-4.webp' },
+    { left: '50.0%', top: '17.5%', cls: 'node-05', sprite: 'anime-node-5.webp' }
   ];
 
-  // Multi-Layered Stylized 3D Vector Landscape (Mountains, Clay Hills, S-Curve Trail & Cloud Balcony)
+  // Bejeweled Cosmic Sapphire Sky & 3D Candy Crush Saga Winding Road (1376x768)
+  const sagaRoadPath = "M 770,670 C 785,630 790,595 770,560 C 738,510 568,520 550,468 C 532,415 780,405 800,353 C 820,305 595,285 575,238 C 555,195 660,170 688,135";
+
   const skyVectorLayer = `
-    <svg class="anime-gradient-sky-svg" viewBox="0 0 1376 768" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <svg class="anime-gradient-sky-svg saga-vector-svg" viewBox="0 0 1376 768" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <defs>
-        <!-- Sky Gradient -->
-        <linearGradient id="animeSkyGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#3b9eff"/>
-          <stop offset="28%" stop-color="#72c4ff"/>
-          <stop offset="55%" stop-color="#b8e4fe"/>
-          <stop offset="85%" stop-color="#e3f4fe"/>
-          <stop offset="100%" stop-color="#f2f9ff"/>
+        <!-- Deep Royal Cosmic Sapphire Sky Gradient -->
+        <linearGradient id="cosmicSkyGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#080c24"/>
+          <stop offset="30%" stop-color="#101844"/>
+          <stop offset="65%" stop-color="#182358"/>
+          <stop offset="100%" stop-color="#0a0f2b"/>
         </linearGradient>
 
-        <!-- Summit Celestial Sun Glow -->
-        <radialGradient id="summitAura" cx="50.5%" cy="23.5%" r="28%">
-          <stop offset="0%" stop-color="#fffbeb" stop-opacity="0.9"/>
-          <stop offset="35%" stop-color="#fef08a" stop-opacity="0.4"/>
-          <stop offset="70%" stop-color="#bae6fd" stop-opacity="0.15"/>
-          <stop offset="100%" stop-color="#bae6fd" stop-opacity="0"/>
+        <!-- Summit Celestial Sun Glow & Aureole -->
+        <radialGradient id="summitCelestialAura" cx="688" cy="135" r="300" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#fffbeb" stop-opacity="0.95"/>
+          <stop offset="20%" stop-color="#fde047" stop-opacity="0.6"/>
+          <stop offset="45%" stop-color="#818cf8" stop-opacity="0.28"/>
+          <stop offset="75%" stop-color="#38bdf8" stop-opacity="0.1"/>
+          <stop offset="100%" stop-color="#080c24" stop-opacity="0"/>
         </radialGradient>
 
-        <!-- Distant Mountains -->
-        <linearGradient id="distMountainGrad1" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#9bbdf0"/>
-          <stop offset="50%" stop-color="#c1d9f8"/>
-          <stop offset="100%" stop-color="#e0edfc"/>
-        </linearGradient>
-        <linearGradient id="distMountainGrad2" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#a8bdf5"/>
-          <stop offset="60%" stop-color="#cbd8f9"/>
-          <stop offset="100%" stop-color="#ecf2fe"/>
+        <!-- Summit Divine Light Cone Beaming Downwards -->
+        <linearGradient id="summitLightCone" x1="0.5" y1="0" x2="0.5" y2="1">
+          <stop offset="0%" stop-color="#fef08a" stop-opacity="0.4"/>
+          <stop offset="40%" stop-color="#93c5fd" stop-opacity="0.14"/>
+          <stop offset="100%" stop-color="#080c24" stop-opacity="0"/>
         </linearGradient>
 
-        <!-- Left Clay Ridge: Sunlit Mint Clay -->
-        <linearGradient id="clayHillLeft" x1="0" y1="0" x2="0.6" y2="1">
-          <stop offset="0%" stop-color="#8ee6d8"/>
-          <stop offset="30%" stop-color="#60cfbe"/>
-          <stop offset="70%" stop-color="#3bb3a1"/>
-          <stop offset="100%" stop-color="#289686"/>
+        <!-- 3D Gold Curb Gradient for Saga Road -->
+        <linearGradient id="roadGoldCurbGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#fef9c3"/>
+          <stop offset="25%" stop-color="#fde047"/>
+          <stop offset="55%" stop-color="#d97706"/>
+          <stop offset="85%" stop-color="#fde047"/>
+          <stop offset="100%" stop-color="#78350f"/>
         </linearGradient>
 
-        <!-- Right Clay Ridge: Gentle Teal Clay -->
-        <linearGradient id="clayHillRight" x1="1" y1="0" x2="0.3" y2="1">
-          <stop offset="0%" stop-color="#9be6dc"/>
-          <stop offset="35%" stop-color="#6fd3c4"/>
-          <stop offset="75%" stop-color="#46b7a6"/>
-          <stop offset="100%" stop-color="#2f9b8b"/>
-        </linearGradient>
-
-        <!-- Road Base Bevel & Ribbon -->
-        <linearGradient id="roadBevelGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#0c4a75" stop-opacity="0.28"/>
-          <stop offset="100%" stop-color="#0c4a75" stop-opacity="0.08"/>
-        </linearGradient>
-        <linearGradient id="animeRoadRibbon" x1="0" y1="1" x2="0" y2="0">
-          <stop offset="0%" stop-color="#ffffff" stop-opacity="0.98"/>
-          <stop offset="50%" stop-color="#fdf9f0" stop-opacity="0.98"/>
-          <stop offset="100%" stop-color="#fff5e8" stop-opacity="0.95"/>
-        </linearGradient>
-
-        <!-- Cloud Sea Pillow Gradient -->
-        <linearGradient id="cloudPuffGrad" x1="0" y1="0" x2="0" y2="1">
+        <!-- Glossy Crystal Track Gradient -->
+        <linearGradient id="roadCrystalTrackGrad" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#ffffff"/>
-          <stop offset="60%" stop-color="#f4f9fd"/>
-          <stop offset="100%" stop-color="#cbe5f9"/>
+          <stop offset="35%" stop-color="#e0e7ff"/>
+          <stop offset="70%" stop-color="#c7d2fe"/>
+          <stop offset="100%" stop-color="#a5b4fc"/>
         </linearGradient>
 
-        <!-- Filters -->
-        <filter id="hillShadow" x="-15%" y="-15%" width="130%" height="135%">
-          <feDropShadow dx="0" dy="16" stdDeviation="22" flood-color="#0e4b77" flood-opacity="0.22"/>
+        <!-- Ambient Filters -->
+        <filter id="roadShadowFilter" x="-15%" y="-15%" width="130%" height="135%">
+          <feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#020617" flood-opacity="0.88"/>
         </filter>
-        <filter id="cloudShadow" x="-15%" y="-15%" width="130%" height="135%">
-          <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#145282" flood-opacity="0.18"/>
+        <filter id="dashGlow" x="-25%" y="-25%" width="150%" height="150%">
+          <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#fbbf24" flood-opacity="0.95"/>
+        </filter>
+        <filter id="crystalPeakGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="4" stdDeviation="12" flood-color="#60a5fa" flood-opacity="0.25"/>
         </filter>
       </defs>
 
-      <!-- 1. Sky Base -->
-      <rect width="1376" height="768" fill="url(#animeSkyGrad)"/>
+      <!-- 1. Deep Cosmic Sapphire Celestial Sky -->
+      <rect width="1376" height="768" fill="url(#cosmicSkyGrad)"/>
 
-      <!-- 2. Summit Glow behind Stage 05 & Crown -->
-      <circle cx="695" cy="180" r="230" fill="url(#summitAura)"/>
+      <!-- 2. Summit Celestial Radiance Burst -->
+      <circle cx="688" cy="135" r="300" fill="url(#summitCelestialAura)"/>
+      <polygon points="688,135 460,768 916,768" fill="url(#summitLightCone)" opacity="0.6"/>
 
-      <!-- 3. Distant Mountains (2 Layers) -->
-      <path d="M -60,430 C 120,330 250,340 380,380 C 520,420 620,320 780,290 C 940,260 1100,320 1250,340 C 1350,350 1420,330 1440,340 L 1440,768 L -60,768 Z" fill="url(#distMountainGrad2)" opacity="0.6"/>
-      <path d="M -60,490 C 160,390 320,410 490,450 C 650,490 770,390 940,370 C 1110,350 1280,410 1440,430 L 1440,768 L -60,768 Z" fill="url(#distMountainGrad1)" opacity="0.65"/>
+      <!-- 3. Cosmic Stardust Field -->
+      <g fill="#ffffff" opacity="0.75">
+        <circle cx="120" cy="90" r="1.8"/>
+        <circle cx="210" cy="180" r="1.4" opacity="0.5"/>
+        <circle cx="340" cy="110" r="2.2"/>
+        <circle cx="480" cy="80" r="1.6"/>
+        <circle cx="620" cy="60" r="2.5" fill="#fef08a"/>
+        <circle cx="780" cy="70" r="2.0" fill="#fef08a"/>
+        <circle cx="920" cy="100" r="1.8"/>
+        <circle cx="1060" cy="80" r="2.4"/>
+        <circle cx="1220" cy="140" r="1.5"/>
+        <circle cx="1310" cy="90" r="2.0"/>
+        <circle cx="80" cy="310" r="1.4"/>
+        <circle cx="290" cy="270" r="1.8"/>
+        <circle cx="1110" cy="240" r="1.6"/>
+        <circle cx="1270" cy="300" r="2.2" fill="#bae6fd"/>
+        <circle cx="150" cy="510" r="1.5"/>
+        <circle cx="360" cy="460" r="2.0"/>
+        <circle cx="1020" cy="480" r="1.8"/>
+        <circle cx="1230" cy="520" r="2.4" fill="#fef08a"/>
+        <circle cx="90" cy="660" r="1.6"/>
+        <circle cx="260" cy="690" r="2.2"/>
+        <circle cx="1140" cy="670" r="2.0"/>
+        <circle cx="1320" cy="650" r="1.7"/>
+      </g>
 
-      <!-- 4. Midground Rolling 3D Clay Hills -->
-      <path d="M -70,550 C 90,430 240,440 390,490 C 530,540 640,600 700,768 L -70,768 Z" fill="url(#clayHillLeft)" filter="url(#hillShadow)"/>
-      <path d="M -70,550 C 90,430 240,440 390,490 C 530,540 640,600 700,768" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="5" stroke-linecap="round"/>
+      <!-- 4. Background Majestic Crystal Formations (Bejeweled Realm Silhouettes) -->
+      <!-- Left Crystal Spires -->
+      <polygon points="-40,768 -40,340 70,440 150,370 270,510 350,470 450,768" fill="#0d1435" opacity="0.88" filter="url(#crystalPeakGlow)"/>
+      <polyline points="-40,340 70,440 150,370 270,510 350,470 450,768" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" opacity="0.45"/>
+      <line x1="70" y1="440" x2="70" y2="768" stroke="#38bdf8" stroke-width="1.2" opacity="0.25"/>
+      <line x1="270" y1="510" x2="270" y2="768" stroke="#38bdf8" stroke-width="1.2" opacity="0.2"/>
 
-      <path d="M 680,768 C 750,580 850,500 1020,460 C 1190,420 1310,480 1440,510 L 1440,768 Z" fill="url(#clayHillRight)" filter="url(#hillShadow)"/>
-      <path d="M 680,768 C 750,580 850,500 1020,460 C 1190,420 1310,480 1440,510" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="5" stroke-linecap="round"/>
+      <!-- Right Crystal Spires -->
+      <polygon points="926,768 1026,470 1106,515 1226,370 1306,440 1416,340 1416,768" fill="#0d1435" opacity="0.88" filter="url(#crystalPeakGlow)"/>
+      <polyline points="926,768 1026,470 1106,515 1226,370 1306,440 1416,340" fill="none" stroke="#c084fc" stroke-width="2.5" stroke-linecap="round" opacity="0.45"/>
+      <line x1="1106" y1="515" x2="1106" y2="768" stroke="#c084fc" stroke-width="1.2" opacity="0.2"/>
+      <line x1="1306" y1="440" x2="1306" y2="768" stroke="#c084fc" stroke-width="1.2" opacity="0.25"/>
 
-      <!-- 5. 3D Tactile S-Curve Journey Trail -->
-      <path d="M 700,660 C 780,610 785,565 764,534 C 735,490 595,485 571,442 C 545,395 740,395 764,349 C 785,305 635,300 612,265 C 590,232 660,205 695,180"
-            fill="none" stroke="url(#roadBevelGrad)" stroke-width="68" stroke-linecap="round"/>
-      <path d="M 700,660 C 780,610 785,565 764,534 C 735,490 595,485 571,442 C 545,395 740,395 764,349 C 785,305 635,300 612,265 C 590,232 660,205 695,180"
-            fill="none" stroke="#ffffff" stroke-width="52" stroke-linecap="round"/>
-      <path d="M 700,660 C 780,610 785,565 764,534 C 735,490 595,485 571,442 C 545,395 740,395 764,349 C 785,305 635,300 612,265 C 590,232 660,205 695,180"
-            fill="none" stroke="url(#animeRoadRibbon)" stroke-width="44" stroke-linecap="round"/>
-      <path d="M 700,660 C 780,610 785,565 764,534 C 735,490 595,485 571,442 C 545,395 740,395 764,349 C 785,305 635,300 612,265 C 590,232 660,205 695,180"
-            fill="none" stroke="#f472b6" stroke-width="6" stroke-dasharray="14 14" stroke-linecap="round" opacity="0.9"/>
+      <!-- Midground Crystalline Floating Terraces -->
+      <path d="M -50,768 L -50,580 C 70,555 170,600 270,640 C 360,675 430,735 470,768 Z" fill="#121b44"/>
+      <path d="M -50,580 C 70,555 170,600 270,640 C 360,675 430,735 470,768" fill="none" stroke="#60a5fa" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
 
-      <!-- 6. Foreground Celestial Cloud Terrace Base -->
-      <path d="M -50,768 C -50,680 30,640 140,660 C 240,680 320,720 380,768 Z" fill="url(#cloudPuffGrad)" filter="url(#cloudShadow)"/>
-      <circle cx="140" cy="670" r="75" fill="url(#cloudPuffGrad)"/>
-      <circle cx="230" cy="710" r="65" fill="url(#cloudPuffGrad)"/>
-      <circle cx="60" cy="700" r="65" fill="url(#cloudPuffGrad)"/>
+      <path d="M 1426,768 L 1426,580 C 1306,555 1206,600 1106,640 C 1016,675 946,735 906,768 Z" fill="#121b44"/>
+      <path d="M 1426,580 C 1306,555 1206,600 1106,640 C 1016,675 946,735 906,768" fill="none" stroke="#f472b6" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
 
-      <path d="M 990,768 C 1050,710 1150,650 1260,660 C 1350,670 1430,710 1430,768 Z" fill="url(#cloudPuffGrad)" filter="url(#cloudShadow)"/>
-      <circle cx="1230" cy="670" r="75" fill="url(#cloudPuffGrad)"/>
-      <circle cx="1140" cy="710" r="65" fill="url(#cloudPuffGrad)"/>
-      <circle cx="1320" cy="700" r="65" fill="url(#cloudPuffGrad)"/>
-
-      <path d="M 460,768 C 530,705 630,680 700,700 C 770,715 850,700 930,768 Z" fill="#ffffff" opacity="0.96" filter="url(#cloudShadow)"/>
-      <circle cx="600" cy="725" r="55" fill="#ffffff" opacity="0.95"/>
-      <circle cx="700" cy="720" r="60" fill="#ffffff" opacity="0.95"/>
-      <circle cx="800" cy="725" r="55" fill="#ffffff" opacity="0.95"/>
+      <!-- 5. 3D Tactile Candy Crush Saga Trail (4 Layered Depth Strokes) -->
+      <!-- Layer 1: Ambient Drop Shadow -->
+      <path d="${sagaRoadPath}" fill="none" stroke="rgba(2, 6, 23, 0.8)" stroke-width="74" stroke-linecap="round" filter="url(#roadShadowFilter)"/>
+      <!-- Layer 2: 3D Beveled Gold Curb -->
+      <path d="${sagaRoadPath}" fill="none" stroke="url(#roadGoldCurbGrad)" stroke-width="60" stroke-linecap="round"/>
+      <!-- Layer 3: Inner White Bevel Rim -->
+      <path d="${sagaRoadPath}" fill="none" stroke="#ffffff" stroke-width="48" stroke-linecap="round"/>
+      <!-- Layer 4: Shimmering Crystal Road Bed -->
+      <path d="${sagaRoadPath}" fill="none" stroke="url(#roadCrystalTrackGrad)" stroke-width="40" stroke-linecap="round"/>
+      <!-- Layer 5: Luminous Amber Centerline Dash -->
+      <path d="${sagaRoadPath}" fill="none" stroke="#f59e0b" stroke-width="6" stroke-dasharray="14 14" stroke-linecap="round" filter="url(#dashGlow)"/>
     </svg>
   `;
 
-  // Stylized 3D Decorative Charms, Kenney VFX Sparkles & OpenGameArt Rotating 3D Jewels
+  // Stylized 3D Decorative Pedestals, Kenney VFX Sparkles & OpenGameArt Rotating 3D Jewels
   const skyDecors = `
     <div class="anime-sky-decors bejeweled-stage" aria-hidden="true">
       <!-- Kenney VFX Lens Flare behind Summit Node 05 Crown -->
@@ -542,61 +547,57 @@
       <img src="vfx_magic.png" class="kenney-vfx summit-magic-vfx" alt="" aria-hidden="true">
 
       <!-- Kenney Twinkling Particle Stars along path & sky -->
-      <img src="vfx_sparkle.png" class="kenney-vfx sparkle-p p1" style="left: 15%; top: 18%;" alt="" aria-hidden="true">
-      <img src="vfx_star.png" class="kenney-vfx sparkle-p p2" style="left: 32%; top: 25%;" alt="" aria-hidden="true">
-      <img src="vfx_sparkle.png" class="kenney-vfx sparkle-p p3" style="left: 18%; top: 48%;" alt="" aria-hidden="true">
-      <img src="vfx_star.png" class="kenney-vfx sparkle-p p4" style="left: 30%; top: 62%;" alt="" aria-hidden="true">
-      <img src="vfx_sparkle.png" class="kenney-vfx sparkle-p p5" style="right: 14%; top: 20%;" alt="" aria-hidden="true">
-      <img src="vfx_star.png" class="kenney-vfx sparkle-p p6" style="right: 32%; top: 38%;" alt="" aria-hidden="true">
-      <img src="vfx_sparkle.png" class="kenney-vfx sparkle-p p7" style="right: 18%; top: 54%;" alt="" aria-hidden="true">
-      <img src="vfx_star.png" class="kenney-vfx sparkle-p p8" style="right: 28%; top: 72%;" alt="" aria-hidden="true">
+      <img src="vfx_sparkle.png" class="kenney-vfx sparkle-p p1" style="left: 17%; top: 14%;" alt="" aria-hidden="true">
+      <img src="vfx_star.png" class="kenney-vfx sparkle-p p2" style="left: 31%; top: 22%;" alt="" aria-hidden="true">
+      <img src="vfx_sparkle.png" class="kenney-vfx sparkle-p p3" style="left: 19%; top: 40%;" alt="" aria-hidden="true">
+      <img src="vfx_star.png" class="kenney-vfx sparkle-p p4" style="left: 30%; top: 60%;" alt="" aria-hidden="true">
+      <img src="vfx_sparkle.png" class="kenney-vfx sparkle-p p5" style="right: 17%; top: 14%;" alt="" aria-hidden="true">
+      <img src="vfx_star.png" class="kenney-vfx sparkle-p p6" style="right: 31%; top: 28%;" alt="" aria-hidden="true">
+      <img src="vfx_sparkle.png" class="kenney-vfx sparkle-p p7" style="right: 19%; top: 50%;" alt="" aria-hidden="true">
+      <img src="vfx_star.png" class="kenney-vfx sparkle-p p8" style="right: 29%; top: 70%;" alt="" aria-hidden="true">
 
-      <!-- 6 HERO 3D FACETED GEMSTONES (OpenGameArt) with Kenney Specular Glints -->
+      <!-- 6 HERO 3D FACETED GEMSTONES (OpenGameArt) with Pedestals & Kenney Specular Glints -->
       <!-- 1. Oval White Diamond (Upper Left) -->
-      <div class="bejeweled-gem-cluster gem-diamond-wrap">
-        <img src="gem_diamond.png" class="bejeweled-gem gem-diamond" alt="" aria-hidden="true">
+      <div class="bejeweled-gem-cluster gem-diamond-wrap" data-gem="diamond">
+        <div class="gem-pedestal-base"></div>
+        <img src="gem_diamond.png" class="bejeweled-gem gem-diamond" alt="Diamond" aria-hidden="true">
         <img src="vfx_star.png" class="kenney-glint glint-diamond" alt="" aria-hidden="true">
       </div>
 
       <!-- 2. Octagonal Deep Blue Sapphire (Mid-Left) -->
-      <div class="bejeweled-gem-cluster gem-sapphire-wrap">
-        <img src="gem_sapphire.png" class="bejeweled-gem gem-sapphire" alt="" aria-hidden="true">
+      <div class="bejeweled-gem-cluster gem-sapphire-wrap" data-gem="sapphire">
+        <div class="gem-pedestal-base"></div>
+        <img src="gem_sapphire.png" class="bejeweled-gem gem-sapphire" alt="Sapphire" aria-hidden="true">
         <img src="vfx_star.png" class="kenney-glint glint-sapphire" alt="" aria-hidden="true">
       </div>
 
       <!-- 3. Emerald Cut Green Emerald (Lower-Left) -->
-      <div class="bejeweled-gem-cluster gem-emerald-wrap">
-        <img src="gem_emerald.png" class="bejeweled-gem gem-emerald" alt="" aria-hidden="true">
+      <div class="bejeweled-gem-cluster gem-emerald-wrap" data-gem="emerald">
+        <div class="gem-pedestal-base"></div>
+        <img src="gem_emerald.png" class="bejeweled-gem gem-emerald" alt="Emerald" aria-hidden="true">
         <img src="vfx_star.png" class="kenney-glint glint-emerald" alt="" aria-hidden="true">
       </div>
 
       <!-- 4. Round Brilliant Citrine / Amber (Upper Right) -->
-      <div class="bejeweled-gem-cluster gem-citrine-wrap">
-        <img src="gem_citrine.png" class="bejeweled-gem gem-citrine" alt="" aria-hidden="true">
+      <div class="bejeweled-gem-cluster gem-citrine-wrap" data-gem="citrine">
+        <div class="gem-pedestal-base"></div>
+        <img src="gem_citrine.png" class="bejeweled-gem gem-citrine" alt="Citrine" aria-hidden="true">
         <img src="vfx_star.png" class="kenney-glint glint-citrine" alt="" aria-hidden="true">
       </div>
 
       <!-- 5. Oval Red Ruby (Mid-Right) -->
-      <div class="bejeweled-gem-cluster gem-ruby-wrap">
-        <img src="gem_ruby.png" class="bejeweled-gem gem-ruby" alt="" aria-hidden="true">
+      <div class="bejeweled-gem-cluster gem-ruby-wrap" data-gem="ruby">
+        <div class="gem-pedestal-base"></div>
+        <img src="gem_ruby.png" class="bejeweled-gem gem-ruby" alt="Ruby" aria-hidden="true">
         <img src="vfx_star.png" class="kenney-glint glint-ruby" alt="" aria-hidden="true">
       </div>
 
       <!-- 6. Teardrop Honey Topaz (Lower-Right) -->
-      <div class="bejeweled-gem-cluster gem-topaz-wrap">
-        <img src="gem_topaz.png" class="bejeweled-gem gem-topaz" alt="" aria-hidden="true">
+      <div class="bejeweled-gem-cluster gem-topaz-wrap" data-gem="topaz">
+        <div class="gem-pedestal-base"></div>
+        <img src="gem_topaz.png" class="bejeweled-gem gem-topaz" alt="Topaz" aria-hidden="true">
         <img src="vfx_star.png" class="kenney-glint glint-topaz" alt="" aria-hidden="true">
       </div>
-
-      <!-- 8 Floating 3D Kanji Charms -->
-      <div class="anime-float-kanji k1" style="background-image:url('anime-tile-1.webp')" lang="ja">日</div>
-      <div class="anime-float-kanji k2" style="background-image:url('anime-tile-4.webp')" lang="ja">月</div>
-      <div class="anime-float-kanji k3" style="background-image:url('anime-tile-2.webp')" lang="ja">火</div>
-      <div class="anime-float-kanji k4" style="background-image:url('anime-tile-5.webp')" lang="ja">水</div>
-      <div class="anime-float-kanji k5" style="background-image:url('anime-tile-3.webp')" lang="ja">木</div>
-      <div class="anime-float-kanji k6" style="background-image:url('anime-tile-8.webp')" lang="ja">花</div>
-      <div class="anime-float-kanji k7" style="background-image:url('anime-tile-7.webp')" lang="ja">星</div>
-      <div class="anime-float-kanji k8" style="background-image:url('anime-tile-6.webp')" lang="ja">空</div>
     </div>
   `;
 
@@ -615,9 +616,9 @@
     <button type="button" class="journey-menu" data-journey-menu aria-label="${I18N.t('menuTitle')}"><i data-lucide="ellipsis" aria-hidden="true"></i></button>
   </div>
 
-  <div class="journey-layout cozy-layout" data-chapter="${mapChapter}">
+  <div class="journey-layout bejeweled-saga-layout" data-chapter="${mapChapter}">
     <div class="mountain-stage-wrap">
-      <div class="mountain-area mountain-canvas">
+      <div class="mountain-area mountain-canvas saga-canvas">
         ${skyVectorLayer}
         ${skyDecors}
         <!-- 5 2D Anime Level Medallions on Winding Cloud Path -->
@@ -637,17 +638,6 @@
           </button>`;
         }).join('')}
       </div>
-    </div>
-
-    <!-- Bottom Kanji Drawer -->
-    <div class="kanji-drawer journey-kanji-shelf">
-      ${shelfCards}
-    </div>
-
-    <div class="journey-hero-cta" style="display:none;" aria-hidden="true">
-      <button type="button" class="journey-hero-play-btn" data-hero-play="${action}" ${locked?'disabled':''}>
-        <span class="hero-play-arrow">▶</span>
-      </button>
     </div>
   </div>`;
  }
