@@ -444,6 +444,14 @@
   // Stylized 3D Decorative Charms (Chest, Props, Stars, Sakura, 3D Gems & Floating 3D Kanji)
   const skyDecors = `
     <div class="anime-sky-decors" aria-hidden="true">
+      <!-- 6 High-Res 3D Lucky Charms (Daruma, Koi, Star Crystal, Origami Crane, Furin, Suzu Bell) -->
+      <img src="anime-daruma.webp" class="anime-prop daruma-prop" alt="">
+      <img src="anime-koi.webp" class="anime-prop koi-prop" alt="">
+      <img src="anime-star-crystal.webp" class="anime-prop star-crystal-prop" alt="">
+      <img src="anime-crane.webp" class="anime-prop crane-prop" alt="">
+      <img src="anime-furin.webp" class="anime-prop furin-prop" alt="">
+      <img src="anime-suzu.webp" class="anime-prop suzu-prop" alt="">
+
       <!-- 3D Treasure Chest & Japanese Cultural Charms -->
       <img src="anime-chest.webp" class="anime-prop chest-top" alt="">
       <img src="anime-omamori.webp" class="anime-prop omamori-prop" alt="">
