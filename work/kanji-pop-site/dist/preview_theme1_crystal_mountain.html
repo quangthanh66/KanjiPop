@@ -1,0 +1,279 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>🏔️ HƯỚNG 1: ĐẢO NGỌC KHỞI NGUYÊN (FLOATING CRYSTAL SANCTUARY)</title>
+  <link rel="stylesheet" href="journey-map.css">
+  <style>
+    body { margin: 0; padding: 0; overflow: hidden; font-family: "Nunito", sans-serif; background: #0284c7; }
+    #kanji-pop { width: 100vw; height: 100vh; height: 100dvh; position: relative; overflow: hidden; }
+    
+    .theme-title-banner {
+      position: absolute;
+      top: 114px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 6px 22px;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 13px;
+      letter-spacing: 0.8px;
+      z-index: 30;
+      white-space: nowrap;
+      pointer-events: none;
+      
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.95) 0%, rgba(13, 148, 136, 0.95) 100%);
+      color: #fef08a; border: 1.5px solid #a7f3d0; box-shadow: 0 4px 18px rgba(13, 148, 136, 0.4);
+    
+    }
+
+    @media (max-width: 640px) {
+      .theme-title-banner {
+        top: 108px;
+        font-size: 10px;
+        padding: 4px 12px;
+        max-width: 85vw;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="kanji-pop" data-view="map">
+    
+    <header class="kp-header">
+      <a class="kp-logo" href="#" aria-label="Kanji Pop Home">
+        <img class="kp-logo-img" src="anime-logo.webp" alt="Kanji Pop">
+        <img class="kp-logo-wordmark" src="cozy-logo-text.webp" alt="KANJIDLE">
+      </a>
+      <div class="kp-header-actions">
+        <button type="button" class="kp-lang-btn">VI</button>
+        <button type="button" id="kp-sound" aria-label="Âm thanh">🔊</button>
+      </div>
+    </header>
+  
+    
+    <div class="chapter-bar">
+      <div class="grade-toggle-group">
+        <button type="button" class="grade-pill active"><span class="grade-tag">JLPT N5</span></button>
+        <button type="button" class="grade-pill"><span class="grade-tag">JLPT N4</span></button>
+        <button type="button" class="grade-pill daily-pill"><span class="grade-tag">📅 HÔM NAY</span></button>
+      </div>
+      <div class="chapter-nav-center">
+        <button disabled><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+        <span>CHƯƠNG 01</span>
+        <button><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+      </div>
+      <button type="button" class="hud-pill stars">★ 0/15</button>
+      <button type="button" class="journey-menu"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><circle cx="5" cy="12" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle></svg></button>
+    </div>
+  
+
+    <div class="theme-title-banner">
+      🏔️ HƯỚNG 1: ĐẢO NGỌC KHỞI NGUYÊN (FLOATING CRYSTAL SANCTUARY)
+    </div>
+
+    <div class="journey-layout cozy-layout" data-chapter="0">
+      <div class="mountain-stage-wrap">
+        <div class="mountain-area mountain-canvas">
+          
+      <svg class="anime-gradient-sky-svg" viewBox="0 0 1376 768" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="t1Sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#2563eb"/>
+            <stop offset="30%" stop-color="#38bdf8"/>
+            <stop offset="65%" stop-color="#bae6fd"/>
+            <stop offset="100%" stop-color="#f0f9ff"/>
+          </linearGradient>
+
+          <radialGradient id="t1SunBurst" cx="50.5%" cy="22%" r="30%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+            <stop offset="30%" stop-color="#fef08a" stop-opacity="0.6"/>
+            <stop offset="65%" stop-color="#38bdf8" stop-opacity="0.2"/>
+            <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+          </radialGradient>
+
+          <!-- Rolling 3D Mint/Teal Clay Hills -->
+          <linearGradient id="hillLeftGrad" x1="0" y1="0" x2="0.8" y2="1">
+            <stop offset="0%" stop-color="#86efac"/>
+            <stop offset="35%" stop-color="#34d399"/>
+            <stop offset="75%" stop-color="#059669"/>
+            <stop offset="100%" stop-color="#065f46"/>
+          </linearGradient>
+
+          <linearGradient id="hillRightGrad" x1="1" y1="0" x2="0.2" y2="1">
+            <stop offset="0%" stop-color="#5eead4"/>
+            <stop offset="35%" stop-color="#14b8a6"/>
+            <stop offset="75%" stop-color="#0d9488"/>
+            <stop offset="100%" stop-color="#115e59"/>
+          </linearGradient>
+
+          <!-- Golden S-Curve Path -->
+          <linearGradient id="t1RoadGold" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="50%" stop-color="#fef08a"/>
+            <stop offset="100%" stop-color="#fef9c3"/>
+          </linearGradient>
+
+          <filter id="hillShadow" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#064e3b" flood-opacity="0.28"/>
+          </filter>
+        </defs>
+
+        <!-- Sky -->
+        <rect width="1376" height="768" fill="url(#t1Sky)"/>
+        <!-- Sunburst Radiance -->
+        <circle cx="695" cy="170" r="260" fill="url(#t1SunBurst)"/>
+
+        <!-- Distant Misty Crystal Peaks -->
+        <path d="M -50,440 C 140,350 260,360 400,390 C 550,430 650,330 800,310 C 960,280 1120,340 1260,350 C 1370,360 1420,340 1440,350 L 1440,768 L -50,768 Z" fill="#93c5fd" opacity="0.45"/>
+
+        <!-- Midground 3D Rolling Hills -->
+        <path d="M -60,540 C 90,430 250,440 400,490 C 540,540 640,600 700,768 L -60,768 Z" fill="url(#hillLeftGrad)" filter="url(#hillShadow)"/>
+        <path d="M -60,540 C 90,430 250,440 400,490 C 540,540 640,600 700,768" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="4"/>
+
+        <path d="M 680,768 C 750,570 860,490 1030,450 C 1200,410 1320,470 1440,500 L 1440,768 Z" fill="url(#hillRightGrad)" filter="url(#hillShadow)"/>
+        <path d="M 680,768 C 750,570 860,490 1030,450 C 1200,410 1320,470 1440,500" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="4"/>
+
+        <!-- Tactile S-Curve Trail -->
+        <path d="M 700,660 C 780,610 785,565 764,534 C 735,490 595,485 571,442 C 545,395 740,395 764,349 C 785,305 635,300 612,265 C 590,232 660,205 695,180"
+              fill="none" stroke="rgba(6, 78, 59, 0.35)" stroke-width="66" stroke-linecap="round"/>
+        <path d="M 700,660 C 780,610 785,565 764,534 C 735,490 595,485 571,442 C 545,395 740,395 764,349 C 785,305 635,300 612,265 C 590,232 660,205 695,180"
+              fill="none" stroke="#ffffff" stroke-width="52" stroke-linecap="round"/>
+        <path d="M 700,660 C 780,610 785,565 764,534 C 735,490 595,485 571,442 C 545,395 740,395 764,349 C 785,305 635,300 612,265 C 590,232 660,205 695,180"
+              fill="none" stroke="url(#t1RoadGold)" stroke-width="44" stroke-linecap="round"/>
+        <path d="M 700,660 C 780,610 785,565 764,534 C 735,490 595,485 571,442 C 545,395 740,395 764,349 C 785,305 635,300 612,265 C 590,232 660,205 695,180"
+              fill="none" stroke="#f43f5e" stroke-width="6" stroke-dasharray="14 14" stroke-linecap="round"/>
+
+        <!-- Cloud Sea Base -->
+        <path d="M -50,768 C -50,680 50,640 160,660 C 270,680 340,720 400,768 Z" fill="#ffffff" opacity="0.95"/>
+        <path d="M 970,768 C 1030,710 1130,650 1240,660 C 1330,670 1430,710 1430,768 Z" fill="#ffffff" opacity="0.95"/>
+        <path d="M 450,768 C 530,705 630,680 700,700 C 770,715 850,700 930,768 Z" fill="#ffffff" opacity="0.98"/>
+      </svg>
+    
+          <div class="anime-sky-decors" aria-hidden="true">
+            
+      
+    <!-- 6 Sparkling Faceted 3D Gems -->
+    <img src="anime-gem-1.webp" class="anime-float-gem g1" alt="">
+    <img src="anime-gem-2.webp" class="anime-float-gem g2" alt="">
+    <img src="anime-gem-3.webp" class="anime-float-gem g3" alt="">
+    <img src="anime-gem-4.webp" class="anime-float-gem g4" alt="">
+    <img src="anime-gem-5.webp" class="anime-float-gem g5" alt="">
+    <img src="anime-gem-6.webp" class="anime-float-gem g6" alt="">
+
+    <!-- 8 Floating 3D Kanji Charms -->
+    <div class="anime-float-kanji k1" style="background-image:url('anime-tile-1.webp')">日</div>
+    <div class="anime-float-kanji k2" style="background-image:url('anime-tile-4.webp')">月</div>
+    <div class="anime-float-kanji k3" style="background-image:url('anime-tile-2.webp')">火</div>
+    <div class="anime-float-kanji k4" style="background-image:url('anime-tile-5.webp')">水</div>
+    <div class="anime-float-kanji k5" style="background-image:url('anime-tile-3.webp')">木</div>
+    <div class="anime-float-kanji k6" style="background-image:url('anime-tile-8.webp')">花</div>
+    <div class="anime-float-kanji k7" style="background-image:url('anime-tile-7.webp')">星</div>
+    <div class="anime-float-kanji k8" style="background-image:url('anime-tile-6.webp')">空</div>
+
+    <!-- Core Luxury Assets -->
+    <img src="anime-star-crystal.webp" class="anime-prop star-crystal-prop" alt="">
+    <img src="anime-chest.webp" class="anime-prop chest-top" alt="">
+  
+      <!-- 3D Floating Crystal Island on the Left -->
+      <img src="anime-island-crystal.webp" class="anime-prop" style="left: 3%; bottom: 8%; width: clamp(170px, 17vw, 255px); filter: drop-shadow(0 14px 22px rgba(6, 78, 59, 0.28));" alt="">
+      
+      <!-- 3D Floating Sakura Island on the Right -->
+      <img src="anime-island-sakura.webp" class="anime-prop" style="right: 2.5%; bottom: 10%; width: clamp(170px, 17vw, 255px); filter: drop-shadow(0 14px 22px rgba(6, 78, 59, 0.28));" alt="">
+
+      <!-- 3D Calligraphy Brush, Inkstone & Kanji Scroll near Node 01 -->
+      <img src="anime-brush.webp" class="anime-prop" style="left: 26%; top: 48%; width: clamp(90px, 8.5vw, 130px); filter: drop-shadow(0 8px 16px rgba(0,0,0,0.2));" alt="">
+
+      <!-- Floating Sakura Petals -->
+      <img src="anime-sakura.webp" class="anime-prop sakura-1" alt="">
+      <img src="anime-sakura.webp" class="anime-prop sakura-2" alt="">
+    
+          </div>
+          
+    <button type="button" class="candy-node selected" style="left: 55.5%; top: 69.5%; background-image: url('anime-node-1.webp');">
+      
+      <div class="play-bubble"><span>Chơi ▶</span></div>
+      <span class="dome-num">01</span>
+      <span class="node-stars unplayed"><span class="star-mini empty">★</span><span class="star-mini empty">★</span><span class="star-mini empty">★</span></span>
+    </button>
+  
+    <button type="button" class="candy-node " style="left: 40.5%; top: 57.0%; background-image: url('anime-node-2.webp');">
+      
+      
+      <span class="dome-num">02</span>
+      <span class="node-stars unplayed"><span class="star-mini empty">★</span><span class="star-mini empty">★</span><span class="star-mini empty">★</span></span>
+    </button>
+  
+    <button type="button" class="candy-node " style="left: 55.5%; top: 45.0%; background-image: url('anime-node-3.webp');">
+      
+      
+      <span class="dome-num">03</span>
+      <span class="node-stars unplayed"><span class="star-mini empty">★</span><span class="star-mini empty">★</span><span class="star-mini empty">★</span></span>
+    </button>
+  
+    <button type="button" class="candy-node " style="left: 44.0%; top: 33.5%; background-image: url('anime-node-4.webp');">
+      
+      
+      <span class="dome-num">04</span>
+      <span class="node-stars unplayed"><span class="star-mini empty">★</span><span class="star-mini empty">★</span><span class="star-mini empty">★</span></span>
+    </button>
+  
+    <button type="button" class="candy-node " style="left: 50.5%; top: 22.5%; background-image: url('anime-node-5.webp');">
+      <img src="anime-crown.webp" class="crown-crest-img" alt="">
+      
+      <span class="dome-num">05</span>
+      <span class="node-stars unplayed"><span class="star-mini empty">★</span><span class="star-mini empty">★</span><span class="star-mini empty">★</span></span>
+    </button>
+  
+        </div>
+      </div>
+
+      <!-- Bottom Kanji Drawer -->
+      <div class="kanji-drawer journey-kanji-shelf">
+        <div class="chapter-shelf-card">
+          <div class="shelf-gem-row">
+            
+    <button type="button" class="shelf-gem-card unlocked" style="background-image: url('anime-tile-1.webp');">
+      <span class="shelf-gem-icon">休</span>
+    </button>
+  
+    <button type="button" class="shelf-gem-card unlocked" style="background-image: url('anime-tile-2.webp');">
+      <span class="shelf-gem-icon">男</span>
+    </button>
+  
+    <button type="button" class="shelf-gem-card unlocked" style="background-image: url('anime-tile-3.webp');">
+      <span class="shelf-gem-icon">分</span>
+    </button>
+  
+    <button type="button" class="shelf-gem-card unlocked" style="background-image: url('anime-tile-4.webp');">
+      <span class="shelf-gem-icon">名</span>
+    </button>
+  
+    <button type="button" class="shelf-gem-card unlocked" style="background-image: url('anime-tile-5.webp');">
+      <span class="shelf-gem-icon">外</span>
+    </button>
+  
+    <button type="button" class="shelf-gem-card unlocked" style="background-image: url('anime-tile-6.webp');">
+      <span class="shelf-gem-icon">何</span>
+    </button>
+  
+    <button type="button" class="shelf-gem-card unlocked" style="background-image: url('anime-tile-7.webp');">
+      <span class="shelf-gem-icon">見</span>
+    </button>
+  
+    <button type="button" class="shelf-gem-card unlocked" style="background-image: url('anime-tile-8.webp');">
+      <span class="shelf-gem-icon">国</span>
+    </button>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+  
