@@ -534,48 +534,59 @@
     </svg>
   `;
 
-  // Stylized 3D Decorative Charms, Sparkles & Floating 3D Kanji
+  // Stylized 3D Decorative Charms, Kenney VFX Sparkles & OpenGameArt Rotating 3D Jewels
   const skyDecors = `
-    <div class="anime-sky-decors" aria-hidden="true">
-      <!-- Magic Shimmering Sparkles -->
-      <span class="anime-sparkle s1" style="left: 14%; top: 20%;">✦</span>
-      <span class="anime-sparkle s2" style="left: 31%; top: 26%;">✧</span>
-      <span class="anime-sparkle s3" style="left: 20%; top: 48%;">✦</span>
-      <span class="anime-sparkle s4" style="left: 33%; top: 58%;">✧</span>
-      <span class="anime-sparkle s5" style="right: 12%; top: 28%;">✦</span>
-      <span class="anime-sparkle s6" style="right: 22%; top: 22%;">✧</span>
-      <span class="anime-sparkle s7" style="right: 32%; top: 44%;">✦</span>
-      <span class="anime-sparkle s8" style="right: 21%; top: 52%;">✧</span>
-      <span class="anime-sparkle s9" style="left: 50%; top: 13%;">✨</span>
-      <span class="anime-sparkle s10" style="right: 10%; top: 62%;">✦</span>
+    <div class="anime-sky-decors bejeweled-stage" aria-hidden="true">
+      <!-- Kenney VFX Lens Flare behind Summit Node 05 Crown -->
+      <img src="vfx_flare.png" class="kenney-vfx crown-flare-vfx" alt="" aria-hidden="true">
+      <img src="vfx_magic.png" class="kenney-vfx summit-magic-vfx" alt="" aria-hidden="true">
 
-      <!-- 1. HERO 3D ASSET: Grand Japanese Pagoda Sanctuary on Floating Island (Upper-Left Sky) -->
-      <img src="anime-pagoda.webp" class="anime-prop pagoda-prop" alt="" aria-hidden="true">
+      <!-- Kenney Twinkling Particle Stars along path & sky -->
+      <img src="vfx_sparkle.png" class="kenney-vfx sparkle-p p1" style="left: 15%; top: 18%;" alt="" aria-hidden="true">
+      <img src="vfx_star.png" class="kenney-vfx sparkle-p p2" style="left: 32%; top: 25%;" alt="" aria-hidden="true">
+      <img src="vfx_sparkle.png" class="kenney-vfx sparkle-p p3" style="left: 18%; top: 48%;" alt="" aria-hidden="true">
+      <img src="vfx_star.png" class="kenney-vfx sparkle-p p4" style="left: 30%; top: 62%;" alt="" aria-hidden="true">
+      <img src="vfx_sparkle.png" class="kenney-vfx sparkle-p p5" style="right: 14%; top: 20%;" alt="" aria-hidden="true">
+      <img src="vfx_star.png" class="kenney-vfx sparkle-p p6" style="right: 32%; top: 38%;" alt="" aria-hidden="true">
+      <img src="vfx_sparkle.png" class="kenney-vfx sparkle-p p7" style="right: 18%; top: 54%;" alt="" aria-hidden="true">
+      <img src="vfx_star.png" class="kenney-vfx sparkle-p p8" style="right: 28%; top: 72%;" alt="" aria-hidden="true">
 
-      <!-- 2. HERO 3D ASSET: Ancient Weathered Kanji Monolith Stele "道" with Glowing Crystals (Lower-Left Hill) -->
-      <img src="anime-monolith.webp" class="anime-prop monolith-prop" alt="" aria-hidden="true">
+      <!-- 6 HERO 3D FACETED GEMSTONES (OpenGameArt) with Kenney Specular Glints -->
+      <!-- 1. Oval White Diamond (Upper Left) -->
+      <div class="bejeweled-gem-cluster gem-diamond-wrap">
+        <img src="gem_diamond.png" class="bejeweled-gem gem-diamond" alt="" aria-hidden="true">
+        <img src="vfx_star.png" class="kenney-glint glint-diamond" alt="" aria-hidden="true">
+      </div>
 
-      <!-- 3. HERO 3D ASSET: Sacred 3D Shinto Torii Gate & Stone Lantern on Fluffy Cloud (Lower-Right Sky) -->
-      <img src="anime-torii-cloud.webp" class="anime-prop torii-prop" alt="" aria-hidden="true">
+      <!-- 2. Octagonal Deep Blue Sapphire (Mid-Left) -->
+      <div class="bejeweled-gem-cluster gem-sapphire-wrap">
+        <img src="gem_sapphire.png" class="bejeweled-gem gem-sapphire" alt="" aria-hidden="true">
+        <img src="vfx_star.png" class="kenney-glint glint-sapphire" alt="" aria-hidden="true">
+      </div>
 
-      <!-- 4. 3D Japanese Calligraphy Set: Brush, Inkstone & Unrolled Kanji Scroll (Mid-Left Trail) -->
-      <img src="anime-brush.webp" class="anime-prop brush-prop" alt="" aria-hidden="true">
+      <!-- 3. Emerald Cut Green Emerald (Lower-Left) -->
+      <div class="bejeweled-gem-cluster gem-emerald-wrap">
+        <img src="gem_emerald.png" class="bejeweled-gem gem-emerald" alt="" aria-hidden="true">
+        <img src="vfx_star.png" class="kenney-glint glint-emerald" alt="" aria-hidden="true">
+      </div>
 
-      <!-- 5. 3D Grand Treasure Chest & Star Crystal (Near Summit Node 05 & Crown) -->
-      <img src="anime-chest.webp" class="anime-prop chest-top" alt="" aria-hidden="true">
-      <img src="anime-star-crystal.webp" class="anime-prop star-crystal-prop" alt="" aria-hidden="true">
+      <!-- 4. Round Brilliant Citrine / Amber (Upper Right) -->
+      <div class="bejeweled-gem-cluster gem-citrine-wrap">
+        <img src="gem_citrine.png" class="bejeweled-gem gem-citrine" alt="" aria-hidden="true">
+        <img src="vfx_star.png" class="kenney-glint glint-citrine" alt="" aria-hidden="true">
+      </div>
 
-      <!-- Floating Sakura Petals -->
-      <img src="anime-sakura.webp" class="anime-prop sakura-1" alt="" aria-hidden="true">
-      <img src="anime-sakura.webp" class="anime-prop sakura-2" alt="" aria-hidden="true">
+      <!-- 5. Oval Red Ruby (Mid-Right) -->
+      <div class="bejeweled-gem-cluster gem-ruby-wrap">
+        <img src="gem_ruby.png" class="bejeweled-gem gem-ruby" alt="" aria-hidden="true">
+        <img src="vfx_star.png" class="kenney-glint glint-ruby" alt="" aria-hidden="true">
+      </div>
 
-      <!-- 6 Colorful Faceted 3D Gemstones -->
-      <img src="anime-gem-1.webp" class="anime-float-gem g1" alt="" aria-hidden="true">
-      <img src="anime-gem-2.webp" class="anime-float-gem g2" alt="" aria-hidden="true">
-      <img src="anime-gem-3.webp" class="anime-float-gem g3" alt="" aria-hidden="true">
-      <img src="anime-gem-4.webp" class="anime-float-gem g4" alt="" aria-hidden="true">
-      <img src="anime-gem-5.webp" class="anime-float-gem g5" alt="" aria-hidden="true">
-      <img src="anime-gem-6.webp" class="anime-float-gem g6" alt="" aria-hidden="true">
+      <!-- 6. Teardrop Honey Topaz (Lower-Right) -->
+      <div class="bejeweled-gem-cluster gem-topaz-wrap">
+        <img src="gem_topaz.png" class="bejeweled-gem gem-topaz" alt="" aria-hidden="true">
+        <img src="vfx_star.png" class="kenney-glint glint-topaz" alt="" aria-hidden="true">
+      </div>
 
       <!-- 8 Floating 3D Kanji Charms -->
       <div class="anime-float-kanji k1" style="background-image:url('anime-tile-1.webp')" lang="ja">日</div>
