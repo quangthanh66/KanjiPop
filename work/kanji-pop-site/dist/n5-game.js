@@ -386,260 +386,113 @@
  const action=resume?'resume':mapSelected,label=locked?'Hoàn thành chương trước':(resume?I18N.t('resume'):result?I18N.t('replay'):I18N.t('play'))+' màn '+String(mapSelected+1).padStart(2,'0');
  const rows=[5,4,3,2,1],cols=[4,8,3,8,5],paths=['M 38 88 C 38 77 71 80 71 69','M 71 69 C 71 58 29 61 29 50','M 29 50 C 29 39 71 42 71 31','M 71 31 C 71 20 50 23 50 12'];
 
-  // Chapter Kanji Shelf (8 characters)
-  const chapterChars=C.ids.filter(id=>C.recipes[id].chapter===mapChapter);
-  const chapterCollectedCount=chapterChars.filter(id=>profile.collected.includes(id)).length;
-  const chapterTotalStars=levels.reduce((acc,l)=>acc+(profile.results[l.id]?.stars||0),0);
-  const maxChapterStars=levels.length*3;
+  const totalStars = C.levels.reduce((acc,l)=>acc+(profile.results[l.id]?.stars||0),0);
+  const maxTotalStars = C.levels.length * 3;
 
-  const todayKey=getDailyKey();
-  const dailyRec=getDailyRecord(todayKey,currentGrade);
-  const dailyDone=!!dailyRec;
-  const dailyPillHtml=`<button type="button" class="grade-pill daily-pill ${state?.isDaily?'active':''}" data-daily-play aria-label="${I18N.t('dailyTitle')}"><span class="grade-tag">📅 ${I18N.t('dailyBadge')}</span> ${dailyDone?'★':''}</button>`;
+  $('#map-screen').innerHTML = `
+    <!-- Top HUD (Gems Free GUI Style) -->
+    <header class="gui-top-hud">
+      <div class="gui-hud-group">
+        <button type="button" class="gui-round-btn ${sound?'active':'muted'}" data-sound-toggle aria-label="Bật/Tắt âm thanh">
+          <img src="gems_gui_assets/btn_sound_round.png" alt="Sound">
+        </button>
+        <button type="button" class="gui-round-btn ${sound?'active':'muted'}" data-music-toggle aria-label="Bật/Tắt nhạc nền">
+          <img src="gems_gui_assets/btn_music_round.png" alt="Music">
+        </button>
+      </div>
 
-  const shelfCards=chapterChars.map((id, idx)=>{
-   const r=C.recipes[id],known=profile.collected.includes(id),intro=C.levels.find(l=>l.newChars&&l.newChars.includes(id));
-   const lvl=intro?intro.id+1:(mapChapter*5+1);
-   const tileIdx = (idx % 8) + 1;
-   return `<button type="button" class="shelf-gem-card kanji-key ${known?'unlocked':'locked'}" style="background-image: url('anime-tile-${tileIdx}.webp');" data-kanji-preview="${id}" aria-label="${known?id+' — '+(r.hanViet||I18N.getRecipeMeaning(r)):'Chưa mở khóa, màn '+lvl}"><span class="shelf-gem-icon" lang="ja">${id}</span></button>`;
-  }).join('');
+      <div class="gui-title-wrap">
+        <img src="gems_gui_assets/logo_title.png" class="gui-title-img" alt="Gems Game">
+        <button type="button" class="gui-mode-pill" data-switch-grade="${currentGrade==='N5'?'N4':'N5'}" aria-label="Đổi cấp độ">
+          <span>JLPT ${currentGrade}</span> · <span>★ ${totalStars}/${maxTotalStars}</span>
+        </button>
+      </div>
 
-  // Exact percentage coordinates matching SVG S-curve journey path (1376x768)
-  const nodeCoords = [
-    { left: '56.0%', top: '74.5%', cls: 'node-01', sprite: 'anime-node-1.webp' },
-    { left: '40.0%', top: '61.0%', cls: 'node-02', sprite: 'anime-node-2.webp' },
-    { left: '58.0%', top: '46.0%', cls: 'node-03', sprite: 'anime-node-3.webp' },
-    { left: '42.0%', top: '31.0%', cls: 'node-04', sprite: 'anime-node-4.webp' },
-    { left: '50.0%', top: '17.5%', cls: 'node-05', sprite: 'anime-node-5.webp' }
-  ];
+      <div class="gui-hud-group">
+        <button type="button" class="gui-round-btn" data-journey-menu aria-label="Cài đặt & Hướng dẫn">
+          <img src="gems_gui_assets/btn_gear.png" alt="Settings">
+        </button>
+        <button type="button" class="gui-round-btn" data-journey-album aria-label="Bộ sưu tập chữ Kanji">
+          <img src="gems_gui_assets/btn_trophy.png" alt="Album">
+        </button>
+      </div>
+    </header>
 
-  // Bejeweled Cosmic Sapphire Sky & 3D Candy Crush Saga Winding Road (1376x768)
-  const sagaRoadPath = "M 770,670 C 785,630 790,595 770,560 C 738,510 568,520 550,468 C 532,415 780,405 800,353 C 820,305 595,285 575,238 C 555,195 660,170 688,135";
+    <!-- Main Stage: Hanging Level Selection Window (Gems Free GUI Style) -->
+    <main class="gui-stage-center">
+      <button type="button" class="gui-nav-arrow" data-chapter-step="-1" ${mapChapter===0?'disabled':''} aria-label="Chương trước">
+        <img src="gems_gui_assets/arrow_left.png" alt="◀">
+      </button>
 
-  const skyVectorLayer = `
-    <svg class="anime-gradient-sky-svg saga-vector-svg" viewBox="0 0 1376 768" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <defs>
-        <!-- Deep Royal Cosmic Sapphire Sky Gradient -->
-        <linearGradient id="cosmicSkyGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#080c24"/>
-          <stop offset="30%" stop-color="#101844"/>
-          <stop offset="65%" stop-color="#182358"/>
-          <stop offset="100%" stop-color="#0a0f2b"/>
-        </linearGradient>
+      <div class="gui-card-box">
+        <!-- Hanging Bow Ties -->
+        <svg class="gui-bow-knot left" viewBox="0 0 24 18" fill="#ffffff" aria-hidden="true">
+          <path d="M 12 9 C 6 2 0 4 2 9 C 4 14 10 10 12 9 Z M 12 9 C 18 2 24 4 22 9 C 20 14 14 10 12 9 Z"/>
+          <circle cx="12" cy="9" r="2.5"/>
+        </svg>
+        <svg class="gui-bow-knot right" viewBox="0 0 24 18" fill="#ffffff" aria-hidden="true">
+          <path d="M 12 9 C 6 2 0 4 2 9 C 4 14 10 10 12 9 Z M 12 9 C 18 2 24 4 22 9 C 20 14 14 10 12 9 Z"/>
+          <circle cx="12" cy="9" r="2.5"/>
+        </svg>
 
-        <!-- Summit Celestial Sun Glow & Aureole -->
-        <radialGradient id="summitCelestialAura" cx="688" cy="135" r="300" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stop-color="#fffbeb" stop-opacity="0.95"/>
-          <stop offset="20%" stop-color="#fde047" stop-opacity="0.6"/>
-          <stop offset="45%" stop-color="#818cf8" stop-opacity="0.28"/>
-          <stop offset="75%" stop-color="#38bdf8" stop-opacity="0.1"/>
-          <stop offset="100%" stop-color="#080c24" stop-opacity="0"/>
-        </radialGradient>
+        <!-- 3D Header Ribbon -->
+        <div class="gui-card-header">
+          <div class="gui-header-ribbon">
+            <span class="gui-header-title">${I18N.t('chapter')} ${String(mapChapter+1).padStart(2,'0')} · CHỌN MÀN CHƠI</span>
+          </div>
+        </div>
 
-        <!-- Summit Divine Light Cone Beaming Downwards -->
-        <linearGradient id="summitLightCone" x1="0.5" y1="0" x2="0.5" y2="1">
-          <stop offset="0%" stop-color="#fef08a" stop-opacity="0.4"/>
-          <stop offset="40%" stop-color="#93c5fd" stop-opacity="0.14"/>
-          <stop offset="100%" stop-color="#080c24" stop-opacity="0"/>
-        </linearGradient>
+        <!-- 15 Levels Grid (Levels 1 to 15 matching all 15 Kanji levels) -->
+        <div class="gui-levels-grid">
+          ${C.levels.map((l, i) => {
+            const r = profile.results[l.id];
+            const isLocked = l.id > next;
+            const current = l.id === mapSelected;
+            const starCount = r ? r.stars : 0;
+            const starsHtml = isLocked
+              ? `<img src="gems_gui_assets/star_gray.png" alt=""><img src="gems_gui_assets/star_gray.png" alt=""><img src="gems_gui_assets/star_gray.png" alt="">`
+              : `${'<img src="gems_gui_assets/star_gold.png" alt="★">'.repeat(starCount)}${'<img src="gems_gui_assets/star_gray.png" alt="☆">'.repeat(3 - starCount)}`;
 
-        <!-- 3D Gold Curb Gradient for Saga Road -->
-        <linearGradient id="roadGoldCurbGrad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#fef9c3"/>
-          <stop offset="25%" stop-color="#fde047"/>
-          <stop offset="55%" stop-color="#d97706"/>
-          <stop offset="85%" stop-color="#fde047"/>
-          <stop offset="100%" stop-color="#78350f"/>
-        </linearGradient>
+            const lockIcon = `<svg class="gui-lock-icon" viewBox="0 0 24 24" fill="#ffffff" aria-hidden="true"><path d="M 18 10 L 18 7 C 18 3.7 15.3 1 12 1 C 8.7 1 6 3.7 6 7 L 6 10 C 4.9 10 4 10.9 4 12 L 4 20 C 4 21.1 4.9 22 6 22 L 18 22 C 19.1 22 20 21.1 20 20 L 20 12 C 20 10.9 19.1 10 18 10 Z M 8.5 7 C 8.5 5.1 10.1 3.5 12 3.5 C 13.9 3.5 15.5 5.1 15.5 7 L 15.5 10 L 8.5 10 L 8.5 7 Z"/></svg>`;
 
-        <!-- Glossy Crystal Track Gradient -->
-        <linearGradient id="roadCrystalTrackGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#ffffff"/>
-          <stop offset="35%" stop-color="#e0e7ff"/>
-          <stop offset="70%" stop-color="#c7d2fe"/>
-          <stop offset="100%" stop-color="#a5b4fc"/>
-        </linearGradient>
+            return `<button type="button" class="gui-lvl-btn ${isLocked ? 'locked' : ''} ${current ? 'active' : ''} ${r ? 'completed' : ''}" data-journey-level="${l.id}" ${isLocked ? 'disabled' : ''} aria-pressed="${current}" aria-label="Màn ${l.id+1}: ${l.title}${isLocked ? ', chưa mở khóa' : r ? ', ' + r.stars + ' sao' : ''}">
+              ${isLocked ? lockIcon : `<span class="gui-lvl-num">${l.id+1}</span>`}
+              <div class="gui-lvl-stars" aria-hidden="true">
+                ${starsHtml}
+              </div>
+            </button>`;
+          }).join('')}
+        </div>
 
-        <!-- Ambient Filters -->
-        <filter id="roadShadowFilter" x="-15%" y="-15%" width="130%" height="135%">
-          <feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#020617" flood-opacity="0.88"/>
-        </filter>
-        <filter id="dashGlow" x="-25%" y="-25%" width="150%" height="150%">
-          <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#fbbf24" flood-opacity="0.95"/>
-        </filter>
-        <filter id="crystalPeakGlow" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="4" stdDeviation="12" flood-color="#60a5fa" flood-opacity="0.25"/>
-        </filter>
-      </defs>
+        <!-- Pagination Dots -->
+        <div class="gui-pagination-dots">
+          <span class="gui-dot ${mapChapter===0?'active':''}" data-chapter-step="${0-mapChapter}"></span>
+          <span class="gui-dot ${mapChapter===1?'active':''}" data-chapter-step="${1-mapChapter}"></span>
+          <span class="gui-dot ${mapChapter===2?'active':''}" data-chapter-step="${2-mapChapter}"></span>
+        </div>
+      </div>
 
-      <!-- 1. Deep Cosmic Sapphire Celestial Sky -->
-      <rect width="1376" height="768" fill="url(#cosmicSkyGrad)"/>
+      <button type="button" class="gui-nav-arrow" data-chapter-step="1" ${mapChapter===2?'disabled':''} aria-label="Chương tiếp theo">
+        <img src="gems_gui_assets/arrow_right.png" alt="▶">
+      </button>
+    </main>
 
-      <!-- 2. Summit Celestial Radiance Burst -->
-      <circle cx="688" cy="135" r="300" fill="url(#summitCelestialAura)"/>
-      <polygon points="688,135 460,768 916,768" fill="url(#summitLightCone)" opacity="0.6"/>
-
-      <!-- 3. Cosmic Stardust Field -->
-      <g fill="#ffffff" opacity="0.75">
-        <circle cx="120" cy="90" r="1.8"/>
-        <circle cx="210" cy="180" r="1.4" opacity="0.5"/>
-        <circle cx="340" cy="110" r="2.2"/>
-        <circle cx="480" cy="80" r="1.6"/>
-        <circle cx="620" cy="60" r="2.5" fill="#fef08a"/>
-        <circle cx="780" cy="70" r="2.0" fill="#fef08a"/>
-        <circle cx="920" cy="100" r="1.8"/>
-        <circle cx="1060" cy="80" r="2.4"/>
-        <circle cx="1220" cy="140" r="1.5"/>
-        <circle cx="1310" cy="90" r="2.0"/>
-        <circle cx="80" cy="310" r="1.4"/>
-        <circle cx="290" cy="270" r="1.8"/>
-        <circle cx="1110" cy="240" r="1.6"/>
-        <circle cx="1270" cy="300" r="2.2" fill="#bae6fd"/>
-        <circle cx="150" cy="510" r="1.5"/>
-        <circle cx="360" cy="460" r="2.0"/>
-        <circle cx="1020" cy="480" r="1.8"/>
-        <circle cx="1230" cy="520" r="2.4" fill="#fef08a"/>
-        <circle cx="90" cy="660" r="1.6"/>
-        <circle cx="260" cy="690" r="2.2"/>
-        <circle cx="1140" cy="670" r="2.0"/>
-        <circle cx="1320" cy="650" r="1.7"/>
-      </g>
-
-      <!-- 4. Background Majestic Crystal Formations (Bejeweled Realm Silhouettes) -->
-      <!-- Left Crystal Spires -->
-      <polygon points="-40,768 -40,340 70,440 150,370 270,510 350,470 450,768" fill="#0d1435" opacity="0.88" filter="url(#crystalPeakGlow)"/>
-      <polyline points="-40,340 70,440 150,370 270,510 350,470 450,768" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" opacity="0.45"/>
-      <line x1="70" y1="440" x2="70" y2="768" stroke="#38bdf8" stroke-width="1.2" opacity="0.25"/>
-      <line x1="270" y1="510" x2="270" y2="768" stroke="#38bdf8" stroke-width="1.2" opacity="0.2"/>
-
-      <!-- Right Crystal Spires -->
-      <polygon points="926,768 1026,470 1106,515 1226,370 1306,440 1416,340 1416,768" fill="#0d1435" opacity="0.88" filter="url(#crystalPeakGlow)"/>
-      <polyline points="926,768 1026,470 1106,515 1226,370 1306,440 1416,340" fill="none" stroke="#c084fc" stroke-width="2.5" stroke-linecap="round" opacity="0.45"/>
-      <line x1="1106" y1="515" x2="1106" y2="768" stroke="#c084fc" stroke-width="1.2" opacity="0.2"/>
-      <line x1="1306" y1="440" x2="1306" y2="768" stroke="#c084fc" stroke-width="1.2" opacity="0.25"/>
-
-      <!-- Midground Crystalline Floating Terraces -->
-      <path d="M -50,768 L -50,580 C 70,555 170,600 270,640 C 360,675 430,735 470,768 Z" fill="#121b44"/>
-      <path d="M -50,580 C 70,555 170,600 270,640 C 360,675 430,735 470,768" fill="none" stroke="#60a5fa" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
-
-      <path d="M 1426,768 L 1426,580 C 1306,555 1206,600 1106,640 C 1016,675 946,735 906,768 Z" fill="#121b44"/>
-      <path d="M 1426,580 C 1306,555 1206,600 1106,640 C 1016,675 946,735 906,768" fill="none" stroke="#f472b6" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
-
-      <!-- 5. 3D Tactile Candy Crush Saga Trail (4 Layered Depth Strokes) -->
-      <!-- Layer 1: Ambient Drop Shadow -->
-      <path d="${sagaRoadPath}" fill="none" stroke="rgba(2, 6, 23, 0.8)" stroke-width="74" stroke-linecap="round" filter="url(#roadShadowFilter)"/>
-      <!-- Layer 2: 3D Beveled Gold Curb -->
-      <path d="${sagaRoadPath}" fill="none" stroke="url(#roadGoldCurbGrad)" stroke-width="60" stroke-linecap="round"/>
-      <!-- Layer 3: Inner White Bevel Rim -->
-      <path d="${sagaRoadPath}" fill="none" stroke="#ffffff" stroke-width="48" stroke-linecap="round"/>
-      <!-- Layer 4: Shimmering Crystal Road Bed -->
-      <path d="${sagaRoadPath}" fill="none" stroke="url(#roadCrystalTrackGrad)" stroke-width="40" stroke-linecap="round"/>
-      <!-- Layer 5: Luminous Amber Centerline Dash -->
-      <path d="${sagaRoadPath}" fill="none" stroke="#f59e0b" stroke-width="6" stroke-dasharray="14 14" stroke-linecap="round" filter="url(#dashGlow)"/>
-    </svg>
+    <!-- Bottom Action Dock (Gems Free GUI Style) -->
+    <footer class="gui-bottom-dock">
+      <button type="button" class="gui-dock-btn" data-switch-grade="${currentGrade==='N5'?'N4':'N5'}" aria-label="Chuyển JLPT N5 / N4">
+        <img src="gems_gui_assets/btn_home.png" alt="Grade">
+      </button>
+      <button type="button" class="gui-dock-btn" data-daily-play aria-label="Thử thách hàng ngày">
+        <img src="gems_gui_assets/btn_gamepad.png" alt="Daily">
+      </button>
+      <button type="button" class="gui-dock-btn" data-journey-album aria-label="Album chữ Kanji (${profile.collected.length}/24)">
+        <img src="gems_gui_assets/btn_trophy.png" alt="Album">
+      </button>
+      <button type="button" class="gui-dock-btn play-btn" data-main="${action}" ${locked?'disabled':''} aria-label="${resume?'Tiếp tục':'Chơi'} màn ${mapSelected+1}">
+        <img src="gems_gui_assets/btn_play_pink.png" alt="Play">
+      </button>
+    </footer>
   `;
-
-  // Stylized 3D Decorative Pedestals, Kenney VFX Sparkles & OpenGameArt Rotating 3D Jewels
-  const skyDecors = `
-    <div class="anime-sky-decors bejeweled-stage" aria-hidden="true">
-      <!-- Kenney VFX Lens Flare behind Summit Node 05 Crown -->
-      <img src="vfx_flare.png" class="kenney-vfx crown-flare-vfx" alt="" aria-hidden="true">
-      <img src="vfx_magic.png" class="kenney-vfx summit-magic-vfx" alt="" aria-hidden="true">
-
-      <!-- Kenney Twinkling Particle Stars along path & sky -->
-      <img src="vfx_sparkle.png" class="kenney-vfx sparkle-p p1" style="left: 17%; top: 14%;" alt="" aria-hidden="true">
-      <img src="vfx_star.png" class="kenney-vfx sparkle-p p2" style="left: 31%; top: 22%;" alt="" aria-hidden="true">
-      <img src="vfx_sparkle.png" class="kenney-vfx sparkle-p p3" style="left: 19%; top: 40%;" alt="" aria-hidden="true">
-      <img src="vfx_star.png" class="kenney-vfx sparkle-p p4" style="left: 30%; top: 60%;" alt="" aria-hidden="true">
-      <img src="vfx_sparkle.png" class="kenney-vfx sparkle-p p5" style="right: 17%; top: 14%;" alt="" aria-hidden="true">
-      <img src="vfx_star.png" class="kenney-vfx sparkle-p p6" style="right: 31%; top: 28%;" alt="" aria-hidden="true">
-      <img src="vfx_sparkle.png" class="kenney-vfx sparkle-p p7" style="right: 19%; top: 50%;" alt="" aria-hidden="true">
-      <img src="vfx_star.png" class="kenney-vfx sparkle-p p8" style="right: 29%; top: 70%;" alt="" aria-hidden="true">
-
-      <!-- 6 HERO 3D FACETED GEMSTONES (OpenGameArt) with Pedestals & Kenney Specular Glints -->
-      <!-- 1. Oval White Diamond (Upper Left) -->
-      <div class="bejeweled-gem-cluster gem-diamond-wrap" data-gem="diamond">
-        <div class="gem-pedestal-base"></div>
-        <img src="gem_diamond.png" class="bejeweled-gem gem-diamond" alt="Diamond" aria-hidden="true">
-        <img src="vfx_star.png" class="kenney-glint glint-diamond" alt="" aria-hidden="true">
-      </div>
-
-      <!-- 2. Octagonal Deep Blue Sapphire (Mid-Left) -->
-      <div class="bejeweled-gem-cluster gem-sapphire-wrap" data-gem="sapphire">
-        <div class="gem-pedestal-base"></div>
-        <img src="gem_sapphire.png" class="bejeweled-gem gem-sapphire" alt="Sapphire" aria-hidden="true">
-        <img src="vfx_star.png" class="kenney-glint glint-sapphire" alt="" aria-hidden="true">
-      </div>
-
-      <!-- 3. Emerald Cut Green Emerald (Lower-Left) -->
-      <div class="bejeweled-gem-cluster gem-emerald-wrap" data-gem="emerald">
-        <div class="gem-pedestal-base"></div>
-        <img src="gem_emerald.png" class="bejeweled-gem gem-emerald" alt="Emerald" aria-hidden="true">
-        <img src="vfx_star.png" class="kenney-glint glint-emerald" alt="" aria-hidden="true">
-      </div>
-
-      <!-- 4. Round Brilliant Citrine / Amber (Upper Right) -->
-      <div class="bejeweled-gem-cluster gem-citrine-wrap" data-gem="citrine">
-        <div class="gem-pedestal-base"></div>
-        <img src="gem_citrine.png" class="bejeweled-gem gem-citrine" alt="Citrine" aria-hidden="true">
-        <img src="vfx_star.png" class="kenney-glint glint-citrine" alt="" aria-hidden="true">
-      </div>
-
-      <!-- 5. Oval Red Ruby (Mid-Right) -->
-      <div class="bejeweled-gem-cluster gem-ruby-wrap" data-gem="ruby">
-        <div class="gem-pedestal-base"></div>
-        <img src="gem_ruby.png" class="bejeweled-gem gem-ruby" alt="Ruby" aria-hidden="true">
-        <img src="vfx_star.png" class="kenney-glint glint-ruby" alt="" aria-hidden="true">
-      </div>
-
-      <!-- 6. Teardrop Honey Topaz (Lower-Right) -->
-      <div class="bejeweled-gem-cluster gem-topaz-wrap" data-gem="topaz">
-        <div class="gem-pedestal-base"></div>
-        <img src="gem_topaz.png" class="bejeweled-gem gem-topaz" alt="Topaz" aria-hidden="true">
-        <img src="vfx_star.png" class="kenney-glint glint-topaz" alt="" aria-hidden="true">
-      </div>
-    </div>
-  `;
-
-   $('#map-screen').innerHTML = `<div class="chapter-bar">
-    <div class="grade-toggle-group">
-      <button type="button" class="grade-pill ${currentGrade==='N5'?'active':''}" data-switch-grade="N5"><span class="grade-tag">JLPT N5</span></button>
-      <button type="button" class="grade-pill ${currentGrade==='N4'?'active':''}" data-switch-grade="N4"><span class="grade-tag">JLPT N4</span></button>
-      ${dailyPillHtml}
-    </div>
-    <div class="chapter-nav-center">
-      <button data-chapter-step="-1" aria-label="Chương trước" ${mapChapter===0?'disabled':''}><i data-lucide="chevron-left" aria-hidden="true"></i></button>
-      <span>${I18N.t('chapter')} ${String(mapChapter+1).padStart(2,'0')}</span>
-      <button data-chapter-step="1" aria-label="Chương tiếp theo" ${mapChapter===2?'disabled':''}><i data-lucide="chevron-right" aria-hidden="true"></i></button>
-    </div>
-    <button type="button" class="hud-pill stars" data-journey-album aria-label="Tiến trình: ${chapterTotalStars}/${maxChapterStars} sao">★ ${chapterTotalStars}/${maxChapterStars}</button>
-    <button type="button" class="journey-menu" data-journey-menu aria-label="${I18N.t('menuTitle')}"><i data-lucide="ellipsis" aria-hidden="true"></i></button>
-  </div>
-
-  <div class="journey-layout bejeweled-saga-layout" data-chapter="${mapChapter}">
-    <div class="mountain-stage-wrap">
-      <div class="mountain-area mountain-canvas saga-canvas">
-        ${skyVectorLayer}
-        ${skyDecors}
-        <!-- 5 2D Anime Level Medallions on Winding Cloud Path -->
-        ${levels.map((l, i) => {
-          const r = profile.results[l.id], isLocked = l.id > next, current = l.id === mapSelected;
-          const pos = nodeCoords[i];
-          const playText = action === 'resume' ? I18N.t('resume') : result ? I18N.t('replay') : I18N.t('play');
-          const crownBadge = i === 4 ? '<img src="anime-crown.webp" class="crown-crest-img" alt="" aria-hidden="true">' : '';
-          const playBubble = current ? `<div role="button" tabindex="0" class="play-bubble journey-node-play-btn" data-main="${action}" ${locked?'aria-disabled="true"':'aria-label="'+playText+' màn '+(l.id+1)+'"'}><span>${playText} ▶</span></div>` : '';
-          const starCount = r ? r.stars : 0;
-          const starRow = `<span class="node-stars ${r ? 'scored' : 'unplayed'}" aria-hidden="true">${'<span class="star-mini filled">★</span>'.repeat(starCount) + '<span class="star-mini empty">★</span>'.repeat(3 - starCount)}</span>`;
-          return `<button type="button" class="candy-node ${pos.cls} journey-stop ${r?'completed':''} ${current?'selected':''} ${i===4?'treasure':''}" style="left: ${pos.left}; top: ${pos.top}; background-image: url('${pos.sprite}');" data-journey-level="${l.id}" ${isLocked?'disabled':''} aria-pressed="${current}" aria-label="Màn ${l.id+1}: ${l.title}${isLocked?', chưa mở khóa':r?', '+r.stars+' sao':''}">
-            ${crownBadge}
-            ${playBubble}
-            <span class="dome-num">${String(l.id+1).padStart(2,'0')}</span>
-            ${starRow}
-          </button>`;
-        }).join('')}
-      </div>
-    </div>
-  </div>`;
  }
  function showJourneyMenu(){modalOpen('<section class="kp-modal journey-options" role="dialog" aria-modal="true"><h2>Hành trình của bạn</h2><p>24 chữ ghép tuyển chọn · 3 chương · 15 màn.<br>Đây là bộ sơ cấp tham khảo, chưa phải toàn bộ Kanji N5.</p><button class="kp-secondary" data-audio-studio style="background:#f0f8ff;border-color:#53aadc;color:#0d5c8a"><i data-lucide="headphones" aria-hidden="true"></i>🎧 Phòng thử & chọn âm thanh từng chức năng</button><button class="kp-secondary" data-settings><i data-lucide="settings" aria-hidden="true"></i>Tùy chỉnh & chơi thử</button><button class="kp-secondary" data-progress><i data-lucide="save" aria-hidden="true"></i>Sao lưu tiến trình</button><button class="kp-secondary" data-about><i data-lucide="info" aria-hidden="true"></i>Bộ chữ & nguồn tham khảo</button><button class="kp-action" data-action="close">Về hành trình</button></section>','Menu hành trình');}
  function renderAlbum(){
@@ -1016,6 +869,9 @@ function showSettings(){
  $('#kp-sound').addEventListener('click',()=>{sound=!sound;save();render();if(sound)A?.hint();});
  $('#map-screen').addEventListener('click',e=>{
   if(busy)return;
+  if(e.target.closest('[data-sound-toggle],[data-music-toggle]')){
+    sound=!sound;save();render();if(sound)A?.hint?.();return;
+  }
   if(e.target.closest('[data-concept-logo]')){A?.select?.();changeView('map');return;}
   if(e.target.closest('[data-concept-lang]')){$('#kp-lang')?.click();return;}
   if(e.target.closest('[data-concept-sound]')){$('#kp-sound')?.click();return;}
@@ -1048,7 +904,7 @@ function showSettings(){
    mapChapter=Math.max(0,Math.min(2,mapChapter+Number(chapterButton.dataset.chapterStep)));
    mapSelected=null;
    renderMap();icons();
-   $('#map-screen h1').focus({preventScroll:true});
+   $('#map-screen h1')?.focus({preventScroll:true});
    return;
   }
   if(e.target.closest('[data-journey-album]')){A?.select();changeView('album');return;}
@@ -1074,7 +930,7 @@ function showSettings(){
    A?.select();
    mapSelected=targetLvl;
    renderMap();icons();
-   $('#map-screen [data-journey-level="'+mapSelected+'"]').focus({preventScroll:true});
+   $('#map-screen [data-journey-level="'+mapSelected+'"]')?.focus({preventScroll:true});
    return;
   }
  });

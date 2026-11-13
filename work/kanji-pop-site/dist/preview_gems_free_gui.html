@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Kanjidle — Gems Game Free GUI Preview</title>
+  <link rel="stylesheet" href="fonts.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Comfortaa', 'Nunito', 'Segoe UI', sans-serif;
+      user-select: none;
+      -webkit-user-select: none;
+      background: #e0f2fe;
+    }
+
+    /* Screen Background: Dreamy Sunbeam Sky from Gems Free GUI */
+    .gems-gui-screen {
+      position: relative;
+      width: 100vw;
+      height: 100dvh;
+      background: url('gems_gui_assets/gui_bg.png') center center / cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: clamp(10px, 1.8vh, 18px) 16px clamp(12px, 2vh, 22px);
+      overflow: hidden;
+    }
+
+    /* Top HUD */
+    .gui-top-hud {
+      width: 100%;
+      max-width: 860px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 25;
+      flex: none;
+    }
+
+    .gui-hud-group {
+      display: flex;
+      align-items: center;
+      gap: clamp(8px, 1.2vw, 14px);
+    }
+
+    /* Round Buttons (Sound, Music, Gear, Help) */
+    .gui-round-btn {
+      width: clamp(44px, 4.2vw, 56px);
+      aspect-ratio: 1 / 1;
+      border: none;
+      background: transparent;
+      padding: 0;
+      cursor: pointer;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.22));
+      transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.15s ease;
+      display: grid;
+      place-items: center;
+    }
+    .gui-round-btn img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      pointer-events: none;
+    }
+    .gui-round-btn:hover {
+      transform: scale(1.14) translateY(-2px);
+      filter: brightness(1.1) drop-shadow(0 6px 14px rgba(0,0,0,0.28));
+    }
+    .gui-round-btn:active {
+      transform: scale(0.94) translateY(2px);
+    }
+
+    /* Center Hanging Title Logo */
+    .gui-title-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+    .gui-title-img {
+      width: clamp(170px, 18vw, 250px);
+      height: auto;
+      filter: drop-shadow(0 8px 18px rgba(76, 29, 149, 0.4));
+      animation: titleFloat 4s ease-in-out infinite;
+    }
+    @keyframes titleFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    /* Mode Pill directly below Title */
+    .gui-mode-pill {
+      margin-top: -10px;
+      background: linear-gradient(180deg, #ec4899 0%, #be185d 100%);
+      border: 2.5px solid #ffffff;
+      border-radius: 9999px;
+      padding: 3px 16px 4px;
+      color: #ffffff;
+      font-weight: 900;
+      font-size: clamp(11px, 1.1vw, 13.5px);
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 12px rgba(190, 24, 93, 0.45), inset 0 1px 2px rgba(255,255,255,0.7);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: transform 0.14s ease;
+    }
+    .gui-mode-pill:hover {
+      transform: scale(1.05);
+    }
+
+    /* Main Centerpiece: Hanging Level Selection Window */
+    .gui-stage-center {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      width: 100%;
+      max-width: 820px;
+      min-height: 0;
+      margin: 4px 0;
+    }
+
+    /* Navigation Arrows flanking the card */
+    .gui-nav-arrow {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      filter: drop-shadow(0 4px 12px rgba(190, 24, 93, 0.45));
+      transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 15;
+      flex: none;
+    }
+    .gui-nav-arrow img {
+      width: clamp(36px, 3.8vw, 52px);
+      height: auto;
+      pointer-events: none;
+    }
+    .gui-nav-arrow:hover:not(:disabled) {
+      transform: scale(1.22);
+      filter: drop-shadow(0 6px 18px rgba(190, 24, 93, 0.7));
+    }
+    .gui-nav-arrow:active:not(:disabled) {
+      transform: scale(0.92);
+    }
+    .gui-nav-arrow:disabled {
+      opacity: 0.35;
+      cursor: default;
+      filter: grayscale(0.8);
+    }
+
+    /* The Purple Hanging Level Selection Card */
+    .gui-card-box {
+      position: relative;
+      width: 100%;
+      max-width: 650px;
+      height: auto;
+      max-height: min(520px, 60vh);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 18px 22px;
+      background: radial-gradient(circle at 50% 35%, #6b3394 0%, #4a1d6d 75%, #351052 100%);
+      border: 4px solid #ffffff;
+      border-radius: 36px;
+      box-shadow: 0 18px 40px rgba(49, 13, 76, 0.48), 0 5px 0 #280a3d, inset 0 2px 4px rgba(255,255,255,0.4);
+      margin: 0 10px;
+    }
+
+    /* Hanging Strings & Bows at Top of Card */
+    .gui-card-box::before,
+    .gui-card-box::after {
+      content: '';
+      position: absolute;
+      top: -38px;
+      width: 3.5px;
+      height: 42px;
+      background: #ffffff;
+      box-shadow: 0 0 8px rgba(255,255,255,0.9);
+      pointer-events: none;
+    }
+    .gui-card-box::before { left: 22%; }
+    .gui-card-box::after { right: 22%; }
+
+    .gui-bow-knot {
+      position: absolute;
+      top: -14px;
+      width: 26px;
+      height: 20px;
+      pointer-events: none;
+      z-index: 5;
+    }
+    .gui-bow-knot.left { left: calc(22% - 12px); }
+    .gui-bow-knot.right { right: calc(22% - 12px); }
+
+    /* Card Header: 3D Candy "Level Selection" Ribbon */
+    .gui-card-header {
+      margin-top: -26px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
+    .gui-header-ribbon {
+      background: linear-gradient(180deg, #f43f5e 0%, #be123c 100%);
+      border: 3.5px solid #ffffff;
+      border-radius: 9999px;
+      padding: 6px 30px 7px;
+      box-shadow: 0 6px 18px rgba(159, 18, 57, 0.5), 0 3px 0 #881337, inset 0 2px 3px rgba(255,255,255,0.7);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .gui-header-title {
+      font-size: clamp(15px, 1.7vw, 21px);
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      text-shadow: 0 2px 0 #881337, 0 0 10px rgba(255,255,255,0.4);
+    }
+
+    /* 15 Level Buttons Grid (3 rows x 5 cols) */
+    .gui-levels-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: clamp(10px, 1.4vw, 18px) clamp(8px, 1.2vw, 16px);
+      width: 100%;
+      flex: 1;
+      padding: 10px 6px 6px;
+      align-items: center;
+      justify-items: center;
+    }
+
+    /* Individual Level Button */
+    .gui-lvl-btn {
+      position: relative;
+      width: clamp(52px, 5.8vw, 74px);
+      aspect-ratio: 1 / 1;
+      background: radial-gradient(circle at 35% 25%, #a855f7 0%, #7e22ce 60%, #581c87 100%);
+      border: 3.5px solid #ffffff;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      box-shadow: 0 6px 14px rgba(24, 7, 38, 0.55), 0 3px 0 #3b0764, inset 0 2px 4px rgba(255,255,255,0.85);
+      transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.15s ease, box-shadow 0.15s ease;
+    }
+    /* Glossy specular pill highlight at top of button */
+    .gui-lvl-btn::before {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 12px;
+      width: 38%;
+      height: 28%;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.9) 0%, transparent 80%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .gui-lvl-btn:hover:not(:disabled) {
+      transform: scale(1.14) translateY(-4px);
+      filter: brightness(1.12);
+      box-shadow: 0 10px 22px rgba(24, 7, 38, 0.65), 0 4px 0 #3b0764;
+    }
+    .gui-lvl-btn:active:not(:disabled) {
+      transform: scale(0.95) translateY(2px);
+    }
+
+    .gui-lvl-num {
+      color: #ffffff;
+      font-size: clamp(18px, 2.0vw, 26px);
+      font-weight: 900;
+      line-height: 1;
+      text-shadow: 0 2px 0 #3b0764, 0 0 6px rgba(0,0,0,0.4);
+      margin-top: -3px;
+    }
+
+    /* 3 Stars Rack Under Button */
+    .gui-lvl-stars {
+      position: absolute;
+      bottom: -9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      pointer-events: none;
+    }
+    .gui-lvl-stars img {
+      width: clamp(13px, 1.4vw, 17px);
+      height: auto;
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,0.4));
+    }
+    .gui-lvl-stars img:nth-child(2) {
+      transform: translateY(-2px);
+      width: clamp(15px, 1.6vw, 19px);
+    }
+
+    /* Selected / Active Playable Level Highlight */
+    .gui-lvl-btn.active {
+      background: radial-gradient(circle at 35% 25%, #f43f5e 0%, #db2777 60%, #9d174d 100%);
+      border-color: #fef08a;
+      box-shadow: 0 0 22px rgba(244, 63, 94, 0.85), 0 6px 14px rgba(24, 7, 38, 0.5), 0 3px 0 #831843;
+      animation: pulseActive 2s ease-in-out infinite;
+      z-index: 5;
+    }
+    @keyframes pulseActive {
+      0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(253, 224, 71, 0.7)); }
+      50% { transform: scale(1.08); filter: drop-shadow(0 0 20px rgba(253, 224, 71, 1)); }
+    }
+
+    /* Locked Level Button */
+    .gui-lvl-btn.locked {
+      background: radial-gradient(circle at 35% 25%, #4c1d95 0%, #3b0764 70%, #240542 100%);
+      border-color: rgba(255,255,255,0.4);
+      opacity: 0.75;
+      cursor: not-allowed;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    }
+    .gui-lock-icon {
+      width: clamp(18px, 1.8vw, 24px);
+      height: auto;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+    }
+
+    /* Pagination Dots at Bottom of Card */
+    .gui-pagination-dots {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 6px;
+    }
+    .gui-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.4);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .gui-dot.active {
+      background: #facc15;
+      width: 12px;
+      height: 12px;
+      box-shadow: 0 0 8px #facc15;
+    }
+
+    /* Bottom Action Dock (Overlapping the Card Bottom nicely!) */
+    .gui-bottom-dock {
+      width: 100%;
+      max-width: 650px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(12px, 3.2vw, 30px);
+      z-index: 25;
+      flex: none;
+    }
+
+    .gui-dock-btn {
+      width: clamp(56px, 6.5vw, 76px);
+      aspect-ratio: 1 / 1;
+      border: none;
+      background: transparent;
+      padding: 0;
+      cursor: pointer;
+      filter: drop-shadow(0 6px 14px rgba(42, 12, 64, 0.35));
+      transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.15s ease;
+      display: grid;
+      place-items: center;
+    }
+    .gui-dock-btn img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      pointer-events: none;
+    }
+    .gui-dock-btn:hover {
+      transform: scale(1.14) translateY(-4px);
+      filter: brightness(1.1) drop-shadow(0 8px 18px rgba(42, 12, 64, 0.45));
+    }
+    .gui-dock-btn:active {
+      transform: scale(0.94) translateY(2px);
+    }
+
+    /* The Big Pink Play Button */
+    .gui-dock-btn.play-btn {
+      width: clamp(74px, 8.5vw, 100px);
+      animation: playBob 2.2s ease-in-out infinite;
+    }
+    @keyframes playBob {
+      0%, 100% { transform: scale(1) translateY(0); filter: drop-shadow(0 6px 14px rgba(190, 24, 93, 0.45)); }
+      50% { transform: scale(1.06) translateY(-4px); filter: drop-shadow(0 10px 22px rgba(190, 24, 93, 0.7)); }
+    }
+    .gui-dock-btn.play-btn:hover {
+      transform: scale(1.16) translateY(-6px);
+      animation: none;
+    }
+
+    /* Mobile Adaptations */
+    @media (max-width: 600px) {
+      .gems-gui-screen {
+        padding: 8px 10px 14px;
+      }
+      .gui-top-hud {
+        gap: 6px;
+      }
+      .gui-round-btn {
+        width: 40px;
+      }
+      .gui-title-img {
+        width: 155px;
+      }
+      .gui-mode-pill {
+        padding: 2.5px 12px 3.5px;
+        font-size: 11px;
+      }
+      .gui-stage-center {
+        margin: 2px 0;
+      }
+      .gui-card-box {
+        max-height: 420px;
+        padding: 10px 8px 14px;
+        border-radius: 28px;
+        margin: 0 4px;
+      }
+      .gui-card-header {
+        margin-top: -20px;
+      }
+      .gui-header-ribbon {
+        padding: 4px 20px 5px;
+      }
+      .gui-header-title {
+        font-size: 14px;
+      }
+      .gui-levels-grid {
+        gap: 14px 6px;
+        padding: 8px 4px 4px;
+      }
+      .gui-lvl-btn {
+        width: 50px;
+        border-width: 2.5px;
+      }
+      .gui-lvl-num {
+        font-size: 17px;
+      }
+      .gui-bottom-dock {
+        gap: 12px;
+      }
+      .gui-dock-btn {
+        width: 50px;
+      }
+      .gui-dock-btn.play-btn {
+        width: 68px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="gems-gui-screen">
+    <!-- Top HUD -->
+    <header class="gui-top-hud">
+      <div class="gui-hud-group">
+        <button type="button" class="gui-round-btn" aria-label="Bật/Tắt âm thanh">
+          <img src="gems_gui_assets/btn_sound_round.png" alt="Sound">
+        </button>
+        <button type="button" class="gui-round-btn" aria-label="Bật/Tắt nhạc nền">
+          <img src="gems_gui_assets/btn_music_round.png" alt="Music">
+        </button>
+      </div>
+
+      <div class="gui-title-wrap">
+        <img src="gems_gui_assets/logo_title.png" class="gui-title-img" alt="Gems Game">
+        <div class="gui-mode-pill">
+          <span>JLPT N5</span> · <span>★ 12/45</span>
+        </div>
+      </div>
+
+      <div class="gui-hud-group">
+        <button type="button" class="gui-round-btn" aria-label="Hướng dẫn & Giới thiệu">
+          <img src="gems_gui_assets/btn_help.png" alt="Help">
+        </button>
+        <button type="button" class="gui-round-btn" aria-label="Cài đặt">
+          <img src="gems_gui_assets/btn_gear.png" alt="Settings">
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Stage: Hanging Level Selection Window -->
+    <main class="gui-stage-center">
+      <button type="button" class="gui-nav-arrow" aria-label="Chương trước">
+        <img src="gems_gui_assets/arrow_left.png" alt="◀">
+      </button>
+
+      <div class="gui-card-box">
+        <!-- Hanging Bow Ties -->
+        <svg class="gui-bow-knot left" viewBox="0 0 24 18" fill="#ffffff">
+          <path d="M 12 9 C 6 2 0 4 2 9 C 4 14 10 10 12 9 Z M 12 9 C 18 2 24 4 22 9 C 20 14 14 10 12 9 Z"/>
+          <circle cx="12" cy="9" r="2.5"/>
+        </svg>
+        <svg class="gui-bow-knot right" viewBox="0 0 24 18" fill="#ffffff">
+          <path d="M 12 9 C 6 2 0 4 2 9 C 4 14 10 10 12 9 Z M 12 9 C 18 2 24 4 22 9 C 20 14 14 10 12 9 Z"/>
+          <circle cx="12" cy="9" r="2.5"/>
+        </svg>
+
+        <!-- 3D Header Ribbon -->
+        <div class="gui-card-header">
+          <div class="gui-header-ribbon">
+            <span class="gui-header-title">CHỌN MÀN CHƠI</span>
+          </div>
+        </div>
+
+        <!-- 15 Levels Grid (1 to 15) -->
+        <div class="gui-levels-grid">
+          <!-- Row 1: Màn 1 - 5 (Chương 1) -->
+          <button type="button" class="gui-lvl-btn">
+            <span class="gui-lvl-num">1</span>
+            <div class="gui-lvl-stars">
+              <img src="gems_gui_assets/star_gold.png" alt="★">
+              <img src="gems_gui_assets/star_gold.png" alt="★">
+              <img src="gems_gui_assets/star_gold.png" alt="★">
+            </div>
+          </button>
+          <button type="button" class="gui-lvl-btn">
+            <span class="gui-lvl-num">2</span>
+            <div class="gui-lvl-stars">
+              <img src="gems_gui_assets/star_gold.png" alt="★">
+              <img src="gems_gui_assets/star_gold.png" alt="★">
+              <img src="gems_gui_assets/star_gold.png" alt="★">
+            </div>
+          </button>
+          <button type="button" class="gui-lvl-btn">
+            <span class="gui-lvl-num">3</span>
+            <div class="gui-lvl-stars">
+              <img src="gems_gui_assets/star_gold.png" alt="★">
+              <img src="gems_gui_assets/star_gold.png" alt="★">
+              <img src="gems_gui_assets/star_gray.png" alt="☆">
+            </div>
+          </button>
+          <button type="button" class="gui-lvl-btn">
+            <span class="gui-lvl-num">4</span>
+            <div class="gui-lvl-stars">
+              <img src="gems_gui_assets/star_gold.png" alt="★">
+              <img src="gems_gui_assets/star_gold.png" alt="★">
+              <img src="gems_gui_assets/star_gold.png" alt="★">
+            </div>
+          </button>
+          <button type="button" class="gui-lvl-btn active">
+            <span class="gui-lvl-num">5</span>
+            <div class="gui-lvl-stars">
+              <img src="gems_gui_assets/star_gold.png" alt="★">
+              <img src="gems_gui_assets/star_gray.png" alt="☆">
+              <img src="gems_gui_assets/star_gray.png" alt="☆">
+            </div>
+          </button>
+
+          <!-- Row 2: Màn 6 - 10 (Chương 2) -->
+          <button type="button" class="gui-lvl-btn">
+            <span class="gui-lvl-num">6</span>
+            <div class="gui-lvl-stars">
+              <img src="gems_gui_assets/star_gold.png" alt="★">
+              <img src="gems_gui_assets/star_gold.png" alt="★">
+              <img src="gems_gui_assets/star_gray.png" alt="☆">
+            </div>
+          </button>
+          <button type="button" class="gui-lvl-btn">
+            <span class="gui-lvl-num">7</span>
+            <div class="gui-lvl-stars">
+              <img src="gems_gui_assets/star_gold.png" alt="★">
+              <img src="gems_gui_assets/star_gold.png" alt="★">
+              <img src="gems_gui_assets/star_gold.png" alt="★">
+            </div>
+          </button>
+          <button type="button" class="gui-lvl-btn">
+            <span class="gui-lvl-num">8</span>
+            <div class="gui-lvl-stars">
+              <img src="gems_gui_assets/star_gold.png" alt="★">
+              <img src="gems_gui_assets/star_gray.png" alt="☆">
+              <img src="gems_gui_assets/star_gray.png" alt="☆">
+            </div>
+          </button>
+          <button type="button" class="gui-lvl-btn">
+            <span class="gui-lvl-num">9</span>
+            <div class="gui-lvl-stars">
+              <img src="gems_gui_assets/star_gold.png" alt="★">
+              <img src="gems_gui_assets/star_gold.png" alt="★">
+              <img src="gems_gui_assets/star_gold.png" alt="★">
+            </div>
+          </button>
+          <button type="button" class="gui-lvl-btn">
+            <span class="gui-lvl-num">10</span>
+            <div class="gui-lvl-stars">
+              <img src="gems_gui_assets/star_gold.png" alt="★">
+              <img src="gems_gui_assets/star_gold.png" alt="★">
+              <img src="gems_gui_assets/star_gold.png" alt="★">
+            </div>
+          </button>
+
+          <!-- Row 3: Màn 11 - 15 (Chương 3) -->
+          <button type="button" class="gui-lvl-btn">
+            <span class="gui-lvl-num">11</span>
+            <div class="gui-lvl-stars">
+              <img src="gems_gui_assets/star_gold.png" alt="★">
+              <img src="gems_gui_assets/star_gold.png" alt="★">
+              <img src="gems_gui_assets/star_gold.png" alt="★">
+            </div>
+          </button>
+          <button type="button" class="gui-lvl-btn">
+            <span class="gui-lvl-num">12</span>
+            <div class="gui-lvl-stars">
+              <img src="gems_gui_assets/star_gold.png" alt="★">
+              <img src="gems_gui_assets/star_gold.png" alt="★">
+              <img src="gems_gui_assets/star_gray.png" alt="☆">
+            </div>
+          </button>
+          <button type="button" class="gui-lvl-btn">
+            <span class="gui-lvl-num">13</span>
+            <div class="gui-lvl-stars">
+              <img src="gems_gui_assets/star_gold.png" alt="★">
+              <img src="gems_gui_assets/star_gray.png" alt="☆">
+              <img src="gems_gui_assets/star_gray.png" alt="☆">
+            </div>
+          </button>
+          <button type="button" class="gui-lvl-btn locked" disabled>
+            <svg class="gui-lock-icon" viewBox="0 0 24 24" fill="#ffffff">
+              <path d="M 18 10 L 18 7 C 18 3.7 15.3 1 12 1 C 8.7 1 6 3.7 6 7 L 6 10 C 4.9 10 4 10.9 4 12 L 4 20 C 4 21.1 4.9 22 6 22 L 18 22 C 19.1 22 20 21.1 20 20 L 20 12 C 20 10.9 19.1 10 18 10 Z M 8.5 7 C 8.5 5.1 10.1 3.5 12 3.5 C 13.9 3.5 15.5 5.1 15.5 7 L 15.5 10 L 8.5 10 L 8.5 7 Z"/>
+            </svg>
+            <div class="gui-lvl-stars">
+              <img src="gems_gui_assets/star_gray.png" alt="☆">
+              <img src="gems_gui_assets/star_gray.png" alt="☆">
+              <img src="gems_gui_assets/star_gray.png" alt="☆">
+            </div>
+          </button>
+          <button type="button" class="gui-lvl-btn locked" disabled>
+            <svg class="gui-lock-icon" viewBox="0 0 24 24" fill="#ffffff">
+              <path d="M 18 10 L 18 7 C 18 3.7 15.3 1 12 1 C 8.7 1 6 3.7 6 7 L 6 10 C 4.9 10 4 10.9 4 12 L 4 20 C 4 21.1 4.9 22 6 22 L 18 22 C 19.1 22 20 21.1 20 20 L 20 12 C 20 10.9 19.1 10 18 10 Z M 8.5 7 C 8.5 5.1 10.1 3.5 12 3.5 C 13.9 3.5 15.5 5.1 15.5 7 L 15.5 10 L 8.5 10 L 8.5 7 Z"/>
+            </svg>
+            <div class="gui-lvl-stars">
+              <img src="gems_gui_assets/star_gray.png" alt="☆">
+              <img src="gems_gui_assets/star_gray.png" alt="☆">
+              <img src="gems_gui_assets/star_gray.png" alt="☆">
+            </div>
+          </button>
+        </div>
+
+        <!-- Pagination Dots -->
+        <div class="gui-pagination-dots">
+          <span class="gui-dot active"></span>
+          <span class="gui-dot"></span>
+          <span class="gui-dot"></span>
+        </div>
+      </div>
+
+      <button type="button" class="gui-nav-arrow" aria-label="Chương tiếp theo">
+        <img src="gems_gui_assets/arrow_right.png" alt="▶">
+      </button>
+    </main>
+
+    <!-- Bottom Action Dock -->
+    <footer class="gui-bottom-dock">
+      <button type="button" class="gui-dock-btn" aria-label="Đổi cấp độ N5 / N4">
+        <img src="gems_gui_assets/btn_home.png" alt="Home">
+      </button>
+      <button type="button" class="gui-dock-btn" aria-label="Thử thách hàng ngày">
+        <img src="gems_gui_assets/btn_gamepad.png" alt="Daily">
+      </button>
+      <button type="button" class="gui-dock-btn" aria-label="Album chữ Kanji">
+        <img src="gems_gui_assets/btn_trophy.png" alt="Album">
+      </button>
+      <button type="button" class="gui-dock-btn play-btn" aria-label="Chơi ngay màn 05">
+        <img src="gems_gui_assets/btn_play_pink.png" alt="Play">
+      </button>
+    </footer>
+  </div>
+</body>
+</html>
