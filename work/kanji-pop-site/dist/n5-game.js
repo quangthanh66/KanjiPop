@@ -413,26 +413,16 @@
     { left: '50.5%', top: '23.5%', cls: 'node-05', sprite: 'anime-node-5.webp' }
   ];
 
-  // Pure CSS/SVG Gradient Sky + Sunbeams + Sparkles + S-Curve Cloud Ribbon Path (Zero Bitmap Background)
+  // Pure CSS/SVG Smooth Gradient Sky + S-Curve Cloud Ribbon Path (Zero Diagonal Lines, Clean Backdrop)
   const skyVectorLayer = `
     <svg class="anime-gradient-sky-svg" viewBox="0 0 1376 768" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <defs>
         <linearGradient id="animeSkyGrad" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#5ec6ff"/>
-          <stop offset="30%" stop-color="#8fdbff"/>
-          <stop offset="62%" stop-color="#c9eeff"/>
-          <stop offset="85%" stop-color="#ebf8ff"/>
-          <stop offset="100%" stop-color="#fff1f6"/>
+          <stop offset="35%" stop-color="#8fdbff"/>
+          <stop offset="70%" stop-color="#c9eeff"/>
+          <stop offset="100%" stop-color="#ebf8ff"/>
         </linearGradient>
-        <linearGradient id="animeBeamGrad" x1="0" y1="0" x2="0.4" y2="1">
-          <stop offset="0%" stop-color="#ffffff" stop-opacity="0.32"/>
-          <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-        </linearGradient>
-        <radialGradient id="animeSummitGlow" cx="50%" cy="24%" r="28%">
-          <stop offset="0%" stop-color="#fffbeb" stop-opacity="0.75"/>
-          <stop offset="55%" stop-color="#bae6fd" stop-opacity="0.25"/>
-          <stop offset="100%" stop-color="#bae6fd" stop-opacity="0"/>
-        </radialGradient>
         <linearGradient id="animeRoadRibbon" x1="0" y1="1" x2="0" y2="0">
           <stop offset="0%" stop-color="#ffffff" stop-opacity="0.96"/>
           <stop offset="50%" stop-color="#fef9ef" stop-opacity="0.96"/>
@@ -440,10 +430,6 @@
         </linearGradient>
       </defs>
       <rect width="1376" height="768" fill="url(#animeSkyGrad)"/>
-      <polygon points="120,0 320,0 640,768 380,768" fill="url(#animeBeamGrad)"/>
-      <polygon points="460,0 690,0 980,768 720,768" fill="url(#animeBeamGrad)"/>
-      <polygon points="860,0 1080,0 1320,768 1060,768" fill="url(#animeBeamGrad)"/>
-      <rect width="1376" height="768" fill="url(#animeSummitGlow)"/>
 
       <!-- Crisp Vector S-Curve Journey Trail connecting 01 -> 02 -> 03 -> 04 -> 05 -->
       <path d="M 700,660 C 780,610 785,565 764,534 C 735,490 595,485 571,442 C 545,395 740,395 764,349 C 785,305 635,300 612,265 C 590,232 660,205 695,180"
@@ -455,24 +441,11 @@
     </svg>
   `;
 
-  // Rich Separate 2D Anime Asset Decorations (Clouds, Islands, Shrine, Chest, Props, Gems, Floating Kanji)
+  // Stylized 3D Decorative Charms (Chest, Props, Stars, Sakura, 3D Gems & Floating 3D Kanji)
   const skyDecors = `
     <div class="anime-sky-decors" aria-hidden="true">
-      <!-- Fluffy 2D Anime Cloud Layer -->
-      <img src="anime-cloud-1.webp" class="anime-prop cloud c1" alt="">
-      <img src="anime-cloud-2.webp" class="anime-prop cloud c2" alt="">
-      <img src="anime-cloud-3.webp" class="anime-prop cloud c3" alt="">
-      <img src="anime-cloud-3.webp" class="anime-prop cloud c4" alt="">
-      <img src="anime-cloud-1.webp" class="anime-prop cloud c5" alt="">
-
-      <!-- Floating Islands & Japanese Shrine / Treasure Chest -->
-      <img src="anime-island-sakura.webp" class="anime-prop island-left" alt="">
-      <img src="anime-island-crystal.webp" class="anime-prop island-right" alt="">
-      <img src="anime-shrine-cloud.webp" class="anime-prop shrine-top" alt="">
+      <!-- 3D Treasure Chest & Japanese Cultural Charms -->
       <img src="anime-chest.webp" class="anime-prop chest-top" alt="">
-
-      <!-- Japanese Cultural Props & Stars & Sakura -->
-      <img src="anime-brush.webp" class="anime-prop brush-prop" alt="">
       <img src="anime-omamori.webp" class="anime-prop omamori-prop" alt="">
       <img src="anime-lantern.webp" class="anime-prop lantern-prop" alt="">
       <img src="anime-sakura.webp" class="anime-prop sakura-1" alt="">
@@ -480,7 +453,7 @@
       <img src="anime-star.webp" class="anime-prop star-1" alt="">
       <img src="anime-star.webp" class="anime-prop star-2" alt="">
 
-      <!-- 6 Colorful Faceted 2D Anime Gemstones -->
+      <!-- 6 Colorful Faceted 3D Gemstones -->
       <img src="anime-gem-1.webp" class="anime-float-gem g1" alt="">
       <img src="anime-gem-2.webp" class="anime-float-gem g2" alt="">
       <img src="anime-gem-3.webp" class="anime-float-gem g3" alt="">
@@ -488,7 +461,7 @@
       <img src="anime-gem-5.webp" class="anime-float-gem g5" alt="">
       <img src="anime-gem-6.webp" class="anime-float-gem g6" alt="">
 
-      <!-- 8 Floating 2D Anime Kanji Charms -->
+      <!-- 8 Floating 3D Kanji Charms -->
       <div class="anime-float-kanji k1" style="background-image:url('anime-tile-1.webp')" lang="ja">日</div>
       <div class="anime-float-kanji k2" style="background-image:url('anime-tile-4.webp')" lang="ja">月</div>
       <div class="anime-float-kanji k3" style="background-image:url('anime-tile-2.webp')" lang="ja">火</div>
