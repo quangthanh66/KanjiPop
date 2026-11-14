@@ -392,22 +392,22 @@
   const starGraySvg=`<svg class="astro-star-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9z" fill="rgba(148,163,184,0.35)" stroke="rgba(148,163,184,0.65)" stroke-width="1.4" stroke-linejoin="round"/></svg>`;
   const constellations=[
    {
-    // Chương 01: Chòm Thiên Cầm (Lyra - Tam giác cánh sao 02-03-04 dẫn tới Kho báu 05)
-    edges:'0-1,1-2,2-3,1-3,3-4',
+    // Chương 01: Chòm Thiên Cầm (Lyra - Cung trăng uốn lượn một chiều 01 → 05)
+    edges:'0-1,1-2,2-3,3-4',
     desk:[[14,34],[36,24],[62,18],[80,58],[50,76]],
     mob:[[22,18],[70,22],[78,52],[26,52],[54,80]]
    },
    {
-    // Chương 02: Chòm Bắc Đẩu (Big Dipper - Cán gáo 06-07-08 uốn cong tới gầu sao 09-10)
+    // Chương 02: Chòm Bắc Đẩu (Big Dipper - Gáo sao một chiều 06 → 10)
     edges:'0-1,1-2,2-3,3-4',
     desk:[[14,26],[34,42],[54,30],[78,28],[74,72]],
     mob:[[22,17],[70,26],[28,50],[78,54],[56,80]]
    },
    {
-    // Chương 03: Chòm Thiên Nga (Cygnus - Hai cánh 11 & 12 hội tụ tại 13 rồi vươn tới 14-15)
-    edges:'0-2,1-2,2-3,3-4',
-    desk:[[16,56],[36,28],[52,50],[82,36],[68,78]],
-    mob:[[20,50],[36,24],[52,50],[82,42],[64,79]]
+    // Chương 03: Chòm Thiên Nga (Cygnus - Vòm sao vươn cao một chiều 11 → 15)
+    edges:'0-1,1-2,2-3,3-4',
+    desk:[[16,70],[30,38],[54,29],[80,44],[64,76]],
+    mob:[[20,66],[26,38],[54,28],[80,44],[62,78]]
    }
   ];
   const chaptersHtml=C.chapters.map((ch,cIdx)=>{
