@@ -416,7 +416,7 @@
         <div class="astro-moon-glow"></div>
         <img src="astro_assets/astro_moon.webp" class="astro-moon-img" alt="">
       </div>
-      <img src="astro_assets/astro_cloud.webp" class="astro-cloud top-right" alt="">
+      <img src="astro_assets/astro_dial_ring.webp" class="astro-dial-landmark" alt="">
       <img src="astro_assets/astro_cloud.webp" class="astro-cloud mid-left" alt="">
       <img src="astro_assets/astro_cloud.webp" class="astro-cloud left" alt="">
       <img src="vfx_star.png" class="astro-star-spark s1" alt="">
@@ -472,12 +472,11 @@
           </div>
         </div>
 
-        <!-- 5 Orbital Pedestals Around Rotating 3D Astrolabe Ring -->
+        <!-- 5 Orbital Pedestals Connected by Straight Zigzag Constellation Path -->
         <div class="astro-orbit-arena">
-          <img src="astro_assets/astro_dial_ring.webp" class="astro-ring-bg" alt="" aria-hidden="true">
           <svg class="astro-constellation-svg" viewBox="0 0 1000 400" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M 130 224 Q 210 110 310 104 Q 405 245 500 272 Q 595 245 690 104 Q 790 110 870 224" fill="none" stroke="rgba(251, 191, 36, 0.35)" stroke-width="5" stroke-linecap="round"/>
-            <path class="astro-constellation-flow" d="M 130 224 Q 210 110 310 104 Q 405 245 500 272 Q 595 245 690 104 Q 790 110 870 224" fill="none" stroke="rgba(125, 211, 252, 0.9)" stroke-width="3" stroke-linecap="round"/>
+            <path d="M 130 224 L 310 104 L 500 272 L 690 104 L 870 224" fill="none" stroke="rgba(251, 191, 36, 0.42)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="astro-constellation-flow" d="M 130 224 L 310 104 L 500 272 L 690 104 L 870 224" fill="none" stroke="rgba(125, 211, 252, 0.92)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           ${levels.map((l, idx) => {
             const r = profile.results[l.id];

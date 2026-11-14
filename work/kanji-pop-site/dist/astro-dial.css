@@ -3,11 +3,11 @@
    ========================================================================== */
 
 /* 0. Full-Bleed Infinite-Resolution Aurora Cosmos Background & Zero-Border Invariants */
-html,
-body {
+html {
   margin: 0 !important;
   padding: 0 !important;
-  width: 100vw !important;
+  width: 100% !important;
+  height: 100% !important;
   min-height: 100dvh !important;
   border: none !important;
   border-radius: 0 !important;
@@ -18,8 +18,22 @@ body {
     radial-gradient(ellipse 70% 50% at 78% 24%, rgba(168, 85, 247, 0.28) 0%, transparent 65%),
     radial-gradient(ellipse 90% 45% at 50% 92%, rgba(236, 72, 153, 0.18) 0%, transparent 65%),
     linear-gradient(165deg, #06091e 0%, #0e1640 38%, #1b1749 70%, #27104e 100%) !important;
-  background-attachment: fixed !important;
-  overflow-x: hidden !important;
+  background-repeat: no-repeat !important;
+  background-size: 100% 100% !important;
+  overflow: hidden !important;
+}
+
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100vw !important;
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+  border: none !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  background: transparent !important;
+  overflow: hidden !important;
 }
 
 #kp-preview,
@@ -463,23 +477,22 @@ body {
   justify-content: center;
 }
 
-/* Rotating 3D Astrolabe Ring Centerpiece */
-#kanji-pop .astro-ring-bg {
+/* 3D Astrolabe Dial Positioned in Upper-Right Sky (Outside Stages Area) */
+#kanji-pop .astro-dial-landmark {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  width: clamp(280px, 42vh, 420px);
+  right: clamp(22px, 5.5vw, 88px);
+  top: clamp(52px, 8.5vh, 90px);
+  width: clamp(106px, 12.5vw, 178px);
   height: auto;
-  transform: translate(-50%, -50%);
   pointer-events: none;
-  z-index: 1;
-  opacity: 0.48;
-  filter: brightness(0.92) drop-shadow(0 0 32px rgba(56, 189, 248, 0.5));
-  animation: astroRingSpin 90s linear infinite;
+  z-index: 2;
+  opacity: 0.9;
+  filter: drop-shadow(0 0 24px rgba(56, 189, 248, 0.45));
+  animation: astroLandmarkSpin 90s linear infinite;
 }
-@keyframes astroRingSpin {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to { transform: translate(-50%, -50%) rotate(360deg); }
+@keyframes astroLandmarkSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* Constellation Arc SVG */
@@ -792,9 +805,11 @@ body {
   #kanji-pop .astro-chapter-meta {
     font-size: 10px;
   }
-  #kanji-pop .astro-ring-bg {
-    width: 240px;
-    opacity: 0.24;
+  #kanji-pop .astro-dial-landmark {
+    right: 10px;
+    top: 54px;
+    width: 64px;
+    opacity: 0.85;
   }
   #kanji-pop .astro-constellation-svg {
     display: none;
