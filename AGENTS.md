@@ -229,7 +229,13 @@ Các script kiểm thử sử dụng Playwright headless để kiểm tra trực
 5. **Hoàn thiện Lắp ghép & Kiểm thử Tự động (100% Pass)**:
    - Đã cập nhật `dist/index.html`, `dist/n5-game.js`, và `dist/journey-map.css` sử dụng bộ 16 file 3D asset trên.
    - Đã kiểm tra thực tế trên 6 độ phân giải (`1920x1080`, `1440x900`, `1366x768`, `1280x720`, `390x844`, `360x740`): **0 thanh cuộn dọc/ngang (`hasScroll = false`), 0 chồng lấp (`overlapsNav = false`)**.
-   - Đã chạy và vượt qua 100% toàn bộ các bộ test Playwright (`ui-shell-check.cjs`, `verify-three-features.cjs`, `audio-settings-check.cjs`).
+6. **Xử lý triệt để 2 dải màu xanh trong màn chơi In-Game (`#play-screen`) & Chuyển hoàn toàn sang Cloud**:
+   - Người dùng phản ánh: *"phần in game bị thừa 2 dãy màu xanh (như ảnh). Tôi ko cần handle trên local nữa nên là nếu bạn có đang run gì đó trên local thì hãy stop đi"*.
+   - Đã dừng toàn bộ tiến trình chạy ngầm Node local (`manage_task kill`, xác nhận `ps aux` không còn tiến trình nào).
+   - Xác định nguyên nhân: `html, body` và `#kp-preview` trong `responsive.css` và `mobile-fullscreen.css` thiết lập màu nền cyan (`#61ccf5`, `#69cef3`, `linear-gradient(#6dd7fa, #62c4f2)`), trong khi container `#kanji-pop` bị giới hạn `max-width: min(96vw, 2200px)` trên desktop và `height: auto` trên mobile, làm lộ 2 dải xanh ở 2 bên và ở đáy.
+   - Đã áp dụng quy tắc Full-Bleed bất biến tại `gems-gui.css`: gán `html, body, #kp-preview` và `#kanji-pop` trải dài 100vw × 100dvh với hình nền pastel mây trời `gems_gui_assets/gui_bg.png` cố định (`fixed cover`). Loại bỏ toàn bộ gradient cyan thừa.
+   - Đã kiểm tra trực quan (Quy tắc 7) bằng Playwright/Chrome headless trên Desktop (1920px, 1440px, 1280px) và Mobile (390px, 360px): 2 dải màu xanh đã biến mất hoàn toàn 100%, hình nền mây trời phủ kín toàn bộ màn hình mượt mà không tì vết.
+   - Tự động commit và push lên nhánh `main` để GitHub Actions deploy trực tiếp lên GitHub Pages: `https://quangthanh66.github.io/KanjiPop/`.
 
 ---
 
@@ -239,3 +245,4 @@ Khi nhận yêu cầu tiếp tục phát triển trên thiết bị mới, bạn
 1. **Đồng bộ phong cách 3D Cozy Casual sang màn hình Chơi (`#play-screen`) hoặc Album (`#album-screen`)** nếu người dùng muốn mở rộng chủ đề đất sét/kẹo 3D sang các màn hình còn lại.
 2. **PWA (Progressive Web App)**: Bổ sung `manifest.json` và `service-worker.js` để người dùng có thể "Cài đặt vào màn hình chính" (Add to Home Screen) trên iPhone và Android để chơi offline hoàn toàn.
 3. **Mở rộng nội dung Giáo trình Kanji N4/N3**: Bổ sung thêm các chương ôn tập hoặc chế độ giải đố nâng cao.
+
