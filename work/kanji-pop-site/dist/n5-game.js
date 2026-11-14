@@ -392,21 +392,21 @@
   const starGraySvg=`<svg class="astro-star-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9z" fill="rgba(148,163,184,0.35)" stroke="rgba(148,163,184,0.65)" stroke-width="1.4" stroke-linejoin="round"/></svg>`;
   const constellations=[
    {
-    // Chương 01: Chòm Thiên Cầm (Lyra - Khung diều tinh thể khép kín + sao đuôi)
-    edges:'0-1,1-2,2-3,3-4,4-1',
-    desk:[[14,34],[38,24],[66,26],[80,62],[48,68]],
-    mob:[[22,18],[70,22],[78,52],[52,78],[22,52]]
+    // Chương 01: Chòm Thiên Cầm (Lyra - Tam giác cánh sao 02-03-04 dẫn tới Kho báu 05)
+    edges:'0-1,1-2,2-3,1-3,3-4',
+    desk:[[14,34],[36,24],[62,18],[80,58],[50,76]],
+    mob:[[22,18],[70,22],[78,52],[26,52],[54,80]]
    },
    {
-    // Chương 02: Chòm Bắc Đẩu (Big Dipper - Tay cầm + Gáo sao tam giác)
-    edges:'0-1,1-2,2-3,3-4,4-2',
-    desk:[[14,28],[33,48],[52,32],[82,24],[72,70]],
+    // Chương 02: Chòm Bắc Đẩu (Big Dipper - Cán gáo 06-07-08 uốn cong tới gầu sao 09-10)
+    edges:'0-1,1-2,2-3,3-4',
+    desk:[[14,26],[34,42],[54,30],[78,28],[74,72]],
     mob:[[22,17],[70,26],[28,50],[78,54],[56,80]]
    },
    {
-    // Chương 03: Chòm Thiên Nga (Cygnus - Ngôi sao chữ thập tỏa cánh nghiêng)
-    edges:'0-2,1-2,2-3,2-4',
-    desk:[[16,56],[36,28],[52,50],[84,38],[66,78]],
+    // Chương 03: Chòm Thiên Nga (Cygnus - Hai cánh 11 & 12 hội tụ tại 13 rồi vươn tới 14-15)
+    edges:'0-2,1-2,2-3,3-4',
+    desk:[[16,56],[36,28],[52,50],[82,36],[68,78]],
     mob:[[20,50],[36,24],[52,50],[82,42],[64,79]]
    }
   ];
