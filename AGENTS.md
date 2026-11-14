@@ -75,6 +75,12 @@
 * AI chỉ được phép thực thi lệnh `git push` **khi và chỉ khi có yêu cầu trực tiếp, rõ ràng từ người dùng** (ví dụ: *"hãy push lên github"*, *"push code đi"*, v.v.).
 * Mọi thao tác sửa đổi, kiểm thử tự động hay tạo local commit có thể thực hiện trên máy cục bộ, nhưng bước đẩy lên remote luôn phải chờ lệnh của người dùng.
 
+### Quy tắc 7: Bắt Buộc Kiểm Tra Trực Quan Triệt Để Chống Cắt Xén UI (Zero-Clipping & Visual Verification Invariant)
+* **Yêu cầu bất biến bắt buộc**: Mỗi khi xử lý xong bất kỳ yêu cầu nào liên quan đến UI/Giao diện (thay đổi asset, CSS, layout, thêm nút, sửa font, icon, hiệu ứng...):
+  - **BẮT BUỘC chụp ảnh màn hình và kiểm tra trực quan chi tiết (visual inspection)** trên cả môi trường Desktop (1280px / 1440px / 1920px) và Mobile (390px / 360px).
+  - **Soi xét kỹ từng thành phần**: Đảm bảo toàn bộ các asset đồ họa (ngôi sao, đá quý, nút bấm, biểu tượng, khung viền, nhãn chữ...) đều hiển thị trọn vẹn 100%, không bị cắt ngang đầu (flat top), không bị xén cạnh, không bị mất góc, không bị `overflow: hidden` chém vào bounding box của sprite, và không có hiện tượng co giật/lệch tâm.
+  - **Chỉ bàn giao kết quả cho người dùng khi đã tự mình xác thực trực quan 100% không còn thành phần nào bị cắt xén.**
+
 ---
 
 ## 4. 🗺️ Bản Đồ Thư Mục & Trách Nhiệm Từng File (File Architecture)

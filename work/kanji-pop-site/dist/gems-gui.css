@@ -335,21 +335,33 @@
 /* 3 Stars Rack Under Button */
 #kanji-pop .gui-lvl-stars {
   position: absolute;
-  bottom: clamp(-8px, -1vw, -10px);
+  bottom: clamp(-9px, -1.2vw, -12px);
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   gap: 1.5px;
   pointer-events: none;
+  overflow: visible !important;
+  z-index: 10;
 }
 #kanji-pop .gui-lvl-stars img {
-  width: clamp(10px, 1.2vw, 15px);
-  height: auto;
-  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
+  width: clamp(12px, 1.5vw, 18px);
+  height: clamp(12px, 1.5vw, 18px);
+  object-fit: contain;
+  filter: drop-shadow(0 1.5px 2px rgba(0,0,0,0.5));
+  display: block;
+}
+#kanji-pop .gui-lvl-stars img:nth-child(1) {
+  transform: translateY(-2px) rotate(-8deg);
 }
 #kanji-pop .gui-lvl-stars img:nth-child(2) {
-  transform: translateY(-1.5px);
-  width: clamp(11px, 1.35vw, 17px);
+  transform: translateY(1.5px);
+  width: clamp(14px, 1.75vw, 21px);
+  height: clamp(14px, 1.75vw, 21px);
+  z-index: 2;
+}
+#kanji-pop .gui-lvl-stars img:nth-child(3) {
+  transform: translateY(-2px) rotate(8deg);
 }
 
 /* Selected / Active Playable Level Highlight */
