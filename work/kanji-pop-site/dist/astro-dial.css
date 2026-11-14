@@ -12,12 +12,11 @@ html {
   border: none !important;
   border-radius: 0 !important;
   outline: none !important;
-  background-color: #070b24 !important;
+  background-color: #010104 !important;
   background-image:
-    radial-gradient(ellipse 80% 55% at 22% 18%, rgba(56, 189, 248, 0.24) 0%, transparent 65%),
-    radial-gradient(ellipse 70% 50% at 78% 24%, rgba(168, 85, 247, 0.28) 0%, transparent 65%),
-    radial-gradient(ellipse 90% 45% at 50% 92%, rgba(236, 72, 153, 0.18) 0%, transparent 65%),
-    linear-gradient(165deg, #06091e 0%, #0e1640 38%, #1b1749 70%, #27104e 100%) !important;
+    radial-gradient(ellipse 80% 55% at 22% 18%, rgba(24, 24, 48, 0.16) 0%, transparent 65%),
+    radial-gradient(ellipse 70% 50% at 78% 24%, rgba(28, 20, 46, 0.14) 0%, transparent 65%),
+    linear-gradient(165deg, #000002 0%, #020207 42%, #04040b 75%, #010104 100%) !important;
   background-repeat: no-repeat !important;
   background-size: 100% 100% !important;
   overflow: hidden !important;
@@ -126,7 +125,7 @@ body {
   width: 124%;
   height: 55%;
   filter: blur(18px);
-  opacity: 0.9;
+  opacity: 0.16;
 }
 
 #kanji-pop .astro-horizon-svg {
@@ -677,7 +676,6 @@ body {
   text-align: center;
   transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
   overflow: visible;
-  filter: drop-shadow(0 6px 14px rgba(2, 6, 23, 0.78));
 }
 #kanji-pop#kanji-pop .astro-node:hover:not(:disabled) {
   transform: translate(-50%, -54%) scale(1.07);
@@ -775,14 +773,13 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  background: rgba(15, 23, 42, 0.94);
-  border: 1.5px solid rgba(251, 191, 36, 0.72);
+  background: rgba(5, 6, 14, 0.96);
+  border: 1.5px solid rgba(251, 191, 36, 0.78);
   border-radius: 9999px;
   padding: 3px 11px;
   margin-top: 3px;
   max-width: clamp(130px, 16vw, 215px);
-  box-shadow: 0 4px 14px rgba(2, 6, 23, 0.72), 0 0 12px rgba(56, 189, 248, 0.35);
-  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.85), 0 0 12px rgba(56, 189, 248, 0.32);
 }
 #kanji-pop .astro-node.active .astro-label {
   background: linear-gradient(180deg, #be185d, #831843);
@@ -797,7 +794,8 @@ body {
 #kanji-pop .astro-title {
   font-size: clamp(10px, 0.92vw, 11.8px);
   font-weight: 800;
-  color: #f8fafc;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

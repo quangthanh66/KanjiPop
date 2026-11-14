@@ -555,8 +555,8 @@
           <path d="M -40 240 C 260 110, 520 290, 860 160 C 1100 70, 1280 210, 1480 120 L 1480 340 C 1220 260, 1020 350, 740 250 C 460 160, 220 320, -40 290 Z" fill="url(#astroAuroraGrad)"/>
         </svg>
         <svg class="astro-horizon-svg" viewBox="0 0 1440 220" preserveAspectRatio="none">
-          <path d="M 0 220 L 0 140 Q 180 75 360 135 T 760 115 T 1140 130 T 1440 95 L 1440 220 Z" fill="rgba(15, 23, 42, 0.48)"/>
-          <path d="M 0 220 L 0 165 Q 240 115 480 165 T 960 150 T 1440 135 L 1440 220 Z" fill="rgba(7, 11, 36, 0.72)"/>
+          <path d="M 0 220 L 0 140 Q 180 75 360 135 T 760 115 T 1140 130 T 1440 95 L 1440 220 Z" fill="rgba(5, 6, 14, 0.65)"/>
+          <path d="M 0 220 L 0 165 Q 240 115 480 165 T 960 150 T 1440 135 L 1440 220 Z" fill="rgba(1, 1, 5, 0.88)"/>
         </svg>
       </div>
       <div class="astro-parallax-near">
