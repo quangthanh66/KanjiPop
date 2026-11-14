@@ -389,68 +389,66 @@
   const totalStars = C.levels.reduce((acc,l)=>acc+(profile.results[l.id]?.stars||0),0);
   const maxTotalStars = C.levels.length * 3;
 
+  const starGoldSvg = `<svg class="zen-star-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9z" fill="#fbbf24" stroke="#b45309" stroke-width="1.4" stroke-linejoin="round"/></svg>`;
+  const starGraySvg = `<svg class="zen-star-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9z" fill="rgba(148,163,184,0.45)" stroke="rgba(71,85,105,0.55)" stroke-width="1.4" stroke-linejoin="round"/></svg>`;
+
   $('#map-screen').innerHTML = `
-    <!-- Top HUD (Gems Free GUI Style) -->
-    <header class="gui-top-hud">
-      <div class="gui-hud-group">
-        <button type="button" class="gui-round-btn ${sound?'active':'muted'}" data-sound-toggle aria-label="Bật/Tắt âm thanh">
-          <img src="gems_gui_assets/btn_sound_round.png" alt="Sound">
+    <div class="zen-petals" aria-hidden="true">
+      <span class="zen-petal"></span><span class="zen-petal"></span><span class="zen-petal"></span><span class="zen-petal"></span><span class="zen-petal"></span>
+    </div>
+
+    <!-- Top Zen HUD -->
+    <header class="zen-top-hud">
+      <div class="zen-hud-group">
+        <button type="button" class="zen-icon-btn ${sound?'active':'muted'}" data-sound-toggle aria-label="Bật/Tắt âm thanh">
+          <i data-lucide="${sound?'volume-2':'volume-x'}" aria-hidden="true"></i>
         </button>
-        <button type="button" class="gui-round-btn ${sound?'active':'muted'}" data-music-toggle aria-label="Bật/Tắt nhạc nền">
-          <img src="gems_gui_assets/btn_music_round.png" alt="Music">
+        <button type="button" class="zen-icon-btn ${sound?'active':'muted'}" data-music-toggle aria-label="Bật/Tắt nhạc nền">
+          <i data-lucide="music" aria-hidden="true"></i>
         </button>
       </div>
 
-      <div class="gui-title-wrap">
-        <img src="kanjidle-logo.png" class="gui-title-img" alt="Kanjidle">
-        <button type="button" class="gui-mode-pill" data-switch-grade="${currentGrade==='N5'?'N4':'N5'}" aria-label="Đổi cấp độ">
+      <div class="zen-title-wrap">
+        <img src="kanjidle-logo.png" class="zen-title-img" alt="Kanjidle">
+        <button type="button" class="zen-mode-pill" data-switch-grade="${currentGrade==='N5'?'N4':'N5'}" aria-label="Đổi cấp độ">
           <span>JLPT ${currentGrade}</span> · <span>★ ${totalStars}/${maxTotalStars}</span>
         </button>
       </div>
 
-      <div class="gui-hud-group">
-        <button type="button" class="gui-round-btn" data-journey-menu aria-label="Cài đặt & Hướng dẫn">
-          <img src="gems_gui_assets/btn_gear.png" alt="Settings">
+      <div class="zen-hud-group">
+        <button type="button" class="zen-icon-btn" data-journey-menu aria-label="Cài đặt & Hướng dẫn">
+          <i data-lucide="settings" aria-hidden="true"></i>
         </button>
-        <button type="button" class="gui-round-btn" data-journey-album aria-label="Bộ sưu tập chữ Kanji">
-          <img src="gems_gui_assets/btn_trophy.png" alt="Album">
+        <button type="button" class="zen-icon-btn" data-journey-album aria-label="Bộ sưu tập chữ Kanji">
+          <i data-lucide="trophy" aria-hidden="true"></i>
         </button>
       </div>
     </header>
 
-    <!-- Main Stage: Hanging Level Selection Window (Gems Free GUI Style) -->
-    <main class="gui-stage-center">
-      <button type="button" class="gui-nav-arrow" data-chapter-step="-1" ${mapChapter===0?'disabled':''} aria-label="Chương trước">
-        <img src="gems_gui_assets/arrow_left.png" alt="◀">
+    <!-- Center Zen Courtyard Diorama -->
+    <main class="zen-stage-center">
+      <button type="button" class="zen-nav-arrow" data-chapter-step="-1" ${mapChapter===0?'disabled':''} aria-label="Chương trước">
+        <i data-lucide="chevron-left" aria-hidden="true"></i>
       </button>
 
-      <div class="gui-card-box">
-        <!-- Hanging Bow Ties -->
-        <svg class="gui-bow-knot left" viewBox="0 0 24 18" fill="#ffffff" aria-hidden="true">
-          <path d="M 12 9 C 6 2 0 4 2 9 C 4 14 10 10 12 9 Z M 12 9 C 18 2 24 4 22 9 C 20 14 14 10 12 9 Z"/>
-          <circle cx="12" cy="9" r="2.5"/>
-        </svg>
-        <svg class="gui-bow-knot right" viewBox="0 0 24 18" fill="#ffffff" aria-hidden="true">
-          <path d="M 12 9 C 6 2 0 4 2 9 C 4 14 10 10 12 9 Z M 12 9 C 18 2 24 4 22 9 C 20 14 14 10 12 9 Z"/>
-          <circle cx="12" cy="9" r="2.5"/>
-        </svg>
-
-        <!-- 3D Header Ribbon -->
-        <div class="gui-card-header">
-          <div class="gui-header-ribbon">
-            <span class="gui-header-title">${I18N.t('chapter')} ${String(mapChapter+1).padStart(2,'0')} · ${chapter.name}</span>
+      <div class="zen-courtyard">
+        <div class="zen-chapter-header">
+          <div class="zen-noren-banner">
+            <span class="zen-noren-title">${I18N.t('chapter')} ${String(mapChapter+1).padStart(2,'0')} · ${chapter.name}</span>
           </div>
         </div>
 
-        <div class="gui-chapter-meta">
-          <span class="gui-chapter-progress">${done}/${levels.length} màn hoàn thành</span>
-          <span class="gui-chapter-stars">★ ${levels.reduce((acc,l)=>acc+(profile.results[l.id]?.stars||0),0)}/${levels.length*3}</span>
+        <div class="zen-chapter-meta">
+          <span>${done}/${levels.length} màn hoàn thành</span>
+          <span class="zen-chapter-stars">★ ${levels.reduce((acc,l)=>acc+(profile.results[l.id]?.stars||0),0)}/${levels.length*3}</span>
         </div>
 
-        <!-- 5 Floating Gemstone Islands for Current Chapter -->
-        <div class="gui-island-map">
-          <svg class="gui-island-path-desktop" viewBox="0 0 800 260" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M 80 150 C 165 150, 175 85, 240 85 C 305 85, 335 160, 400 160 C 465 160, 495 85, 560 85 C 625 85, 645 140, 720 140" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="5" stroke-linecap="round" stroke-dasharray="10 10"/>
+        <!-- 5 Mossy Stone Shrine Pedestals + Torii Gate -->
+        <div class="zen-path-map">
+          <img src="zen_assets/zen_torii_gate.webp" class="zen-torii-backdrop" alt="" aria-hidden="true">
+          <svg class="zen-path-svg" viewBox="0 0 800 260" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M 80 150 C 165 150, 175 90, 240 90 C 305 90, 335 155, 400 155 C 465 155, 495 90, 560 90 C 625 90, 645 140, 720 140" fill="none" stroke="rgba(255, 251, 235, 0.85)" stroke-width="6" stroke-linecap="round" stroke-dasharray="10 10"/>
+            <path d="M 80 150 C 165 150, 175 90, 240 90 C 305 90, 335 155, 400 155 C 465 155, 495 90, 560 90 C 625 90, 645 140, 720 140" fill="none" stroke="rgba(217, 119, 6, 0.4)" stroke-width="2" stroke-linecap="round" stroke-dasharray="10 10"/>
           </svg>
           ${levels.map((l, idx) => {
             const r = profile.results[l.id];
@@ -459,70 +457,71 @@
             const starCount = r ? r.stars : 0;
             const pairIdx = (l.id * 3 + 2) % 7;
             const featuredKanji = l.targets && l.targets[0] ? l.targets[0] : (l.id + 1);
-            const starsHtml = isLocked
-              ? `<img src="gems_gui_assets/star_gray.png" alt=""><img src="gems_gui_assets/star_gray.png" alt=""><img src="gems_gui_assets/star_gray.png" alt="">`
-              : `${'<img src="gems_gui_assets/star_gold.png" alt="★">'.repeat(starCount)}${'<img src="gems_gui_assets/star_gray.png" alt="☆">'.repeat(3 - starCount)}`;
+            const starsHtml = [0, 1, 2].map(si => {
+              const filled = !isLocked && si < starCount;
+              const svg = filled ? starGoldSvg : starGraySvg;
+              return si === 1 ? svg.replace('class="zen-star-svg"', 'class="zen-star-svg center"') : svg;
+            }).join('');
 
             const statusBadge = isLocked
-              ? `<span class="gui-island-badge locked">🔒</span>`
+              ? `<span class="zen-badge locked">🔒</span>`
               : r
-                ? `<span class="gui-island-badge done">✓</span>`
+                ? `<span class="zen-badge done">✓</span>`
                 : l.review
-                  ? `<span class="gui-island-badge review">ÔN</span>`
-                  : `<span class="gui-island-badge play">MỚI</span>`;
+                  ? `<span class="zen-badge review">ÔN</span>`
+                  : `<span class="zen-badge play">MỚI</span>`;
 
-            return `<button type="button" class="gui-island-node island-pos-${idx} ${isLocked ? 'locked' : ''} ${current ? 'active' : ''} ${r ? 'completed' : ''}" data-journey-level="${l.id}" ${isLocked ? 'disabled' : ''} aria-pressed="${current}" aria-label="Màn ${l.id+1}: ${l.title}${isLocked ? ', chưa mở khóa' : r ? ', ' + r.stars + ' sao' : ''}">
-              <div class="gui-island-float">
+            return `<button type="button" class="zen-node zen-pos-${idx} ${isLocked ? 'locked' : ''} ${current ? 'active' : ''} ${r ? 'completed' : ''}" data-journey-level="${l.id}" ${isLocked ? 'disabled' : ''} aria-pressed="${current}" aria-label="Màn ${l.id+1}: ${l.title}${isLocked ? ', chưa mở khóa' : r ? ', ' + r.stars + ' sao' : ''}">
+              <div class="zen-pedestal-stack">
                 ${statusBadge}
-                <div class="gui-island-gem-wrap">
-                  <span class="gui-showcase-gem result-gem" data-pair="${pairIdx}" style="--gem-label-y:${KanjiGemArt.cutFor(pairIdx).labelY}%">
+                <div class="zen-gem-float">
+                  <span class="zen-gem-icon result-gem" data-pair="${pairIdx}" style="--gem-label-y:${KanjiGemArt.cutFor(pairIdx).labelY}%">
                     ${KanjiGemArt.render(pairIdx, 'map-gem-' + l.id)}
                     <span class="result-glyph" lang="ja">${isLocked ? '?' : featuredKanji}</span>
                   </span>
                 </div>
-                <div class="gui-island-pedestal" aria-hidden="true">
-                  <span class="gui-island-grass"></span>
-                  <span class="gui-island-rock"></span>
-                  <span class="gui-island-cloud"></span>
-                </div>
+                <img src="zen_assets/zen_pedestal.webp" class="zen-pedestal-img" alt="" aria-hidden="true">
               </div>
-              <div class="gui-island-label">
-                <span class="gui-island-num">${String(l.id+1).padStart(2,'0')}</span>
-                <span class="gui-island-title">${l.title}</span>
+              <div class="zen-label">
+                <span class="zen-num">${String(l.id+1).padStart(2,'0')}</span>
+                <span class="zen-title">${l.title}</span>
               </div>
-              <div class="gui-lvl-stars" aria-hidden="true">
+              <div class="zen-stars" aria-hidden="true">
                 ${starsHtml}
               </div>
             </button>`;
           }).join('')}
         </div>
 
-        <!-- Pagination Dots (Chapters 1-3) -->
-        <div class="gui-pagination-dots">
-          <span class="gui-dot ${mapChapter===0?'active':''}" data-chapter-step="${0-mapChapter}"></span>
-          <span class="gui-dot ${mapChapter===1?'active':''}" data-chapter-step="${1-mapChapter}"></span>
-          <span class="gui-dot ${mapChapter===2?'active':''}" data-chapter-step="${2-mapChapter}"></span>
+        <div class="zen-dots">
+          <span class="zen-dot ${mapChapter===0?'active':''}" data-chapter-step="${0-mapChapter}"></span>
+          <span class="zen-dot ${mapChapter===1?'active':''}" data-chapter-step="${1-mapChapter}"></span>
+          <span class="zen-dot ${mapChapter===2?'active':''}" data-chapter-step="${2-mapChapter}"></span>
         </div>
       </div>
 
-      <button type="button" class="gui-nav-arrow" data-chapter-step="1" ${mapChapter===2?'disabled':''} aria-label="Chương tiếp theo">
-        <img src="gems_gui_assets/arrow_right.png" alt="▶">
+      <button type="button" class="zen-nav-arrow" data-chapter-step="1" ${mapChapter===2?'disabled':''} aria-label="Chương tiếp theo">
+        <i data-lucide="chevron-right" aria-hidden="true"></i>
       </button>
     </main>
 
-    <!-- Bottom Action Dock (Gems Free GUI Style) -->
-    <footer class="gui-bottom-dock">
-      <button type="button" class="gui-dock-btn" data-switch-grade="${currentGrade==='N5'?'N4':'N5'}" aria-label="Chuyển JLPT N5 / N4">
-        <img src="gems_gui_assets/btn_home.png" alt="Grade">
+    <!-- Bottom Hinoki-Washi Action Dock -->
+    <footer class="zen-bottom-dock">
+      <button type="button" class="zen-dock-btn" data-switch-grade="${currentGrade==='N5'?'N4':'N5'}" aria-label="Chuyển JLPT N5 / N4">
+        <i data-lucide="layers" aria-hidden="true"></i>
+        <span>${currentGrade}</span>
       </button>
-      <button type="button" class="gui-dock-btn" data-daily-play aria-label="Thử thách hàng ngày">
-        <img src="gems_gui_assets/btn_gamepad.png" alt="Daily">
+      <button type="button" class="zen-dock-btn" data-daily-play aria-label="Thử thách hàng ngày">
+        <i data-lucide="calendar" aria-hidden="true"></i>
+        <span>Hôm nay</span>
       </button>
-      <button type="button" class="gui-dock-btn" data-journey-album aria-label="Album chữ Kanji (${profile.collected.length}/24)">
-        <img src="gems_gui_assets/btn_trophy.png" alt="Album">
+      <button type="button" class="zen-dock-btn" data-journey-album aria-label="Album chữ Kanji (${profile.collected.length}/24)">
+        <i data-lucide="book-open" aria-hidden="true"></i>
+        <span>Album ${profile.collected.length}/24</span>
       </button>
-      <button type="button" class="gui-dock-btn play-btn" data-main="${action}" ${locked?'disabled':''} aria-label="${resume?'Tiếp tục':'Chơi'} màn ${mapSelected+1}">
-        <img src="gems_gui_assets/btn_play_pink.png" alt="Play">
+      <button type="button" class="zen-dock-play" data-main="${action}" ${locked?'disabled':''} aria-label="${label}">
+        <i data-lucide="play" aria-hidden="true"></i>
+        <span>${label}</span>
       </button>
     </footer>
   `;
