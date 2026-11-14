@@ -458,27 +458,33 @@ body {
   overflow: visible;
 }
 
-/* Chapter Banner */
-#kanji-pop .astro-chapter-bar {
+/* Chapter Divider Banner inside Continuous Vertical Track */
+#kanji-pop .astro-chapter-divider {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  z-index: 12;
-  flex: none;
+  z-index: 6;
+  width: max-content;
+  max-width: calc(100% - 24px);
+  pointer-events: none;
 }
 #kanji-pop .astro-chapter-pill {
-  background: linear-gradient(90deg, rgba(15, 23, 42, 0.88), rgba(30, 58, 138, 0.88), rgba(15, 23, 42, 0.88));
+  background: linear-gradient(90deg, rgba(15, 23, 42, 0.92), rgba(30, 58, 138, 0.92), rgba(15, 23, 42, 0.92));
   border: 1.5px solid #fbbf24;
   border-radius: 9999px;
-  padding: 4px clamp(16px, 2.8vw, 30px) 5px;
+  padding: 5px clamp(16px, 2.8vw, 30px) 6px;
   color: #fef3c7;
   font-family: 'Nunito', sans-serif;
   font-weight: 900;
   font-size: clamp(11px, 1.2vw, 14px);
   letter-spacing: 0.7px;
   text-transform: uppercase;
-  box-shadow: 0 0 18px rgba(56, 189, 248, 0.35);
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.35), 0 4px 12px rgba(2, 6, 23, 0.65);
+  white-space: nowrap;
 }
 #kanji-pop .astro-chapter-meta {
   display: flex;
@@ -487,6 +493,7 @@ body {
   font-size: clamp(10.5px, 0.95vw, 12px);
   font-weight: 800;
   color: #bae6fd;
+  text-shadow: 0 2px 6px rgba(2, 6, 23, 0.9);
 }
 #kanji-pop .astro-chapter-stars {
   color: #fde047;
@@ -515,7 +522,62 @@ body {
 #kanji-pop .astro-vertical-track {
   position: relative;
   width: 100%;
-  height: 840px;
+}
+
+/* Animated "More Stages Below" Scroll Cue Button */
+#kanji-pop#kanji-pop .astro-scroll-more-btn {
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  transform: translateX(-50%);
+  z-index: 16;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 36px;
+  padding: 0 16px 0 18px;
+  border-radius: 9999px;
+  border: 1.5px solid #fbbf24;
+  background: linear-gradient(180deg, rgba(30, 58, 138, 0.92) 0%, rgba(15, 23, 42, 0.96) 100%);
+  color: #fef3c7;
+  font-family: 'Nunito', sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.45), 0 6px 16px rgba(2, 6, 23, 0.65);
+  animation: astroScrollGlow 2.2s ease-in-out infinite;
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+#kanji-pop#kanji-pop .astro-scroll-more-btn:hover {
+  border-color: #38bdf8;
+  color: #ffffff;
+}
+#kanji-pop#kanji-pop .astro-scroll-more-btn.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(10px);
+}
+#kanji-pop .astro-scroll-more-chevrons {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  color: #38bdf8;
+  animation: astroChevronBounce 1.35s ease-in-out infinite;
+}
+#kanji-pop .astro-scroll-more-chevrons svg {
+  width: 18px;
+  height: 18px;
+}
+@keyframes astroScrollGlow {
+  0%, 100% { box-shadow: 0 0 14px rgba(56, 189, 248, 0.4), 0 6px 14px rgba(2, 6, 23, 0.65); }
+  50% { box-shadow: 0 0 24px rgba(251, 191, 36, 0.72), 0 0 10px rgba(56, 189, 248, 0.6), 0 6px 16px rgba(2, 6, 23, 0.7); }
+}
+@keyframes astroChevronBounce {
+  0%, 100% { transform: translateY(-2px); }
+  50% { transform: translateY(3px); }
 }
 
 /* 3D Astrolabe Dial Positioned in Upper-Right Sky (Outside Stages Area) */
@@ -546,9 +608,11 @@ body {
   z-index: 1;
 }
 
-/* 5 Stage Pedestal Nodes Arranged Vertically in a Winding Path */
+/* 15 Stage Pedestal Nodes Arranged Vertically in One Continuous Winding Path */
 #kanji-pop#kanji-pop .astro-node {
   position: absolute;
+  left: var(--node-x-desk, 50%);
+  top: var(--node-y, 0px);
   z-index: 5;
   transform: translate(-50%, -50%);
   display: flex;
@@ -573,13 +637,6 @@ body {
   opacity: 1;
   cursor: default;
 }
-
-/* Vertical Zigzag Coordinates (Top -> Bottom) */
-#kanji-pop .astro-node.astro-pos-0 { left: 34%; top: 14%; }
-#kanji-pop .astro-node.astro-pos-1 { left: 66%; top: 32%; }
-#kanji-pop .astro-node.astro-pos-2 { left: 34%; top: 50%; }
-#kanji-pop .astro-node.astro-pos-3 { left: 66%; top: 68%; }
-#kanji-pop .astro-node.astro-pos-4 { left: 50%; top: 86%; }
 
 /* Pedestal + Gem Stack */
 #kanji-pop .astro-pedestal-stack {
@@ -854,14 +911,15 @@ body {
     width: 64px;
     opacity: 0.85;
   }
-  #kanji-pop .astro-vertical-track {
-    height: 760px;
+  #kanji-pop#kanji-pop .astro-node {
+    left: var(--node-x-mob, 50%);
   }
-  #kanji-pop .astro-node.astro-pos-0 { left: 29%; top: 14%; }
-  #kanji-pop .astro-node.astro-pos-1 { left: 71%; top: 32%; }
-  #kanji-pop .astro-node.astro-pos-2 { left: 29%; top: 50%; }
-  #kanji-pop .astro-node.astro-pos-3 { left: 71%; top: 68%; }
-  #kanji-pop .astro-node.astro-pos-4 { left: 50%; top: 86%; }
+  #kanji-pop#kanji-pop .astro-scroll-more-btn {
+    height: 32px;
+    padding: 0 12px 0 14px;
+    font-size: 11px;
+    bottom: 6px;
+  }
   #kanji-pop .astro-gem-float {
     margin-bottom: -18px;
   }

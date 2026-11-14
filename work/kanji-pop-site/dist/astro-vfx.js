@@ -286,11 +286,11 @@
       ctx.stroke();
 
       // 2. Multi-Layered Sinusoidal Flowing Energy Ribbons (Target-VFX style)
-      const streamCount = 3;
-      const ribbonLen = 0.28;
-      const steps = 36;
+      const streamCount = 6;
+      const ribbonLen = 0.11;
+      const steps = 34;
       for (let sIdx = 0; sIdx < streamCount; sIdx++) {
-        const head = ((t * 0.14 + sIdx / streamCount) % 1 + 1) % 1;
+        const head = ((t * 0.065 + sIdx / streamCount) % 1 + 1) % 1;
         const tail = head - ribbonLen;
 
         for (let layer = 0; layer < 3; layer++) {
@@ -339,7 +339,7 @@
         }
 
         // Luminous Head Orb
-        const hPos = samplePath(Math.max(0, Math.min(1, head - 0.015)));
+        const hPos = samplePath(Math.max(0, Math.min(1, head - 0.008)));
         const orbR = 11;
         const orb = ctx.createRadialGradient(hPos.x, hPos.y, 0, hPos.x, hPos.y, orbR);
         orb.addColorStop(0, 'rgba(255, 255, 255, 0.92)');
@@ -350,10 +350,10 @@
       }
 
       // 3. Drifting Micro-Sparks Along Energy Stream
-      const sparkCount = 16;
+      const sparkCount = 36;
       for (let i = 0; i < sparkCount; i++) {
         const life = ((t * 0.45 + i * 0.618) % 1 + 1) % 1;
-        const u = ((t * 0.08 + i / sparkCount) % 1 + 1) % 1;
+        const u = ((t * 0.04 + i / sparkCount) % 1 + 1) % 1;
         const p = samplePath(u);
         const dir = (i % 2 === 0 ? 1 : -1);
         const drift = dir * (4 + 12 * life);

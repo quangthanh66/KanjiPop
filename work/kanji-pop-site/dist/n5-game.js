@@ -387,129 +387,87 @@
   return {next,ongoing,recommended,chapter,levels,done,selectedLevel,locked,resume,result,action,label};
  }
  function buildDialStageHtml(ms){
-  const {next,chapter,levels,done}=ms;
+  const {next}=ms;
   const starGoldSvg=`<svg class="astro-star-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9z" fill="#fbbf24" stroke="#b45309" stroke-width="1.4" stroke-linejoin="round"/></svg>`;
   const starGraySvg=`<svg class="astro-star-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9z" fill="rgba(148,163,184,0.35)" stroke="rgba(148,163,184,0.65)" stroke-width="1.4" stroke-linejoin="round"/></svg>`;
+  const chStride=930;
+  const trackHeight=38+C.chapters.length*chStride+30;
+  const chaptersHtml=C.chapters.map((ch,cIdx)=>{
+   const chLevels=C.levels.filter(l=>l.chapter===cIdx);
+   const chDone=chLevels.filter(l=>profile.results[l.id]).length;
+   const chStars=chLevels.reduce((acc,l)=>acc+(profile.results[l.id]?.stars||0),0);
+   const chTop=38+cIdx*chStride;
+   const nodesHtml=chLevels.map((l,idx)=>{
+    const r=profile.results[l.id];
+    const isLocked=l.id>next;
+    const current=l.id===mapSelected;
+    const starCount=r?r.stars:0;
+    const pairIdx=(l.id*3+2)%7;
+    const featuredKanji=l.targets&&l.targets[0]?l.targets[0]:(l.id+1);
+    const starsHtml=[0,1,2].map(si=>{
+     const filled=!isLocked&&si<starCount;
+     const svg=filled?starGoldSvg:starGraySvg;
+     return si===1?svg.replace('class="astro-star-svg"','class="astro-star-svg center"'):svg;
+    }).join('');
+    const statusBadge=isLocked
+     ?`<span class="astro-badge locked">🔒</span>`
+     :r
+      ?`<span class="astro-badge done">✓</span>`
+      :l.review
+       ?`<span class="astro-badge review">ÔN</span>`
+       :`<span class="astro-badge play">MỚI</span>`;
+    const isLast=l.id===C.levels.length-1;
+    const xDesk=isLast?'50%':(l.id%2===0?'34%':'66%');
+    const xMob=isLast?'50%':(l.id%2===0?'29%':'71%');
+    const nodeY=chTop+125+idx*165;
+    return `<button type="button" class="astro-node ${isLocked?'locked':''} ${current?'active':''} ${r?'completed':''}" style="--node-y:${nodeY}px;--node-x-desk:${xDesk};--node-x-mob:${xMob}" data-journey-level="${l.id}" ${isLocked?'disabled':''} aria-pressed="${current}" aria-label="Màn ${l.id+1}: ${l.title}${isLocked?', chưa mở khóa':r?', '+r.stars+' sao':''}">
+     <div class="astro-pedestal-stack">
+      ${statusBadge}
+      <div class="astro-gem-float">
+       <span class="astro-gem-icon result-gem" data-pair="${pairIdx}" style="--gem-label-y:${KanjiGemArt.cutFor(pairIdx).labelY}%">
+        ${KanjiGemArt.render(pairIdx,'map-gem-'+l.id)}
+        <span class="result-glyph" lang="ja">${isLocked?'?':featuredKanji}</span>
+       </span>
+      </div>
+      <img src="astro_assets/astro_orb_pedestal.webp" class="astro-pedestal-img" alt="" aria-hidden="true">
+     </div>
+     <div class="astro-label">
+      <span class="astro-num">${String(l.id+1).padStart(2,'0')}</span>
+      <span class="astro-title">${l.title}</span>
+     </div>
+     <div class="astro-stars" aria-hidden="true">
+      ${starsHtml}
+     </div>
+    </button>`;
+   }).join('');
+   return `
+    <div class="astro-chapter-divider" style="top:${chTop}px">
+     <div class="astro-chapter-pill">
+      ${I18N.t('chapter')} ${String(cIdx+1).padStart(2,'0')} · ${ch.name}
+     </div>
+     <div class="astro-chapter-meta">
+      <span>${chDone}/${chLevels.length} màn hoàn thành</span>
+      <span class="astro-chapter-stars">★ ${chStars}/${chLevels.length*3}</span>
+     </div>
+    </div>
+    ${nodesHtml}
+   `;
+  }).join('');
   return `
-    <div class="astro-slide-incoming">
-      <div class="astro-chapter-bar">
-        <div class="astro-chapter-pill">
-          ${I18N.t('chapter')} ${String(mapChapter+1).padStart(2,'0')} · ${chapter.name}
-        </div>
-        <div class="astro-chapter-meta">
-          <span>${done}/${levels.length} màn hoàn thành</span>
-          <span class="astro-chapter-stars">★ ${levels.reduce((acc,l)=>acc+(profile.results[l.id]?.stars||0),0)}/${levels.length*3}</span>
-        </div>
-      </div>
-
-      <div class="astro-orbit-arena">
-        <div class="astro-vertical-track">
-          <canvas class="astro-energy-canvas" aria-hidden="true"></canvas>
-          ${levels.map((l, idx) => {
-          const r = profile.results[l.id];
-          const isLocked = l.id > next;
-          const current = l.id === mapSelected;
-          const starCount = r ? r.stars : 0;
-          const pairIdx = (l.id * 3 + 2) % 7;
-          const featuredKanji = l.targets && l.targets[0] ? l.targets[0] : (l.id + 1);
-          const starsHtml = [0, 1, 2].map(si => {
-            const filled = !isLocked && si < starCount;
-            const svg = filled ? starGoldSvg : starGraySvg;
-            return si === 1 ? svg.replace('class="astro-star-svg"', 'class="astro-star-svg center"') : svg;
-          }).join('');
-          const statusBadge = isLocked
-            ? `<span class="astro-badge locked">🔒</span>`
-            : r
-              ? `<span class="astro-badge done">✓</span>`
-              : l.review
-                ? `<span class="astro-badge review">ÔN</span>`
-                : `<span class="astro-badge play">MỚI</span>`;
-          return `<button type="button" class="astro-node astro-pos-${idx} ${isLocked ? 'locked' : ''} ${current ? 'active' : ''} ${r ? 'completed' : ''}" data-journey-level="${l.id}" ${isLocked ? 'disabled' : ''} aria-pressed="${current}" aria-label="Màn ${l.id+1}: ${l.title}${isLocked ? ', chưa mở khóa' : r ? ', ' + r.stars + ' sao' : ''}">
-            <div class="astro-pedestal-stack">
-              ${statusBadge}
-              <div class="astro-gem-float">
-                <span class="astro-gem-icon result-gem" data-pair="${pairIdx}" style="--gem-label-y:${KanjiGemArt.cutFor(pairIdx).labelY}%">
-                  ${KanjiGemArt.render(pairIdx, 'map-gem-' + l.id)}
-                  <span class="result-glyph" lang="ja">${isLocked ? '?' : featuredKanji}</span>
-                </span>
-              </div>
-              <img src="astro_assets/astro_orb_pedestal.webp" class="astro-pedestal-img" alt="" aria-hidden="true">
-            </div>
-            <div class="astro-label">
-              <span class="astro-num">${String(l.id+1).padStart(2,'0')}</span>
-              <span class="astro-title">${l.title}</span>
-            </div>
-            <div class="astro-stars" aria-hidden="true">
-              ${starsHtml}
-            </div>
-          </button>`;
-        }).join('')}
-        </div>
+    <div class="astro-orbit-arena">
+      <div class="astro-vertical-track" style="height:${trackHeight}px">
+        <canvas class="astro-energy-canvas" aria-hidden="true"></canvas>
+        ${chaptersHtml}
       </div>
     </div>
-    <div class="astro-dots">
-      <span class="astro-dot ${mapChapter===0?'active':''}" data-chapter-step="${0-mapChapter}"></span>
-      <span class="astro-dot ${mapChapter===1?'active':''}" data-chapter-step="${1-mapChapter}"></span>
-      <span class="astro-dot ${mapChapter===2?'active':''}" data-chapter-step="${2-mapChapter}"></span>
-    </div>
+    <button type="button" class="astro-scroll-more-btn" aria-label="Cuộn xuống xem thêm màn chơi">
+      <span class="astro-scroll-more-text">Còn màn bên dưới</span>
+      <span class="astro-scroll-more-chevrons" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m7 6 5 5 5-5"/><path d="m7 13 5 5 5-5"/></svg>
+      </span>
+    </button>
   `;
  }
- function slideToChapter(nextChapter){
-  if(nextChapter===mapChapter||nextChapter<0||nextChapter>2)return;
-  const dir=nextChapter>mapChapter?'dir-next':'dir-prev';
-  const mapEl=$('#map-screen');
-  const stage=mapEl?.querySelector('.astro-dial-stage');
-  const oldIncoming=stage?.querySelector('.astro-slide-incoming');
-  if(!stage||!oldIncoming){mapChapter=nextChapter;mapSelected=null;renderMap();icons();return;}
-  const outgoing=oldIncoming.cloneNode(true);
-  mapChapter=nextChapter;
-  mapSelected=null;
-  const ms=getMapState();
-  mapEl.style.setProperty('--astro-ch',String(mapChapter));
-  mapEl.dataset.chapter=String(mapChapter);
-  const prevBtn=mapEl.querySelector('.astro-nav-arrow[data-chapter-step="-1"]');
-  const nextBtn=mapEl.querySelector('.astro-nav-arrow[data-chapter-step="1"]');
-  if(prevBtn)prevBtn.disabled=(mapChapter===0);
-  if(nextBtn)nextBtn.disabled=(mapChapter===2);
-  const playBtn=mapEl.querySelector('.astro-dock-play');
-  if(playBtn){
-   playBtn.disabled=ms.locked;
-   playBtn.dataset.main=String(ms.action);
-   playBtn.setAttribute('aria-label',ms.label);
-   const span=playBtn.querySelector('span');
-   if(span)span.textContent=ms.label;
-  }
-  stage.innerHTML=buildDialStageHtml(ms);
-  const newIncoming=stage.querySelector('.astro-slide-incoming');
-  if(newIncoming){
-   stage.classList.add('is-sliding');
-   newIncoming.classList.add(dir);
-   outgoing.className='astro-slide-outgoing '+dir;
-   stage.appendChild(outgoing);
-   if(slideTimer)clearTimeout(slideTimer);
-   slideTimer=setTimeout(()=>{
-    outgoing?.remove();
-    stage.classList.remove('is-sliding');
-    newIncoming.classList.remove('dir-next','dir-prev');
-   },900);
-  }
- }
- $('#map-screen').addEventListener('touchstart',e=>{
-  if(!e.target.closest('.astro-dial-stage')||e.touches.length!==1){swipeStartX=0;return;}
-  swipeStartX=e.touches[0].clientX;
-  swipeStartY=e.touches[0].clientY;
- },{passive:true});
- $('#map-screen').addEventListener('touchend',e=>{
-  if(!swipeStartX||!e.changedTouches.length)return;
-  const dx=e.changedTouches[0].clientX-swipeStartX;
-  const dy=e.changedTouches[0].clientY-swipeStartY;
-  swipeStartX=0;
-  if(Math.abs(dx)>46&&Math.abs(dx)>Math.abs(dy)*1.35){
-   const step=dx<0?1:-1;
-   const nextChapter=Math.max(0,Math.min(2,mapChapter+step));
-   if(nextChapter!==mapChapter){A?.select();slideToChapter(nextChapter);}
-  }
- },{passive:true});
  function renderMap(){
  const ms=getMapState();
  const {locked,action,label}=ms;
@@ -587,19 +545,11 @@
       </div>
     </header>
 
-    <!-- Center Cosmic Astrolabe Dial Stage -->
+    <!-- Center Continuous Vertical Stage Path -->
     <main class="astro-stage-center">
-      <button type="button" class="astro-nav-arrow" data-chapter-step="-1" ${mapChapter===0?'disabled':''} aria-label="Chương trước">
-        <i data-lucide="chevron-left" aria-hidden="true"></i>
-      </button>
-
       <div class="astro-dial-stage">
         ${buildDialStageHtml(ms)}
       </div>
-
-      <button type="button" class="astro-nav-arrow" data-chapter-step="1" ${mapChapter===2?'disabled':''} aria-label="Chương tiếp theo">
-        <i data-lucide="chevron-right" aria-hidden="true"></i>
-      </button>
     </main>
 
     <!-- Bottom Celestial Action Dock -->
@@ -622,6 +572,16 @@
       </button>
     </footer>
   `;
+  const arena=mapEl.querySelector('.astro-orbit-arena');
+  const scrollBtn=mapEl.querySelector('.astro-scroll-more-btn');
+  if(arena&&scrollBtn){
+   const updateScrollCue=()=>{
+    const hasMore=arena.scrollTop+arena.clientHeight<arena.scrollHeight-44;
+    scrollBtn.classList.toggle('is-hidden',!hasMore);
+   };
+   arena.addEventListener('scroll',updateScrollCue,{passive:true});
+   requestAnimationFrame(updateScrollCue);
+  }
   if (window.AstroVFX) window.AstroVFX.mount();
  }
  function showJourneyMenu(){modalOpen('<section class="kp-modal journey-options" role="dialog" aria-modal="true"><h2>Hành trình của bạn</h2><p>24 chữ ghép tuyển chọn · 3 chương · 15 màn.<br>Đây là bộ sơ cấp tham khảo, chưa phải toàn bộ Kanji N5.</p><button class="kp-secondary" data-audio-studio style="background:#f0f8ff;border-color:#53aadc;color:#0d5c8a"><i data-lucide="headphones" aria-hidden="true"></i>🎧 Phòng thử & chọn âm thanh từng chức năng</button><button class="kp-secondary" data-settings><i data-lucide="settings" aria-hidden="true"></i>Tùy chỉnh & chơi thử</button><button class="kp-secondary" data-progress><i data-lucide="save" aria-hidden="true"></i>Sao lưu tiến trình</button><button class="kp-secondary" data-about><i data-lucide="info" aria-hidden="true"></i>Bộ chữ & nguồn tham khảo</button><button class="kp-action" data-action="close">Về hành trình</button></section>','Menu hành trình');}
@@ -1028,13 +988,12 @@ function showSettings(){
    }
    return;
   }
-  const chapterButton=e.target.closest('[data-chapter-step]');
-  if(chapterButton&&!chapterButton.disabled){
-   const step=Number(chapterButton.dataset.chapterStep);
-   const nextChapter=Math.max(0,Math.min(2,mapChapter+step));
-   if(nextChapter!==mapChapter){
+  const scrollMoreBtn=e.target.closest('.astro-scroll-more-btn');
+  if(scrollMoreBtn){
+   const arena=$('#map-screen .astro-orbit-arena');
+   if(arena){
     A?.select();
-    slideToChapter(nextChapter);
+    arena.scrollBy({top:Math.max(280,Math.round(arena.clientHeight*0.72)),behavior:'smooth'});
    }
    return;
   }
