@@ -458,17 +458,8 @@
      </div>
     </button>`;
    }).join('');
-   return `
+    return `
     <section class="astro-chapter-section" data-ch="${cIdx}">
-     <div class="astro-chapter-divider">
-      <div class="astro-chapter-pill">
-       ${I18N.t('chapter')} ${String(cIdx+1).padStart(2,'0')} · ${ch.name}
-      </div>
-      <div class="astro-chapter-meta">
-       <span>${chDone}/${chLevels.length} màn hoàn thành</span>
-       <span class="astro-chapter-stars">★ ${chStars}/${chLevels.length*3}</span>
-      </div>
-     </div>
      <div class="astro-constellation-field" data-edges="${cSpec.edges}">
       <canvas class="astro-energy-canvas" aria-hidden="true"></canvas>
       ${nodesHtml}
@@ -494,15 +485,29 @@
     </button>
   `;
  }
+ function buildChapterDividerHtml(cIdx){
+  const ch=C.chapters[cIdx]||C.chapters[0];
+  const chLevels=C.levels.filter(l=>l.chapter===cIdx);
+  const chDone=chLevels.filter(l=>profile.results[l.id]).length;
+  const chStars=chLevels.reduce((acc,l)=>acc+(profile.results[l.id]?.stars||0),0);
+  return `
+   <div class="astro-chapter-divider" data-active-ch="${cIdx}">
+    <div class="astro-chapter-pill">
+     ${I18N.t('chapter')} ${String(cIdx+1).padStart(2,'0')} · ${ch.name}
+    </div>
+    <div class="astro-chapter-meta">
+     <span>${chDone}/${chLevels.length} màn hoàn thành</span>
+     <span class="astro-chapter-stars">★ ${chStars}/${chLevels.length*3}</span>
+    </div>
+   </div>
+  `;
+ }
  function renderMap(){
  const ms=getMapState();
  const {locked,action,label}=ms;
  const mapEl=$('#map-screen');
  mapEl.style.setProperty('--astro-ch',String(mapChapter));
  mapEl.dataset.chapter=String(mapChapter);
-
-  const totalStars = C.levels.reduce((acc,l)=>acc+(profile.results[l.id]?.stars||0),0);
-  const maxTotalStars = C.levels.length * 3;
 
   mapEl.innerHTML = `
     <canvas class="astro-vfx-canvas" aria-hidden="true"></canvas>
@@ -556,9 +561,6 @@
 
       <div class="astro-title-wrap">
         <img src="kanjidle-logo.png" class="astro-title-img" alt="Kanjidle">
-        <button type="button" class="astro-mode-pill" data-switch-grade="${currentGrade==='N5'?'N4':'N5'}" aria-label="Đổi cấp độ">
-          <span>JLPT ${currentGrade}</span> · <span>★ ${totalStars}/${maxTotalStars}</span>
-        </button>
       </div>
 
       <div class="astro-hud-group">
@@ -571,42 +573,56 @@
       </div>
     </header>
 
-    <!-- Center Continuous Vertical Stage Path -->
+    <!-- 3:7 Split Main Stage: Left (Chapter + Dock) | Right (Constellations) -->
     <main class="astro-stage-center">
+      <aside class="astro-left-panel">
+        <div class="astro-left-chapter-slot">
+          ${buildChapterDividerHtml(mapChapter)}
+        </div>
+        <footer class="astro-bottom-dock">
+          <button type="button" class="astro-dock-btn" data-switch-grade="${currentGrade==='N5'?'N4':'N5'}" aria-label="Chuyển JLPT N5 / N4">
+            <i data-lucide="layers" aria-hidden="true"></i>
+            <span>${currentGrade}</span>
+          </button>
+          <button type="button" class="astro-dock-btn" data-daily-play aria-label="Thử thách hàng ngày">
+            <i data-lucide="calendar" aria-hidden="true"></i>
+            <span>Hôm nay</span>
+          </button>
+          <button type="button" class="astro-dock-btn" data-journey-album aria-label="Album chữ Kanji (${profile.collected.length}/24)">
+            <i data-lucide="book-open" aria-hidden="true"></i>
+            <span>Album ${profile.collected.length}/24</span>
+          </button>
+          <button type="button" class="astro-dock-play" data-main="${action}" ${locked?'disabled':''} aria-label="${label}">
+            <i data-lucide="play" aria-hidden="true"></i>
+            <span>${label}</span>
+          </button>
+        </footer>
+      </aside>
       <div class="astro-dial-stage">
         ${buildDialStageHtml(ms)}
       </div>
     </main>
-
-    <!-- Bottom Celestial Action Dock -->
-    <footer class="astro-bottom-dock">
-      <button type="button" class="astro-dock-btn" data-switch-grade="${currentGrade==='N5'?'N4':'N5'}" aria-label="Chuyển JLPT N5 / N4">
-        <i data-lucide="layers" aria-hidden="true"></i>
-        <span>${currentGrade}</span>
-      </button>
-      <button type="button" class="astro-dock-btn" data-daily-play aria-label="Thử thách hàng ngày">
-        <i data-lucide="calendar" aria-hidden="true"></i>
-        <span>Hôm nay</span>
-      </button>
-      <button type="button" class="astro-dock-btn" data-journey-album aria-label="Album chữ Kanji (${profile.collected.length}/24)">
-        <i data-lucide="book-open" aria-hidden="true"></i>
-        <span>Album ${profile.collected.length}/24</span>
-      </button>
-      <button type="button" class="astro-dock-play" data-main="${action}" ${locked?'disabled':''} aria-label="${label}">
-        <i data-lucide="play" aria-hidden="true"></i>
-        <span>${label}</span>
-      </button>
-    </footer>
   `;
   const arena=mapEl.querySelector('.astro-orbit-arena');
   const prevBtn=mapEl.querySelector('.astro-scroll-prev-btn');
   const scrollBtn=mapEl.querySelector('.astro-scroll-more-btn');
+  const chSlot=mapEl.querySelector('.astro-left-chapter-slot');
   if(arena&&scrollBtn){
+   let lastCh=mapChapter;
    const updateScrollCue=()=>{
+    const pageH=arena.clientHeight||1;
     const hasPrev=arena.scrollTop>44;
-    const hasMore=arena.scrollTop+arena.clientHeight<arena.scrollHeight-44;
+    const hasMore=arena.scrollTop+pageH<arena.scrollHeight-44;
     if(prevBtn)prevBtn.classList.toggle('is-hidden',!hasPrev);
     scrollBtn.classList.toggle('is-hidden',!hasMore);
+    const activeCh=Math.max(0,Math.min(C.chapters.length-1,Math.round(arena.scrollTop/pageH)));
+    if(activeCh!==lastCh){
+     lastCh=activeCh;
+     mapChapter=activeCh;
+     mapEl.dataset.chapter=String(activeCh);
+     mapEl.style.setProperty('--astro-ch',String(activeCh));
+     if(chSlot)chSlot.innerHTML=buildChapterDividerHtml(activeCh);
+    }
    };
    const cancelGlide=()=>{
     if(arena._glideRaf){

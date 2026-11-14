@@ -393,7 +393,7 @@ body {
   transform: scale(1.05);
 }
 
-/* 4. Center Cosmic Constellation Stage (Wide Full-Screen Arena) */
+/* 4. Center Cosmic Constellation Stage (3:7 Split on Desktop, Vertical Stack on Mobile) */
 #kanji-pop .astro-stage-center {
   position: relative;
   z-index: 10;
@@ -401,60 +401,89 @@ body {
   max-width: 1380px;
   flex: 1;
   min-height: 0;
-  display: flex;
+  display: grid;
+  grid-template-columns: 3fr 7fr;
   align-items: stretch;
-  justify-content: center;
-  padding: 2px 0;
+  gap: clamp(12px, 1.6vw, 22px);
+  padding: 4px clamp(10px, 1.5vw, 22px);
+  box-sizing: border-box;
 }
 
-/* Open Cosmic Observatory Stage (Frameless & Wide) */
+#kanji-pop .astro-left-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  gap: 18px;
+  width: 100%;
+  min-width: 0;
+  padding: 20px 14px;
+  border-radius: 26px;
+  background: rgba(7, 11, 36, 0.58);
+  border: 1.5px solid rgba(125, 211, 252, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 12px 34px rgba(2, 6, 23, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  box-sizing: border-box;
+}
+
+#kanji-pop .astro-left-chapter-slot {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Open Cosmic Observatory Stage (Frameless & Wide 70% Right) */
 #kanji-pop .astro-dial-stage {
   position: relative;
-  flex: 1;
   width: 100%;
-  max-width: 1320px;
+  min-width: 0;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2px clamp(4px, 1vw, 14px) 0;
+  padding: 2px clamp(4px, 0.8vw, 12px) 0;
   box-sizing: border-box;
   overflow: visible;
 }
 
-/* Chapter Banner inside Each Full-Screen Constellation Section */
+/* Chapter Banner (Inside Left Panel on Desktop, Top on Mobile) */
 #kanji-pop .astro-chapter-divider {
   position: relative;
   flex: none;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
+  gap: 6px;
   z-index: 8;
-  width: max-content;
-  max-width: calc(100% - 16px);
-  padding-top: 2px;
+  width: 100%;
+  max-width: 100%;
   pointer-events: none;
 }
 #kanji-pop .astro-chapter-pill {
   background: linear-gradient(90deg, rgba(15, 23, 42, 0.92), rgba(30, 58, 138, 0.92), rgba(15, 23, 42, 0.92));
   border: 1.5px solid #fbbf24;
   border-radius: 9999px;
-  padding: 4px clamp(16px, 2.8vw, 30px) 5px;
+  padding: 6px clamp(14px, 1.8vw, 22px) 7px;
   color: #fef3c7;
   font-family: 'Nunito', sans-serif;
   font-weight: 900;
-  font-size: clamp(11px, 1.2vw, 14px);
-  letter-spacing: 0.7px;
+  font-size: clamp(11.5px, 1.1vw, 13.5px);
+  letter-spacing: 0.6px;
   text-transform: uppercase;
+  text-align: center;
+  line-height: 1.35;
   box-shadow: 0 0 18px rgba(56, 189, 248, 0.35), 0 4px 12px rgba(2, 6, 23, 0.65);
-  white-space: nowrap;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 #kanji-pop .astro-chapter-meta {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
-  font-size: clamp(10.5px, 0.95vw, 12px);
+  font-size: clamp(11px, 0.95vw, 12.5px);
   font-weight: 800;
   color: #bae6fd;
   text-shadow: 0 2px 6px rgba(2, 6, 23, 0.9);
@@ -491,13 +520,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 36px;
+  padding: 36px 0;
   box-sizing: border-box;
   contain: layout style;
-}
-#kanji-pop .astro-chapter-section[data-ch="1"],
-#kanji-pop .astro-chapter-section[data-ch="2"] {
-  padding-top: 40px;
 }
 
 #kanji-pop .astro-constellation-field {
@@ -800,38 +825,42 @@ body {
   box-shadow: 0 0 10px rgba(251, 191, 36, 0.75);
 }
 
-/* 5. Bottom Celestial Action Dock */
+/* 5. Celestial Action Dock (Grouped in Left Panel on Desktop, Bottom on Mobile) */
 #kanji-pop .astro-bottom-dock {
   position: relative;
   z-index: 20;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: clamp(8px, 1.4vw, 16px);
-  background: rgba(15, 23, 42, 0.82);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1.5px solid rgba(251, 191, 36, 0.55);
-  border-radius: 9999px;
-  padding: 6px 14px;
-  box-shadow: 0 0 24px rgba(56, 189, 248, 0.22), 0 10px 26px rgba(0, 0, 0, 0.45);
+  gap: 8px;
+  width: 100%;
+  background: rgba(15, 23, 42, 0.72);
+  border: 1.5px solid rgba(251, 191, 36, 0.45);
+  border-radius: 22px;
+  padding: 10px;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.16), 0 8px 22px rgba(0, 0, 0, 0.4);
   flex: none;
+  box-sizing: border-box;
 }
 
 #kanji-pop#kanji-pop .astro-dock-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  height: 44px;
-  padding: 0 14px;
+  justify-content: center;
+  flex: 1 1 auto;
+  gap: 5px;
+  height: 40px;
+  padding: 0 10px;
   border-radius: 9999px;
   border: 1.5px solid rgba(148, 163, 184, 0.4);
   background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
   color: #e2e8f0;
   font-family: 'Nunito', sans-serif;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 800;
   cursor: pointer;
+  white-space: nowrap;
   transition: transform 0.15s ease, border-color 0.15s ease;
 }
 #kanji-pop#kanji-pop .astro-dock-btn:hover {
@@ -840,23 +869,26 @@ body {
   color: #ffffff;
 }
 #kanji-pop .astro-dock-btn svg {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   color: #38bdf8;
+  flex: none;
 }
 
 #kanji-pop#kanji-pop .astro-dock-play {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  width: 100%;
   gap: 8px;
-  height: 48px;
-  padding: 0 24px;
+  height: 46px;
+  padding: 0 20px;
   border-radius: 9999px;
   border: 2px solid #fde68a;
   background: linear-gradient(180deg, #f43f5e 0%, #be123c 100%);
   color: #ffffff;
   font-family: 'Nunito', sans-serif;
-  font-size: 15px;
+  font-size: 14.5px;
   font-weight: 900;
   letter-spacing: 0.4px;
   cursor: pointer;
@@ -864,7 +896,7 @@ body {
   transition: transform 0.16s ease, box-shadow 0.16s ease;
 }
 #kanji-pop#kanji-pop .astro-dock-play:hover:not(:disabled) {
-  transform: translateY(-2px) scale(1.04);
+  transform: translateY(-2px) scale(1.03);
   box-shadow: 0 0 24px rgba(251, 191, 36, 0.65), 0 8px 18px rgba(0, 0, 0, 0.5);
 }
 #kanji-pop#kanji-pop .astro-dock-play:disabled {
@@ -877,7 +909,50 @@ body {
   fill: currentColor;
 }
 
-/* 6. Mobile Responsiveness (<= 640px) */
+/* 6. Mobile & Tablet Responsiveness (< 860px) */
+@media (max-width: 859px) {
+  #kanji-pop .astro-stage-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 0;
+  }
+  #kanji-pop .astro-left-panel {
+    display: contents;
+  }
+  #kanji-pop .astro-left-chapter-slot {
+    order: 1;
+    flex: none;
+  }
+  #kanji-pop .astro-dial-stage {
+    order: 2;
+    flex: 1;
+    min-height: 0;
+  }
+  #kanji-pop .astro-bottom-dock {
+    order: 3;
+    width: auto;
+    max-width: 100%;
+    flex-wrap: nowrap;
+    border-radius: 9999px;
+    padding: 5px 10px;
+    gap: 6px;
+  }
+  #kanji-pop#kanji-pop .astro-dock-btn {
+    flex: none;
+    height: 38px;
+    padding: 0 10px;
+  }
+  #kanji-pop#kanji-pop .astro-dock-play {
+    width: auto;
+    height: 40px;
+    padding: 0 16px;
+    font-size: 13px;
+  }
+}
+
+/* 6b. Narrow Mobile (<= 640px) */
 @media (max-width: 640px) {
   #kanji-pop #map-screen {
     padding: 8px 8px 10px !important;
@@ -888,10 +963,6 @@ body {
   }
   #kanji-pop .astro-title-img {
     width: 128px;
-  }
-  #kanji-pop#kanji-pop .astro-mode-pill {
-    font-size: 10px;
-    padding: 2px 10px 3px;
   }
   #kanji-pop .astro-stage-center {
     gap: 4px;
