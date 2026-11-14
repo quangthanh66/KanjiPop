@@ -403,8 +403,9 @@
       </div>
 
       <div class="astro-orbit-arena">
-        <canvas class="astro-energy-canvas" aria-hidden="true"></canvas>
-        ${levels.map((l, idx) => {
+        <div class="astro-vertical-track">
+          <canvas class="astro-energy-canvas" aria-hidden="true"></canvas>
+          ${levels.map((l, idx) => {
           const r = profile.results[l.id];
           const isLocked = l.id > next;
           const current = l.id === mapSelected;
@@ -443,6 +444,7 @@
             </div>
           </button>`;
         }).join('')}
+        </div>
       </div>
     </div>
     <div class="astro-dots">

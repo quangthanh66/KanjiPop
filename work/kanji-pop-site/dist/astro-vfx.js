@@ -196,11 +196,12 @@
 
     for (let aIdx = 0; aIdx < arenas.length; aIdx++) {
       const arena = arenas[aIdx];
-      const canvas = arena.querySelector('.astro-energy-canvas');
+      const track = arena.querySelector('.astro-vertical-track') || arena;
+      const canvas = track.querySelector('.astro-energy-canvas');
       if (!canvas) continue;
-      const arenaRect = arena.getBoundingClientRect();
-      const aw = arenaRect.width;
-      const ah = arenaRect.height;
+      const trackRect = track.getBoundingClientRect();
+      const aw = trackRect.width;
+      const ah = trackRect.height;
       if (aw < 20 || ah < 20) continue;
 
       if (canvas.width !== Math.floor(aw * dpr) || canvas.height !== Math.floor(ah * dpr)) {
@@ -208,7 +209,7 @@
         canvas.height = Math.floor(ah * dpr);
       }
 
-      const nodes = arena.querySelectorAll('.astro-node');
+      const nodes = track.querySelectorAll('.astro-node');
       if (nodes.length < 2) continue;
 
       const pts = [];
@@ -216,8 +217,8 @@
         const ped = nodes[i].querySelector('.astro-pedestal-img') || nodes[i];
         const r = ped.getBoundingClientRect();
         pts.push({
-          x: r.left + r.width * 0.5 - arenaRect.left,
-          y: r.top + r.height * 0.52 - arenaRect.top
+          x: r.left + r.width * 0.5 - trackRect.left,
+          y: r.top + r.height * 0.52 - trackRect.top
         });
       }
 
