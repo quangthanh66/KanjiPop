@@ -2,18 +2,28 @@
    Option 4: Cosmic Astrolabe Dial (Vòng sao thiên văn) Theme for Kanjidle
    ========================================================================== */
 
-/* 0. Full-Bleed Cosmic Observatory Background & Zero-Sideband Viewport Invariants */
+/* 0. Full-Bleed Infinite-Resolution Aurora Cosmos Background & Zero-Border Invariants */
 html,
-body,
-#kp-preview {
+body {
   margin: 0 !important;
   padding: 0 !important;
   width: 100vw !important;
   min-height: 100dvh !important;
-  background: url('astro_assets/astro_sky_bg.webp') center center / cover no-repeat fixed !important;
+  border: none !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  background-color: #070b24 !important;
+  background-image:
+    radial-gradient(ellipse 80% 55% at 22% 18%, rgba(56, 189, 248, 0.24) 0%, transparent 65%),
+    radial-gradient(ellipse 70% 50% at 78% 24%, rgba(168, 85, 247, 0.28) 0%, transparent 65%),
+    radial-gradient(ellipse 90% 45% at 50% 92%, rgba(236, 72, 153, 0.18) 0%, transparent 65%),
+    linear-gradient(165deg, #06091e 0%, #0e1640 38%, #1b1749 70%, #27104e 100%) !important;
+  background-attachment: fixed !important;
   overflow-x: hidden !important;
 }
 
+#kp-preview,
+#kp-preview#kp-preview,
 #kanji-pop,
 #kanji-pop#kanji-pop,
 #kanji-pop[data-view="map"],
@@ -26,9 +36,11 @@ body,
   max-width: 100vw !important;
   min-height: 100dvh !important;
   margin: 0 !important;
+  padding: 0 !important;
   border: none !important;
   border-radius: 0 !important;
   box-shadow: none !important;
+  outline: none !important;
   background: transparent !important;
   box-sizing: border-box !important;
 }
@@ -55,6 +67,9 @@ body,
   height: 100dvh;
   max-width: none !important;
   margin: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
   padding: clamp(8px, 1.4vh, 16px) clamp(10px, 2vw, 24px) clamp(10px, 1.6vh, 16px) !important;
   display: flex !important;
   flex-direction: column !important;
@@ -62,7 +77,154 @@ body,
   align-items: center !important;
   overflow: hidden !important;
   box-sizing: border-box !important;
-  background: radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.12) 0%, rgba(10, 14, 38, 0.42) 100%);
+  background: transparent !important;
+}
+
+/* 2b. Standalone 3D Scenery & 60fps VFX Canvas */
+#kanji-pop .astro-vfx-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+#kanji-pop .astro-scenery {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 2;
+}
+
+#kanji-pop .astro-moon-wrap {
+  position: absolute;
+  left: clamp(16px, 4.5vw, 72px);
+  top: clamp(56px, 10vh, 96px);
+  width: clamp(78px, 9.5vw, 138px);
+  animation: astroFloatSlow 7s ease-in-out infinite;
+}
+#kanji-pop .astro-moon-glow {
+  position: absolute;
+  inset: -45%;
+  width: 190%;
+  height: 190%;
+  background: url('vfx_light.png') center / contain no-repeat;
+  mix-blend-mode: screen;
+  opacity: 0.65;
+  animation: astroPulseGlow 4.5s ease-in-out infinite;
+}
+#kanji-pop .astro-moon-img {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 0 18px rgba(253, 224, 71, 0.45));
+}
+
+#kanji-pop .astro-observatory-wrap {
+  position: absolute;
+  right: clamp(-14px, 1.5vw, 28px);
+  bottom: clamp(-12px, 1vh, 12px);
+  width: clamp(130px, 17vw, 250px);
+  opacity: 0.94;
+}
+#kanji-pop .astro-observatory-glow {
+  position: absolute;
+  left: 12%;
+  top: 24%;
+  width: 76%;
+  height: 76%;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.35) 0%, transparent 70%);
+  mix-blend-mode: screen;
+  animation: astroPulseGlow 5s ease-in-out infinite;
+}
+#kanji-pop .astro-observatory-img {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 12px 24px rgba(2, 6, 23, 0.65));
+}
+
+#kanji-pop .astro-cloud {
+  position: absolute;
+  height: auto;
+  opacity: 0.72;
+  filter: drop-shadow(0 8px 18px rgba(15, 23, 42, 0.45));
+}
+#kanji-pop .astro-cloud.left {
+  left: clamp(-40px, -1vw, 12px);
+  bottom: clamp(18px, 6vh, 64px);
+  width: clamp(150px, 19vw, 270px);
+  animation: astroDriftLeft 11s ease-in-out infinite;
+}
+#kanji-pop .astro-cloud.top-right {
+  right: clamp(24px, 7vw, 110px);
+  top: clamp(48px, 8vh, 88px);
+  width: clamp(110px, 13vw, 190px);
+  opacity: 0.55;
+  animation: astroDriftRight 13s ease-in-out infinite;
+}
+
+@keyframes astroFloatSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
+@keyframes astroDriftLeft {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  50% { transform: translateX(12px) translateY(-5px); }
+}
+@keyframes astroDriftRight {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  50% { transform: translateX(-12px) translateY(5px); }
+}
+@keyframes astroPulseGlow {
+  0%, 100% { opacity: 0.52; transform: scale(0.96); }
+  50% { opacity: 0.85; transform: scale(1.05); }
+}
+
+/* Active Node Magic Aura & Sparkle VFX */
+#kanji-pop .astro-node-vfx {
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  width: 136px;
+  height: 136px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 1;
+}
+#kanji-pop .astro-vfx-magic {
+  position: absolute;
+  inset: 0;
+  background: url('vfx_magic.png') center / contain no-repeat;
+  mix-blend-mode: screen;
+  opacity: 0.78;
+  animation: astroVfxSpin 14s linear infinite;
+}
+#kanji-pop .astro-vfx-flare {
+  position: absolute;
+  inset: -14%;
+  background: url('vfx_flare.png') center / contain no-repeat;
+  mix-blend-mode: screen;
+  opacity: 0.65;
+  animation: astroPulseGlow 2.6s ease-in-out infinite;
+}
+@keyframes astroVfxSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Animated Constellation Energy Flow */
+#kanji-pop .astro-constellation-flow {
+  stroke-dasharray: 10 18;
+  animation: astroConstellationFlow 2.4s linear infinite;
+}
+@keyframes astroConstellationFlow {
+  from { stroke-dashoffset: 56; }
+  to { stroke-dashoffset: 0; }
 }
 
 /* 3. Top Celestial HUD */
@@ -198,11 +360,9 @@ body,
   max-width: 920px;
   height: 100%;
   max-height: clamp(340px, 60vh, 510px);
-  background: radial-gradient(ellipse at center, rgba(15, 23, 42, 0.45) 0%, rgba(15, 23, 42, 0.2) 68%, transparent 100%);
+  background: radial-gradient(ellipse at center, rgba(15, 23, 42, 0.45) 0%, rgba(15, 23, 42, 0.18) 68%, transparent 100%);
   border-radius: 36px;
   border: 1.5px solid rgba(251, 191, 36, 0.28);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -652,6 +812,30 @@ body,
   }
   #kanji-pop .astro-dock-btn span {
     display: none;
+  }
+  #kanji-pop .astro-moon-wrap {
+    left: 10px;
+    top: 56px;
+    width: 62px;
+  }
+  #kanji-pop .astro-observatory-wrap {
+    right: -12px;
+    bottom: 52px;
+    width: 108px;
+    opacity: 0.78;
+  }
+  #kanji-pop .astro-cloud.left {
+    left: -30px;
+    bottom: 48px;
+    width: 118px;
+    opacity: 0.55;
+  }
+  #kanji-pop .astro-cloud.top-right {
+    display: none;
+  }
+  #kanji-pop .astro-node-vfx {
+    width: 104px;
+    height: 104px;
   }
   #kanji-pop#kanji-pop .astro-dock-play {
     height: 40px;

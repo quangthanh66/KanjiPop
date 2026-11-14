@@ -393,6 +393,21 @@
   const starGraySvg = `<svg class="astro-star-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9z" fill="rgba(148,163,184,0.35)" stroke="rgba(148,163,184,0.65)" stroke-width="1.4" stroke-linejoin="round"/></svg>`;
 
   $('#map-screen').innerHTML = `
+    <canvas class="astro-vfx-canvas" aria-hidden="true"></canvas>
+
+    <div class="astro-scenery" aria-hidden="true">
+      <div class="astro-moon-wrap">
+        <div class="astro-moon-glow"></div>
+        <img src="astro_assets/astro_moon.webp" class="astro-moon-img" alt="">
+      </div>
+      <img src="astro_assets/astro_cloud.webp" class="astro-cloud top-right" alt="">
+      <img src="astro_assets/astro_cloud.webp" class="astro-cloud left" alt="">
+      <div class="astro-observatory-wrap">
+        <div class="astro-observatory-glow"></div>
+        <img src="astro_assets/astro_observatory.webp" class="astro-observatory-img" alt="">
+      </div>
+    </div>
+
     <!-- Top Celestial HUD -->
     <header class="astro-top-hud">
       <div class="astro-hud-group">
@@ -442,8 +457,8 @@
         <div class="astro-orbit-arena">
           <img src="astro_assets/astro_dial_ring.webp" class="astro-ring-bg" alt="" aria-hidden="true">
           <svg class="astro-constellation-svg" viewBox="0 0 1000 400" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M 130 224 Q 210 110 310 104 Q 405 245 500 272 Q 595 245 690 104 Q 790 110 870 224" fill="none" stroke="rgba(251, 191, 36, 0.65)" stroke-width="4" stroke-linecap="round" stroke-dasharray="10 10"/>
-            <path d="M 130 224 Q 210 110 310 104 Q 405 245 500 272 Q 595 245 690 104 Q 790 110 870 224" fill="none" stroke="rgba(56, 189, 248, 0.4)" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="10 10"/>
+            <path d="M 130 224 Q 210 110 310 104 Q 405 245 500 272 Q 595 245 690 104 Q 790 110 870 224" fill="none" stroke="rgba(251, 191, 36, 0.35)" stroke-width="5" stroke-linecap="round"/>
+            <path class="astro-constellation-flow" d="M 130 224 Q 210 110 310 104 Q 405 245 500 272 Q 595 245 690 104 Q 790 110 870 224" fill="none" stroke="rgba(125, 211, 252, 0.9)" stroke-width="3" stroke-linecap="round"/>
           </svg>
           ${levels.map((l, idx) => {
             const r = profile.results[l.id];
@@ -466,8 +481,13 @@
                   ? `<span class="astro-badge review">ÔN</span>`
                   : `<span class="astro-badge play">MỚI</span>`;
 
+            const activeVfx = current && !isLocked
+              ? `<div class="astro-node-vfx" aria-hidden="true"><div class="astro-vfx-flare"></div><div class="astro-vfx-magic"></div></div>`
+              : '';
+
             return `<button type="button" class="astro-node astro-pos-${idx} ${isLocked ? 'locked' : ''} ${current ? 'active' : ''} ${r ? 'completed' : ''}" data-journey-level="${l.id}" ${isLocked ? 'disabled' : ''} aria-pressed="${current}" aria-label="Màn ${l.id+1}: ${l.title}${isLocked ? ', chưa mở khóa' : r ? ', ' + r.stars + ' sao' : ''}">
               <div class="astro-pedestal-stack">
+                ${activeVfx}
                 ${statusBadge}
                 <div class="astro-gem-float">
                   <span class="astro-gem-icon result-gem" data-pair="${pairIdx}" style="--gem-label-y:${KanjiGemArt.cutFor(pairIdx).labelY}%">
@@ -520,6 +540,7 @@
       </button>
     </footer>
   `;
+  if (window.AstroVFX) window.AstroVFX.mount();
  }
  function showJourneyMenu(){modalOpen('<section class="kp-modal journey-options" role="dialog" aria-modal="true"><h2>Hành trình của bạn</h2><p>24 chữ ghép tuyển chọn · 3 chương · 15 màn.<br>Đây là bộ sơ cấp tham khảo, chưa phải toàn bộ Kanji N5.</p><button class="kp-secondary" data-audio-studio style="background:#f0f8ff;border-color:#53aadc;color:#0d5c8a"><i data-lucide="headphones" aria-hidden="true"></i>🎧 Phòng thử & chọn âm thanh từng chức năng</button><button class="kp-secondary" data-settings><i data-lucide="settings" aria-hidden="true"></i>Tùy chỉnh & chơi thử</button><button class="kp-secondary" data-progress><i data-lucide="save" aria-hidden="true"></i>Sao lưu tiến trình</button><button class="kp-secondary" data-about><i data-lucide="info" aria-hidden="true"></i>Bộ chữ & nguồn tham khảo</button><button class="kp-action" data-action="close">Về hành trình</button></section>','Menu hành trình');}
  function renderAlbum(){
