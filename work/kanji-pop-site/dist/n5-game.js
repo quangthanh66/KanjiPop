@@ -389,66 +389,61 @@
   const totalStars = C.levels.reduce((acc,l)=>acc+(profile.results[l.id]?.stars||0),0);
   const maxTotalStars = C.levels.length * 3;
 
-  const starGoldSvg = `<svg class="zen-star-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9z" fill="#fbbf24" stroke="#b45309" stroke-width="1.4" stroke-linejoin="round"/></svg>`;
-  const starGraySvg = `<svg class="zen-star-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9z" fill="rgba(148,163,184,0.45)" stroke="rgba(71,85,105,0.55)" stroke-width="1.4" stroke-linejoin="round"/></svg>`;
+  const starGoldSvg = `<svg class="astro-star-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9z" fill="#fbbf24" stroke="#b45309" stroke-width="1.4" stroke-linejoin="round"/></svg>`;
+  const starGraySvg = `<svg class="astro-star-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9z" fill="rgba(148,163,184,0.35)" stroke="rgba(148,163,184,0.65)" stroke-width="1.4" stroke-linejoin="round"/></svg>`;
 
   $('#map-screen').innerHTML = `
-    <div class="zen-petals" aria-hidden="true">
-      <span class="zen-petal"></span><span class="zen-petal"></span><span class="zen-petal"></span><span class="zen-petal"></span><span class="zen-petal"></span>
-    </div>
-
-    <!-- Top Zen HUD -->
-    <header class="zen-top-hud">
-      <div class="zen-hud-group">
-        <button type="button" class="zen-icon-btn ${sound?'active':'muted'}" data-sound-toggle aria-label="Bật/Tắt âm thanh">
+    <!-- Top Celestial HUD -->
+    <header class="astro-top-hud">
+      <div class="astro-hud-group">
+        <button type="button" class="astro-icon-btn ${sound?'active':'muted'}" data-sound-toggle aria-label="Bật/Tắt âm thanh">
           <i data-lucide="${sound?'volume-2':'volume-x'}" aria-hidden="true"></i>
         </button>
-        <button type="button" class="zen-icon-btn ${sound?'active':'muted'}" data-music-toggle aria-label="Bật/Tắt nhạc nền">
+        <button type="button" class="astro-icon-btn ${sound?'active':'muted'}" data-music-toggle aria-label="Bật/Tắt nhạc nền">
           <i data-lucide="music" aria-hidden="true"></i>
         </button>
       </div>
 
-      <div class="zen-title-wrap">
-        <img src="kanjidle-logo.png" class="zen-title-img" alt="Kanjidle">
-        <button type="button" class="zen-mode-pill" data-switch-grade="${currentGrade==='N5'?'N4':'N5'}" aria-label="Đổi cấp độ">
+      <div class="astro-title-wrap">
+        <img src="kanjidle-logo.png" class="astro-title-img" alt="Kanjidle">
+        <button type="button" class="astro-mode-pill" data-switch-grade="${currentGrade==='N5'?'N4':'N5'}" aria-label="Đổi cấp độ">
           <span>JLPT ${currentGrade}</span> · <span>★ ${totalStars}/${maxTotalStars}</span>
         </button>
       </div>
 
-      <div class="zen-hud-group">
-        <button type="button" class="zen-icon-btn" data-journey-menu aria-label="Cài đặt & Hướng dẫn">
+      <div class="astro-hud-group">
+        <button type="button" class="astro-icon-btn" data-journey-menu aria-label="Cài đặt & Hướng dẫn">
           <i data-lucide="settings" aria-hidden="true"></i>
         </button>
-        <button type="button" class="zen-icon-btn" data-journey-album aria-label="Bộ sưu tập chữ Kanji">
+        <button type="button" class="astro-icon-btn" data-journey-album aria-label="Bộ sưu tập chữ Kanji">
           <i data-lucide="trophy" aria-hidden="true"></i>
         </button>
       </div>
     </header>
 
-    <!-- Center Zen Courtyard Diorama -->
-    <main class="zen-stage-center">
-      <button type="button" class="zen-nav-arrow" data-chapter-step="-1" ${mapChapter===0?'disabled':''} aria-label="Chương trước">
+    <!-- Center Cosmic Astrolabe Dial Stage -->
+    <main class="astro-stage-center">
+      <button type="button" class="astro-nav-arrow" data-chapter-step="-1" ${mapChapter===0?'disabled':''} aria-label="Chương trước">
         <i data-lucide="chevron-left" aria-hidden="true"></i>
       </button>
 
-      <div class="zen-courtyard">
-        <div class="zen-chapter-header">
-          <div class="zen-noren-banner">
-            <span class="zen-noren-title">${I18N.t('chapter')} ${String(mapChapter+1).padStart(2,'0')} · ${chapter.name}</span>
+      <div class="astro-dial-stage">
+        <div class="astro-chapter-bar">
+          <div class="astro-chapter-pill">
+            ${I18N.t('chapter')} ${String(mapChapter+1).padStart(2,'0')} · ${chapter.name}
+          </div>
+          <div class="astro-chapter-meta">
+            <span>${done}/${levels.length} màn hoàn thành</span>
+            <span class="astro-chapter-stars">★ ${levels.reduce((acc,l)=>acc+(profile.results[l.id]?.stars||0),0)}/${levels.length*3}</span>
           </div>
         </div>
 
-        <div class="zen-chapter-meta">
-          <span>${done}/${levels.length} màn hoàn thành</span>
-          <span class="zen-chapter-stars">★ ${levels.reduce((acc,l)=>acc+(profile.results[l.id]?.stars||0),0)}/${levels.length*3}</span>
-        </div>
-
-        <!-- 5 Mossy Stone Shrine Pedestals + Torii Gate -->
-        <div class="zen-path-map">
-          <img src="zen_assets/zen_torii_gate.webp" class="zen-torii-backdrop" alt="" aria-hidden="true">
-          <svg class="zen-path-svg" viewBox="0 0 800 260" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M 80 150 C 165 150, 175 90, 240 90 C 305 90, 335 155, 400 155 C 465 155, 495 90, 560 90 C 625 90, 645 140, 720 140" fill="none" stroke="rgba(255, 251, 235, 0.85)" stroke-width="6" stroke-linecap="round" stroke-dasharray="10 10"/>
-            <path d="M 80 150 C 165 150, 175 90, 240 90 C 305 90, 335 155, 400 155 C 465 155, 495 90, 560 90 C 625 90, 645 140, 720 140" fill="none" stroke="rgba(217, 119, 6, 0.4)" stroke-width="2" stroke-linecap="round" stroke-dasharray="10 10"/>
+        <!-- 5 Orbital Pedestals Around Rotating 3D Astrolabe Ring -->
+        <div class="astro-orbit-arena">
+          <img src="astro_assets/astro_dial_ring.webp" class="astro-ring-bg" alt="" aria-hidden="true">
+          <svg class="astro-constellation-svg" viewBox="0 0 1000 400" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M 130 224 Q 210 110 310 104 Q 405 245 500 272 Q 595 245 690 104 Q 790 110 870 224" fill="none" stroke="rgba(251, 191, 36, 0.65)" stroke-width="4" stroke-linecap="round" stroke-dasharray="10 10"/>
+            <path d="M 130 224 Q 210 110 310 104 Q 405 245 500 272 Q 595 245 690 104 Q 790 110 870 224" fill="none" stroke="rgba(56, 189, 248, 0.4)" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="10 10"/>
           </svg>
           ${levels.map((l, idx) => {
             const r = profile.results[l.id];
@@ -460,66 +455,66 @@
             const starsHtml = [0, 1, 2].map(si => {
               const filled = !isLocked && si < starCount;
               const svg = filled ? starGoldSvg : starGraySvg;
-              return si === 1 ? svg.replace('class="zen-star-svg"', 'class="zen-star-svg center"') : svg;
+              return si === 1 ? svg.replace('class="astro-star-svg"', 'class="astro-star-svg center"') : svg;
             }).join('');
 
             const statusBadge = isLocked
-              ? `<span class="zen-badge locked">🔒</span>`
+              ? `<span class="astro-badge locked">🔒</span>`
               : r
-                ? `<span class="zen-badge done">✓</span>`
+                ? `<span class="astro-badge done">✓</span>`
                 : l.review
-                  ? `<span class="zen-badge review">ÔN</span>`
-                  : `<span class="zen-badge play">MỚI</span>`;
+                  ? `<span class="astro-badge review">ÔN</span>`
+                  : `<span class="astro-badge play">MỚI</span>`;
 
-            return `<button type="button" class="zen-node zen-pos-${idx} ${isLocked ? 'locked' : ''} ${current ? 'active' : ''} ${r ? 'completed' : ''}" data-journey-level="${l.id}" ${isLocked ? 'disabled' : ''} aria-pressed="${current}" aria-label="Màn ${l.id+1}: ${l.title}${isLocked ? ', chưa mở khóa' : r ? ', ' + r.stars + ' sao' : ''}">
-              <div class="zen-pedestal-stack">
+            return `<button type="button" class="astro-node astro-pos-${idx} ${isLocked ? 'locked' : ''} ${current ? 'active' : ''} ${r ? 'completed' : ''}" data-journey-level="${l.id}" ${isLocked ? 'disabled' : ''} aria-pressed="${current}" aria-label="Màn ${l.id+1}: ${l.title}${isLocked ? ', chưa mở khóa' : r ? ', ' + r.stars + ' sao' : ''}">
+              <div class="astro-pedestal-stack">
                 ${statusBadge}
-                <div class="zen-gem-float">
-                  <span class="zen-gem-icon result-gem" data-pair="${pairIdx}" style="--gem-label-y:${KanjiGemArt.cutFor(pairIdx).labelY}%">
+                <div class="astro-gem-float">
+                  <span class="astro-gem-icon result-gem" data-pair="${pairIdx}" style="--gem-label-y:${KanjiGemArt.cutFor(pairIdx).labelY}%">
                     ${KanjiGemArt.render(pairIdx, 'map-gem-' + l.id)}
                     <span class="result-glyph" lang="ja">${isLocked ? '?' : featuredKanji}</span>
                   </span>
                 </div>
-                <img src="zen_assets/zen_pedestal.webp" class="zen-pedestal-img" alt="" aria-hidden="true">
+                <img src="astro_assets/astro_orb_pedestal.webp" class="astro-pedestal-img" alt="" aria-hidden="true">
               </div>
-              <div class="zen-label">
-                <span class="zen-num">${String(l.id+1).padStart(2,'0')}</span>
-                <span class="zen-title">${l.title}</span>
+              <div class="astro-label">
+                <span class="astro-num">${String(l.id+1).padStart(2,'0')}</span>
+                <span class="astro-title">${l.title}</span>
               </div>
-              <div class="zen-stars" aria-hidden="true">
+              <div class="astro-stars" aria-hidden="true">
                 ${starsHtml}
               </div>
             </button>`;
           }).join('')}
         </div>
 
-        <div class="zen-dots">
-          <span class="zen-dot ${mapChapter===0?'active':''}" data-chapter-step="${0-mapChapter}"></span>
-          <span class="zen-dot ${mapChapter===1?'active':''}" data-chapter-step="${1-mapChapter}"></span>
-          <span class="zen-dot ${mapChapter===2?'active':''}" data-chapter-step="${2-mapChapter}"></span>
+        <div class="astro-dots">
+          <span class="astro-dot ${mapChapter===0?'active':''}" data-chapter-step="${0-mapChapter}"></span>
+          <span class="astro-dot ${mapChapter===1?'active':''}" data-chapter-step="${1-mapChapter}"></span>
+          <span class="astro-dot ${mapChapter===2?'active':''}" data-chapter-step="${2-mapChapter}"></span>
         </div>
       </div>
 
-      <button type="button" class="zen-nav-arrow" data-chapter-step="1" ${mapChapter===2?'disabled':''} aria-label="Chương tiếp theo">
+      <button type="button" class="astro-nav-arrow" data-chapter-step="1" ${mapChapter===2?'disabled':''} aria-label="Chương tiếp theo">
         <i data-lucide="chevron-right" aria-hidden="true"></i>
       </button>
     </main>
 
-    <!-- Bottom Hinoki-Washi Action Dock -->
-    <footer class="zen-bottom-dock">
-      <button type="button" class="zen-dock-btn" data-switch-grade="${currentGrade==='N5'?'N4':'N5'}" aria-label="Chuyển JLPT N5 / N4">
+    <!-- Bottom Celestial Action Dock -->
+    <footer class="astro-bottom-dock">
+      <button type="button" class="astro-dock-btn" data-switch-grade="${currentGrade==='N5'?'N4':'N5'}" aria-label="Chuyển JLPT N5 / N4">
         <i data-lucide="layers" aria-hidden="true"></i>
         <span>${currentGrade}</span>
       </button>
-      <button type="button" class="zen-dock-btn" data-daily-play aria-label="Thử thách hàng ngày">
+      <button type="button" class="astro-dock-btn" data-daily-play aria-label="Thử thách hàng ngày">
         <i data-lucide="calendar" aria-hidden="true"></i>
         <span>Hôm nay</span>
       </button>
-      <button type="button" class="zen-dock-btn" data-journey-album aria-label="Album chữ Kanji (${profile.collected.length}/24)">
+      <button type="button" class="astro-dock-btn" data-journey-album aria-label="Album chữ Kanji (${profile.collected.length}/24)">
         <i data-lucide="book-open" aria-hidden="true"></i>
         <span>Album ${profile.collected.length}/24</span>
       </button>
-      <button type="button" class="zen-dock-play" data-main="${action}" ${locked?'disabled':''} aria-label="${label}">
+      <button type="button" class="astro-dock-play" data-main="${action}" ${locked?'disabled':''} aria-label="${label}">
         <i data-lucide="play" aria-hidden="true"></i>
         <span>${label}</span>
       </button>
