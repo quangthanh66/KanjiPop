@@ -490,15 +490,41 @@
   const chLevels=C.levels.filter(l=>l.chapter===cIdx);
   const chDone=chLevels.filter(l=>profile.results[l.id]).length;
   const chStars=chLevels.reduce((acc,l)=>acc+(profile.results[l.id]?.stars||0),0);
+  const chIds=C.ids.slice(cIdx*8,cIdx*8+8);
+  const chKnown=chIds.filter(id=>profile.collected.includes(id)).length;
+  const pct=Math.round((chDone/Math.max(1,chLevels.length))*100);
+  const constellations=['✦ Chòm Thiên Cầm · Lyra','✦ Chòm Bắc Đẩu · Big Dipper','✦ Chòm Thiên Nga · Cygnus'];
+  const n5Descs=[
+   'Khám phá 8 chữ Kanji đời sống quen thuộc: nghỉ ngơi, tên gọi, đất nước và con người.',
+   'Làm chủ các chữ về thời gian, lắng nghe, trò chuyện, đọc sách và tình bạn học đường.',
+   'Chinh phục các chữ chỉ số đếm, bầu trời, màu sắc, phương hướng và thế giới rộng mở.'
+  ];
+  const n4Descs=[
+   'Khám phá thiên nhiên bốn mùa: nắng ấm, bóng tối, đồng quê và rừng cây xanh mát.',
+   'Mở rộng vốn chữ về cơ thể, gia đình, ẩm thực, sức khỏe và sinh hoạt hằng ngày.',
+   'Chinh phục nhóm chữ về giao thông, kim loại, học tập và tư duy nhận thức.'
+  ];
+  const chDesc=(currentGrade==='N4'?n4Descs:n5Descs)[cIdx]||'';
+  const kanjiChipsHtml=chIds.map(id=>{
+   const known=profile.collected.includes(id);
+   return `<button type="button" class="astro-ch-kanji ${known?'known':''}" data-kanji-preview="${id}" title="${known?id+' — '+(C.recipes[id]?.meaning||''):'Chưa mở khóa'}"><span lang="ja">${known?id:'?'}</span></button>`;
+  }).join('');
   return `
    <div class="astro-chapter-divider" data-active-ch="${cIdx}">
+    <div class="astro-ch-constellation">${constellations[cIdx]||constellations[0]}</div>
     <div class="astro-chapter-pill">
      ${I18N.t('chapter')} ${String(cIdx+1).padStart(2,'0')} · ${ch.name}
     </div>
-    <div class="astro-chapter-meta">
-     <span>${chDone}/${chLevels.length} màn hoàn thành</span>
-     <span class="astro-chapter-stars">★ ${chStars}/${chLevels.length*3}</span>
+    <p class="astro-ch-desc">${chDesc}</p>
+    <div class="astro-ch-progress-wrap">
+     <div class="astro-ch-progress-track"><div class="astro-ch-progress-fill" style="width:${pct}%"></div></div>
+     <div class="astro-chapter-meta">
+      <span>${chDone}/${chLevels.length} màn</span>
+      <span class="astro-chapter-stars">★ ${chStars}/${chLevels.length*3}</span>
+      <span class="astro-chapter-kanji-count">${chKnown}/${chIds.length} chữ</span>
+     </div>
     </div>
+    <div class="astro-ch-kanji-row" aria-label="Các chữ Kanji trong chương">${kanjiChipsHtml}</div>
    </div>
   `;
  }
