@@ -139,10 +139,11 @@ body {
 
 #kanji-pop .astro-moon-wrap {
   position: absolute;
-  left: clamp(24px, 4vw, 68px);
-  top: clamp(64px, 9.5vh, 96px);
-  width: clamp(88px, 10vw, 138px);
+  left: clamp(130px, 14.5vw, 200px);
+  top: clamp(10px, 1.8vh, 26px);
+  width: clamp(80px, 8vw, 115px);
   animation: astroFloatSlow 7s ease-in-out infinite;
+  z-index: 3;
 }
 #kanji-pop .astro-moon-glow {
   position: absolute;
@@ -154,6 +155,17 @@ body {
   opacity: 0.72;
   animation: astroPulseGlow 4.5s ease-in-out infinite;
 }
+#kanji-pop .astro-moon-beam {
+  position: absolute;
+  top: 45%;
+  left: 10%;
+  width: clamp(220px, 24vw, 340px);
+  height: clamp(320px, 50vh, 480px);
+  background: radial-gradient(ellipse at 30% 0%, rgba(253, 224, 71, 0.22) 0%, rgba(56, 189, 248, 0.08) 45%, transparent 75%);
+  pointer-events: none;
+  transform: rotate(10deg);
+  mix-blend-mode: screen;
+}
 #kanji-pop .astro-moon-img {
   position: relative;
   width: 100%;
@@ -164,10 +176,11 @@ body {
 
 #kanji-pop .astro-observatory-wrap {
   position: absolute;
-  right: clamp(24px, 3.2vw, 56px);
-  bottom: clamp(24px, 3.5vh, 44px);
-  width: clamp(135px, 15vw, 220px);
-  opacity: 0.94;
+  right: clamp(16px, 2.6vw, 44px);
+  bottom: clamp(12px, 1.6vh, 26px);
+  width: clamp(130px, 14vw, 205px);
+  opacity: 0.98;
+  z-index: 4;
 }
 #kanji-pop .astro-observatory-glow {
   position: absolute;
@@ -190,28 +203,25 @@ body {
 #kanji-pop .astro-cloud {
   position: absolute;
   height: auto;
-  opacity: 0.78;
-  filter: drop-shadow(0 8px 18px rgba(15, 23, 42, 0.45));
+  pointer-events: none;
 }
 #kanji-pop .astro-cloud.left {
-  left: clamp(20px, 3vw, 52px);
-  bottom: clamp(28px, 4.5vh, 56px);
-  width: clamp(140px, 16vw, 230px);
-  animation: astroDriftLeft 11s ease-in-out infinite;
+  left: clamp(30px, 5vw, 110px);
+  bottom: clamp(-8px, -1vh, 6px);
+  width: clamp(200px, 22vw, 320px);
+  opacity: 0.82;
+  z-index: 2;
+  animation: astroDriftLeft 12s ease-in-out infinite;
+  filter: drop-shadow(0 8px 20px rgba(15, 23, 42, 0.5));
 }
-#kanji-pop .astro-cloud.mid-left {
-  left: clamp(8%, 12vw, 16%);
-  top: clamp(18%, 22vh, 26%);
-  width: clamp(90px, 10vw, 145px);
-  opacity: 0.42;
+#kanji-pop .astro-cloud.horizon-right {
+  right: clamp(-10px, 0.5vw, 20px);
+  bottom: clamp(-12px, -1.5vh, 4px);
+  width: clamp(220px, 24vw, 340px);
+  opacity: 0.85;
+  z-index: 3;
   animation: astroDriftRight 14s ease-in-out infinite;
-}
-#kanji-pop .astro-cloud.top-right {
-  right: clamp(24px, 7vw, 110px);
-  top: clamp(48px, 8vh, 88px);
-  width: clamp(120px, 14vw, 205px);
-  opacity: 0.62;
-  animation: astroDriftRight 13s ease-in-out infinite;
+  filter: drop-shadow(0 0 24px rgba(56, 189, 248, 0.28));
 }
 
 #kanji-pop .astro-star-spark {
@@ -708,22 +718,23 @@ body {
   50% { transform: translateY(-3px); }
 }
 
-/* 3D Astrolabe Dial Positioned in Upper-Right Sky (Outside Stages Area) */
-#kanji-pop .astro-dial-landmark {
+/* Centered Rotating Celestial Astrolabe Wheel (Focal Anchor Behind Constellation) */
+#kanji-pop .astro-constellation-dial-ring {
   position: absolute;
-  right: clamp(24px, 4vw, 68px);
-  top: clamp(64px, 9.5vh, 96px);
-  width: clamp(96px, 11vw, 156px);
-  height: auto;
+  left: 50%;
+  top: 50%;
+  width: clamp(340px, 44vw, 540px);
+  height: clamp(340px, 44vw, 540px);
   pointer-events: none;
-  z-index: 2;
-  opacity: 0.9;
-  filter: drop-shadow(0 0 24px rgba(56, 189, 248, 0.45));
-  animation: astroLandmarkSpin 90s linear infinite;
+  z-index: 1;
+  opacity: 0.44;
+  filter: drop-shadow(0 0 32px rgba(56, 189, 248, 0.48)) drop-shadow(0 0 64px rgba(251, 191, 36, 0.28));
+  animation: astroDialRingSpin 110s linear infinite;
+  user-select: none;
 }
-@keyframes astroLandmarkSpin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+@keyframes astroDialRingSpin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 /* Flowing Energy Stream Canvas (Strictly Underneath Stage Pedestals) */
@@ -1106,11 +1117,15 @@ body {
   #kanji-pop .astro-chapter-meta {
     font-size: 10px;
   }
-  #kanji-pop .astro-dial-landmark {
-    right: 10px;
-    top: 54px;
+  #kanji-pop .astro-constellation-dial-ring {
+    width: min(84vw, 360px);
+    height: min(84vw, 360px);
+    opacity: 0.32;
+  }
+  #kanji-pop .astro-moon-wrap {
+    left: 12px;
+    top: 48px;
     width: 64px;
-    opacity: 0.85;
   }
   #kanji-pop#kanji-pop .astro-node {
     left: var(--node-x-mob, 50%);

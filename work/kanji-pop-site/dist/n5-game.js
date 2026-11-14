@@ -461,6 +461,7 @@
     return `
     <section class="astro-chapter-section" data-ch="${cIdx}">
      <div class="astro-constellation-field" data-edges="${cSpec.edges}">
+      <img src="astro_assets/astro_dial_ring.webp" class="astro-constellation-dial-ring" alt="" aria-hidden="true">
       <canvas class="astro-energy-canvas" aria-hidden="true"></canvas>
       ${nodesHtml}
      </div>
@@ -558,13 +559,13 @@
         </svg>
         <div class="astro-moon-wrap">
           <div class="astro-moon-glow"></div>
+          <div class="astro-moon-beam"></div>
           <img src="astro_assets/astro_moon.webp" class="astro-moon-img" alt="">
         </div>
-        <img src="astro_assets/astro_dial_ring.webp" class="astro-dial-landmark" alt="">
       </div>
       <div class="astro-parallax-near">
-        <img src="astro_assets/astro_cloud.webp" class="astro-cloud mid-left" alt="">
         <img src="astro_assets/astro_cloud.webp" class="astro-cloud left" alt="">
+        <img src="astro_assets/astro_cloud.webp" class="astro-cloud horizon-right" alt="">
         <img src="vfx_star.png" class="astro-star-spark s1" alt="">
         <img src="vfx_star.png" class="astro-star-spark s2" alt="">
         <div class="astro-observatory-wrap">
