@@ -70,10 +70,10 @@
 * Phiên chơi thử riêng (Playtest): Namespace `kanji-pop-experience-v1` hoặc URL `?playtest=<id>`.
 * Khi nâng cấp logic lưu trữ, luôn duy trì hàm migration để không làm mất tiến trình đã chơi của người dùng.
 
-### Quy tắc 6: Nguyên Tắc Đồng Bộ Git & Push GitHub (User Permission Invariant)
-* **TUYỆT ĐỐI KHÔNG tự ý thực hiện `git push`** lên kho lưu trữ từ xa (GitHub/origin).
-* AI chỉ được phép thực thi lệnh `git push` **khi và chỉ khi có yêu cầu trực tiếp, rõ ràng từ người dùng** (ví dụ: *"hãy push lên github"*, *"push code đi"*, v.v.).
-* Mọi thao tác sửa đổi, kiểm thử tự động hay tạo local commit có thể thực hiện trên máy cục bộ, nhưng bước đẩy lên remote luôn phải chờ lệnh của người dùng.
+### Quy tắc 6: Nguyên Tắc Đồng Bộ Git & Push GitHub (Auto-Push Mode: BẬT)
+* **Chế độ Tự Động Push**: Người dùng đã phê duyệt kích hoạt chế độ **Auto-Push**.
+* Sau khi xử lý xong yêu cầu và vượt qua bước kiểm tra trực quan chống cắt xén (Quy tắc 7), AI **tự động tạo git commit và thực thi `git push origin main`** lên kho GitHub từ xa.
+* Nhờ vậy, người dùng trên máy cá nhân có thể `git pull` (hoặc chạy file `update.bat`) để nhận bản cập nhật mới nhất ngay lập tức mà không cần phải chat qua lại xin phép push từng lần.
 
 ### Quy tắc 7: Bắt Buộc Kiểm Tra Trực Quan Triệt Để Chống Cắt Xén UI (Zero-Clipping & Visual Verification Invariant)
 * **Yêu cầu bất biến bắt buộc**: Mỗi khi xử lý xong bất kỳ yêu cầu nào liên quan đến UI/Giao diện (thay đổi asset, CSS, layout, thêm nút, sửa font, icon, hiệu ứng...):
