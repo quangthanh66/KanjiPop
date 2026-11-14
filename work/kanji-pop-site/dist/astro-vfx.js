@@ -71,6 +71,34 @@
 
     const t = ts * 0.001;
 
+    // 0. Subtle Sky Constellations (Upper-Left & Upper-Right)
+    const constellations = [
+      [[0.12, 0.24], [0.18, 0.16], [0.25, 0.21], [0.29, 0.12], [0.35, 0.17]],
+      [[0.66, 0.14], [0.72, 0.20], [0.78, 0.13], [0.84, 0.19], [0.79, 0.26]]
+    ];
+    for (let c = 0; c < constellations.length; c++) {
+      const pts = constellations[c];
+      const pulse = 0.22 + 0.12 * Math.sin(t * 0.9 + c * 2.1);
+      ctx.strokeStyle = `rgba(125, 211, 252, ${pulse.toFixed(3)})`;
+      ctx.lineWidth = 1.1;
+      ctx.beginPath();
+      for (let i = 0; i < pts.length; i++) {
+        const px = pts[i][0] * w;
+        const py = pts[i][1] * h;
+        if (i === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+      }
+      ctx.stroke();
+      for (let i = 0; i < pts.length; i++) {
+        const px = pts[i][0] * w;
+        const py = pts[i][1] * h;
+        ctx.fillStyle = `rgba(253, 230, 138, ${(pulse + 0.35).toFixed(3)})`;
+        ctx.beginPath();
+        ctx.arc(px, py, 2.1, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
     // 1. Twinkling Stars
     for (let i = 0; i < stars.length; i++) {
       const s = stars[i];

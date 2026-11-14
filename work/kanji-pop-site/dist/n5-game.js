@@ -396,12 +396,31 @@
     <canvas class="astro-vfx-canvas" aria-hidden="true"></canvas>
 
     <div class="astro-scenery" aria-hidden="true">
+      <svg class="astro-aurora-svg" viewBox="0 0 1440 420" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="astroAuroraGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#38bdf8" stop-opacity="0"/>
+            <stop offset="30%" stop-color="#38bdf8" stop-opacity="0.22"/>
+            <stop offset="55%" stop-color="#a855f7" stop-opacity="0.24"/>
+            <stop offset="80%" stop-color="#ec4899" stop-opacity="0.16"/>
+            <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <path d="M -40 240 C 260 110, 520 290, 860 160 C 1100 70, 1280 210, 1480 120 L 1480 340 C 1220 260, 1020 350, 740 250 C 460 160, 220 320, -40 290 Z" fill="url(#astroAuroraGrad)"/>
+      </svg>
+      <svg class="astro-horizon-svg" viewBox="0 0 1440 220" preserveAspectRatio="none">
+        <path d="M 0 220 L 0 140 Q 180 75 360 135 T 760 115 T 1140 130 T 1440 95 L 1440 220 Z" fill="rgba(15, 23, 42, 0.48)"/>
+        <path d="M 0 220 L 0 165 Q 240 115 480 165 T 960 150 T 1440 135 L 1440 220 Z" fill="rgba(7, 11, 36, 0.72)"/>
+      </svg>
       <div class="astro-moon-wrap">
         <div class="astro-moon-glow"></div>
         <img src="astro_assets/astro_moon.webp" class="astro-moon-img" alt="">
       </div>
       <img src="astro_assets/astro_cloud.webp" class="astro-cloud top-right" alt="">
+      <img src="astro_assets/astro_cloud.webp" class="astro-cloud mid-left" alt="">
       <img src="astro_assets/astro_cloud.webp" class="astro-cloud left" alt="">
+      <img src="vfx_star.png" class="astro-star-spark s1" alt="">
+      <img src="vfx_star.png" class="astro-star-spark s2" alt="">
       <div class="astro-observatory-wrap">
         <div class="astro-observatory-glow"></div>
         <img src="astro_assets/astro_observatory.webp" class="astro-observatory-img" alt="">

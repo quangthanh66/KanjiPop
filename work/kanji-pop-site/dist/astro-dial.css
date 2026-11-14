@@ -98,11 +98,29 @@ body {
   z-index: 2;
 }
 
+#kanji-pop .astro-aurora-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 55%;
+  filter: blur(18px);
+  opacity: 0.9;
+}
+
+#kanji-pop .astro-horizon-svg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: clamp(110px, 20vh, 210px);
+}
+
 #kanji-pop .astro-moon-wrap {
   position: absolute;
   left: clamp(16px, 4.5vw, 72px);
-  top: clamp(56px, 10vh, 96px);
-  width: clamp(78px, 9.5vw, 138px);
+  top: clamp(54px, 9vh, 92px);
+  width: clamp(92px, 11vw, 152px);
   animation: astroFloatSlow 7s ease-in-out infinite;
 }
 #kanji-pop .astro-moon-glow {
@@ -112,7 +130,7 @@ body {
   height: 190%;
   background: url('vfx_light.png') center / contain no-repeat;
   mix-blend-mode: screen;
-  opacity: 0.65;
+  opacity: 0.72;
   animation: astroPulseGlow 4.5s ease-in-out infinite;
 }
 #kanji-pop .astro-moon-img {
@@ -120,15 +138,15 @@ body {
   width: 100%;
   height: auto;
   display: block;
-  filter: drop-shadow(0 0 18px rgba(253, 224, 71, 0.45));
+  filter: drop-shadow(0 0 22px rgba(253, 224, 71, 0.55));
 }
 
 #kanji-pop .astro-observatory-wrap {
   position: absolute;
-  right: clamp(-14px, 1.5vw, 28px);
-  bottom: clamp(-12px, 1vh, 12px);
-  width: clamp(130px, 17vw, 250px);
-  opacity: 0.94;
+  right: clamp(-10px, 1.5vw, 28px);
+  bottom: clamp(-10px, 1vh, 14px);
+  width: clamp(155px, 20vw, 285px);
+  opacity: 0.96;
 }
 #kanji-pop .astro-observatory-glow {
   position: absolute;
@@ -136,7 +154,7 @@ body {
   top: 24%;
   width: 76%;
   height: 76%;
-  background: radial-gradient(circle, rgba(251, 191, 36, 0.35) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.42) 0%, transparent 70%);
   mix-blend-mode: screen;
   animation: astroPulseGlow 5s ease-in-out infinite;
 }
@@ -145,27 +163,54 @@ body {
   width: 100%;
   height: auto;
   display: block;
-  filter: drop-shadow(0 12px 24px rgba(2, 6, 23, 0.65));
+  filter: drop-shadow(0 12px 24px rgba(2, 6, 23, 0.7));
 }
 
 #kanji-pop .astro-cloud {
   position: absolute;
   height: auto;
-  opacity: 0.72;
+  opacity: 0.78;
   filter: drop-shadow(0 8px 18px rgba(15, 23, 42, 0.45));
 }
 #kanji-pop .astro-cloud.left {
-  left: clamp(-40px, -1vw, 12px);
-  bottom: clamp(18px, 6vh, 64px);
-  width: clamp(150px, 19vw, 270px);
+  left: clamp(-36px, -0.5vw, 18px);
+  bottom: clamp(16px, 5vh, 58px);
+  width: clamp(165px, 21vw, 290px);
   animation: astroDriftLeft 11s ease-in-out infinite;
+}
+#kanji-pop .astro-cloud.mid-left {
+  left: clamp(8%, 12vw, 16%);
+  top: clamp(18%, 22vh, 26%);
+  width: clamp(90px, 10vw, 145px);
+  opacity: 0.42;
+  animation: astroDriftRight 14s ease-in-out infinite;
 }
 #kanji-pop .astro-cloud.top-right {
   right: clamp(24px, 7vw, 110px);
   top: clamp(48px, 8vh, 88px);
-  width: clamp(110px, 13vw, 190px);
-  opacity: 0.55;
+  width: clamp(120px, 14vw, 205px);
+  opacity: 0.62;
   animation: astroDriftRight 13s ease-in-out infinite;
+}
+
+#kanji-pop .astro-star-spark {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  mix-blend-mode: screen;
+  opacity: 0.75;
+  animation: astroPulseGlow 3.2s ease-in-out infinite;
+}
+#kanji-pop .astro-star-spark.s1 {
+  left: 24%;
+  top: 18%;
+}
+#kanji-pop .astro-star-spark.s2 {
+  right: 25%;
+  top: 22%;
+  width: 28px;
+  height: 28px;
+  animation-delay: -1.6s;
 }
 
 @keyframes astroFloatSlow {
@@ -423,13 +468,13 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: clamp(230px, 34vh, 340px);
+  width: clamp(280px, 42vh, 420px);
   height: auto;
   transform: translate(-50%, -50%);
   pointer-events: none;
   z-index: 1;
-  opacity: 0.32;
-  filter: brightness(0.8) drop-shadow(0 0 28px rgba(56, 189, 248, 0.45));
+  opacity: 0.48;
+  filter: brightness(0.92) drop-shadow(0 0 32px rgba(56, 189, 248, 0.5));
   animation: astroRingSpin 90s linear infinite;
 }
 @keyframes astroRingSpin {
