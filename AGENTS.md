@@ -236,6 +236,13 @@ Các script kiểm thử sử dụng Playwright headless để kiểm tra trực
    - Đã áp dụng quy tắc Full-Bleed bất biến tại `gems-gui.css`: gán `html, body, #kp-preview` và `#kanji-pop` trải dài 100vw × 100dvh với hình nền pastel mây trời `gems_gui_assets/gui_bg.png` cố định (`fixed cover`). Loại bỏ toàn bộ gradient cyan thừa.
    - Đã kiểm tra trực quan (Quy tắc 7) bằng Playwright/Chrome headless trên Desktop (1920px, 1440px, 1280px) và Mobile (390px, 360px): 2 dải màu xanh đã biến mất hoàn toàn 100%, hình nền mây trời phủ kín toàn bộ màn hình mượt mà không tì vết.
    - Tự động commit và push lên nhánh `main` để GitHub Actions deploy trực tiếp lên GitHub Pages: `https://quangthanh66.github.io/KanjiPop/`.
+7. **Thiết kế lại Đồng hồ Thiên văn Rỗng & Hố đen Ma thuật 60fps chứa cụm Stage**:
+   - Người dùng yêu cầu: *"thiết kế lại đồng hồ, sao cho phần bên trong rỗng, chỉ chừa lại phần viền ngoài, phần bên trong là dạng hố đen ma thuật chuyển động liên tục, chứa cụm stage"*.
+   - Đã tách rỗng vành đồng hồ `astro_dial_ring.webp`: khử hoàn toàn lõi đĩa đặc bằng thuật toán feathering bán kính $R < 175.5\text{px}$, giữ nguyên 100% chi tiết bánh răng đồng thau 3D và vành đai thiên văn.
+   - Tạo hố đen ma thuật trên Canvas 60fps (`drawBlackHoleVortex` trong `astro-vfx.js`): tâm chân trời sự kiện tối sâu thẳm (Event Horizon Singularity), vành quang tử tương đối tính (Relativistic Photon Ring) rực sáng, 4 nhánh đĩa bồi tụ plasma xoắn ốc (tím, lam, vàng, hồng) chuyển động liên tục, và 56 hạt bụi sao bị hút vào tâm.
+   - Chuẩn hóa khung chứa tỉ lệ 1:1 (`.astro-dial-hub`): đưa vành đồng hồ, canvas hố đen, canvas năng lượng starlight và 5 bệ đá quý vào cùng một hệ tọa độ vuông hoàn hảo.
+   - Thiết lập Quỹ đạo sao vương miện (Crown Horseshoe Orbit) cho cả 3 chương: 5 bệ đá quý phân bổ ở bán kính $22\% - 27\%$, khoảng cách bệ và nhãn chữ được hiệu chỉnh tối ưu (0 chồng chéo, 0 chạm viền bánh răng, 0 che tâm hố đen).
+   - Kiểm tra trực quan triệt để (Quy tắc 7) trên Desktop (1280px) và Mobile (360px), xác nhận vượt qua toàn bộ tiêu chí hiển thị không cắt xén. Commit và tự động push lên GitHub `main`.
 
 ---
 
