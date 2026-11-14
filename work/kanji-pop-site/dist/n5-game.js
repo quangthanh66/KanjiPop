@@ -447,8 +447,11 @@
           <span class="gui-chapter-stars">★ ${levels.reduce((acc,l)=>acc+(profile.results[l.id]?.stars||0),0)}/${levels.length*3}</span>
         </div>
 
-        <!-- 5 Gemstone Showcase Cards for Current Chapter -->
-        <div class="gui-showcase-grid">
+        <!-- 5 Floating Gemstone Islands for Current Chapter -->
+        <div class="gui-island-map">
+          <svg class="gui-island-path-desktop" viewBox="0 0 800 260" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M 80 150 C 165 150, 175 85, 240 85 C 305 85, 335 160, 400 160 C 465 160, 495 85, 560 85 C 625 85, 645 140, 720 140" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="5" stroke-linecap="round" stroke-dasharray="10 10"/>
+          </svg>
           ${levels.map((l, idx) => {
             const r = profile.results[l.id];
             const isLocked = l.id > next;
@@ -461,25 +464,32 @@
               : `${'<img src="gems_gui_assets/star_gold.png" alt="★">'.repeat(starCount)}${'<img src="gems_gui_assets/star_gray.png" alt="☆">'.repeat(3 - starCount)}`;
 
             const statusBadge = isLocked
-              ? `<span class="gui-card-badge locked">🔒</span>`
+              ? `<span class="gui-island-badge locked">🔒</span>`
               : r
-                ? `<span class="gui-card-badge done">✓</span>`
+                ? `<span class="gui-island-badge done">✓</span>`
                 : l.review
-                  ? `<span class="gui-card-badge review">ÔN</span>`
-                  : `<span class="gui-card-badge play">MỚI</span>`;
+                  ? `<span class="gui-island-badge review">ÔN</span>`
+                  : `<span class="gui-island-badge play">MỚI</span>`;
 
-            return `<button type="button" class="gui-showcase-card ${isLocked ? 'locked' : ''} ${current ? 'active' : ''} ${r ? 'completed' : ''}" data-journey-level="${l.id}" ${isLocked ? 'disabled' : ''} aria-pressed="${current}" aria-label="Màn ${l.id+1}: ${l.title}${isLocked ? ', chưa mở khóa' : r ? ', ' + r.stars + ' sao' : ''}">
-              <div class="gui-card-top">
-                <span class="gui-card-num">MÀN ${String(l.id+1).padStart(2,'0')}</span>
+            return `<button type="button" class="gui-island-node island-pos-${idx} ${isLocked ? 'locked' : ''} ${current ? 'active' : ''} ${r ? 'completed' : ''}" data-journey-level="${l.id}" ${isLocked ? 'disabled' : ''} aria-pressed="${current}" aria-label="Màn ${l.id+1}: ${l.title}${isLocked ? ', chưa mở khóa' : r ? ', ' + r.stars + ' sao' : ''}">
+              <div class="gui-island-float">
                 ${statusBadge}
+                <div class="gui-island-gem-wrap">
+                  <span class="gui-showcase-gem result-gem" data-pair="${pairIdx}" style="--gem-label-y:${KanjiGemArt.cutFor(pairIdx).labelY}%">
+                    ${KanjiGemArt.render(pairIdx, 'map-gem-' + l.id)}
+                    <span class="result-glyph" lang="ja">${isLocked ? '?' : featuredKanji}</span>
+                  </span>
+                </div>
+                <div class="gui-island-pedestal" aria-hidden="true">
+                  <span class="gui-island-grass"></span>
+                  <span class="gui-island-rock"></span>
+                  <span class="gui-island-cloud"></span>
+                </div>
               </div>
-              <div class="gui-showcase-gem-wrap">
-                <span class="gui-showcase-gem result-gem" data-pair="${pairIdx}" style="--gem-label-y:${KanjiGemArt.cutFor(pairIdx).labelY}%">
-                  ${KanjiGemArt.render(pairIdx, 'map-gem-' + l.id)}
-                  <span class="result-glyph" lang="ja">${isLocked ? '?' : featuredKanji}</span>
-                </span>
+              <div class="gui-island-label">
+                <span class="gui-island-num">${String(l.id+1).padStart(2,'0')}</span>
+                <span class="gui-island-title">${l.title}</span>
               </div>
-              <span class="gui-card-title">${l.title}</span>
               <div class="gui-lvl-stars" aria-hidden="true">
                 ${starsHtml}
               </div>

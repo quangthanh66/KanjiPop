@@ -318,148 +318,226 @@ body,
   color: #fde047;
 }
 
-/* 5 Gemstone Showcase Cards Grid */
-#kanji-pop .gui-showcase-grid {
+/* 5 Floating Gemstone Islands Map */
+#kanji-pop .gui-island-map {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: clamp(8px, 1.3vw, 14px);
+  gap: clamp(6px, 1.2vw, 14px);
   width: 100%;
   flex: 1;
-  padding: clamp(6px, 1vw, 12px) 2px 6px;
-  align-items: stretch;
+  min-height: clamp(220px, 34vh, 300px);
+  padding: clamp(8px, 1.4vh, 16px) 4px 8px;
+  align-items: center;
   box-sizing: border-box;
 }
 
-/* Individual Gemstone Showcase Card */
-#kanji-pop#kanji-pop .gui-showcase-card {
+#kanji-pop .gui-island-path-desktop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  filter: drop-shadow(0 2px 6px rgba(59, 7, 100, 0.35));
+}
+
+/* Individual Floating Island Node */
+#kanji-pop#kanji-pop .gui-island-node {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 6px 4px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  color: #ffffff;
+  text-align: center;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: visible;
+}
+
+/* Winding S-curve Stagger on Desktop */
+#kanji-pop .gui-island-node.island-pos-0 { transform: translateY(18px); }
+#kanji-pop .gui-island-node.island-pos-1 { transform: translateY(-20px); }
+#kanji-pop .gui-island-node.island-pos-2 { transform: translateY(22px); }
+#kanji-pop .gui-island-node.island-pos-3 { transform: translateY(-20px); }
+#kanji-pop .gui-island-node.island-pos-4 { transform: translateY(8px); }
+
+#kanji-pop#kanji-pop .gui-island-node:hover:not(:disabled) {
+  transform: translateY(-8px) scale(1.06);
+}
+#kanji-pop#kanji-pop .gui-island-node.island-pos-0:hover:not(:disabled) { transform: translateY(10px) scale(1.06); }
+#kanji-pop#kanji-pop .gui-island-node.island-pos-1:hover:not(:disabled) { transform: translateY(-28px) scale(1.06); }
+#kanji-pop#kanji-pop .gui-island-node.island-pos-2:hover:not(:disabled) { transform: translateY(14px) scale(1.06); }
+#kanji-pop#kanji-pop .gui-island-node.island-pos-3:hover:not(:disabled) { transform: translateY(-28px) scale(1.06); }
+#kanji-pop#kanji-pop .gui-island-node.island-pos-4:hover:not(:disabled) { transform: translateY(0px) scale(1.06); }
+
+/* Floating Island Group (Badge + Gem + Pedestal) */
+#kanji-pop .gui-island-float {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: clamp(4px, 0.7vh, 8px);
-  padding: clamp(8px, 1.2vh, 12px) clamp(6px, 0.8vw, 10px) clamp(8px, 1vh, 10px);
-  border-radius: clamp(16px, 2vw, 22px);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(235, 216, 255, 0.14) 100%);
-  border: 2px solid rgba(255, 255, 255, 0.45);
-  box-shadow: 0 6px 16px rgba(24, 7, 38, 0.28), inset 0 1px 2px rgba(255, 255, 255, 0.55);
-  cursor: pointer;
-  color: #ffffff;
-  text-align: center;
-  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
-  overflow: visible;
+  animation: islandBob 3.6s ease-in-out infinite;
+}
+#kanji-pop .gui-island-node.island-pos-1 .gui-island-float { animation-delay: -0.7s; }
+#kanji-pop .gui-island-node.island-pos-2 .gui-island-float { animation-delay: -1.4s; }
+#kanji-pop .gui-island-node.island-pos-3 .gui-island-float { animation-delay: -2.1s; }
+#kanji-pop .gui-island-node.island-pos-4 .gui-island-float { animation-delay: -2.8s; }
+
+@keyframes islandBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
 }
 
-#kanji-pop#kanji-pop .gui-showcase-card:hover:not(:disabled) {
-  transform: translateY(-4px) scale(1.03);
-  border-color: #ffffff;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.34) 0%, rgba(235, 216, 255, 0.22) 100%);
-  box-shadow: 0 12px 24px rgba(24, 7, 38, 0.38), inset 0 1px 3px rgba(255, 255, 255, 0.8);
+#kanji-pop .gui-island-node.locked .gui-island-float {
+  animation: none;
+  opacity: 0.78;
 }
 
-#kanji-pop#kanji-pop .gui-showcase-card:active:not(:disabled) {
-  transform: translateY(1px) scale(0.97);
-}
-
-#kanji-pop#kanji-pop .gui-showcase-card.active {
-  background: linear-gradient(180deg, rgba(244, 63, 94, 0.35) 0%, rgba(190, 24, 93, 0.45) 100%);
-  border: 2.5px solid #fef08a;
-  box-shadow: 0 0 22px rgba(253, 224, 71, 0.55), 0 10px 22px rgba(24, 7, 38, 0.42), inset 0 1px 4px rgba(255, 255, 255, 0.85);
-  transform: translateY(-3px);
-}
-
-#kanji-pop#kanji-pop .gui-showcase-card.completed:not(.active) {
-  background: linear-gradient(180deg, rgba(16, 185, 129, 0.22) 0%, rgba(5, 150, 105, 0.18) 100%);
-  border-color: rgba(167, 243, 208, 0.65);
-}
-
-#kanji-pop#kanji-pop .gui-showcase-card.locked {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
-  border-color: rgba(255, 255, 255, 0.22);
-  opacity: 0.68;
-  cursor: not-allowed;
-  box-shadow: none;
-}
-
-/* Card Top Row: Level Number + Badge */
-#kanji-pop .gui-card-top {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 4px;
-}
-#kanji-pop .gui-card-num {
-  font-size: clamp(9.5px, 0.9vw, 11.5px);
+/* Status Badge */
+#kanji-pop .gui-island-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  z-index: 6;
+  font-size: clamp(8.5px, 0.8vw, 10.5px);
   font-weight: 900;
-  color: rgba(255, 255, 255, 0.92);
-  letter-spacing: 0.4px;
-}
-#kanji-pop .gui-card-badge {
-  font-size: clamp(8px, 0.75vw, 10px);
-  font-weight: 900;
-  padding: 1px 6px;
+  padding: 2px 7px;
   border-radius: 9999px;
-  line-height: 1.3;
+  line-height: 1.25;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
 }
-#kanji-pop .gui-card-badge.play {
-  background: #f43f5e;
+#kanji-pop .gui-island-badge.play {
+  background: linear-gradient(180deg, #f43f5e, #e11d48);
   color: #ffffff;
-  border: 1px solid #ffffff;
+  border: 1.5px solid #ffffff;
 }
-#kanji-pop .gui-card-badge.review {
+#kanji-pop .gui-island-badge.review {
   background: #38bdf8;
   color: #0c4a6e;
+  border: 1.5px solid #ffffff;
 }
-#kanji-pop .gui-card-badge.done {
+#kanji-pop .gui-island-badge.done {
   background: #34d399;
   color: #064e3b;
+  border: 1.5px solid #ffffff;
 }
-#kanji-pop .gui-card-badge.locked {
-  background: rgba(255, 255, 255, 0.15);
-  color: rgba(255, 255, 255, 0.8);
+#kanji-pop .gui-island-badge.locked {
+  background: rgba(59, 7, 100, 0.75);
+  color: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   padding: 1px 5px;
 }
 
-/* Center Gem Display */
-#kanji-pop .gui-showcase-gem-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2px 0;
+/* Gem Sitting on Top of the Island */
+#kanji-pop .gui-island-gem-wrap {
+  position: relative;
+  z-index: 4;
+  margin-bottom: -14px;
 }
 #kanji-pop .gui-showcase-gem {
-  width: clamp(50px, 5.8vw, 76px);
-  height: clamp(50px, 5.8vw, 76px);
-  font-size: clamp(20px, 2.2vw, 30px);
-  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.35));
-  transition: transform 0.2s ease;
+  width: clamp(52px, 5.8vw, 76px);
+  height: clamp(52px, 5.8vw, 76px);
+  font-size: clamp(20px, 2.2vw, 29px);
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.38));
 }
-#kanji-pop .gui-showcase-card:hover:not(:disabled) .gui-showcase-gem {
-  transform: scale(1.08) rotate(-3deg);
+#kanji-pop .gui-island-node.active .gui-showcase-gem {
+  filter: drop-shadow(0 0 14px rgba(253, 224, 71, 0.85)) drop-shadow(0 6px 12px rgba(244, 63, 94, 0.55));
 }
-#kanji-pop .gui-showcase-card.locked .gui-showcase-gem {
-  filter: saturate(0.35) opacity(0.7);
+#kanji-pop .gui-island-node.locked .gui-showcase-gem {
+  filter: saturate(0.35) brightness(0.9);
 }
 
-/* Card Title */
-#kanji-pop .gui-card-title {
-  font-size: clamp(10.5px, 1vw, 12.5px);
+/* 3D Island Pedestal (Pastel Turf + Crystal Rock + Fluffy Cloud) */
+#kanji-pop .gui-island-pedestal {
+  position: relative;
+  width: clamp(74px, 8vw, 106px);
+  height: clamp(30px, 3.3vw, 42px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+#kanji-pop .gui-island-grass {
+  width: 100%;
+  height: 58%;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #f9a8d4 0%, #e879f9 55%, #a855f7 100%);
+  border: 2px solid #ffffff;
+  box-shadow: inset 0 3px 6px rgba(255, 255, 255, 0.75), 0 4px 0 #7e22ce;
+  z-index: 2;
+}
+#kanji-pop .gui-island-node.active .gui-island-grass {
+  background: linear-gradient(180deg, #fef08a 0%, #f472b6 55%, #db2777 100%);
+  border-color: #fef08a;
+  box-shadow: 0 0 16px rgba(253, 224, 71, 0.75), inset 0 3px 6px rgba(255, 255, 255, 0.85), 0 4px 0 #9d174d;
+}
+#kanji-pop .gui-island-node.completed:not(.active) .gui-island-grass {
+  background: linear-gradient(180deg, #a7f3d0 0%, #34d399 65%, #059669 100%);
+  box-shadow: inset 0 3px 6px rgba(255, 255, 255, 0.75), 0 4px 0 #047857;
+}
+#kanji-pop .gui-island-node.locked .gui-island-grass {
+  background: linear-gradient(180deg, #c4b5fd 0%, #8b5cf6 65%, #6d28d9 100%);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 0 #4c1d95;
+}
+#kanji-pop .gui-island-rock {
+  width: 72%;
+  height: 48%;
+  margin-top: -8px;
+  border-radius: 0 0 24px 24px;
+  background: linear-gradient(180deg, #6b21a8 0%, #3b0764 100%);
+  box-shadow: 0 6px 12px rgba(24, 7, 38, 0.45);
+  z-index: 1;
+}
+#kanji-pop .gui-island-cloud {
+  width: 88%;
+  height: 10px;
+  margin-top: 3px;
+  border-radius: 9999px;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.45) 0%, transparent 75%);
+}
+
+/* Island Label Pill */
+#kanji-pop .gui-island-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(36, 5, 66, 0.68);
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  border-radius: 9999px;
+  padding: 2px 8px;
+  margin-top: 2px;
+  max-width: 100%;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.28);
+}
+#kanji-pop .gui-island-node.active .gui-island-label {
+  background: linear-gradient(180deg, #ec4899, #be185d);
+  border-color: #fef08a;
+}
+#kanji-pop .gui-island-num {
+  font-size: clamp(9px, 0.85vw, 11px);
+  font-weight: 900;
+  color: #fde047;
+  flex: none;
+}
+#kanji-pop .gui-island-title {
+  font-size: clamp(9.5px, 0.9vw, 11.5px);
   font-weight: 800;
   color: #ffffff;
-  line-height: 1.25;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  white-space: nowrap;
   overflow: hidden;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
-  min-height: 2.5em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-overflow: ellipsis;
 }
 
-/* 3 Stars Rack Inside Showcase Card */
+/* 3 Stars Rack Under Island */
 #kanji-pop .gui-lvl-stars {
   position: relative;
   bottom: auto;
@@ -470,7 +548,7 @@ body,
   pointer-events: none;
   overflow: visible !important;
   z-index: 10;
-  padding-top: 2px;
+  padding-top: 1px;
 }
 #kanji-pop .gui-lvl-stars img {
   width: clamp(13px, 1.4vw, 18px);
@@ -614,35 +692,55 @@ body,
     font-size: 10px;
     gap: 8px;
   }
-  #kanji-pop .gui-showcase-grid {
+  #kanji-pop .gui-island-path-desktop {
+    display: none;
+  }
+  #kanji-pop .gui-island-map {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 7px;
-    padding: 4px 0 4px;
+    align-items: flex-start;
+    min-height: 0;
+    gap: 8px 6px;
+    padding: 6px 0 4px;
   }
-  #kanji-pop#kanji-pop .gui-showcase-card {
+  #kanji-pop#kanji-pop .gui-island-node {
     flex: 0 0 calc(33.333% - 6px);
-    max-width: 104px;
-    padding: 6px 5px 6px;
-    border-radius: 14px;
-    gap: 3px;
+    max-width: 108px;
+    padding: 2px;
+    transform: none !important;
   }
-  #kanji-pop .gui-card-num {
-    font-size: 8.5px;
+  #kanji-pop#kanji-pop .gui-island-node:hover:not(:disabled) {
+    transform: translateY(-4px) scale(1.04) !important;
   }
-  #kanji-pop .gui-card-badge {
-    font-size: 7.5px;
-    padding: 1px 4px;
+  #kanji-pop .gui-island-badge {
+    top: -4px;
+    right: -4px;
+    font-size: 8px;
+    padding: 1px 5px;
+  }
+  #kanji-pop .gui-island-gem-wrap {
+    margin-bottom: -10px;
   }
   #kanji-pop .gui-showcase-gem {
-    width: 42px;
-    height: 42px;
-    font-size: 16px;
+    width: 44px;
+    height: 44px;
+    font-size: 17px;
   }
-  #kanji-pop .gui-card-title {
-    font-size: 9.5px;
-    min-height: 2.3em;
+  #kanji-pop .gui-island-pedestal {
+    width: 64px;
+    height: 24px;
+  }
+  #kanji-pop .gui-island-label {
+    padding: 1px 6px;
+    gap: 3px;
+  }
+  #kanji-pop .gui-island-num {
+    font-size: 8.5px;
+  }
+  #kanji-pop .gui-island-title {
+    font-size: 9px;
+    max-width: 72px;
   }
   #kanji-pop .gui-lvl-stars img {
     width: 11px;
