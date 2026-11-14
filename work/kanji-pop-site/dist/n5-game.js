@@ -557,21 +557,10 @@
           <path d="M 0 220 L 0 140 Q 180 75 360 135 T 760 115 T 1140 130 T 1440 95 L 1440 220 Z" fill="rgba(15, 23, 42, 0.48)"/>
           <path d="M 0 220 L 0 165 Q 240 115 480 165 T 960 150 T 1440 135 L 1440 220 Z" fill="rgba(7, 11, 36, 0.72)"/>
         </svg>
-        <div class="astro-moon-wrap">
-          <div class="astro-moon-glow"></div>
-          <div class="astro-moon-beam"></div>
-          <img src="astro_assets/astro_moon.webp" class="astro-moon-img" alt="">
-        </div>
       </div>
       <div class="astro-parallax-near">
-        <img src="astro_assets/astro_cloud.webp" class="astro-cloud left" alt="">
-        <img src="astro_assets/astro_cloud.webp" class="astro-cloud horizon-right" alt="">
         <img src="vfx_star.png" class="astro-star-spark s1" alt="">
         <img src="vfx_star.png" class="astro-star-spark s2" alt="">
-        <div class="astro-observatory-wrap">
-          <div class="astro-observatory-glow"></div>
-          <img src="astro_assets/astro_observatory.webp" class="astro-observatory-img" alt="">
-        </div>
       </div>
     </div>
 
