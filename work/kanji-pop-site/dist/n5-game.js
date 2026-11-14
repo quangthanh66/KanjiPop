@@ -394,20 +394,20 @@
    {
     // Chương 01: Chòm Thiên Cầm (Lyra - Quỹ đạo sao vương miện quanh Hố đen 01 → 05)
     edges:'0-1,1-2,2-3,3-4',
-    desk:[[23,50],[35,26],[65,30],[77,50],[50,72]],
-    mob:[[23,50],[35,26],[65,30],[77,50],[50,72]]
+    desk:[[21,50],[33,25],[67,25],[79,50],[50,75]],
+    mob:[[21,50],[33,25],[67,25],[79,50],[50,75]]
    },
    {
     // Chương 02: Chòm Bắc Đẩu (Big Dipper - Gáo sao một chiều 06 → 10)
     edges:'0-1,1-2,2-3,3-4',
-    desk:[[24,52],[36,34],[54,25],[72,36],[58,68]],
-    mob:[[24,52],[36,34],[54,25],[72,36],[58,68]]
+    desk:[[21,52],[35,32],[55,24],[74,36],[58,72]],
+    mob:[[21,52],[35,32],[55,24],[74,36],[58,72]]
    },
    {
     // Chương 03: Chòm Thiên Nga (Cygnus - Vòm cánh thiên nga 11 → 15)
     edges:'0-1,1-2,2-3,3-4',
-    desk:[[24,50],[38,28],[62,30],[76,50],[48,72]],
-    mob:[[24,50],[38,28],[62,30],[76,50],[48,72]]
+    desk:[[21,50],[34,26],[66,26],[79,50],[50,75]],
+    mob:[[21,50],[34,26],[66,26],[79,50],[50,75]]
    }
   ];
   const chaptersHtml=C.chapters.map((ch,cIdx)=>{
@@ -440,8 +440,8 @@
     const [mx,my]=mPts[idx%mPts.length];
     return `<button type="button" class="astro-node ${isLocked?'locked':''} ${current?'active':''} ${r?'completed':''}" style="--node-x-desk:${dx}%;--node-y-desk:${dy}%;--node-x-mob:${mx}%;--node-y-mob:${my}%;--node-x:${dx}%;--node-y:${dy}%" data-journey-level="${l.id}" ${isLocked?'disabled':''} aria-pressed="${current}" aria-label="Màn ${l.id+1}: ${l.title}${isLocked?', chưa mở khóa':r?', '+r.stars+' sao':''}">
      <div class="astro-pedestal-stack">
-      ${statusBadge}
       <div class="astro-gem-float">
+       ${statusBadge}
        <span class="astro-gem-icon result-gem" data-pair="${pairIdx}" style="--gem-label-y:${KanjiGemArt.cutFor(pairIdx).labelY}%">
         ${KanjiGemArt.render(pairIdx,'map-gem-'+l.id)}
         <span class="result-glyph" lang="ja">${isLocked?'?':featuredKanji}</span>

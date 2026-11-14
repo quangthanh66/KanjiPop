@@ -219,36 +219,102 @@
       const cx = pw * 0.5;
       const cy = ph * 0.5;
       const R = Math.min(pw, ph) * 0.5;
-      const rHole = R * 0.625; // Matches the hollow inner cutout of the golden clock ring
+      const rHole = R * 0.635; // Matches the hollow inner cutout of the golden clock ring
 
       ctx.save();
 
-      // 1. Volumetric Rotating Accretion Disk Glow
-      const diskGrad = ctx.createRadialGradient(cx, cy, rHole * 0.28, cx, cy, rHole * 0.98);
-      diskGrad.addColorStop(0, 'rgba(0, 0, 0, 0)');
-      diskGrad.addColorStop(0.35, 'rgba(168, 85, 247, 0.42)');
-      diskGrad.addColorStop(0.65, 'rgba(56, 189, 248, 0.34)');
-      diskGrad.addColorStop(0.92, 'rgba(251, 191, 36, 0.26)');
-      diskGrad.addColorStop(1, 'rgba(15, 23, 42, 0)');
-      ctx.fillStyle = diskGrad;
+      // 0. Circular Deep Cosmic Void Backdrop (Vũ trụ đen thăm thẳm bên trong đồng hồ)
+      ctx.globalCompositeOperation = 'source-over';
+      const cosmosVoid = ctx.createRadialGradient(cx, cy, 0, cx, cy, rHole * 0.99);
+      cosmosVoid.addColorStop(0, '#000002');
+      cosmosVoid.addColorStop(0.52, '#010106');
+      cosmosVoid.addColorStop(0.82, '#030310');
+      cosmosVoid.addColorStop(0.96, '#07061a');
+      cosmosVoid.addColorStop(1, 'rgba(7, 6, 26, 0)');
+      ctx.fillStyle = cosmosVoid;
       ctx.beginPath();
-      ctx.arc(cx, cy, rHole * 0.98, 0, Math.PI * 2);
+      ctx.arc(cx, cy, rHole * 0.99, 0, Math.PI * 2);
       ctx.fill();
 
-      // 2. Gravitational Lensing & Swirling Accretion Disk (Additive / Screen)
+      // Clip all internal black hole vortex effects cleanly within the hollow aperture
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(cx, cy, rHole * 0.975, 0, Math.PI * 2);
+      ctx.clip();
+
+      // Initialize persistent starfields if not yet cached or on resize
+      if (!portal._driftingStars || portal._starSizeKey !== Math.round(pw)) {
+        portal._starSizeKey = Math.round(pw);
+
+        // Layer 1: Distant micro-stardust field (65 stars)
+        const dust = [];
+        for (let i = 0; i < 65; i++) {
+          dust.push({
+            angle: Math.random() * Math.PI * 2,
+            distFrac: 0.12 + 0.84 * Math.sqrt(Math.random()),
+            speed: (0.002 + Math.random() * 0.005) * (Math.random() < 0.5 ? 1 : -1),
+            size: 0.6 + Math.random() * 1.1,
+            brightness: 0.35 + Math.random() * 0.45,
+            twinkleRate: 1.2 + Math.random() * 3.0,
+            twinklePhase: Math.random() * Math.PI * 2,
+            colorType: i % 4
+          });
+        }
+        portal._dustStars = dust;
+
+        // Layer 2: Foreground prominent floating stars with luminous halos & cross glints (48 stars)
+        const fgStars = [];
+        for (let i = 0; i < 48; i++) {
+          fgStars.push({
+            angle: Math.random() * Math.PI * 2,
+            distFrac: 0.16 + 0.78 * Math.sqrt(Math.random()),
+            speed: (0.004 + Math.random() * 0.009) * (Math.random() < 0.5 ? 1 : -1),
+            radDrift: (Math.random() - 0.5) * 0.003,
+            size: 1.6 + Math.random() * 1.8,
+            brightness: 0.65 + Math.random() * 0.35,
+            twinkleRate: 1.5 + Math.random() * 3.5,
+            twinklePhase: Math.random() * Math.PI * 2,
+            hasSpikes: Math.random() < 0.52,
+            spikeRot: Math.random() * Math.PI * 0.25,
+            colorType: i % 5
+          });
+        }
+        portal._driftingStars = fgStars;
+      }
+
+      // 1. Draw Layer 1: Distant Micro-Stardust in Deep Space
       ctx.globalCompositeOperation = 'screen';
+      const dust = portal._dustStars;
+      for (let i = 0; i < dust.length; i++) {
+        const d = dust[i];
+        const curAngle = d.angle + t * d.speed;
+        const curDist = d.distFrac;
+        const dx = cx + Math.cos(curAngle) * (rHole * curDist);
+        const dy = cy + Math.sin(curAngle) * (rHole * curDist);
+        const twinkle = d.brightness * (0.65 + 0.35 * Math.sin(t * d.twinkleRate + d.twinklePhase));
+        if (twinkle <= 0.05) continue;
 
-      // Swirling Multi-Arm Plasma Vortex (Continuous 60fps Motion)
+        ctx.fillStyle = (d.colorType === 0)
+          ? `rgba(255, 255, 255, ${twinkle.toFixed(3)})`
+          : (d.colorType === 1)
+            ? `rgba(186, 230, 253, ${twinkle.toFixed(3)})`
+            : (d.colorType === 2)
+              ? `rgba(254, 240, 138, ${twinkle.toFixed(3)})`
+              : `rgba(233, 213, 255, ${twinkle.toFixed(3)})`;
+        ctx.beginPath();
+        ctx.arc(dx, dy, d.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // 2. Subtle Ethereal Swirling Vortex Wisps (Continuous 60fps Magic Movement without washing out the black void)
       const armCount = 4;
-      const spiralSteps = 44;
-      const baseRot = t * 0.72;
-
-      // 4 Elemental Cosmic Plasma Colors for the Arms
+      const spiralSteps = 42;
+      const baseRot = t * 0.65;
       const armColors = [
-        ['rgba(168, 85, 247, 0.4)', '#c084fc', '#e879f9'],
-        ['rgba(2, 132, 199, 0.4)', '#38bdf8', '#7dd3fc'],
-        ['rgba(217, 119, 6, 0.4)', '#fbbf24', '#fde047'],
-        ['rgba(225, 29, 72, 0.4)', '#f43f5e', '#fb7185']
+        ['rgba(168, 85, 247, 0.16)', 'rgba(192, 132, 252, 0.32)'],
+        ['rgba(2, 132, 199, 0.16)', 'rgba(56, 189, 248, 0.32)'],
+        ['rgba(217, 119, 6, 0.15)', 'rgba(251, 191, 36, 0.30)'],
+        ['rgba(225, 29, 72, 0.15)', 'rgba(244, 63, 94, 0.30)']
       ];
 
       for (let a = 0; a < armCount; a++) {
@@ -258,7 +324,7 @@
         ctx.beginPath();
         for (let s = 0; s <= spiralSteps; s++) {
           const frac = s / spiralSteps;
-          const r = rHole * (0.96 - 0.68 * Math.pow(frac, 1.25));
+          const r = rHole * (0.95 - 0.68 * Math.pow(frac, 1.25));
           const theta = armAngle0 + Math.pow(frac, 1.15) * Math.PI * 1.8;
           const px = cx + Math.cos(theta) * r;
           const py = cy + Math.sin(theta) * r;
@@ -267,74 +333,74 @@
           else ctx.lineTo(px, py);
         }
 
-        const pulse = 0.6 + 0.22 * Math.sin(t * 2.5 + a * 1.57);
-        // Outer diffuse nebula wisp
+        const pulse = 0.58 + 0.18 * Math.sin(t * 2.2 + a * 1.57);
+        // Soft translucent aurora wisp
         ctx.strokeStyle = colors[0];
-        ctx.lineWidth = 24 * pulse;
+        ctx.lineWidth = 12 * pulse;
         ctx.stroke();
 
-        // Core plasma stream
+        // Thin glowing plasma core
         ctx.strokeStyle = colors[1];
-        ctx.lineWidth = 9 * pulse;
+        ctx.lineWidth = 4 * pulse;
         ctx.stroke();
 
-        // White-hot filament
-        ctx.strokeStyle = '#ffffff';
-        ctx.lineWidth = 2.4 * pulse;
+        // Delicate white-hot filament
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.55)';
+        ctx.lineWidth = 1.2 * pulse;
         ctx.stroke();
       }
 
-      // 3. Central Event Horizon Singularity (Pure Void Black Hole)
+      // 3. Central Event Horizon Singularity (Pure Pitch-Black Void Center)
       ctx.globalCompositeOperation = 'source-over';
-      const coreVoid = ctx.createRadialGradient(cx, cy, 0, cx, cy, rHole * 0.32);
+      const photonR = rHole * 0.28;
+      const coreVoid = ctx.createRadialGradient(cx, cy, 0, cx, cy, photonR * 1.05);
       coreVoid.addColorStop(0, '#000000');
-      coreVoid.addColorStop(0.85, '#020208');
-      coreVoid.addColorStop(1, 'rgba(8, 5, 24, 0.96)');
+      coreVoid.addColorStop(0.92, '#000000');
+      coreVoid.addColorStop(1, 'rgba(0, 0, 0, 0.95)');
       ctx.fillStyle = coreVoid;
       ctx.beginPath();
-      ctx.arc(cx, cy, rHole * 0.31, 0, Math.PI * 2);
+      ctx.arc(cx, cy, photonR * 1.02, 0, Math.PI * 2);
       ctx.fill();
 
-      // 4. Relativistic Photon Ring (Blinding Warp Border Around Singularity)
+      // 4. Relativistic Photon Ring & Infalling Sparks (Additive)
       ctx.globalCompositeOperation = 'screen';
-      const photonR = rHole * 0.31;
       const photonPulse = 0.88 + 0.12 * Math.sin(t * 3.4);
-      const ringGrad = ctx.createRadialGradient(cx, cy, photonR * 0.82, cx, cy, photonR * 1.45);
+      const ringGrad = ctx.createRadialGradient(cx, cy, photonR * 0.80, cx, cy, photonR * 1.40);
       ringGrad.addColorStop(0, 'rgba(0, 0, 0, 0)');
-      ringGrad.addColorStop(0.38, `rgba(56, 189, 248, ${(0.92 * photonPulse).toFixed(3)})`);
-      ringGrad.addColorStop(0.68, `rgba(244, 63, 94, ${(0.72 * photonPulse).toFixed(3)})`);
+      ringGrad.addColorStop(0.38, `rgba(56, 189, 248, ${(0.88 * photonPulse).toFixed(3)})`);
+      ringGrad.addColorStop(0.68, `rgba(192, 132, 252, ${(0.70 * photonPulse).toFixed(3)})`);
       ringGrad.addColorStop(1, 'rgba(251, 191, 36, 0)');
 
       ctx.beginPath();
-      ctx.arc(cx, cy, photonR * 1.45, 0, Math.PI * 2);
+      ctx.arc(cx, cy, photonR * 1.40, 0, Math.PI * 2);
       ctx.fillStyle = ringGrad;
       ctx.fill();
 
       // Sharp central photon orbit line
       ctx.beginPath();
       ctx.arc(cx, cy, photonR, 0, Math.PI * 2);
-      ctx.strokeStyle = `rgba(255, 255, 255, ${(0.96 * photonPulse).toFixed(3)})`;
-      ctx.lineWidth = 2.6;
+      ctx.strokeStyle = `rgba(255, 255, 255, ${(0.95 * photonPulse).toFixed(3)})`;
+      ctx.lineWidth = 2.2;
       ctx.stroke();
 
-      // 5. Infalling Stardust & Magic Sparks (Gravitational Inward Suction)
-      const sparkCount = 56;
+      // Infalling Stardust & Magic Sparks into the Singularity
+      const sparkCount = 42;
       for (let i = 0; i < sparkCount; i++) {
-        const speed = 0.16 + (i % 7) * 0.026;
-        const phase = (t * speed + i * 0.073) % 1;
+        const speed = 0.15 + (i % 6) * 0.025;
+        const phase = (t * speed + i * 0.081) % 1;
         const initAngle = (i * 0.618033) * Math.PI * 2;
 
-        const r = rHole * (0.95 - 0.66 * Math.pow(phase, 1.2));
-        const theta = initAngle + baseRot * 1.4 + Math.pow(phase, 1.8) * Math.PI * 3.6;
+        const r = rHole * (0.94 - 0.66 * Math.pow(phase, 1.2));
+        const theta = initAngle + baseRot * 1.3 + Math.pow(phase, 1.8) * Math.PI * 3.4;
 
         const sx = cx + Math.cos(theta) * r;
         const sy = cy + Math.sin(theta) * r;
 
-        const size = (1 - phase * 0.45) * (1.3 + (i % 3) * 1.2);
-        const alpha = Math.sin(phase * Math.PI) * 0.88;
+        const size = (1 - phase * 0.45) * (1.2 + (i % 3) * 1.0);
+        const alpha = Math.sin(phase * Math.PI) * 0.82;
 
-        const tailLen = (1 + phase * 2.5) * 4;
-        const tailTheta = theta - 0.08 * (1 + phase * 1.5);
+        const tailLen = (1 + phase * 2.2) * 3.5;
+        const tailTheta = theta - 0.07 * (1 + phase * 1.4);
         const tx = cx + Math.cos(tailTheta) * (r + tailLen * 0.6);
         const ty = cy + Math.sin(tailTheta) * (r + tailLen * 0.6);
 
@@ -348,7 +414,7 @@
         ctx.stroke();
 
         ctx.beginPath();
-        ctx.arc(sx, sy, size * 0.95, 0, Math.PI * 2);
+        ctx.arc(sx, sy, size * 0.9, 0, Math.PI * 2);
         ctx.fillStyle = (i % 3 === 0)
           ? `rgba(255, 255, 255, ${alpha.toFixed(3)})`
           : (i % 3 === 1)
@@ -357,18 +423,91 @@
         ctx.fill();
       }
 
-      // 6. Outer Event Horizon Rim Distortion Ring
+      // 5. Layer 2: Foreground Prominent Drifting & Floating Stars (Các vì sao trôi lơ lửng trên nền vũ trụ đen)
+      const dStars = portal._driftingStars;
+      for (let i = 0; i < dStars.length; i++) {
+        const s = dStars[i];
+        const curAngle = s.angle + t * s.speed;
+        let curDist = s.distFrac + Math.sin(t * s.radDrift * 60 + s.twinklePhase) * 0.045;
+        if (curDist < 0.12) curDist = 0.12;
+        if (curDist > 0.96) curDist = 0.96;
+
+        const sx = cx + Math.cos(curAngle) * (rHole * curDist);
+        const sy = cy + Math.sin(curAngle) * (rHole * curDist);
+
+        const twinkle = s.brightness * (0.65 + 0.35 * Math.sin(t * s.twinkleRate + s.twinklePhase));
+        if (twinkle <= 0.08) continue;
+
+        let colCore = '#ffffff';
+        let colGlow = 'rgba(255, 255, 255, 0.55)';
+        if (s.colorType === 0) {
+          colCore = '#ffffff';
+          colGlow = `rgba(224, 242, 254, ${(twinkle * 0.65).toFixed(3)})`;
+        } else if (s.colorType === 1) {
+          colCore = '#bae6fd';
+          colGlow = `rgba(56, 189, 248, ${(twinkle * 0.72).toFixed(3)})`;
+        } else if (s.colorType === 2) {
+          colCore = '#fef08a';
+          colGlow = `rgba(251, 191, 36, ${(twinkle * 0.68).toFixed(3)})`;
+        } else if (s.colorType === 3) {
+          colCore = '#f5d0fe';
+          colGlow = `rgba(192, 132, 252, ${(twinkle * 0.62).toFixed(3)})`;
+        } else {
+          colCore = '#fecdd3';
+          colGlow = `rgba(244, 63, 94, ${(twinkle * 0.58).toFixed(3)})`;
+        }
+
+        // Luminous outer starlight halo
+        ctx.fillStyle = colGlow;
+        ctx.beginPath();
+        ctx.arc(sx, sy, s.size * 2.6, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Brilliant diamond core
+        ctx.fillStyle = colCore;
+        ctx.beginPath();
+        ctx.arc(sx, sy, s.size * 0.95, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 4-point cross diffraction spikes (Hubble/JWST style diamond glints)
+        if (s.hasSpikes && twinkle > 0.42) {
+          const spikeLen = s.size * 4.6 * (0.85 + 0.15 * Math.sin(t * 3.5 + s.twinklePhase));
+          const rot = s.spikeRot + t * 0.08;
+          const cosR = Math.cos(rot);
+          const sinR = Math.sin(rot);
+
+          ctx.strokeStyle = colGlow;
+          ctx.lineWidth = 1.0;
+          ctx.beginPath();
+          ctx.moveTo(sx - cosR * spikeLen, sy - sinR * spikeLen);
+          ctx.lineTo(sx + cosR * spikeLen, sy + sinR * spikeLen);
+          ctx.moveTo(sx + sinR * spikeLen, sy - cosR * spikeLen);
+          ctx.lineTo(sx - sinR * spikeLen, sy + cosR * spikeLen);
+          ctx.stroke();
+
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.92)';
+          ctx.lineWidth = 0.55;
+          ctx.beginPath();
+          ctx.moveTo(sx - cosR * spikeLen * 0.45, sy - sinR * spikeLen * 0.45);
+          ctx.lineTo(sx + cosR * spikeLen * 0.45, sy + sinR * spikeLen * 0.45);
+          ctx.moveTo(sx + sinR * spikeLen * 0.45, sy - cosR * spikeLen * 0.45);
+          ctx.lineTo(sx - sinR * spikeLen * 0.45, sy + cosR * spikeLen * 0.45);
+          ctx.stroke();
+        }
+      }
+
+      // 6. Outer Celestial Rim & Dashed Orbit Ring
       ctx.beginPath();
-      ctx.arc(cx, cy, rHole * 0.98, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(56, 189, 248, 0.48)';
-      ctx.lineWidth = 2.4;
+      ctx.arc(cx, cy, rHole * 0.97, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(56, 189, 248, 0.42)';
+      ctx.lineWidth = 2.0;
       ctx.stroke();
 
       ctx.beginPath();
       ctx.arc(cx, cy, rHole * 0.94, 0, Math.PI * 2);
       ctx.setLineDash([6, 8]);
-      ctx.lineDashOffset = -t * 18;
-      ctx.strokeStyle = 'rgba(251, 191, 36, 0.52)';
+      ctx.lineDashOffset = -t * 16;
+      ctx.strokeStyle = 'rgba(251, 191, 36, 0.48)';
       ctx.lineWidth = 1.4;
       ctx.stroke();
       ctx.setLineDash([]);

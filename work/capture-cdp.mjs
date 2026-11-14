@@ -24,7 +24,7 @@ async function launchChromium() {
   throw new Error('Chromium failed to start');
 }
 
-async function capture(url, outPath, width, height, dpr = 1) {
+async function capture(url, outPath, width, height, dpr = 1, chIndex = 0) {
   // Create target
   const newRes = await fetch(`http://127.0.0.1:${PORT}/json/new?${encodeURIComponent(url)}`, { method: 'PUT' });
   const target = await newRes.json();
@@ -62,39 +62,20 @@ async function capture(url, outPath, width, height, dpr = 1) {
     mobile: width < 600
   });
 
-  // Wait for page load and assets
+  // Wait for initial render
   await new Promise(r => setTimeout(r, 1200));
 
-  // Evaluate metrics
-  const evalRes = await send('Runtime.evaluate', {
-    expression: `(() => {
-      const f = document.querySelector('#map-screen .astro-constellation-field');
-      const d = document.querySelector('#map-screen .astro-constellation-dial-ring');
-      const nodes = Array.from(document.querySelectorAll('#map-screen .astro-chapter-section[data-ch="0"] .astro-node')).map(n => {
-        const r = n.getBoundingClientRect();
-        const gr = n.querySelector('.astro-gem-float')?.getBoundingClientRect();
-        const pr = n.querySelector('.astro-pedestal-img')?.getBoundingClientRect();
-        const title = n.querySelector('.astro-title')?.textContent;
-        const num = n.querySelector('.astro-num')?.textContent;
-        return {
-          num,
-          title,
-          nodeTop: Math.round(r.top),
-          nodeLeft: Math.round(r.left),
-          gemTop: gr ? Math.round(gr.top) : null,
-          gemLeft: gr ? Math.round(gr.left) : null,
-          pedTop: pr ? Math.round(pr.top) : null,
-          pedLeft: pr ? Math.round(pr.left) : null
-        };
-      });
-      return {
-        field: f ? { width: f.offsetWidth, height: f.offsetHeight, top: f.getBoundingClientRect().top, left: f.getBoundingClientRect().left } : null,
-        dial: d ? { width: d.offsetWidth, height: d.offsetHeight, top: d.getBoundingClientRect().top, left: d.getBoundingClientRect().left } : null,
-        nodes
-      };
-    })()`,
-    returnByValue: true
-  });
+  if (chIndex > 0) {
+    await send('Runtime.evaluate', {
+      expression: `(() => {
+        const sections = document.querySelectorAll('.astro-chapter-section');
+        if (sections[${chIndex}]) {
+          sections[${chIndex}].scrollIntoView({ behavior: 'instant' });
+        }
+      })()`
+    });
+    await new Promise(r => setTimeout(r, 600));
+  }
 
   // Capture screenshot
   const shot = await send('Page.captureScreenshot', { format: 'png' });
@@ -106,21 +87,24 @@ async function capture(url, outPath, width, height, dpr = 1) {
 
   // Close target
   await fetch(`http://127.0.0.1:${PORT}/json/close/${target.id}`);
-  return evalRes.result?.value;
 }
 
 (async () => {
   const chrome = await launchChromium();
   try {
-    console.log('Capturing Desktop...');
-    const dMetrics = await capture('http://127.0.0.1:8765/', '/tmp/test_blackhole_desktop.png', 1280, 720, 1);
-    console.log('Desktop nodes:', dMetrics?.nodes);
+    console.log('Capturing Desktop Ch1...');
+    await capture('http://127.0.0.1:8765/', '/tmp/test_blackhole_desktop.png', 1280, 720, 1, 0);
 
-    console.log('Capturing Mobile...');
-    const mMetrics = await capture('http://127.0.0.1:8765/', '/tmp/test_blackhole_mobile.png', 360, 740, 2);
-    console.log('Mobile nodes:', mMetrics?.nodes);
+    console.log('Capturing Desktop Ch2...');
+    await capture('http://127.0.0.1:8765/', '/tmp/test_blackhole_ch2.png', 1280, 720, 1, 1);
 
-    console.log('Done!');
+    console.log('Capturing Desktop Ch3...');
+    await capture('http://127.0.0.1:8765/', '/tmp/test_blackhole_ch3.png', 1280, 720, 1, 2);
+
+    console.log('Capturing Mobile Ch1...');
+    await capture('http://127.0.0.1:8765/', '/tmp/test_blackhole_mobile.png', 360, 740, 2, 0);
+
+    console.log('All captures done!');
   } finally {
     chrome.kill();
   }

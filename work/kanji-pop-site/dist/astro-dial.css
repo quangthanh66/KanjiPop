@@ -542,7 +542,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 36px 0;
+  padding: 6px 0;
   box-sizing: border-box;
   contain: layout style;
 }
@@ -639,10 +639,10 @@ body {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: min(84vh, 500px, 94vw);
-  height: min(84vh, 500px, 94vw);
-  max-width: 98%;
-  max-height: 98%;
+  width: min(94vh, 670px, 99%);
+  height: min(94vh, 670px, 99%);
+  max-width: 100%;
+  max-height: 100%;
   aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
@@ -751,15 +751,15 @@ body {
 /* Celestial Badge */
 #kanji-pop .astro-badge {
   position: absolute;
-  top: -6px;
-  right: -8px;
+  top: -2px;
+  right: -4px;
   z-index: 8;
   font-size: clamp(8.5px, 0.78vw, 10px);
   font-weight: 900;
-  padding: 2px 7px;
+  padding: 1.5px 6px;
   border-radius: 9999px;
   line-height: 1.25;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
 }
 #kanji-pop .astro-badge.play {
   background: linear-gradient(180deg, #f43f5e, #be123c);
@@ -787,16 +787,16 @@ body {
 #kanji-pop .astro-gem-float {
   position: relative;
   z-index: 5;
-  margin-bottom: -16px;
+  margin-bottom: -22px;
 }
 #kanji-pop .astro-gem-icon {
-  width: clamp(44px, 4.8vw, 56px);
-  height: clamp(44px, 4.8vw, 56px);
-  font-size: clamp(18px, 1.9vw, 22px);
-  filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.55));
+  width: clamp(60px, 6.4vw, 76px);
+  height: clamp(60px, 6.4vw, 76px);
+  font-size: clamp(25px, 2.7vw, 32px);
+  filter: drop-shadow(0 0 14px rgba(56, 189, 248, 0.72));
 }
 #kanji-pop .astro-node.active .astro-gem-icon {
-  filter: drop-shadow(0 0 16px rgba(251, 191, 36, 0.95)) drop-shadow(0 0 8px rgba(56, 189, 248, 0.75));
+  filter: drop-shadow(0 0 20px rgba(251, 191, 36, 1)) drop-shadow(0 0 12px rgba(56, 189, 248, 0.9));
 }
 #kanji-pop .astro-node.locked .astro-gem-icon {
   filter: saturate(0.28) brightness(0.68);
@@ -806,10 +806,10 @@ body {
 #kanji-pop .astro-pedestal-img {
   position: relative;
   z-index: 2;
-  width: clamp(62px, 6.4vw, 76px);
+  width: clamp(84px, 8.8vw, 106px);
   height: auto;
   display: block;
-  filter: drop-shadow(0 10px 20px rgba(2, 6, 23, 0.85)) drop-shadow(0 0 14px rgba(56, 189, 248, 0.35));
+  filter: drop-shadow(0 14px 26px rgba(2, 6, 23, 0.9)) drop-shadow(0 0 18px rgba(56, 189, 248, 0.45));
 }
 #kanji-pop .astro-node.locked .astro-pedestal-img {
   filter: saturate(0.45) brightness(0.75) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
@@ -819,33 +819,34 @@ body {
 #kanji-pop .astro-label {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
   background: rgba(15, 23, 42, 0.94);
-  border: 1.5px solid rgba(251, 191, 36, 0.65);
+  border: 1.5px solid rgba(251, 191, 36, 0.72);
   border-radius: 9999px;
-  padding: 2px 7px;
-  margin-top: 2px;
-  max-width: clamp(105px, 11vw, 130px);
-  box-shadow: 0 4px 12px rgba(2, 6, 23, 0.65), 0 0 10px rgba(56, 189, 248, 0.3);
-  backdrop-filter: blur(6px);
+  padding: 3px 11px;
+  margin-top: 3px;
+  max-width: clamp(130px, 16vw, 215px);
+  box-shadow: 0 4px 14px rgba(2, 6, 23, 0.72), 0 0 12px rgba(56, 189, 248, 0.35);
+  backdrop-filter: blur(8px);
 }
 #kanji-pop .astro-node.active .astro-label {
   background: linear-gradient(180deg, #be185d, #831843);
   border-color: #fde047;
 }
 #kanji-pop .astro-num {
-  font-size: clamp(9px, 0.82vw, 10.5px);
+  font-size: clamp(10px, 0.9vw, 11.5px);
   font-weight: 900;
   color: #fde047;
   flex: none;
 }
 #kanji-pop .astro-title {
-  font-size: clamp(9px, 0.85vw, 11px);
+  font-size: clamp(10px, 0.92vw, 11.8px);
   font-weight: 800;
   color: #f8fafc;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  letter-spacing: -0.15px;
 }
 
 /* 3 Crisp SVG Stars */
@@ -857,13 +858,13 @@ body {
   overflow: visible;
 }
 #kanji-pop .astro-star-svg {
-  width: 12px;
-  height: 12px;
-  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.55));
+  width: 15px;
+  height: 15px;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.65));
 }
 #kanji-pop .astro-star-svg.center {
-  width: 14px;
-  height: 14px;
+  width: 18px;
+  height: 18px;
   transform: translateY(-2px);
 }
 
@@ -1075,8 +1076,8 @@ body {
     font-size: 10px;
   }
   #kanji-pop .astro-dial-hub {
-    width: min(94vw, 360px);
-    height: min(94vw, 360px);
+    width: min(99vw, 410px);
+    height: min(99vw, 410px);
   }
   #kanji-pop .astro-constellation-dial-ring {
     opacity: 0.94;
@@ -1101,34 +1102,34 @@ body {
     bottom: 6px;
   }
   #kanji-pop .astro-gem-float {
-    margin-bottom: -14px;
+    margin-bottom: -18px;
   }
   #kanji-pop .astro-gem-icon {
-    width: 38px;
-    height: 38px;
-    font-size: 16px;
+    width: 50px;
+    height: 50px;
+    font-size: 21px;
   }
   #kanji-pop .astro-pedestal-img {
-    width: 52px;
+    width: 70px;
   }
   #kanji-pop .astro-label {
-    max-width: 94px;
-    padding: 1.5px 5px;
-    gap: 2.5px;
+    max-width: 114px;
+    padding: 2.5px 8px;
+    gap: 3.5px;
   }
   #kanji-pop .astro-num {
-    font-size: 8.5px;
+    font-size: 10px;
   }
   #kanji-pop .astro-title {
-    font-size: 9px;
+    font-size: 10.5px;
   }
   #kanji-pop .astro-star-svg {
-    width: 9px;
-    height: 9px;
+    width: 12px;
+    height: 12px;
   }
   #kanji-pop .astro-star-svg.center {
-    width: 11px;
-    height: 11px;
+    width: 14.5px;
+    height: 14.5px;
   }
   #kanji-pop .astro-bottom-dock {
     gap: 6px;

@@ -243,6 +243,17 @@ Các script kiểm thử sử dụng Playwright headless để kiểm tra trực
    - Chuẩn hóa khung chứa tỉ lệ 1:1 (`.astro-dial-hub`): đưa vành đồng hồ, canvas hố đen, canvas năng lượng starlight và 5 bệ đá quý vào cùng một hệ tọa độ vuông hoàn hảo.
    - Thiết lập Quỹ đạo sao vương miện (Crown Horseshoe Orbit) cho cả 3 chương: 5 bệ đá quý phân bổ ở bán kính $22\% - 27\%$, khoảng cách bệ và nhãn chữ được hiệu chỉnh tối ưu (0 chồng chéo, 0 chạm viền bánh răng, 0 che tâm hố đen).
    - Kiểm tra trực quan triệt để (Quy tắc 7) trên Desktop (1280px) và Mobile (360px), xác nhận vượt qua toàn bộ tiêu chí hiển thị không cắt xén. Commit và tự động push lên GitHub `main`.
+8. **Phóng to Đồng hồ & Cụm Stage, Nền Vũ Trụ Đen Thăm Thẳm & Các Vì Sao Trôi Lơ Lửng (Option 4 Refinement)**:
+   - Người dùng yêu cầu: *"đồng hồ và các cụm stage phải to hơn nữa, phần nền bên trong của đồng hồ phải là dạng nền như vũ trụ đen thăm thẳm có các vì sao trôi lơ lững"*.
+   - **Phóng to Đồng hồ và cụm Stage**:
+     - Desktop: `.astro-dial-hub` nâng lên `min(94vh, 670px, 99%)`. Bệ đá quý nâng lên `clamp(84px, 8.8vw, 106px)`. Viên ngọc mở rộng `clamp(60px, 6.4vw, 76px)`, font chữ Kanji `25px - 32px`. Nhãn màn chơi mở rộng `max-width: clamp(130px, 16vw, 215px)`.
+     - Mobile: `.astro-dial-hub` mở rộng `min(99vw, 410px)`, bệ đá `70px`, ngọc `50px`, nhãn chữ `114px`.
+   - **Nền Vũ trụ Đen Thăm thẳm & Bầu trời sao trôi lơ lửng**:
+     - Nền bên trong đồng hồ được phủ gradient vũ trụ đen thăm thẳm (`#000002` đến `#07061a`) lấp kín toàn bộ phần rỗng của vành bánh răng thiên văn.
+     - Hệ thống sao 2 tầng: Tầng 1 gồm 65 vi hạt bụi sao lấp lánh ở không gian xa; Tầng 2 gồm 48 vì sao sáng nổi bật trôi lơ lửng với quầng sáng tỏa đa sắc (kim cương trắng, lam thiên thanh, vàng hổ phách, tím thạch anh) cùng tia sáng nhiễu xạ chữ thập 4 cánh (4-point cross diffraction spikes phong cách Hubble/JWST) liên tục trôi và lấp lánh trên nền hố đen.
+     - Vòng xoáy ma thuật bồi tụ (accretion vortex) được chuyển thành các dải cực quang mờ ảo chuyển động mượt mà 60fps, tôn trọn vẹn nền đen sâu thẳm mà không che khuất các vì sao.
+     - Neo badge trạng thái ('MỚI', 'ÔN', '🔒') vào thẳng góc trên viên ngọc thay vì rìa bệ, chống hoàn toàn hiện tượng badge trôi sang nhãn chữ lân cận.
+   - Đã kiểm tra trực quan (Quy tắc 7) trên Desktop (1280x720) cho cả 3 chương và Mobile (360x740): 0 cắt xén, 0 chồng chéo, hiển thị cực kỳ rực rỡ và có chiều sâu vũ trụ huyền bí.
 
 ---
 
