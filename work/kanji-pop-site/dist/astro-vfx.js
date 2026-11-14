@@ -221,42 +221,26 @@
         });
       }
 
-      // Compute cumulative arc length for smooth u in [0, 1] sampling
-      const segs = [];
-      let totalLen = 0;
-      for (let i = 0; i < pts.length - 1; i++) {
-        const dx = pts[i + 1].x - pts[i].x;
-        const dy = pts[i + 1].y - pts[i].y;
-        const len = Math.hypot(dx, dy) || 1;
-        segs.push({
-          ax: pts[i].x, ay: pts[i].y,
-          bx: pts[i + 1].x, by: pts[i + 1].y,
-          dx, dy, len,
-          nx: -dy / len, ny: dx / len,
-          start: totalLen, end: totalLen + len
-        });
-        totalLen += len;
-      }
-      if (totalLen < 1) continue;
-
-      function samplePath(u) {
-        const clamped = Math.max(0, Math.min(1, u));
-        const d = clamped * totalLen;
-        for (let i = 0; i < segs.length; i++) {
-          const s = segs[i];
-          if (d <= s.end || i === segs.length - 1) {
-            const f = Math.max(0, Math.min(1, (d - s.start) / s.len));
-            return {
-              x: s.ax + s.dx * f,
-              y: s.ay + s.dy * f,
-              nx: s.nx,
-              ny: s.ny
-            };
-          }
+      // Build constellation edges from data-edges (or fallback to linear chain)
+      const rawEdges = (field.dataset.edges || '').split(',').map(s => s.trim()).filter(Boolean);
+      const edgePairs = [];
+      for (let i = 0; i < rawEdges.length; i++) {
+        const parts = rawEdges[i].split('-').map(Number);
+        if (parts.length === 2 && pts[parts[0]] && pts[parts[1]]) {
+          edgePairs.push(parts);
         }
-        const lastS = segs[segs.length - 1];
-        return { x: lastS.bx, y: lastS.by, nx: lastS.nx, ny: lastS.ny };
       }
+      if (!edgePairs.length) {
+        for (let i = 0; i < pts.length - 1; i++) edgePairs.push([i, i + 1]);
+      }
+
+      const segs = edgePairs.map(([ia, ib]) => {
+        const a = pts[ia], b = pts[ib];
+        const dx = b.x - a.x;
+        const dy = b.y - a.y;
+        const len = Math.hypot(dx, dy) || 1;
+        return { ax: a.x, ay: a.y, bx: b.x, by: b.y, dx, dy, len, nx: -dy / len, ny: dx / len };
+      });
 
       const ctx = canvas.getContext('2d');
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -268,7 +252,7 @@
       const chIdx = Number(field.closest('.astro-chapter-section')?.dataset.ch || aIdx);
       const cx = aw * 0.5;
       const cy = ah * 0.48;
-      const orbitTilt = (chIdx - 1) * 0.24 + Math.sin(t * 0.15 + chIdx) * 0.03;
+      const orbitTilt = (chIdx - 1) * 0.28 + Math.sin(t * 0.15 + chIdx) * 0.03;
       ctx.save();
       ctx.translate(cx, cy);
       ctx.rotate(orbitTilt);
@@ -280,7 +264,7 @@
       ctx.ellipse(0, 0, aw * 0.42, ah * 0.34, 0, 0, Math.PI * 2);
       ctx.stroke();
 
-      ctx.rotate(-orbitTilt * 1.65);
+      ctx.rotate(-orbitTilt * 1.7);
       ctx.lineDashOffset = t * 11;
       ctx.strokeStyle = 'rgba(251, 191, 36, 0.14)';
       ctx.beginPath();
@@ -289,13 +273,13 @@
       ctx.restore();
       ctx.setLineDash([]);
 
-      // 1. Soft Ambient Base Conduit (Gold + Cyan Bloom)
+      // 1. Soft Ambient Constellation Conduit Lines (Gold + Cyan Bloom)
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
       ctx.beginPath();
-      for (let i = 0; i < pts.length; i++) {
-        if (i === 0) ctx.moveTo(pts[i].x, pts[i].y);
-        else ctx.lineTo(pts[i].x, pts[i].y);
+      for (let i = 0; i < segs.length; i++) {
+        ctx.moveTo(segs[i].ax, segs[i].ay);
+        ctx.lineTo(segs[i].bx, segs[i].by);
       }
       ctx.strokeStyle = 'rgba(56, 189, 248, 0.22)';
       ctx.lineWidth = 8;
@@ -305,16 +289,16 @@
       ctx.lineWidth = 3.2;
       ctx.stroke();
 
-      ctx.strokeStyle = 'rgba(224, 242, 254, 0.42)';
+      ctx.strokeStyle = 'rgba(224, 242, 254, 0.44)';
       ctx.lineWidth = 1.2;
       ctx.stroke();
 
-      // 2. Multi-Layered Sinusoidal Flowing Energy Ribbons (Target-VFX style)
-      const streamCount = 3;
-      const ribbonLen = 0.28;
-      const steps = 34;
-      for (let sIdx = 0; sIdx < streamCount; sIdx++) {
-        const head = ((t * 0.14 + sIdx / streamCount) % 1 + 1) % 1;
+      // 2. Multi-Layered Sinusoidal Flowing Energy Ribbons Along Each Constellation Edge
+      const ribbonLen = 0.56;
+      const steps = 22;
+      for (let eIdx = 0; eIdx < segs.length; eIdx++) {
+        const s = segs[eIdx];
+        const head = ((t * 0.32 + eIdx * 0.37) % 1.45);
         const tail = head - ribbonLen;
 
         for (let layer = 0; layer < 3; layer++) {
@@ -324,12 +308,13 @@
             const f = j / steps;
             const u = tail + f * ribbonLen;
             if (u < 0 || u > 1) continue;
-            const p = samplePath(u);
+            const px = s.ax + s.dx * u;
+            const py = s.ay + s.dy * u;
             const env = Math.sin(Math.PI * f);
-            const w = Math.pow(env, 0.65) * (layer === 0 ? 6.2 : layer === 1 ? 3.2 : 1.45);
-            const wave = Math.sin(f * 10 - t * 3.2 + layer * 1.1 + sIdx * 2.0) * (layer === 2 ? 0.9 : 2.6) * env;
-            left.push([p.x + p.nx * (wave + w), p.y + p.ny * (wave + w)]);
-            right.push([p.x + p.nx * (wave - w), p.y + p.ny * (wave - w)]);
+            const w = Math.pow(env, 0.65) * (layer === 0 ? 5.8 : layer === 1 ? 3.0 : 1.35);
+            const wave = Math.sin(f * 8 - t * 3.4 + layer * 1.1 + eIdx * 1.7) * (layer === 2 ? 0.8 : 2.3) * env;
+            left.push([px + s.nx * (wave + w), py + s.ny * (wave + w)]);
+            right.push([px + s.nx * (wave - w), py + s.ny * (wave - w)]);
           }
           if (left.length < 3) continue;
 
@@ -338,13 +323,13 @@
           const grad = ctx.createLinearGradient(pStart[0], pStart[1], pEnd[0], pEnd[1]);
           if (layer === 0) {
             grad.addColorStop(0, 'rgba(56, 189, 248, 0)');
-            grad.addColorStop(0.55, 'rgba(56, 189, 248, 0.26)');
+            grad.addColorStop(0.55, 'rgba(56, 189, 248, 0.25)');
             grad.addColorStop(0.85, 'rgba(125, 211, 252, 0.42)');
             grad.addColorStop(1, 'rgba(125, 211, 252, 0)');
           } else if (layer === 1) {
             grad.addColorStop(0, 'rgba(125, 211, 252, 0)');
-            grad.addColorStop(0.5, 'rgba(125, 211, 252, 0.52)');
-            grad.addColorStop(0.82, 'rgba(253, 230, 138, 0.72)');
+            grad.addColorStop(0.5, 'rgba(125, 211, 252, 0.50)');
+            grad.addColorStop(0.82, 'rgba(253, 230, 138, 0.70)');
             grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
           } else {
             grad.addColorStop(0, 'rgba(254, 249, 195, 0)');
@@ -362,27 +347,31 @@
           ctx.fill();
         }
 
-        // Luminous Head Orb
-        const hPos = samplePath(Math.max(0, Math.min(1, head - 0.015)));
-        const orbR = 11;
-        const orb = ctx.createRadialGradient(hPos.x, hPos.y, 0, hPos.x, hPos.y, orbR);
-        orb.addColorStop(0, 'rgba(255, 255, 255, 0.92)');
-        orb.addColorStop(0.3, 'rgba(186, 230, 253, 0.55)');
-        orb.addColorStop(1, 'rgba(56, 189, 248, 0)');
-        ctx.fillStyle = orb;
-        ctx.fillRect(hPos.x - orbR, hPos.y - orbR, orbR * 2, orbR * 2);
+        if (head >= 0.02 && head <= 1.0) {
+          const hx = s.ax + s.dx * head;
+          const hy = s.ay + s.dy * head;
+          const orbR = 10;
+          const orb = ctx.createRadialGradient(hx, hy, 0, hx, hy, orbR);
+          orb.addColorStop(0, 'rgba(255, 255, 255, 0.92)');
+          orb.addColorStop(0.3, 'rgba(186, 230, 253, 0.55)');
+          orb.addColorStop(1, 'rgba(56, 189, 248, 0)');
+          ctx.fillStyle = orb;
+          ctx.fillRect(hx - orbR, hy - orbR, orbR * 2, orbR * 2);
+        }
       }
 
-      // 3. Drifting Micro-Sparks Along Energy Stream
+      // 3. Drifting Micro-Sparks Along Constellation Edges
       const sparkCount = 18;
       for (let i = 0; i < sparkCount; i++) {
+        const s = segs[i % segs.length];
         const life = ((t * 0.45 + i * 0.618) % 1 + 1) % 1;
-        const u = ((t * 0.08 + i / sparkCount) % 1 + 1) % 1;
-        const p = samplePath(u);
+        const u = ((t * 0.16 + i * 0.29) % 1 + 1) % 1;
+        const px = s.ax + s.dx * u;
+        const py = s.ay + s.dy * u;
         const dir = (i % 2 === 0 ? 1 : -1);
         const drift = dir * (4 + 12 * life);
-        const sx = p.x + p.nx * drift;
-        const sy = p.y + p.ny * drift - life * 5;
+        const sx = px + s.nx * drift;
+        const sy = py + s.ny * drift - life * 5;
         const alpha = Math.sin(Math.PI * life) * 0.85;
         const sr = 1.1 + (i % 3) * 0.55;
 

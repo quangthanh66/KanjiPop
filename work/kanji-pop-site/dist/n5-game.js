@@ -390,22 +390,33 @@
   const {next}=ms;
   const starGoldSvg=`<svg class="astro-star-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9z" fill="#fbbf24" stroke="#b45309" stroke-width="1.4" stroke-linejoin="round"/></svg>`;
   const starGraySvg=`<svg class="astro-star-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9z" fill="rgba(148,163,184,0.35)" stroke="rgba(148,163,184,0.65)" stroke-width="1.4" stroke-linejoin="round"/></svg>`;
-  const deskConstellations=[
-   [[11,56],[30,24],[50,68],[70,24],[89,56]],
-   [[12,26],[32,66],[51,32],[72,70],[88,30]],
-   [[13,62],[30,26],[50,44],[70,24],[87,60]]
-  ];
-  const mobConstellations=[
-   [[23,21],[75,25],[48,50],[23,77],[77,79]],
-   [[74,20],[24,28],[52,50],[76,74],[26,80]],
-   [[24,24],[76,22],[50,48],[26,78],[75,76]]
+  const constellations=[
+   {
+    // Chương 01: Chòm Thiên Cầm (Lyra - Khung diều tinh thể khép kín + sao đuôi)
+    edges:'0-1,1-2,2-3,3-4,4-1',
+    desk:[[14,34],[38,24],[66,26],[80,62],[48,68]],
+    mob:[[22,18],[70,22],[78,52],[52,78],[22,52]]
+   },
+   {
+    // Chương 02: Chòm Bắc Đẩu (Big Dipper - Tay cầm + Gáo sao tam giác)
+    edges:'0-1,1-2,2-3,3-4,4-2',
+    desk:[[14,28],[33,48],[52,32],[82,24],[72,70]],
+    mob:[[22,17],[70,26],[28,50],[78,54],[56,80]]
+   },
+   {
+    // Chương 03: Chòm Thiên Nga (Cygnus - Ngôi sao chữ thập tỏa cánh nghiêng)
+    edges:'0-2,1-2,2-3,2-4',
+    desk:[[16,54],[36,19],[52,48],[84,36],[66,77]],
+    mob:[[20,48],[36,18],[52,49],[82,42],[64,79]]
+   }
   ];
   const chaptersHtml=C.chapters.map((ch,cIdx)=>{
    const chLevels=C.levels.filter(l=>l.chapter===cIdx);
    const chDone=chLevels.filter(l=>profile.results[l.id]).length;
    const chStars=chLevels.reduce((acc,l)=>acc+(profile.results[l.id]?.stars||0),0);
-   const dPts=deskConstellations[cIdx%deskConstellations.length];
-   const mPts=mobConstellations[cIdx%mobConstellations.length];
+   const cSpec=constellations[cIdx%constellations.length];
+   const dPts=cSpec.desk;
+   const mPts=cSpec.mob;
    const nodesHtml=chLevels.map((l,idx)=>{
     const r=profile.results[l.id];
     const isLocked=l.id>next;
@@ -458,7 +469,7 @@
        <span class="astro-chapter-stars">★ ${chStars}/${chLevels.length*3}</span>
       </div>
      </div>
-     <div class="astro-constellation-field">
+     <div class="astro-constellation-field" data-edges="${cSpec.edges}">
       <canvas class="astro-energy-canvas" aria-hidden="true"></canvas>
       ${nodesHtml}
      </div>
