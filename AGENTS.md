@@ -261,6 +261,12 @@ Các script kiểm thử sử dụng Playwright headless để kiểm tra trực
    - Vành ngoài được thay bằng quầng sáng cực quang thiên thanh êm dịu và đường quỹ đạo sao hoàng đạo nét đứt tinh tế.
    - Toàn bộ giao diện trở nên thanh thoát, huyền ảo, đậm chất vũ trụ kỳ ảo hiện đại (Cosmic Fantasy) mà không còn cảm giác cơ khí steampunk.
    - Đã kiểm tra trực quan (Quy tắc 7) trên Desktop và Mobile, commit và tự động push lên GitHub `main`.
+10. **Bỏ Hoàn Toàn Hố Đen Trung Tâm (Open Cosmic Constellation)**:
+   - Người dùng phản hồi: *"hố đen vẫn còn này"*.
+   - Đã gỡ bỏ hoàn toàn phần tử `.astro-blackhole-portal` / `.astro-blackhole-canvas` trong [`n5-game.js`](file:///home/antigravity/quangthanh66/KanjiPop/work/kanji-pop-site/dist/n5-game.js), CSS trong [`astro-dial.css`](file:///home/antigravity/quangthanh66/KanjiPop/work/kanji-pop-site/dist/astro-dial.css), và hàm `drawBlackHoleVortex` trong [`astro-vfx.js`](file:///home/antigravity/quangthanh66/KanjiPop/work/kanji-pop-site/dist/astro-vfx.js).
+   - 5 cụm stage đá quý giờ đây trôi nổi tự do trực tiếp trên nền bầu trời sao cực quang mở (Open Cosmic Starfield), kết nối với nhau bằng luồng năng lượng starlight một chiều.
+   - Tinh chỉnh lại tọa độ phân bổ chòm sao cho cả Desktop và Mobile để triệt tiêu hoàn toàn hiện tượng nhãn chữ chạm vào ngọc/nhãn lân cận.
+   - Đã kiểm tra trực quan (Quy tắc 7) trên Desktop (3 chương) và Mobile (360×740), commit và tự động push lên GitHub `main`.
 
 ---
 

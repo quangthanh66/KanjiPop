@@ -392,22 +392,22 @@
   const starGraySvg=`<svg class="astro-star-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9z" fill="rgba(148,163,184,0.35)" stroke="rgba(148,163,184,0.65)" stroke-width="1.4" stroke-linejoin="round"/></svg>`;
   const constellations=[
    {
-    // Chương 01: Chòm Thiên Cầm (Lyra - Quỹ đạo sao vương miện quanh Hố đen 01 → 05)
+    // Chương 01: Chòm Thiên Cầm (Lyra - Quỹ đạo sao vương miện 01 → 05)
     edges:'0-1,1-2,2-3,3-4',
-    desk:[[21,50],[33,25],[67,25],[79,50],[50,75]],
-    mob:[[21,50],[33,25],[67,25],[79,50],[50,75]]
+    desk:[[19,50],[33,22],[65,22],[81,52],[50,77]],
+    mob:[[18,57],[30,19],[70,19],[82,57],[50,80]]
    },
    {
     // Chương 02: Chòm Bắc Đẩu (Big Dipper - Gáo sao một chiều 06 → 10)
     edges:'0-1,1-2,2-3,3-4',
-    desk:[[21,52],[35,32],[55,24],[74,36],[58,72]],
-    mob:[[21,52],[35,32],[55,24],[74,36],[58,72]]
+    desk:[[19,52],[34,30],[55,21],[77,36],[58,74]],
+    mob:[[18,56],[31,29],[55,19],[80,36],[58,78]]
    },
    {
     // Chương 03: Chòm Thiên Nga (Cygnus - Vòm cánh thiên nga 11 → 15)
     edges:'0-1,1-2,2-3,3-4',
-    desk:[[21,50],[34,26],[66,26],[79,50],[50,75]],
-    mob:[[21,50],[34,26],[66,26],[79,50],[50,75]]
+    desk:[[19,50],[33,23],[65,23],[81,52],[50,77]],
+    mob:[[18,57],[30,19],[70,19],[82,57],[50,80]]
    }
   ];
   const chaptersHtml=C.chapters.map((ch,cIdx)=>{
@@ -462,9 +462,6 @@
     <section class="astro-chapter-section" data-ch="${cIdx}">
      <div class="astro-constellation-field" data-edges="${cSpec.edges}">
       <div class="astro-dial-hub">
-       <div class="astro-blackhole-portal" aria-hidden="true">
-         <canvas class="astro-blackhole-canvas" aria-hidden="true"></canvas>
-       </div>
        <canvas class="astro-energy-canvas" aria-hidden="true"></canvas>
        ${nodesHtml}
       </div>
