@@ -392,22 +392,22 @@
   const starGraySvg=`<svg class="astro-star-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9z" fill="rgba(148,163,184,0.35)" stroke="rgba(148,163,184,0.65)" stroke-width="1.4" stroke-linejoin="round"/></svg>`;
   const constellations=[
    {
-    // Chương 01: Chòm Thiên Cầm (Lyra - Cung trăng uốn lượn một chiều 01 → 05)
+    // Chương 01: Chòm Thiên Cầm (Lyra - Quỹ đạo sao vương miện quanh Hố đen 01 → 05)
     edges:'0-1,1-2,2-3,3-4',
-    desk:[[14,34],[36,24],[62,18],[80,58],[50,76]],
-    mob:[[22,18],[70,22],[78,52],[26,52],[54,80]]
+    desk:[[23,50],[35,26],[65,30],[77,50],[50,72]],
+    mob:[[23,50],[35,26],[65,30],[77,50],[50,72]]
    },
    {
     // Chương 02: Chòm Bắc Đẩu (Big Dipper - Gáo sao một chiều 06 → 10)
     edges:'0-1,1-2,2-3,3-4',
-    desk:[[14,26],[34,42],[54,30],[78,28],[74,72]],
-    mob:[[22,17],[70,26],[28,50],[78,54],[56,80]]
+    desk:[[24,52],[36,34],[54,25],[72,36],[58,68]],
+    mob:[[24,52],[36,34],[54,25],[72,36],[58,68]]
    },
    {
-    // Chương 03: Chòm Thiên Nga (Cygnus - Vòm sao vươn cao một chiều 11 → 15)
+    // Chương 03: Chòm Thiên Nga (Cygnus - Vòm cánh thiên nga 11 → 15)
     edges:'0-1,1-2,2-3,3-4',
-    desk:[[16,70],[30,38],[54,29],[80,44],[64,76]],
-    mob:[[20,66],[26,38],[54,28],[80,44],[62,78]]
+    desk:[[24,50],[38,28],[62,30],[76,50],[48,72]],
+    mob:[[24,50],[38,28],[62,30],[76,50],[48,72]]
    }
   ];
   const chaptersHtml=C.chapters.map((ch,cIdx)=>{
@@ -438,7 +438,7 @@
        :`<span class="astro-badge play">MỚI</span>`;
     const [dx,dy]=dPts[idx%dPts.length];
     const [mx,my]=mPts[idx%mPts.length];
-    return `<button type="button" class="astro-node ${isLocked?'locked':''} ${current?'active':''} ${r?'completed':''}" style="--node-x-desk:${dx}%;--node-y-desk:${dy}%;--node-x-mob:${mx}%;--node-y-mob:${my}%" data-journey-level="${l.id}" ${isLocked?'disabled':''} aria-pressed="${current}" aria-label="Màn ${l.id+1}: ${l.title}${isLocked?', chưa mở khóa':r?', '+r.stars+' sao':''}">
+    return `<button type="button" class="astro-node ${isLocked?'locked':''} ${current?'active':''} ${r?'completed':''}" style="--node-x-desk:${dx}%;--node-y-desk:${dy}%;--node-x-mob:${mx}%;--node-y-mob:${my}%;--node-x:${dx}%;--node-y:${dy}%" data-journey-level="${l.id}" ${isLocked?'disabled':''} aria-pressed="${current}" aria-label="Màn ${l.id+1}: ${l.title}${isLocked?', chưa mở khóa':r?', '+r.stars+' sao':''}">
      <div class="astro-pedestal-stack">
       ${statusBadge}
       <div class="astro-gem-float">
@@ -461,9 +461,14 @@
     return `
     <section class="astro-chapter-section" data-ch="${cIdx}">
      <div class="astro-constellation-field" data-edges="${cSpec.edges}">
-      <img src="astro_assets/astro_dial_ring.webp" class="astro-constellation-dial-ring" alt="" aria-hidden="true">
-      <canvas class="astro-energy-canvas" aria-hidden="true"></canvas>
-      ${nodesHtml}
+      <div class="astro-dial-hub">
+       <div class="astro-blackhole-portal" aria-hidden="true">
+         <canvas class="astro-blackhole-canvas" aria-hidden="true"></canvas>
+       </div>
+       <img src="astro_assets/astro_dial_ring.webp" class="astro-constellation-dial-ring" alt="" aria-hidden="true">
+       <canvas class="astro-energy-canvas" aria-hidden="true"></canvas>
+       ${nodesHtml}
+      </div>
      </div>
     </section>
    `;

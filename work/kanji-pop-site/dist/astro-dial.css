@@ -633,35 +633,74 @@ body {
   50% { transform: translateY(-3px); }
 }
 
-/* Centered Rotating Celestial Astrolabe Wheel (Sole Hero Anchor Behind Constellation) */
-#kanji-pop .astro-constellation-dial-ring {
+/* Astrolabe Dial Hub: Strict 1:1 Aspect Ratio Housing Clock, Black Hole & Nodes */
+#kanji-pop .astro-dial-hub {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: min(86vh, 720px, 94%);
-  height: min(86vh, 720px, 94%);
+  transform: translate(-50%, -50%);
+  width: min(84vh, 500px, 94vw);
+  height: min(84vh, 500px, 94vw);
+  max-width: 98%;
+  max-height: 98%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Swirling Magical Black Hole Vortex (Inside the Hollow Clock Ring) */
+#kanji-pop .astro-blackhole-portal {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 50%;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#kanji-pop .astro-blackhole-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+/* Centered Rotating Celestial Astrolabe Wheel (Sole Hero Anchor Behind Constellation) */
+#kanji-pop .astro-constellation-dial-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   pointer-events: none;
   z-index: 1;
   opacity: 0.96;
   filter: brightness(1.12) saturate(120%)
-          drop-shadow(0 0 40px rgba(251, 191, 36, 0.55))
-          drop-shadow(0 0 80px rgba(56, 189, 248, 0.45));
+          drop-shadow(0 0 32px rgba(251, 191, 36, 0.52))
+          drop-shadow(0 0 65px rgba(56, 189, 248, 0.38));
   animation: astroDialRingSpin 120s linear infinite;
   user-select: none;
 }
 @keyframes astroDialRingSpin {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to { transform: translate(-50%, -50%) rotate(360deg); }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
-/* Flowing Energy Stream Canvas (Strictly Underneath Stage Pedestals) */
+/* Flowing Energy Stream Canvas (Over Black Hole, Underneath Stage Pedestals) */
 #kanji-pop .astro-energy-canvas {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 1;
+  z-index: 3;
 }
 
 /* Stage Pedestal Nodes Arranged Freely in Constellation Orbits */
@@ -748,12 +787,12 @@ body {
 #kanji-pop .astro-gem-float {
   position: relative;
   z-index: 5;
-  margin-bottom: -22px;
+  margin-bottom: -16px;
 }
 #kanji-pop .astro-gem-icon {
-  width: clamp(56px, 6.2vw, 80px);
-  height: clamp(56px, 6.2vw, 80px);
-  font-size: clamp(22px, 2.3vw, 30px);
+  width: clamp(44px, 4.8vw, 56px);
+  height: clamp(44px, 4.8vw, 56px);
+  font-size: clamp(18px, 1.9vw, 22px);
   filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.55));
 }
 #kanji-pop .astro-node.active .astro-gem-icon {
@@ -767,7 +806,7 @@ body {
 #kanji-pop .astro-pedestal-img {
   position: relative;
   z-index: 2;
-  width: clamp(78px, 8.2vw, 108px);
+  width: clamp(62px, 6.4vw, 76px);
   height: auto;
   display: block;
   filter: drop-shadow(0 10px 20px rgba(2, 6, 23, 0.85)) drop-shadow(0 0 14px rgba(56, 189, 248, 0.35));
@@ -780,13 +819,13 @@ body {
 #kanji-pop .astro-label {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
   background: rgba(15, 23, 42, 0.94);
   border: 1.5px solid rgba(251, 191, 36, 0.65);
   border-radius: 9999px;
-  padding: 3px 10px;
+  padding: 2px 7px;
   margin-top: 2px;
-  max-width: clamp(130px, 14.5vw, 185px);
+  max-width: clamp(105px, 11vw, 130px);
   box-shadow: 0 4px 12px rgba(2, 6, 23, 0.65), 0 0 10px rgba(56, 189, 248, 0.3);
   backdrop-filter: blur(6px);
 }
@@ -795,13 +834,13 @@ body {
   border-color: #fde047;
 }
 #kanji-pop .astro-num {
-  font-size: clamp(10px, 0.9vw, 11.5px);
+  font-size: clamp(9px, 0.82vw, 10.5px);
   font-weight: 900;
   color: #fde047;
   flex: none;
 }
 #kanji-pop .astro-title {
-  font-size: clamp(10px, 0.95vw, 12px);
+  font-size: clamp(9px, 0.85vw, 11px);
   font-weight: 800;
   color: #f8fafc;
   white-space: nowrap;
@@ -818,13 +857,13 @@ body {
   overflow: visible;
 }
 #kanji-pop .astro-star-svg {
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
   filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.55));
 }
 #kanji-pop .astro-star-svg.center {
-  width: 19px;
-  height: 19px;
+  width: 14px;
+  height: 14px;
   transform: translateY(-2px);
 }
 
@@ -1035,9 +1074,11 @@ body {
   #kanji-pop .astro-chapter-meta {
     font-size: 10px;
   }
+  #kanji-pop .astro-dial-hub {
+    width: min(94vw, 360px);
+    height: min(94vw, 360px);
+  }
   #kanji-pop .astro-constellation-dial-ring {
-    width: min(94vw, 400px);
-    height: min(94vw, 400px);
     opacity: 0.94;
     filter: brightness(1.1) saturate(118%)
             drop-shadow(0 0 28px rgba(251, 191, 36, 0.52))
@@ -1060,33 +1101,34 @@ body {
     bottom: 6px;
   }
   #kanji-pop .astro-gem-float {
-    margin-bottom: -16px;
+    margin-bottom: -14px;
   }
   #kanji-pop .astro-gem-icon {
-    width: 48px;
-    height: 48px;
-    font-size: 19px;
+    width: 38px;
+    height: 38px;
+    font-size: 16px;
   }
   #kanji-pop .astro-pedestal-img {
-    width: 68px;
+    width: 52px;
   }
   #kanji-pop .astro-label {
-    max-width: 126px;
-    padding: 2px 8px;
+    max-width: 94px;
+    padding: 1.5px 5px;
+    gap: 2.5px;
   }
   #kanji-pop .astro-num {
-    font-size: 9.5px;
+    font-size: 8.5px;
   }
   #kanji-pop .astro-title {
-    font-size: 10px;
+    font-size: 9px;
   }
   #kanji-pop .astro-star-svg {
-    width: 12px;
-    height: 12px;
+    width: 9px;
+    height: 9px;
   }
   #kanji-pop .astro-star-svg.center {
-    width: 14px;
-    height: 14px;
+    width: 11px;
+    height: 11px;
   }
   #kanji-pop .astro-bottom-dock {
     gap: 6px;

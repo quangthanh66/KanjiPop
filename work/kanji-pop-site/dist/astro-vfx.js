@@ -186,8 +186,195 @@
       ctx.stroke();
     }
 
+    drawBlackHoleVortex(t);
     drawEnergyConduits(t);
     rafId = requestAnimationFrame(frame);
+  }
+
+  function drawBlackHoleVortex(t) {
+    const portals = document.querySelectorAll('#map-screen .astro-blackhole-portal');
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const vh = window.innerHeight;
+
+    for (let pIdx = 0; pIdx < portals.length; pIdx++) {
+      const portal = portals[pIdx];
+      const canvas = portal.querySelector('.astro-blackhole-canvas');
+      if (!canvas) continue;
+      const rect = portal.getBoundingClientRect();
+      if (rect.bottom < -30 || rect.top > vh + 30) continue;
+
+      const pw = rect.width;
+      const ph = rect.height;
+      if (pw < 40 || ph < 40) continue;
+
+      if (canvas.width !== Math.floor(pw * dpr) || canvas.height !== Math.floor(ph * dpr)) {
+        canvas.width = Math.floor(pw * dpr);
+        canvas.height = Math.floor(ph * dpr);
+      }
+
+      const ctx = canvas.getContext('2d');
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, pw, ph);
+
+      const cx = pw * 0.5;
+      const cy = ph * 0.5;
+      const R = Math.min(pw, ph) * 0.5;
+      const rHole = R * 0.625; // Matches the hollow inner cutout of the golden clock ring
+
+      ctx.save();
+
+      // 1. Volumetric Rotating Accretion Disk Glow
+      const diskGrad = ctx.createRadialGradient(cx, cy, rHole * 0.28, cx, cy, rHole * 0.98);
+      diskGrad.addColorStop(0, 'rgba(0, 0, 0, 0)');
+      diskGrad.addColorStop(0.35, 'rgba(168, 85, 247, 0.42)');
+      diskGrad.addColorStop(0.65, 'rgba(56, 189, 248, 0.34)');
+      diskGrad.addColorStop(0.92, 'rgba(251, 191, 36, 0.26)');
+      diskGrad.addColorStop(1, 'rgba(15, 23, 42, 0)');
+      ctx.fillStyle = diskGrad;
+      ctx.beginPath();
+      ctx.arc(cx, cy, rHole * 0.98, 0, Math.PI * 2);
+      ctx.fill();
+
+      // 2. Gravitational Lensing & Swirling Accretion Disk (Additive / Screen)
+      ctx.globalCompositeOperation = 'screen';
+
+      // Swirling Multi-Arm Plasma Vortex (Continuous 60fps Motion)
+      const armCount = 4;
+      const spiralSteps = 44;
+      const baseRot = t * 0.72;
+
+      // 4 Elemental Cosmic Plasma Colors for the Arms
+      const armColors = [
+        ['rgba(168, 85, 247, 0.4)', '#c084fc', '#e879f9'],
+        ['rgba(2, 132, 199, 0.4)', '#38bdf8', '#7dd3fc'],
+        ['rgba(217, 119, 6, 0.4)', '#fbbf24', '#fde047'],
+        ['rgba(225, 29, 72, 0.4)', '#f43f5e', '#fb7185']
+      ];
+
+      for (let a = 0; a < armCount; a++) {
+        const armAngle0 = (a * (Math.PI * 2 / armCount)) + baseRot;
+        const colors = armColors[a % armColors.length];
+
+        ctx.beginPath();
+        for (let s = 0; s <= spiralSteps; s++) {
+          const frac = s / spiralSteps;
+          const r = rHole * (0.96 - 0.68 * Math.pow(frac, 1.25));
+          const theta = armAngle0 + Math.pow(frac, 1.15) * Math.PI * 1.8;
+          const px = cx + Math.cos(theta) * r;
+          const py = cy + Math.sin(theta) * r;
+
+          if (s === 0) ctx.moveTo(px, py);
+          else ctx.lineTo(px, py);
+        }
+
+        const pulse = 0.6 + 0.22 * Math.sin(t * 2.5 + a * 1.57);
+        // Outer diffuse nebula wisp
+        ctx.strokeStyle = colors[0];
+        ctx.lineWidth = 24 * pulse;
+        ctx.stroke();
+
+        // Core plasma stream
+        ctx.strokeStyle = colors[1];
+        ctx.lineWidth = 9 * pulse;
+        ctx.stroke();
+
+        // White-hot filament
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 2.4 * pulse;
+        ctx.stroke();
+      }
+
+      // 3. Central Event Horizon Singularity (Pure Void Black Hole)
+      ctx.globalCompositeOperation = 'source-over';
+      const coreVoid = ctx.createRadialGradient(cx, cy, 0, cx, cy, rHole * 0.32);
+      coreVoid.addColorStop(0, '#000000');
+      coreVoid.addColorStop(0.85, '#020208');
+      coreVoid.addColorStop(1, 'rgba(8, 5, 24, 0.96)');
+      ctx.fillStyle = coreVoid;
+      ctx.beginPath();
+      ctx.arc(cx, cy, rHole * 0.31, 0, Math.PI * 2);
+      ctx.fill();
+
+      // 4. Relativistic Photon Ring (Blinding Warp Border Around Singularity)
+      ctx.globalCompositeOperation = 'screen';
+      const photonR = rHole * 0.31;
+      const photonPulse = 0.88 + 0.12 * Math.sin(t * 3.4);
+      const ringGrad = ctx.createRadialGradient(cx, cy, photonR * 0.82, cx, cy, photonR * 1.45);
+      ringGrad.addColorStop(0, 'rgba(0, 0, 0, 0)');
+      ringGrad.addColorStop(0.38, `rgba(56, 189, 248, ${(0.92 * photonPulse).toFixed(3)})`);
+      ringGrad.addColorStop(0.68, `rgba(244, 63, 94, ${(0.72 * photonPulse).toFixed(3)})`);
+      ringGrad.addColorStop(1, 'rgba(251, 191, 36, 0)');
+
+      ctx.beginPath();
+      ctx.arc(cx, cy, photonR * 1.45, 0, Math.PI * 2);
+      ctx.fillStyle = ringGrad;
+      ctx.fill();
+
+      // Sharp central photon orbit line
+      ctx.beginPath();
+      ctx.arc(cx, cy, photonR, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(255, 255, 255, ${(0.96 * photonPulse).toFixed(3)})`;
+      ctx.lineWidth = 2.6;
+      ctx.stroke();
+
+      // 5. Infalling Stardust & Magic Sparks (Gravitational Inward Suction)
+      const sparkCount = 56;
+      for (let i = 0; i < sparkCount; i++) {
+        const speed = 0.16 + (i % 7) * 0.026;
+        const phase = (t * speed + i * 0.073) % 1;
+        const initAngle = (i * 0.618033) * Math.PI * 2;
+
+        const r = rHole * (0.95 - 0.66 * Math.pow(phase, 1.2));
+        const theta = initAngle + baseRot * 1.4 + Math.pow(phase, 1.8) * Math.PI * 3.6;
+
+        const sx = cx + Math.cos(theta) * r;
+        const sy = cy + Math.sin(theta) * r;
+
+        const size = (1 - phase * 0.45) * (1.3 + (i % 3) * 1.2);
+        const alpha = Math.sin(phase * Math.PI) * 0.88;
+
+        const tailLen = (1 + phase * 2.5) * 4;
+        const tailTheta = theta - 0.08 * (1 + phase * 1.5);
+        const tx = cx + Math.cos(tailTheta) * (r + tailLen * 0.6);
+        const ty = cy + Math.sin(tailTheta) * (r + tailLen * 0.6);
+
+        ctx.beginPath();
+        ctx.moveTo(tx, ty);
+        ctx.lineTo(sx, sy);
+        ctx.strokeStyle = (i % 2 === 0)
+          ? `rgba(56, 189, 248, ${alpha.toFixed(3)})`
+          : `rgba(253, 224, 71, ${alpha.toFixed(3)})`;
+        ctx.lineWidth = size * 0.85;
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(sx, sy, size * 0.95, 0, Math.PI * 2);
+        ctx.fillStyle = (i % 3 === 0)
+          ? `rgba(255, 255, 255, ${alpha.toFixed(3)})`
+          : (i % 3 === 1)
+            ? `rgba(168, 85, 247, ${alpha.toFixed(3)})`
+            : `rgba(251, 191, 36, ${alpha.toFixed(3)})`;
+        ctx.fill();
+      }
+
+      // 6. Outer Event Horizon Rim Distortion Ring
+      ctx.beginPath();
+      ctx.arc(cx, cy, rHole * 0.98, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(56, 189, 248, 0.48)';
+      ctx.lineWidth = 2.4;
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(cx, cy, rHole * 0.94, 0, Math.PI * 2);
+      ctx.setLineDash([6, 8]);
+      ctx.lineDashOffset = -t * 18;
+      ctx.strokeStyle = 'rgba(251, 191, 36, 0.52)';
+      ctx.lineWidth = 1.4;
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      ctx.restore();
+    }
   }
 
   function drawEnergyConduits(t) {
@@ -199,11 +386,12 @@
       const field = fields[aIdx];
       const canvas = field.querySelector('.astro-energy-canvas');
       if (!canvas) continue;
-      const fieldRect = field.getBoundingClientRect();
-      if (fieldRect.bottom < -30 || fieldRect.top > vh + 30) continue;
+      const hub = field.querySelector('.astro-dial-hub') || field;
+      const hubRect = hub.getBoundingClientRect();
+      if (hubRect.bottom < -30 || hubRect.top > vh + 30) continue;
 
-      const aw = fieldRect.width;
-      const ah = fieldRect.height;
+      const aw = hubRect.width;
+      const ah = hubRect.height;
       if (aw < 20 || ah < 20) continue;
 
       if (canvas.width !== Math.floor(aw * dpr) || canvas.height !== Math.floor(ah * dpr)) {
@@ -215,15 +403,15 @@
       const sizeKey = Math.round(aw) + 'x' + Math.round(ah);
       let pts = field._cachedPts;
       if (!pts || field._cachedSizeKey !== sizeKey) {
-        const nodes = field.querySelectorAll('.astro-node');
+        const nodes = hub.querySelectorAll('.astro-node');
         if (nodes.length < 2) continue;
         pts = [];
         for (let i = 0; i < nodes.length; i++) {
           const ped = nodes[i].querySelector('.astro-pedestal-img') || nodes[i];
           const r = ped.getBoundingClientRect();
           pts.push({
-            x: r.left + r.width * 0.5 - fieldRect.left,
-            y: r.top + r.height * 0.52 - fieldRect.top
+            x: r.left + r.width * 0.5 - hubRect.left,
+            y: r.top + r.height * 0.52 - hubRect.top
           });
         }
         field._cachedPts = pts;
@@ -291,16 +479,16 @@
         ctx.moveTo(segs[i].ax, segs[i].ay);
         ctx.lineTo(segs[i].bx, segs[i].by);
       }
-      ctx.strokeStyle = 'rgba(56, 189, 248, 0.22)';
-      ctx.lineWidth = 8;
+      ctx.strokeStyle = 'rgba(56, 189, 248, 0.45)';
+      ctx.lineWidth = 9;
       ctx.stroke();
 
-      ctx.strokeStyle = 'rgba(251, 191, 36, 0.24)';
-      ctx.lineWidth = 3.2;
+      ctx.strokeStyle = 'rgba(251, 191, 36, 0.55)';
+      ctx.lineWidth = 3.8;
       ctx.stroke();
 
-      ctx.strokeStyle = 'rgba(224, 242, 254, 0.44)';
-      ctx.lineWidth = 1.2;
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
+      ctx.lineWidth = 1.8;
       ctx.stroke();
 
       // 2. Multi-Layered Sinusoidal Flowing Energy Ribbons Along Each Constellation Edge
