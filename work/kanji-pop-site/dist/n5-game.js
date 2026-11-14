@@ -406,8 +406,8 @@
    {
     // Chương 03: Chòm Thiên Nga (Cygnus - Ngôi sao chữ thập tỏa cánh nghiêng)
     edges:'0-2,1-2,2-3,2-4',
-    desk:[[16,54],[36,19],[52,48],[84,36],[66,77]],
-    mob:[[20,48],[36,18],[52,49],[82,42],[64,79]]
+    desk:[[16,56],[36,28],[52,50],[84,38],[66,78]],
+    mob:[[20,50],[36,24],[52,50],[82,42],[64,79]]
    }
   ];
   const chaptersHtml=C.chapters.map((ch,cIdx)=>{
@@ -477,6 +477,12 @@
    `;
   }).join('');
   return `
+    <button type="button" class="astro-scroll-prev-btn is-hidden" aria-label="Cuộn lên xem chương trước">
+      <span class="astro-scroll-prev-chevrons" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m17 18-5-5-5 5"/><path d="m17 11-5-5-5 5"/></svg>
+      </span>
+      <span class="astro-scroll-prev-text">Lên chương trước</span>
+    </button>
     <div class="astro-orbit-arena">
       ${chaptersHtml}
     </div>
@@ -593,13 +599,25 @@
     </footer>
   `;
   const arena=mapEl.querySelector('.astro-orbit-arena');
+  const prevBtn=mapEl.querySelector('.astro-scroll-prev-btn');
   const scrollBtn=mapEl.querySelector('.astro-scroll-more-btn');
   if(arena&&scrollBtn){
    const updateScrollCue=()=>{
+    const hasPrev=arena.scrollTop>44;
     const hasMore=arena.scrollTop+arena.clientHeight<arena.scrollHeight-44;
+    if(prevBtn)prevBtn.classList.toggle('is-hidden',!hasPrev);
     scrollBtn.classList.toggle('is-hidden',!hasMore);
    };
+   const cancelGlide=()=>{
+    if(arena._glideRaf){
+     cancelAnimationFrame(arena._glideRaf);
+     arena._glideRaf=0;
+     arena.style.scrollSnapType='';
+    }
+   };
    arena.addEventListener('scroll',updateScrollCue,{passive:true});
+   arena.addEventListener('wheel',cancelGlide,{passive:true});
+   arena.addEventListener('touchstart',cancelGlide,{passive:true});
    requestAnimationFrame(updateScrollCue);
   }
   if (window.AstroVFX) window.AstroVFX.mount();
@@ -1008,12 +1026,36 @@ function showSettings(){
    }
    return;
   }
-  const scrollMoreBtn=e.target.closest('.astro-scroll-more-btn');
-  if(scrollMoreBtn){
+  const scrollNavBtn=e.target.closest('.astro-scroll-more-btn, .astro-scroll-prev-btn');
+  if(scrollNavBtn){
    const arena=$('#map-screen .astro-orbit-arena');
    if(arena){
     A?.select();
-    arena.scrollBy({top:arena.clientHeight,behavior:'smooth'});
+    const dir=scrollNavBtn.classList.contains('astro-scroll-prev-btn')?-1:1;
+    const pageH=arena.clientHeight||1;
+    const maxScroll=Math.max(0,arena.scrollHeight-pageH);
+    const curIdx=Math.round(arena.scrollTop/pageH);
+    const targetIdx=Math.max(0,Math.min(2,curIdx+dir));
+    const targetTop=Math.min(maxScroll,targetIdx*pageH);
+    const startTop=arena.scrollTop;
+    const dist=targetTop-startTop;
+    if(Math.abs(dist)<2)return;
+    if(arena._glideRaf)cancelAnimationFrame(arena._glideRaf);
+    arena.style.scrollSnapType='none';
+    const dur=560;
+    const t0=performance.now();
+    const step=(now)=>{
+     const p=Math.min(1,(now-t0)/dur);
+     const ease=p<0.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
+     arena.scrollTop=startTop+dist*ease;
+     if(p<1){
+      arena._glideRaf=requestAnimationFrame(step);
+     }else{
+      arena._glideRaf=0;
+      arena.style.scrollSnapType='';
+     }
+    };
+    arena._glideRaf=requestAnimationFrame(step);
    }
    return;
   }

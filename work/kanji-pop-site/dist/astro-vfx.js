@@ -193,12 +193,15 @@
   function drawEnergyConduits(t) {
     const fields = document.querySelectorAll('#map-screen .astro-constellation-field');
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const vh = window.innerHeight;
 
     for (let aIdx = 0; aIdx < fields.length; aIdx++) {
       const field = fields[aIdx];
       const canvas = field.querySelector('.astro-energy-canvas');
       if (!canvas) continue;
       const fieldRect = field.getBoundingClientRect();
+      if (fieldRect.bottom < -30 || fieldRect.top > vh + 30) continue;
+
       const aw = fieldRect.width;
       const ah = fieldRect.height;
       if (aw < 20 || ah < 20) continue;
@@ -206,20 +209,27 @@
       if (canvas.width !== Math.floor(aw * dpr) || canvas.height !== Math.floor(ah * dpr)) {
         canvas.width = Math.floor(aw * dpr);
         canvas.height = Math.floor(ah * dpr);
+        field._cachedPts = null;
       }
 
-      const nodes = field.querySelectorAll('.astro-node');
-      if (nodes.length < 2) continue;
-
-      const pts = [];
-      for (let i = 0; i < nodes.length; i++) {
-        const ped = nodes[i].querySelector('.astro-pedestal-img') || nodes[i];
-        const r = ped.getBoundingClientRect();
-        pts.push({
-          x: r.left + r.width * 0.5 - fieldRect.left,
-          y: r.top + r.height * 0.52 - fieldRect.top
-        });
+      const sizeKey = Math.round(aw) + 'x' + Math.round(ah);
+      let pts = field._cachedPts;
+      if (!pts || field._cachedSizeKey !== sizeKey) {
+        const nodes = field.querySelectorAll('.astro-node');
+        if (nodes.length < 2) continue;
+        pts = [];
+        for (let i = 0; i < nodes.length; i++) {
+          const ped = nodes[i].querySelector('.astro-pedestal-img') || nodes[i];
+          const r = ped.getBoundingClientRect();
+          pts.push({
+            x: r.left + r.width * 0.5 - fieldRect.left,
+            y: r.top + r.height * 0.52 - fieldRect.top
+          });
+        }
+        field._cachedPts = pts;
+        field._cachedSizeKey = sizeKey;
       }
+      if (pts.length < 2) continue;
 
       // Build constellation edges from data-edges (or fallback to linear chain)
       const rawEdges = (field.dataset.edges || '').split(',').map(s => s.trim()).filter(Boolean);

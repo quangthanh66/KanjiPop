@@ -472,11 +472,11 @@ body {
   min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
-  scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
   scrollbar-width: none;
   -ms-overflow-style: none;
   -webkit-overflow-scrolling: touch;
+  will-change: scroll-position;
 }
 #kanji-pop .astro-orbit-arena::-webkit-scrollbar {
   display: none;
@@ -488,12 +488,16 @@ body {
   height: 100%;
   min-height: 100%;
   scroll-snap-align: start;
-  scroll-snap-stop: always;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-bottom: 36px;
   box-sizing: border-box;
+  contain: layout style;
+}
+#kanji-pop .astro-chapter-section[data-ch="1"],
+#kanji-pop .astro-chapter-section[data-ch="2"] {
+  padding-top: 40px;
 }
 
 #kanji-pop .astro-constellation-field {
@@ -503,21 +507,21 @@ body {
   min-height: 0;
 }
 
-/* Animated "More Stages Below" Scroll Cue Button */
+/* Animated Scroll-Up & Scroll-Down Cue Buttons */
+#kanji-pop#kanji-pop .astro-scroll-prev-btn,
 #kanji-pop#kanji-pop .astro-scroll-more-btn {
   position: absolute;
   left: 50%;
-  bottom: 8px;
   transform: translateX(-50%);
   z-index: 16;
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  height: 36px;
-  padding: 0 16px 0 18px;
+  height: 34px;
+  padding: 0 15px 0 17px;
   border-radius: 9999px;
   border: 1.5px solid #fbbf24;
-  background: linear-gradient(180deg, rgba(30, 58, 138, 0.92) 0%, rgba(15, 23, 42, 0.96) 100%);
+  background: linear-gradient(180deg, rgba(30, 58, 138, 0.94) 0%, rgba(15, 23, 42, 0.97) 100%);
   color: #fef3c7;
   font-family: 'Nunito', sans-serif;
   font-size: 12px;
@@ -526,17 +530,30 @@ body {
   cursor: pointer;
   box-shadow: 0 0 18px rgba(56, 189, 248, 0.45), 0 6px 16px rgba(2, 6, 23, 0.65);
   animation: astroScrollGlow 2.2s ease-in-out infinite;
-  transition: opacity 0.28s ease, transform 0.28s ease;
+  transition: opacity 0.24s ease, transform 0.24s ease;
 }
+#kanji-pop#kanji-pop .astro-scroll-prev-btn {
+  top: 4px;
+}
+#kanji-pop#kanji-pop .astro-scroll-more-btn {
+  bottom: 8px;
+}
+#kanji-pop#kanji-pop .astro-scroll-prev-btn:hover,
 #kanji-pop#kanji-pop .astro-scroll-more-btn:hover {
   border-color: #38bdf8;
   color: #ffffff;
+}
+#kanji-pop#kanji-pop .astro-scroll-prev-btn.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(-10px);
 }
 #kanji-pop#kanji-pop .astro-scroll-more-btn.is-hidden {
   opacity: 0;
   pointer-events: none;
   transform: translateX(-50%) translateY(10px);
 }
+#kanji-pop .astro-scroll-prev-chevrons,
 #kanji-pop .astro-scroll-more-chevrons {
   display: inline-flex;
   align-items: center;
@@ -544,8 +561,14 @@ body {
   width: 18px;
   height: 18px;
   color: #38bdf8;
+}
+#kanji-pop .astro-scroll-prev-chevrons {
+  animation: astroChevronBounceUp 1.35s ease-in-out infinite;
+}
+#kanji-pop .astro-scroll-more-chevrons {
   animation: astroChevronBounce 1.35s ease-in-out infinite;
 }
+#kanji-pop .astro-scroll-prev-chevrons svg,
 #kanji-pop .astro-scroll-more-chevrons svg {
   width: 18px;
   height: 18px;
@@ -557,6 +580,10 @@ body {
 @keyframes astroChevronBounce {
   0%, 100% { transform: translateY(-2px); }
   50% { transform: translateY(3px); }
+}
+@keyframes astroChevronBounceUp {
+  0%, 100% { transform: translateY(2px); }
+  50% { transform: translateY(-3px); }
 }
 
 /* 3D Astrolabe Dial Positioned in Upper-Right Sky (Outside Stages Area) */
@@ -894,10 +921,16 @@ body {
     left: var(--node-x-mob, 50%);
     top: var(--node-y-mob, 50%);
   }
+  #kanji-pop#kanji-pop .astro-scroll-prev-btn,
   #kanji-pop#kanji-pop .astro-scroll-more-btn {
-    height: 32px;
+    height: 30px;
     padding: 0 12px 0 14px;
     font-size: 11px;
+  }
+  #kanji-pop#kanji-pop .astro-scroll-prev-btn {
+    top: 2px;
+  }
+  #kanji-pop#kanji-pop .astro-scroll-more-btn {
     bottom: 6px;
   }
   #kanji-pop .astro-gem-float {
