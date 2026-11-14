@@ -77,7 +77,10 @@
     window._astroSkyPx += (targetParallax - window._astroSkyPx) * (1 - Math.exp(-dt * 4.5));
     const skyDx = window._astroSkyPx;
 
-    // 0. Subtle Sky Constellations (Upper-Left & Upper-Right)
+    // 0. Unified Celestial Orbit System Connecting All 4 Corner Assets
+    drawUnifiedOrbitSystem(ctx, w, h, t);
+
+    // 0b. Subtle Sky Constellations (Upper-Left & Upper-Right)
     const constellations = [
       [[0.12, 0.24], [0.18, 0.16], [0.25, 0.21], [0.29, 0.12], [0.35, 0.17]],
       [[0.66, 0.14], [0.72, 0.20], [0.78, 0.13], [0.84, 0.19], [0.79, 0.26]]
@@ -188,6 +191,128 @@
 
     drawEnergyConduits(t);
     rafId = requestAnimationFrame(frame);
+  }
+
+  function drawUnifiedOrbitSystem(ctx, w, h, t) {
+    if (!activeCanvas) return;
+    const sizeKey = Math.round(w) + 'x' + Math.round(h);
+    let anchors = activeCanvas._cornerAnchors;
+    if (!anchors || activeCanvas._anchorSizeKey !== sizeKey) {
+      const sels = [
+        '.astro-moon-img',
+        '.astro-dial-landmark',
+        '.astro-observatory-img',
+        '.astro-cloud.left'
+      ];
+      anchors = [];
+      for (let i = 0; i < sels.length; i++) {
+        const el = document.querySelector('#map-screen ' + sels[i]);
+        if (!el) continue;
+        const r = el.getBoundingClientRect();
+        if (r.width > 4 && r.height > 4) {
+          anchors.push({
+            x: r.left + r.width * 0.5,
+            y: r.top + r.height * 0.5,
+            r: Math.max(24, Math.min(64, Math.max(r.width, r.height) * 0.48))
+          });
+        }
+      }
+      activeCanvas._cornerAnchors = anchors;
+      activeCanvas._anchorSizeKey = sizeKey;
+    }
+    if (anchors.length < 3) return;
+
+    // Fit grand unifying orbit ellipse passing smoothly through all 4 corner anchors
+    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    for (let i = 0; i < anchors.length; i++) {
+      if (anchors[i].x < minX) minX = anchors[i].x;
+      if (anchors[i].x > maxX) maxX = anchors[i].x;
+      if (anchors[i].y < minY) minY = anchors[i].y;
+      if (anchors[i].y > maxY) maxY = anchors[i].y;
+    }
+    const cx = (minX + maxX) * 0.5;
+    const cy = (minY + maxY) * 0.5;
+    const rx = Math.max(110, (maxX - minX) * 0.55);
+    const ry = Math.max(110, (maxY - minY) * 0.53);
+
+    ctx.save();
+    ctx.globalCompositeOperation = 'screen';
+
+    // 1. Soft Milky Way Galactic Halo Band Along the Grand Orbit
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(56, 189, 248, 0.14)';
+    ctx.lineWidth = 30;
+    ctx.stroke();
+
+    ctx.strokeStyle = 'rgba(168, 85, 247, 0.11)';
+    ctx.lineWidth = 14;
+    ctx.stroke();
+
+    // 2. Outer Dashed Golden-Cyan Celestial Orbit Ring
+    ctx.setLineDash([10, 12]);
+    ctx.lineDashOffset = -t * 16;
+    ctx.strokeStyle = 'rgba(251, 191, 36, 0.52)';
+    ctx.lineWidth = 1.8;
+    ctx.stroke();
+
+    // 3. Inner Counter-Rotating Fine Cyan Orbit Ring
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, rx * 0.88, ry * 0.88, 0, 0, Math.PI * 2);
+    ctx.setLineDash([4, 10]);
+    ctx.lineDashOffset = t * 11;
+    ctx.strokeStyle = 'rgba(125, 211, 252, 0.34)';
+    ctx.lineWidth = 1.3;
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // 4. Subtle Celestial Socket Rings Around Each Corner Anchor
+    for (let i = 0; i < anchors.length; i++) {
+      const a = anchors[i];
+      const pulse = 0.42 + 0.16 * Math.sin(t * 1.6 + i * 1.5);
+      ctx.beginPath();
+      ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(125, 211, 252, ${pulse.toFixed(3)})`;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(a.x, a.y, a.r * 1.18, t * 0.35 + i, t * 0.35 + i + Math.PI * 1.15);
+      ctx.strokeStyle = `rgba(251, 191, 36, ${(pulse * 0.95).toFixed(3)})`;
+      ctx.lineWidth = 1.4;
+      ctx.stroke();
+    }
+
+    // 5. Orbiting Energy Comets Gliding Around the Grand Ring (Linking All 4 Corners)
+    const cometCount = 4;
+    for (let i = 0; i < cometCount; i++) {
+      const baseAngle = t * 0.22 + i * (Math.PI * 0.5);
+      const tailSteps = 10;
+      for (let s = tailSteps; s >= 0; s--) {
+        const ang = baseAngle - s * 0.032;
+        const px = cx + Math.cos(ang) * rx;
+        const py = cy + Math.sin(ang) * ry;
+        const frac = 1 - s / tailSteps;
+        const alpha = Math.pow(frac, 1.8) * 0.72;
+        const rad = 1.2 + frac * 2.2;
+        ctx.fillStyle = i % 2 === 0
+          ? `rgba(125, 211, 252, ${alpha.toFixed(3)})`
+          : `rgba(253, 224, 71, ${alpha.toFixed(3)})`;
+        ctx.beginPath();
+        ctx.arc(px, py, rad, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      const hx = cx + Math.cos(baseAngle) * rx;
+      const hy = cy + Math.sin(baseAngle) * ry;
+      const orb = ctx.createRadialGradient(hx, hy, 0, hx, hy, 11);
+      orb.addColorStop(0, 'rgba(255, 255, 255, 0.92)');
+      orb.addColorStop(0.35, i % 2 === 0 ? 'rgba(56, 189, 248, 0.55)' : 'rgba(251, 191, 36, 0.55)');
+      orb.addColorStop(1, 'rgba(56, 189, 248, 0)');
+      ctx.fillStyle = orb;
+      ctx.fillRect(hx - 11, hy - 11, 22, 22);
+    }
+
+    ctx.restore();
   }
 
   function drawEnergyConduits(t) {
