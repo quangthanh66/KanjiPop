@@ -12,11 +12,12 @@ html {
   border: none !important;
   border-radius: 0 !important;
   outline: none !important;
-  background-color: #010104 !important;
+  background-color: #090a12 !important;
   background-image:
-    radial-gradient(ellipse 80% 55% at 22% 18%, rgba(24, 24, 48, 0.16) 0%, transparent 65%),
-    radial-gradient(ellipse 70% 50% at 78% 24%, rgba(28, 20, 46, 0.14) 0%, transparent 65%),
-    linear-gradient(165deg, #000002 0%, #020207 42%, #04040b 75%, #010104 100%) !important;
+    radial-gradient(ellipse 80% 55% at 22% 18%, rgba(52, 54, 86, 0.24) 0%, transparent 65%),
+    radial-gradient(ellipse 70% 50% at 78% 24%, rgba(62, 42, 88, 0.22) 0%, transparent 65%),
+    radial-gradient(ellipse 90% 45% at 50% 92%, rgba(44, 46, 74, 0.18) 0%, transparent 65%),
+    linear-gradient(165deg, #07080e 0%, #0c0d18 42%, #111220 75%, #0a0b14 100%) !important;
   background-repeat: no-repeat !important;
   background-size: 100% 100% !important;
   overflow: hidden !important;
@@ -125,7 +126,7 @@ body {
   width: 124%;
   height: 55%;
   filter: blur(18px);
-  opacity: 0.16;
+  opacity: 0.26;
 }
 
 #kanji-pop .astro-horizon-svg {
