@@ -219,7 +219,7 @@
       const cx = pw * 0.5;
       const cy = ph * 0.5;
       const R = Math.min(pw, ph) * 0.5;
-      const rHole = R * 0.635; // Matches the hollow inner cutout of the golden clock ring
+      const rHole = R * 0.94; // Pure frameless cosmic portal without clock frame
 
       ctx.save();
 

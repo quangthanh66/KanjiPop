@@ -465,7 +465,6 @@
        <div class="astro-blackhole-portal" aria-hidden="true">
          <canvas class="astro-blackhole-canvas" aria-hidden="true"></canvas>
        </div>
-       <img src="astro_assets/astro_dial_ring.webp" class="astro-constellation-dial-ring" alt="" aria-hidden="true">
        <canvas class="astro-energy-canvas" aria-hidden="true"></canvas>
        ${nodesHtml}
       </div>

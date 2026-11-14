@@ -254,6 +254,13 @@ Các script kiểm thử sử dụng Playwright headless để kiểm tra trực
      - Vòng xoáy ma thuật bồi tụ (accretion vortex) được chuyển thành các dải cực quang mờ ảo chuyển động mượt mà 60fps, tôn trọn vẹn nền đen sâu thẳm mà không che khuất các vì sao.
      - Neo badge trạng thái ('MỚI', 'ÔN', '🔒') vào thẳng góc trên viên ngọc thay vì rìa bệ, chống hoàn toàn hiện tượng badge trôi sang nhãn chữ lân cận.
    - Đã kiểm tra trực quan (Quy tắc 7) trên Desktop (1280x720) cho cả 3 chương và Mobile (360x740): 0 cắt xén, 0 chồng chéo, hiển thị cực kỳ rực rỡ và có chiều sâu vũ trụ huyền bí.
+9. **Bỏ Đồng Hồ Thiên Văn, Chuyển Sang Cổng Vũ Trụ Huyền Bí Thuần Khiết (Frameless Cosmic Void Portal)**:
+   - Người dùng yêu cầu: *"bỏ đồng hồ"*.
+   - Đã gỡ bỏ hoàn toàn vành đồng hồ bánh răng kim loại đồng thau 3D (`astro_dial_ring.webp` / `.astro-constellation-dial-ring`) khỏi markup HTML và CSS.
+   - Mở rộng bán kính cổng vũ trụ (`rPortal = R * 0.94` thay vì `0.635`), giúp nền vũ trụ đen thăm thẳm và bầu trời sao trôi lơ lửng bao bọc trọn vẹn toàn bộ 5 cụm stage mà không bị giới hạn cơ khí bởi vành đồng hồ.
+   - Vành ngoài được thay bằng quầng sáng cực quang thiên thanh êm dịu và đường quỹ đạo sao hoàng đạo nét đứt tinh tế.
+   - Toàn bộ giao diện trở nên thanh thoát, huyền ảo, đậm chất vũ trụ kỳ ảo hiện đại (Cosmic Fantasy) mà không còn cảm giác cơ khí steampunk.
+   - Đã kiểm tra trực quan (Quy tắc 7) trên Desktop và Mobile, commit và tự động push lên GitHub `main`.
 
 ---
 

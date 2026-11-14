@@ -672,27 +672,6 @@ body {
   border-radius: 50%;
 }
 
-/* Centered Rotating Celestial Astrolabe Wheel (Sole Hero Anchor Behind Constellation) */
-#kanji-pop .astro-constellation-dial-ring {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0.96;
-  filter: brightness(1.12) saturate(120%)
-          drop-shadow(0 0 32px rgba(251, 191, 36, 0.52))
-          drop-shadow(0 0 65px rgba(56, 189, 248, 0.38));
-  animation: astroDialRingSpin 120s linear infinite;
-  user-select: none;
-}
-@keyframes astroDialRingSpin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
 /* Flowing Energy Stream Canvas (Over Black Hole, Underneath Stage Pedestals) */
 #kanji-pop .astro-energy-canvas {
   position: absolute;
@@ -1078,12 +1057,6 @@ body {
   #kanji-pop .astro-dial-hub {
     width: min(99vw, 410px);
     height: min(99vw, 410px);
-  }
-  #kanji-pop .astro-constellation-dial-ring {
-    opacity: 0.94;
-    filter: brightness(1.1) saturate(118%)
-            drop-shadow(0 0 28px rgba(251, 191, 36, 0.52))
-            drop-shadow(0 0 55px rgba(56, 189, 248, 0.38));
   }
   #kanji-pop#kanji-pop .astro-node {
     left: var(--node-x-mob, 50%);
