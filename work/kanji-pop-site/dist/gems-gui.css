@@ -2,6 +2,37 @@
    Gems Game Free GUI (OpenGameArt / CraftPix) Theme for Kanjidle
    ========================================================================== */
 
+/* 0. Full-Bleed GUI Background & Zero-Sideband Viewport Invariants */
+html,
+body,
+#kp-preview {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100vw !important;
+  min-height: 100dvh !important;
+  background: url('gems_gui_assets/gui_bg.png') center center / cover no-repeat fixed !important;
+  overflow-x: hidden !important;
+}
+
+#kanji-pop,
+#kanji-pop#kanji-pop,
+#kanji-pop[data-view="map"],
+#kanji-pop#kanji-pop[data-view="map"],
+#kanji-pop[data-view="play"],
+#kanji-pop#kanji-pop[data-view="play"],
+#kanji-pop[data-view="album"],
+#kanji-pop#kanji-pop[data-view="album"] {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  min-height: 100dvh !important;
+  margin: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  box-sizing: border-box !important;
+}
+
 /* 1. Global View Control: Hide old header and old bottom nav on Main Screen */
 #kanji-pop[data-view="map"] .kp-header,
 #kanji-pop[data-view="map"] .course-nav {
@@ -9,18 +40,12 @@
 }
 
 #kanji-pop[data-view="map"] {
-  background: url('gems_gui_assets/gui_bg.png') center center / cover no-repeat !important;
-  width: 100vw;
   height: 100dvh;
   overflow: hidden !important;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-#kanji-pop[data-view="play"] {
-  background: url('gems_gui_assets/gui_bg.png') center center / cover no-repeat !important;
 }
 
 /* 2. Main Map Screen Container */
