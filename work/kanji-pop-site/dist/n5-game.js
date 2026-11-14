@@ -402,7 +402,7 @@
       </div>
 
       <div class="gui-title-wrap">
-        <img src="gems_gui_assets/logo_title.png" class="gui-title-img" alt="Gems Game">
+        <img src="kanjidle-logo.png" class="gui-title-img" alt="Kanjidle">
         <button type="button" class="gui-mode-pill" data-switch-grade="${currentGrade==='N5'?'N4':'N5'}" aria-label="Đổi cấp độ">
           <span>JLPT ${currentGrade}</span> · <span>★ ${totalStars}/${maxTotalStars}</span>
         </button>

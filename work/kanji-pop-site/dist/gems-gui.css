@@ -139,11 +139,11 @@ body,
   position: relative;
 }
 #kanji-pop .gui-title-img {
-  width: clamp(160px, 18vw, 260px);
-  max-height: clamp(80px, 11vh, 140px);
+  width: clamp(145px, 16vw, 230px);
+  max-height: clamp(78px, 12vh, 130px);
   height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 6px 16px rgba(76, 29, 149, 0.38));
+  filter: drop-shadow(0 6px 16px rgba(76, 29, 149, 0.32));
   animation: titleFloat 4s ease-in-out infinite;
   pointer-events: none;
 }
@@ -154,7 +154,7 @@ body,
 
 /* Mode Pill directly below Title */
 #kanji-pop .gui-mode-pill {
-  margin-top: clamp(-7px, -1vw, -10px);
+  margin-top: 4px;
   background: linear-gradient(180deg, #ec4899 0%, #be185d 100%);
   border: 2px solid #ffffff;
   border-radius: 9999px;
