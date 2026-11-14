@@ -259,13 +259,13 @@ body {
   50% { opacity: 0.85; transform: scale(1.05); }
 }
 
-/* Smooth Horizontal Chapter Slide Transition */
+/* Smooth Horizontal Chapter Slide Transition (Unclipped Full-Width Glide) */
 #kanji-pop .astro-dial-stage.is-sliding {
-  overflow: hidden;
+  overflow: visible;
 }
 #kanji-pop .astro-slide-outgoing {
   position: absolute;
-  inset: clamp(10px, 1.5vh, 16px) clamp(12px, 2vw, 24px) clamp(26px, 3.6vh, 36px);
+  inset: clamp(6px, 1vh, 12px) clamp(8px, 1.5vw, 18px) clamp(24px, 3.4vh, 34px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -287,18 +287,18 @@ body {
 }
 @keyframes astroSlideOutLeft {
   from { transform: translate3d(0, 0, 0); opacity: 1; }
-  to { transform: translate3d(-85%, 0, 0); opacity: 0; }
+  to { transform: translate3d(-105vw, 0, 0); opacity: 0; }
 }
 @keyframes astroSlideOutRight {
   from { transform: translate3d(0, 0, 0); opacity: 1; }
-  to { transform: translate3d(85%, 0, 0); opacity: 0; }
+  to { transform: translate3d(105vw, 0, 0); opacity: 0; }
 }
 @keyframes astroSlideInFromRight {
-  from { transform: translate3d(85%, 0, 0); opacity: 0; }
+  from { transform: translate3d(105vw, 0, 0); opacity: 0; }
   to { transform: translate3d(0, 0, 0); opacity: 1; }
 }
 @keyframes astroSlideInFromLeft {
-  from { transform: translate3d(-85%, 0, 0); opacity: 0; }
+  from { transform: translate3d(-105vw, 0, 0); opacity: 0; }
   to { transform: translate3d(0, 0, 0); opacity: 1; }
 }
 #kanji-pop .astro-slide-outgoing.dir-next {
@@ -417,6 +417,8 @@ body {
 }
 
 #kanji-pop#kanji-pop .astro-nav-arrow {
+  position: relative;
+  z-index: 22;
   flex: none;
   width: 44px;
   height: 44px;
