@@ -34,6 +34,7 @@
 | **Hiệu ứng hợp nhất (Fusion VFX)** | ✅ Hoàn thành | 8 nguyên tố ma thuật: Lửa, Nước, Băng, Sấm, Mộc, Đất, Ma thuật, Vũ trụ trên HTML5 Canvas 60fps. |
 | **Hào quang mục tiêu (Target Marker)** | ✅ Hoàn thành | Hào quang 3 lớp bám sát alpha viền đá quý, lưu thông hạt nguyên tố theo chu kỳ 5.8s. |
 | **Lưu tiến trình (Persistence v11)** | ✅ Hoàn thành | Schema v11, Web Locks API chống ghi đè đa tab, xoay vòng backup, nhập/xuất JSON. |
+| **Trang Web Trực Tuyến (GitHub Pages)** | ✅ Hoàn thành | Đã kích hoạt triển khai tự động qua GitHub Actions tại: `https://quangthanh66.github.io/KanjiPop/`. Tự động cập nhật mỗi khi push code lên `main`. |
 | **Git Repository** | ✅ Hoàn thành | Đã đồng bộ hoàn chỉnh trên GitHub: `quangthanh66/KanjiPop` (nhánh `main`). |
 
 ---
