@@ -401,82 +401,54 @@ body {
   transform: scale(1.05);
 }
 
-/* 4. Center Cosmic Astrolabe Dial Stage */
+/* 4. Center Cosmic Constellation Stage (Wide Full-Screen Arena) */
 #kanji-pop .astro-stage-center {
   position: relative;
   z-index: 10;
   width: 100%;
-  max-width: 1120px;
+  max-width: 1380px;
   flex: 1;
   min-height: 0;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
-  gap: clamp(8px, 1.4vw, 18px);
-  padding: 6px 0 4px;
+  padding: 2px 0;
 }
 
-#kanji-pop#kanji-pop .astro-nav-arrow {
-  position: relative;
-  z-index: 22;
-  flex: none;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #1e293b 0%, #0f172a 100%);
-  border: 2px solid #fbbf24;
-  color: #fde68a;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  padding: 0;
-  box-shadow: 0 0 14px rgba(251, 191, 36, 0.25), 0 5px 14px rgba(0, 0, 0, 0.45);
-  transition: transform 0.16s ease, opacity 0.16s ease;
-}
-#kanji-pop#kanji-pop .astro-nav-arrow:hover:not(:disabled) {
-  transform: scale(1.1);
-}
-#kanji-pop#kanji-pop .astro-nav-arrow:disabled {
-  opacity: 0.35;
-  cursor: default;
-}
-
-/* Open Cosmic Observatory Stage (Frameless) */
+/* Open Cosmic Observatory Stage (Frameless & Wide) */
 #kanji-pop .astro-dial-stage {
   position: relative;
   flex: 1;
-  max-width: 980px;
+  width: 100%;
+  max-width: 1320px;
   height: 100%;
-  max-height: clamp(380px, 68dvh, 660px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: clamp(6px, 1vh, 12px) clamp(8px, 1.5vw, 18px) clamp(6px, 1vh, 10px);
+  padding: 2px clamp(4px, 1vw, 14px) 0;
   box-sizing: border-box;
   overflow: visible;
 }
 
-/* Chapter Divider Banner inside Continuous Vertical Track */
+/* Chapter Banner inside Each Full-Screen Constellation Section */
 #kanji-pop .astro-chapter-divider {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
+  flex: none;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  z-index: 6;
+  gap: 3px;
+  z-index: 8;
   width: max-content;
-  max-width: calc(100% - 24px);
+  max-width: calc(100% - 16px);
+  padding-top: 2px;
   pointer-events: none;
 }
 #kanji-pop .astro-chapter-pill {
   background: linear-gradient(90deg, rgba(15, 23, 42, 0.92), rgba(30, 58, 138, 0.92), rgba(15, 23, 42, 0.92));
   border: 1.5px solid #fbbf24;
   border-radius: 9999px;
-  padding: 5px clamp(16px, 2.8vw, 30px) 6px;
+  padding: 4px clamp(16px, 2.8vw, 30px) 5px;
   color: #fef3c7;
   font-family: 'Nunito', sans-serif;
   font-weight: 900;
@@ -500,7 +472,7 @@ body {
   font-weight: 900;
 }
 
-/* Vertical Scrollable Stage Arena */
+/* Vertical Snap-Scrollable Constellation Arena */
 #kanji-pop .astro-orbit-arena {
   position: relative;
   width: 100%;
@@ -509,19 +481,34 @@ body {
   overflow-y: auto;
   overflow-x: hidden;
   scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
   scrollbar-width: none;
   -ms-overflow-style: none;
   -webkit-overflow-scrolling: touch;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 2.5%, #000 96.5%, transparent 100%);
-  mask-image: linear-gradient(to bottom, transparent 0%, #000 2.5%, #000 96.5%, transparent 100%);
 }
 #kanji-pop .astro-orbit-arena::-webkit-scrollbar {
   display: none;
 }
 
-#kanji-pop .astro-vertical-track {
+#kanji-pop .astro-chapter-section {
   position: relative;
   width: 100%;
+  height: 100%;
+  min-height: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 36px;
+  box-sizing: border-box;
+}
+
+#kanji-pop .astro-constellation-field {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
 }
 
 /* Animated "More Stages Below" Scroll Cue Button */
@@ -608,11 +595,11 @@ body {
   z-index: 1;
 }
 
-/* 15 Stage Pedestal Nodes Arranged Vertically in One Continuous Winding Path */
+/* Stage Pedestal Nodes Arranged Freely in Constellation Orbits */
 #kanji-pop#kanji-pop .astro-node {
   position: absolute;
   left: var(--node-x-desk, 50%);
-  top: var(--node-y, 0px);
+  top: var(--node-y-desk, 50%);
   z-index: 5;
   transform: translate(-50%, -50%);
   display: flex;
@@ -913,6 +900,7 @@ body {
   }
   #kanji-pop#kanji-pop .astro-node {
     left: var(--node-x-mob, 50%);
+    top: var(--node-y-mob, 50%);
   }
   #kanji-pop#kanji-pop .astro-scroll-more-btn {
     height: 32px;
@@ -921,15 +909,15 @@ body {
     bottom: 6px;
   }
   #kanji-pop .astro-gem-float {
-    margin-bottom: -18px;
+    margin-bottom: -16px;
   }
   #kanji-pop .astro-gem-icon {
-    width: 56px;
-    height: 56px;
-    font-size: 21px;
+    width: 48px;
+    height: 48px;
+    font-size: 19px;
   }
   #kanji-pop .astro-pedestal-img {
-    width: 76px;
+    width: 68px;
   }
   #kanji-pop .astro-label {
     max-width: 126px;

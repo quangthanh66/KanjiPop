@@ -390,13 +390,22 @@
   const {next}=ms;
   const starGoldSvg=`<svg class="astro-star-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9z" fill="#fbbf24" stroke="#b45309" stroke-width="1.4" stroke-linejoin="round"/></svg>`;
   const starGraySvg=`<svg class="astro-star-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9z" fill="rgba(148,163,184,0.35)" stroke="rgba(148,163,184,0.65)" stroke-width="1.4" stroke-linejoin="round"/></svg>`;
-  const chStride=930;
-  const trackHeight=38+C.chapters.length*chStride+30;
+  const deskConstellations=[
+   [[11,56],[30,24],[50,68],[70,24],[89,56]],
+   [[12,26],[32,66],[51,32],[72,70],[88,30]],
+   [[13,62],[30,26],[50,44],[70,24],[87,60]]
+  ];
+  const mobConstellations=[
+   [[23,21],[75,25],[48,50],[23,77],[77,79]],
+   [[74,20],[24,28],[52,50],[76,74],[26,80]],
+   [[24,24],[76,22],[50,48],[26,78],[75,76]]
+  ];
   const chaptersHtml=C.chapters.map((ch,cIdx)=>{
    const chLevels=C.levels.filter(l=>l.chapter===cIdx);
    const chDone=chLevels.filter(l=>profile.results[l.id]).length;
    const chStars=chLevels.reduce((acc,l)=>acc+(profile.results[l.id]?.stars||0),0);
-   const chTop=38+cIdx*chStride;
+   const dPts=deskConstellations[cIdx%deskConstellations.length];
+   const mPts=mobConstellations[cIdx%mobConstellations.length];
    const nodesHtml=chLevels.map((l,idx)=>{
     const r=profile.results[l.id];
     const isLocked=l.id>next;
@@ -416,11 +425,9 @@
       :l.review
        ?`<span class="astro-badge review">ÔN</span>`
        :`<span class="astro-badge play">MỚI</span>`;
-    const isLast=l.id===C.levels.length-1;
-    const xDesk=isLast?'50%':(l.id%2===0?'34%':'66%');
-    const xMob=isLast?'50%':(l.id%2===0?'29%':'71%');
-    const nodeY=chTop+125+idx*165;
-    return `<button type="button" class="astro-node ${isLocked?'locked':''} ${current?'active':''} ${r?'completed':''}" style="--node-y:${nodeY}px;--node-x-desk:${xDesk};--node-x-mob:${xMob}" data-journey-level="${l.id}" ${isLocked?'disabled':''} aria-pressed="${current}" aria-label="Màn ${l.id+1}: ${l.title}${isLocked?', chưa mở khóa':r?', '+r.stars+' sao':''}">
+    const [dx,dy]=dPts[idx%dPts.length];
+    const [mx,my]=mPts[idx%mPts.length];
+    return `<button type="button" class="astro-node ${isLocked?'locked':''} ${current?'active':''} ${r?'completed':''}" style="--node-x-desk:${dx}%;--node-y-desk:${dy}%;--node-x-mob:${mx}%;--node-y-mob:${my}%" data-journey-level="${l.id}" ${isLocked?'disabled':''} aria-pressed="${current}" aria-label="Màn ${l.id+1}: ${l.title}${isLocked?', chưa mở khóa':r?', '+r.stars+' sao':''}">
      <div class="astro-pedestal-stack">
       ${statusBadge}
       <div class="astro-gem-float">
@@ -441,26 +448,28 @@
     </button>`;
    }).join('');
    return `
-    <div class="astro-chapter-divider" style="top:${chTop}px">
-     <div class="astro-chapter-pill">
-      ${I18N.t('chapter')} ${String(cIdx+1).padStart(2,'0')} · ${ch.name}
+    <section class="astro-chapter-section" data-ch="${cIdx}">
+     <div class="astro-chapter-divider">
+      <div class="astro-chapter-pill">
+       ${I18N.t('chapter')} ${String(cIdx+1).padStart(2,'0')} · ${ch.name}
+      </div>
+      <div class="astro-chapter-meta">
+       <span>${chDone}/${chLevels.length} màn hoàn thành</span>
+       <span class="astro-chapter-stars">★ ${chStars}/${chLevels.length*3}</span>
+      </div>
      </div>
-     <div class="astro-chapter-meta">
-      <span>${chDone}/${chLevels.length} màn hoàn thành</span>
-      <span class="astro-chapter-stars">★ ${chStars}/${chLevels.length*3}</span>
+     <div class="astro-constellation-field">
+      <canvas class="astro-energy-canvas" aria-hidden="true"></canvas>
+      ${nodesHtml}
      </div>
-    </div>
-    ${nodesHtml}
+    </section>
    `;
   }).join('');
   return `
     <div class="astro-orbit-arena">
-      <div class="astro-vertical-track" style="height:${trackHeight}px">
-        <canvas class="astro-energy-canvas" aria-hidden="true"></canvas>
-        ${chaptersHtml}
-      </div>
+      ${chaptersHtml}
     </div>
-    <button type="button" class="astro-scroll-more-btn" aria-label="Cuộn xuống xem thêm màn chơi">
+    <button type="button" class="astro-scroll-more-btn" aria-label="Cuộn xuống xem chương tiếp theo">
       <span class="astro-scroll-more-text">Còn màn bên dưới</span>
       <span class="astro-scroll-more-chevrons" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m7 6 5 5 5-5"/><path d="m7 13 5 5 5-5"/></svg>
@@ -993,7 +1002,7 @@ function showSettings(){
    const arena=$('#map-screen .astro-orbit-arena');
    if(arena){
     A?.select();
-    arena.scrollBy({top:Math.max(280,Math.round(arena.clientHeight*0.72)),behavior:'smooth'});
+    arena.scrollBy({top:arena.clientHeight,behavior:'smooth'});
    }
    return;
   }

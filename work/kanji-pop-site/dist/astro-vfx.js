@@ -191,17 +191,16 @@
   }
 
   function drawEnergyConduits(t) {
-    const arenas = document.querySelectorAll('#map-screen .astro-orbit-arena');
+    const fields = document.querySelectorAll('#map-screen .astro-constellation-field');
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-    for (let aIdx = 0; aIdx < arenas.length; aIdx++) {
-      const arena = arenas[aIdx];
-      const track = arena.querySelector('.astro-vertical-track') || arena;
-      const canvas = track.querySelector('.astro-energy-canvas');
+    for (let aIdx = 0; aIdx < fields.length; aIdx++) {
+      const field = fields[aIdx];
+      const canvas = field.querySelector('.astro-energy-canvas');
       if (!canvas) continue;
-      const trackRect = track.getBoundingClientRect();
-      const aw = trackRect.width;
-      const ah = trackRect.height;
+      const fieldRect = field.getBoundingClientRect();
+      const aw = fieldRect.width;
+      const ah = fieldRect.height;
       if (aw < 20 || ah < 20) continue;
 
       if (canvas.width !== Math.floor(aw * dpr) || canvas.height !== Math.floor(ah * dpr)) {
@@ -209,7 +208,7 @@
         canvas.height = Math.floor(ah * dpr);
       }
 
-      const nodes = track.querySelectorAll('.astro-node');
+      const nodes = field.querySelectorAll('.astro-node');
       if (nodes.length < 2) continue;
 
       const pts = [];
@@ -217,8 +216,8 @@
         const ped = nodes[i].querySelector('.astro-pedestal-img') || nodes[i];
         const r = ped.getBoundingClientRect();
         pts.push({
-          x: r.left + r.width * 0.5 - trackRect.left,
-          y: r.top + r.height * 0.52 - trackRect.top
+          x: r.left + r.width * 0.5 - fieldRect.left,
+          y: r.top + r.height * 0.52 - fieldRect.top
         });
       }
 
@@ -265,6 +264,31 @@
       ctx.save();
       ctx.globalCompositeOperation = 'screen';
 
+      // 0. Subtle Constellation Orbital Ellipses (Different Orbits per Chapter)
+      const chIdx = Number(field.closest('.astro-chapter-section')?.dataset.ch || aIdx);
+      const cx = aw * 0.5;
+      const cy = ah * 0.48;
+      const orbitTilt = (chIdx - 1) * 0.24 + Math.sin(t * 0.15 + chIdx) * 0.03;
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(orbitTilt);
+      ctx.setLineDash([5, 9]);
+      ctx.lineDashOffset = -t * 14;
+      ctx.strokeStyle = 'rgba(125, 211, 252, 0.16)';
+      ctx.lineWidth = 1.1;
+      ctx.beginPath();
+      ctx.ellipse(0, 0, aw * 0.42, ah * 0.34, 0, 0, Math.PI * 2);
+      ctx.stroke();
+
+      ctx.rotate(-orbitTilt * 1.65);
+      ctx.lineDashOffset = t * 11;
+      ctx.strokeStyle = 'rgba(251, 191, 36, 0.14)';
+      ctx.beginPath();
+      ctx.ellipse(0, 0, aw * 0.30, ah * 0.24, 0, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.restore();
+      ctx.setLineDash([]);
+
       // 1. Soft Ambient Base Conduit (Gold + Cyan Bloom)
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
@@ -286,11 +310,11 @@
       ctx.stroke();
 
       // 2. Multi-Layered Sinusoidal Flowing Energy Ribbons (Target-VFX style)
-      const streamCount = 6;
-      const ribbonLen = 0.11;
+      const streamCount = 3;
+      const ribbonLen = 0.28;
       const steps = 34;
       for (let sIdx = 0; sIdx < streamCount; sIdx++) {
-        const head = ((t * 0.065 + sIdx / streamCount) % 1 + 1) % 1;
+        const head = ((t * 0.14 + sIdx / streamCount) % 1 + 1) % 1;
         const tail = head - ribbonLen;
 
         for (let layer = 0; layer < 3; layer++) {
@@ -339,7 +363,7 @@
         }
 
         // Luminous Head Orb
-        const hPos = samplePath(Math.max(0, Math.min(1, head - 0.008)));
+        const hPos = samplePath(Math.max(0, Math.min(1, head - 0.015)));
         const orbR = 11;
         const orb = ctx.createRadialGradient(hPos.x, hPos.y, 0, hPos.x, hPos.y, orbR);
         orb.addColorStop(0, 'rgba(255, 255, 255, 0.92)');
@@ -350,10 +374,10 @@
       }
 
       // 3. Drifting Micro-Sparks Along Energy Stream
-      const sparkCount = 36;
+      const sparkCount = 18;
       for (let i = 0; i < sparkCount; i++) {
         const life = ((t * 0.45 + i * 0.618) % 1 + 1) % 1;
-        const u = ((t * 0.04 + i / sparkCount) % 1 + 1) % 1;
+        const u = ((t * 0.08 + i / sparkCount) % 1 + 1) % 1;
         const p = samplePath(u);
         const dir = (i % 2 === 0 ? 1 : -1);
         const drift = dir * (4 + 12 * life);
