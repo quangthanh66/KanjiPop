@@ -438,25 +438,48 @@
         <!-- 3D Header Ribbon -->
         <div class="gui-card-header">
           <div class="gui-header-ribbon">
-            <span class="gui-header-title">${I18N.t('chapter')} ${String(mapChapter+1).padStart(2,'0')} · CHỌN MÀN</span>
+            <span class="gui-header-title">${I18N.t('chapter')} ${String(mapChapter+1).padStart(2,'0')} · ${chapter.name}</span>
           </div>
         </div>
 
-        <!-- 15 Levels Grid (Levels 1 to 15 matching all 15 Kanji levels) -->
-        <div class="gui-levels-grid">
-          ${C.levels.map((l, i) => {
+        <div class="gui-chapter-meta">
+          <span class="gui-chapter-progress">${done}/${levels.length} màn hoàn thành</span>
+          <span class="gui-chapter-stars">★ ${levels.reduce((acc,l)=>acc+(profile.results[l.id]?.stars||0),0)}/${levels.length*3}</span>
+        </div>
+
+        <!-- 5 Gemstone Showcase Cards for Current Chapter -->
+        <div class="gui-showcase-grid">
+          ${levels.map((l, idx) => {
             const r = profile.results[l.id];
             const isLocked = l.id > next;
             const current = l.id === mapSelected;
             const starCount = r ? r.stars : 0;
+            const pairIdx = (l.id * 3 + 2) % 7;
+            const featuredKanji = l.targets && l.targets[0] ? l.targets[0] : (l.id + 1);
             const starsHtml = isLocked
               ? `<img src="gems_gui_assets/star_gray.png" alt=""><img src="gems_gui_assets/star_gray.png" alt=""><img src="gems_gui_assets/star_gray.png" alt="">`
               : `${'<img src="gems_gui_assets/star_gold.png" alt="★">'.repeat(starCount)}${'<img src="gems_gui_assets/star_gray.png" alt="☆">'.repeat(3 - starCount)}`;
 
-            const lockIcon = `<svg class="gui-lock-icon" viewBox="0 0 24 24" fill="#ffffff" aria-hidden="true"><path d="M 18 10 L 18 7 C 18 3.7 15.3 1 12 1 C 8.7 1 6 3.7 6 7 L 6 10 C 4.9 10 4 10.9 4 12 L 4 20 C 4 21.1 4.9 22 6 22 L 18 22 C 19.1 22 20 21.1 20 20 L 20 12 C 20 10.9 19.1 10 18 10 Z M 8.5 7 C 8.5 5.1 10.1 3.5 12 3.5 C 13.9 3.5 15.5 5.1 15.5 7 L 15.5 10 L 8.5 10 L 8.5 7 Z"/></svg>`;
+            const statusBadge = isLocked
+              ? `<span class="gui-card-badge locked">🔒</span>`
+              : r
+                ? `<span class="gui-card-badge done">✓</span>`
+                : l.review
+                  ? `<span class="gui-card-badge review">ÔN</span>`
+                  : `<span class="gui-card-badge play">MỚI</span>`;
 
-            return `<button type="button" class="gui-lvl-btn ${isLocked ? 'locked' : ''} ${current ? 'active' : ''} ${r ? 'completed' : ''}" data-journey-level="${l.id}" ${isLocked ? 'disabled' : ''} aria-pressed="${current}" aria-label="Màn ${l.id+1}: ${l.title}${isLocked ? ', chưa mở khóa' : r ? ', ' + r.stars + ' sao' : ''}">
-              ${isLocked ? lockIcon : `<span class="gui-lvl-num">${l.id+1}</span>`}
+            return `<button type="button" class="gui-showcase-card ${isLocked ? 'locked' : ''} ${current ? 'active' : ''} ${r ? 'completed' : ''}" data-journey-level="${l.id}" ${isLocked ? 'disabled' : ''} aria-pressed="${current}" aria-label="Màn ${l.id+1}: ${l.title}${isLocked ? ', chưa mở khóa' : r ? ', ' + r.stars + ' sao' : ''}">
+              <div class="gui-card-top">
+                <span class="gui-card-num">MÀN ${String(l.id+1).padStart(2,'0')}</span>
+                ${statusBadge}
+              </div>
+              <div class="gui-showcase-gem-wrap">
+                <span class="gui-showcase-gem result-gem" data-pair="${pairIdx}" style="--gem-label-y:${KanjiGemArt.cutFor(pairIdx).labelY}%">
+                  ${KanjiGemArt.render(pairIdx, 'map-gem-' + l.id)}
+                  <span class="result-glyph" lang="ja">${isLocked ? '?' : featuredKanji}</span>
+                </span>
+              </div>
+              <span class="gui-card-title">${l.title}</span>
               <div class="gui-lvl-stars" aria-hidden="true">
                 ${starsHtml}
               </div>
@@ -464,7 +487,7 @@
           }).join('')}
         </div>
 
-        <!-- Pagination Dots -->
+        <!-- Pagination Dots (Chapters 1-3) -->
         <div class="gui-pagination-dots">
           <span class="gui-dot ${mapChapter===0?'active':''}" data-chapter-step="${0-mapChapter}"></span>
           <span class="gui-dot ${mapChapter===1?'active':''}" data-chapter-step="${1-mapChapter}"></span>

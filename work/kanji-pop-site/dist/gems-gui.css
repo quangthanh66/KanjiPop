@@ -177,7 +177,7 @@ body,
   transform: scale(1.05);
 }
 
-/* 4. Main Stage Centerpiece (Arrows + Level Card) */
+/* 4. Main Stage Centerpiece (Arrows + Gemstone Showcase) */
 #kanji-pop .gui-stage-center {
   position: relative;
   display: flex;
@@ -185,12 +185,12 @@ body,
   justify-content: center;
   flex: 1;
   width: 100%;
-  max-width: 800px;
+  max-width: 940px;
   min-height: 0;
   margin: 2px 0;
-  padding: 0 4px;
+  padding: 0 6px;
   box-sizing: border-box;
-  gap: clamp(4px, 1.2vw, 14px);
+  gap: clamp(6px, 1.4vw, 18px);
 }
 
 /* Navigation Arrows flanking the card */
@@ -228,23 +228,25 @@ body,
   pointer-events: none;
 }
 
-/* The Purple Level Selection Card (Scales smoothly to fit between arrows) */
+/* The Frosted Lavender-Velvet Gemstone Showcase Card */
 #kanji-pop .gui-card-box {
   position: relative;
   flex: 1;
   min-width: 0;
-  max-width: 580px;
+  max-width: 800px;
   height: auto;
-  max-height: min(490px, 58vh);
+  max-height: min(460px, 60vh);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: clamp(14px, 2.2vw, 22px) clamp(8px, 1.6vw, 18px) clamp(8px, 1.4vw, 16px);
-  background: radial-gradient(circle at 50% 35%, #6b3394 0%, #4a1d6d 75%, #351052 100%);
+  padding: clamp(14px, 2vw, 22px) clamp(10px, 1.8vw, 22px) clamp(10px, 1.5vw, 16px);
+  background: linear-gradient(165deg, rgba(114, 58, 165, 0.88) 0%, rgba(76, 30, 118, 0.92) 65%, rgba(56, 17, 92, 0.95) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: clamp(2.5px, 0.4vw, 4px) solid #ffffff;
-  border-radius: clamp(22px, 3.2vw, 36px);
-  box-shadow: 0 14px 34px rgba(49, 13, 76, 0.48), 0 4px 0 #280a3d, inset 0 2px 4px rgba(255,255,255,0.4);
+  border-radius: clamp(22px, 3vw, 34px);
+  box-shadow: 0 16px 38px rgba(49, 13, 76, 0.42), 0 4px 0 #2e0c4a, inset 0 2px 6px rgba(255,255,255,0.45);
   box-sizing: border-box;
 }
 
@@ -295,125 +297,199 @@ body,
   white-space: nowrap !important;
 }
 
-/* 15 Level Buttons Grid (3 rows x 5 cols) */
-#kanji-pop .gui-levels-grid {
+/* Chapter Sub-meta Bar */
+#kanji-pop .gui-chapter-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 6px;
+  margin-bottom: 4px;
+  font-size: clamp(10.5px, 1.1vw, 13px);
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.3px;
+}
+#kanji-pop .gui-chapter-stars {
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 9999px;
+  padding: 1px 10px;
+  color: #fde047;
+}
+
+/* 5 Gemstone Showcase Cards Grid */
+#kanji-pop .gui-showcase-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  gap: clamp(8px, 1.4vw, 16px) clamp(4px, 1.0vw, 12px);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(8px, 1.3vw, 14px);
   width: 100%;
   flex: 1;
-  padding: clamp(6px, 1vw, 10px) 2px 2px;
-  align-items: center;
-  justify-items: center;
+  padding: clamp(6px, 1vw, 12px) 2px 6px;
+  align-items: stretch;
   box-sizing: border-box;
 }
 
-/* Individual Level Button */
-#kanji-pop .gui-lvl-btn {
+/* Individual Gemstone Showcase Card */
+#kanji-pop#kanji-pop .gui-showcase-card {
   position: relative;
-  width: 100%;
-  max-width: clamp(40px, 5.2vw, 68px);
-  aspect-ratio: 1 / 1;
-  background: radial-gradient(circle at 35% 25%, #a855f7 0%, #7e22ce 60%, #581c87 100%);
-  border: clamp(2px, 0.35vw, 3px) solid #ffffff;
-  border-radius: 50%;
-  cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 0;
-  box-shadow: 0 5px 12px rgba(24, 7, 38, 0.5), 0 2.5px 0 #3b0764, inset 0 1.5px 3px rgba(255,255,255,0.85);
-  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.15s ease, box-shadow 0.15s ease;
-}
-#kanji-pop .gui-lvl-btn::before {
-  content: '';
-  position: absolute;
-  top: 3px;
-  left: 20%;
-  width: 38%;
-  height: 28%;
-  background: radial-gradient(ellipse at center, rgba(255,255,255,0.9) 0%, transparent 80%);
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-#kanji-pop .gui-lvl-btn:hover:not(:disabled) {
-  transform: scale(1.12) translateY(-3px);
-  filter: brightness(1.1);
-  box-shadow: 0 8px 18px rgba(24, 7, 38, 0.6), 0 3px 0 #3b0764;
-}
-#kanji-pop .gui-lvl-btn:active:not(:disabled) {
-  transform: scale(0.95) translateY(1px);
-}
-
-#kanji-pop .gui-lvl-num {
+  justify-content: space-between;
+  gap: clamp(4px, 0.7vh, 8px);
+  padding: clamp(8px, 1.2vh, 12px) clamp(6px, 0.8vw, 10px) clamp(8px, 1vh, 10px);
+  border-radius: clamp(16px, 2vw, 22px);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(235, 216, 255, 0.14) 100%);
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 6px 16px rgba(24, 7, 38, 0.28), inset 0 1px 2px rgba(255, 255, 255, 0.55);
+  cursor: pointer;
   color: #ffffff;
-  font-size: clamp(14px, 1.8vw, 22px);
-  font-weight: 900;
-  line-height: 1;
-  text-shadow: 0 1.5px 0 #3b0764, 0 0 5px rgba(0,0,0,0.4);
-  margin-top: -2px;
+  text-align: center;
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+  overflow: visible;
 }
 
-/* 3 Stars Rack Under Button */
+#kanji-pop#kanji-pop .gui-showcase-card:hover:not(:disabled) {
+  transform: translateY(-4px) scale(1.03);
+  border-color: #ffffff;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.34) 0%, rgba(235, 216, 255, 0.22) 100%);
+  box-shadow: 0 12px 24px rgba(24, 7, 38, 0.38), inset 0 1px 3px rgba(255, 255, 255, 0.8);
+}
+
+#kanji-pop#kanji-pop .gui-showcase-card:active:not(:disabled) {
+  transform: translateY(1px) scale(0.97);
+}
+
+#kanji-pop#kanji-pop .gui-showcase-card.active {
+  background: linear-gradient(180deg, rgba(244, 63, 94, 0.35) 0%, rgba(190, 24, 93, 0.45) 100%);
+  border: 2.5px solid #fef08a;
+  box-shadow: 0 0 22px rgba(253, 224, 71, 0.55), 0 10px 22px rgba(24, 7, 38, 0.42), inset 0 1px 4px rgba(255, 255, 255, 0.85);
+  transform: translateY(-3px);
+}
+
+#kanji-pop#kanji-pop .gui-showcase-card.completed:not(.active) {
+  background: linear-gradient(180deg, rgba(16, 185, 129, 0.22) 0%, rgba(5, 150, 105, 0.18) 100%);
+  border-color: rgba(167, 243, 208, 0.65);
+}
+
+#kanji-pop#kanji-pop .gui-showcase-card.locked {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border-color: rgba(255, 255, 255, 0.22);
+  opacity: 0.68;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Card Top Row: Level Number + Badge */
+#kanji-pop .gui-card-top {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+}
+#kanji-pop .gui-card-num {
+  font-size: clamp(9.5px, 0.9vw, 11.5px);
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.92);
+  letter-spacing: 0.4px;
+}
+#kanji-pop .gui-card-badge {
+  font-size: clamp(8px, 0.75vw, 10px);
+  font-weight: 900;
+  padding: 1px 6px;
+  border-radius: 9999px;
+  line-height: 1.3;
+}
+#kanji-pop .gui-card-badge.play {
+  background: #f43f5e;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+}
+#kanji-pop .gui-card-badge.review {
+  background: #38bdf8;
+  color: #0c4a6e;
+}
+#kanji-pop .gui-card-badge.done {
+  background: #34d399;
+  color: #064e3b;
+}
+#kanji-pop .gui-card-badge.locked {
+  background: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.8);
+  padding: 1px 5px;
+}
+
+/* Center Gem Display */
+#kanji-pop .gui-showcase-gem-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 0;
+}
+#kanji-pop .gui-showcase-gem {
+  width: clamp(50px, 5.8vw, 76px);
+  height: clamp(50px, 5.8vw, 76px);
+  font-size: clamp(20px, 2.2vw, 30px);
+  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.35));
+  transition: transform 0.2s ease;
+}
+#kanji-pop .gui-showcase-card:hover:not(:disabled) .gui-showcase-gem {
+  transform: scale(1.08) rotate(-3deg);
+}
+#kanji-pop .gui-showcase-card.locked .gui-showcase-gem {
+  filter: saturate(0.35) opacity(0.7);
+}
+
+/* Card Title */
+#kanji-pop .gui-card-title {
+  font-size: clamp(10.5px, 1vw, 12.5px);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+  min-height: 2.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 3 Stars Rack Inside Showcase Card */
 #kanji-pop .gui-lvl-stars {
-  position: absolute;
-  bottom: clamp(-9px, -1.2vw, -12px);
+  position: relative;
+  bottom: auto;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  gap: 1.5px;
+  gap: 2px;
   pointer-events: none;
   overflow: visible !important;
   z-index: 10;
+  padding-top: 2px;
 }
 #kanji-pop .gui-lvl-stars img {
-  width: clamp(12px, 1.5vw, 18px);
-  height: clamp(12px, 1.5vw, 18px);
+  width: clamp(13px, 1.4vw, 18px);
+  height: clamp(13px, 1.4vw, 18px);
   object-fit: contain;
-  filter: drop-shadow(0 1.5px 2px rgba(0,0,0,0.5));
+  filter: drop-shadow(0 1.5px 2px rgba(0,0,0,0.45));
   display: block;
 }
 #kanji-pop .gui-lvl-stars img:nth-child(1) {
-  transform: translateY(-2px) rotate(-8deg);
+  transform: translateY(-1px) rotate(-8deg);
 }
 #kanji-pop .gui-lvl-stars img:nth-child(2) {
-  transform: translateY(1.5px);
-  width: clamp(14px, 1.75vw, 21px);
-  height: clamp(14px, 1.75vw, 21px);
+  transform: translateY(-3px);
+  width: clamp(15px, 1.65vw, 21px);
+  height: clamp(15px, 1.65vw, 21px);
   z-index: 2;
 }
 #kanji-pop .gui-lvl-stars img:nth-child(3) {
-  transform: translateY(-2px) rotate(8deg);
-}
-
-/* Selected / Active Playable Level Highlight */
-#kanji-pop .gui-lvl-btn.active {
-  background: radial-gradient(circle at 35% 25%, #f43f5e 0%, #db2777 60%, #9d174d 100%);
-  border-color: #fef08a;
-  box-shadow: 0 0 18px rgba(244, 63, 94, 0.85), 0 5px 12px rgba(24, 7, 38, 0.5), 0 2.5px 0 #831843;
-  animation: pulseActive 2s ease-in-out infinite;
-  z-index: 5;
-}
-@keyframes pulseActive {
-  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px rgba(253, 224, 71, 0.7)); }
-  50% { transform: scale(1.06); filter: drop-shadow(0 0 16px rgba(253, 224, 71, 1)); }
-}
-
-/* Locked Level Button */
-#kanji-pop .gui-lvl-btn.locked {
-  background: radial-gradient(circle at 35% 25%, #4c1d95 0%, #3b0764 70%, #240542 100%);
-  border-color: rgba(255,255,255,0.4);
-  opacity: 0.75;
-  cursor: not-allowed;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.3);
-}
-#kanji-pop .gui-lock-icon {
-  width: clamp(15px, 1.6vw, 22px);
-  height: auto;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+  transform: translateY(-1px) rotate(8deg);
 }
 
 /* Pagination Dots below Grid */
@@ -495,7 +571,7 @@ body,
 }
 
 /* 6. Mobile Responsiveness */
-@media (max-width: 600px) {
+@media (max-width: 640px) {
   #kanji-pop #map-screen {
     padding: 6px 6px 10px !important;
   }
@@ -506,7 +582,7 @@ body,
     width: 36px;
   }
   #kanji-pop .gui-title-img {
-    width: 135px;
+    width: 130px;
   }
   #kanji-pop .gui-mode-pill {
     padding: 2px 10px 3px;
@@ -518,29 +594,63 @@ body,
     padding: 0 2px;
   }
   #kanji-pop .gui-nav-arrow {
-    width: 26px;
+    width: 22px;
   }
   #kanji-pop .gui-card-box {
-    max-height: 410px;
-    padding: 12px 6px 10px;
-    border-radius: 24px;
+    max-height: none;
+    padding: 12px 8px 10px;
+    border-radius: 22px;
   }
   #kanji-pop .gui-header-ribbon {
-    padding: 3.5px 14px 4px;
+    padding: 3.5px 12px 4px;
   }
   #kanji-pop .gui-header-title {
-    font-size: 11.5px;
-    letter-spacing: 0.5px;
+    font-size: 10.5px;
+    letter-spacing: 0.4px;
   }
-  #kanji-pop .gui-levels-grid {
-    gap: 10px 4px;
-    padding: 4px 2px 2px;
+  #kanji-pop .gui-chapter-meta {
+    margin-top: 4px;
+    margin-bottom: 2px;
+    font-size: 10px;
+    gap: 8px;
   }
-  #kanji-pop .gui-lvl-btn {
-    max-width: 44px;
+  #kanji-pop .gui-showcase-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 7px;
+    padding: 4px 0 4px;
   }
-  #kanji-pop .gui-lvl-num {
-    font-size: 15px;
+  #kanji-pop#kanji-pop .gui-showcase-card {
+    flex: 0 0 calc(33.333% - 6px);
+    max-width: 104px;
+    padding: 6px 5px 6px;
+    border-radius: 14px;
+    gap: 3px;
+  }
+  #kanji-pop .gui-card-num {
+    font-size: 8.5px;
+  }
+  #kanji-pop .gui-card-badge {
+    font-size: 7.5px;
+    padding: 1px 4px;
+  }
+  #kanji-pop .gui-showcase-gem {
+    width: 42px;
+    height: 42px;
+    font-size: 16px;
+  }
+  #kanji-pop .gui-card-title {
+    font-size: 9.5px;
+    min-height: 2.3em;
+  }
+  #kanji-pop .gui-lvl-stars img {
+    width: 11px;
+    height: 11px;
+  }
+  #kanji-pop .gui-lvl-stars img:nth-child(2) {
+    width: 13px;
+    height: 13px;
   }
   #kanji-pop .gui-bottom-dock {
     gap: 10px;
