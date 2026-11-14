@@ -70,6 +70,12 @@
     ctx.clearRect(0, 0, w, h);
 
     const t = ts * 0.001;
+    const mapScreen = document.getElementById('map-screen');
+    const chIdx = Number(mapScreen?.dataset.chapter || 0);
+    const targetParallax = (1 - chIdx) * 32;
+    if (typeof window._astroSkyPx !== 'number') window._astroSkyPx = targetParallax;
+    window._astroSkyPx += (targetParallax - window._astroSkyPx) * (1 - Math.exp(-dt * 4.5));
+    const skyDx = window._astroSkyPx;
 
     // 0. Subtle Sky Constellations (Upper-Left & Upper-Right)
     const constellations = [
@@ -83,14 +89,14 @@
       ctx.lineWidth = 1.1;
       ctx.beginPath();
       for (let i = 0; i < pts.length; i++) {
-        const px = pts[i][0] * w;
+        const px = pts[i][0] * w + skyDx * 0.65;
         const py = pts[i][1] * h;
         if (i === 0) ctx.moveTo(px, py);
         else ctx.lineTo(px, py);
       }
       ctx.stroke();
       for (let i = 0; i < pts.length; i++) {
-        const px = pts[i][0] * w;
+        const px = pts[i][0] * w + skyDx * 0.65;
         const py = pts[i][1] * h;
         ctx.fillStyle = `rgba(253, 230, 138, ${(pulse + 0.35).toFixed(3)})`;
         ctx.beginPath();
@@ -102,10 +108,11 @@
     // 1. Twinkling Stars
     for (let i = 0; i < stars.length; i++) {
       const s = stars[i];
+      const sx = ((s.x + skyDx * 0.5) % w + w) % w;
       const tw = 0.35 + 0.65 * (0.5 + 0.5 * Math.sin(t * s.speed + s.phase));
       ctx.fillStyle = `rgba(${s.tint},${tw.toFixed(3)})`;
       ctx.beginPath();
-      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.arc(sx, s.y, s.r, 0, Math.PI * 2);
       ctx.fill();
 
       if (s.cross && tw > 0.72) {
@@ -113,10 +120,10 @@
         ctx.strokeStyle = `rgba(${s.tint},${(tw * 0.65).toFixed(3)})`;
         ctx.lineWidth = 0.9;
         ctx.beginPath();
-        ctx.moveTo(s.x - len, s.y);
-        ctx.lineTo(s.x + len, s.y);
-        ctx.moveTo(s.x, s.y - len);
-        ctx.lineTo(s.x, s.y + len);
+        ctx.moveTo(sx - len, s.y);
+        ctx.lineTo(sx + len, s.y);
+        ctx.moveTo(sx, s.y - len);
+        ctx.lineTo(sx, s.y + len);
         ctx.stroke();
       }
     }

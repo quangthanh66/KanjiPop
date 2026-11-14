@@ -376,30 +376,120 @@
   $('#mission-status').textContent=current?'Thu đủ '+targets.length+' chữ mục tiêu để qua màn · Không cần đúng thứ tự.':'Đã khám phá đủ các chữ mục tiêu!';
  }
  let mapChapter=null,mapSelected=null,slideTimer=null,swipeStartX=0,swipeStartY=0;
+ function getMapState(){
+  const next=unlocked(),ongoing=state.status==='playing'&&(state.moves>0||state.pending)&&state.level<=next;
+  const recommended=ongoing?state.level:Math.min(next,C.levels.length-1);
+  if(mapChapter===null)mapChapter=C.levels[recommended].chapter;
+  const chapter=C.chapters[mapChapter],levels=C.levels.filter(l=>l.chapter===mapChapter),done=levels.filter(l=>profile.results[l.id]).length;
+  if(!levels.some(l=>l.id===mapSelected))mapSelected=levels.some(l=>l.id===recommended)?recommended:levels.find(l=>!profile.results[l.id])?.id??levels.at(-1).id;
+  const selectedLevel=C.levels[mapSelected],locked=mapSelected>next,resume=ongoing&&mapSelected===state.level,result=profile.results[mapSelected];
+  const action=resume?'resume':mapSelected,label=locked?'Hoàn thành chương trước':(resume?I18N.t('resume'):result?I18N.t('replay'):I18N.t('play'))+' màn '+String(mapSelected+1).padStart(2,'0');
+  return {next,ongoing,recommended,chapter,levels,done,selectedLevel,locked,resume,result,action,label};
+ }
+ function buildDialStageHtml(ms){
+  const {next,chapter,levels,done}=ms;
+  const starGoldSvg=`<svg class="astro-star-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9z" fill="#fbbf24" stroke="#b45309" stroke-width="1.4" stroke-linejoin="round"/></svg>`;
+  const starGraySvg=`<svg class="astro-star-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9z" fill="rgba(148,163,184,0.35)" stroke="rgba(148,163,184,0.65)" stroke-width="1.4" stroke-linejoin="round"/></svg>`;
+  return `
+    <div class="astro-slide-incoming">
+      <div class="astro-chapter-bar">
+        <div class="astro-chapter-pill">
+          ${I18N.t('chapter')} ${String(mapChapter+1).padStart(2,'0')} · ${chapter.name}
+        </div>
+        <div class="astro-chapter-meta">
+          <span>${done}/${levels.length} màn hoàn thành</span>
+          <span class="astro-chapter-stars">★ ${levels.reduce((acc,l)=>acc+(profile.results[l.id]?.stars||0),0)}/${levels.length*3}</span>
+        </div>
+      </div>
+
+      <div class="astro-orbit-arena">
+        <canvas class="astro-energy-canvas" aria-hidden="true"></canvas>
+        ${levels.map((l, idx) => {
+          const r = profile.results[l.id];
+          const isLocked = l.id > next;
+          const current = l.id === mapSelected;
+          const starCount = r ? r.stars : 0;
+          const pairIdx = (l.id * 3 + 2) % 7;
+          const featuredKanji = l.targets && l.targets[0] ? l.targets[0] : (l.id + 1);
+          const starsHtml = [0, 1, 2].map(si => {
+            const filled = !isLocked && si < starCount;
+            const svg = filled ? starGoldSvg : starGraySvg;
+            return si === 1 ? svg.replace('class="astro-star-svg"', 'class="astro-star-svg center"') : svg;
+          }).join('');
+          const statusBadge = isLocked
+            ? `<span class="astro-badge locked">🔒</span>`
+            : r
+              ? `<span class="astro-badge done">✓</span>`
+              : l.review
+                ? `<span class="astro-badge review">ÔN</span>`
+                : `<span class="astro-badge play">MỚI</span>`;
+          return `<button type="button" class="astro-node astro-pos-${idx} ${isLocked ? 'locked' : ''} ${current ? 'active' : ''} ${r ? 'completed' : ''}" data-journey-level="${l.id}" ${isLocked ? 'disabled' : ''} aria-pressed="${current}" aria-label="Màn ${l.id+1}: ${l.title}${isLocked ? ', chưa mở khóa' : r ? ', ' + r.stars + ' sao' : ''}">
+            <div class="astro-pedestal-stack">
+              ${statusBadge}
+              <div class="astro-gem-float">
+                <span class="astro-gem-icon result-gem" data-pair="${pairIdx}" style="--gem-label-y:${KanjiGemArt.cutFor(pairIdx).labelY}%">
+                  ${KanjiGemArt.render(pairIdx, 'map-gem-' + l.id)}
+                  <span class="result-glyph" lang="ja">${isLocked ? '?' : featuredKanji}</span>
+                </span>
+              </div>
+              <img src="astro_assets/astro_orb_pedestal.webp" class="astro-pedestal-img" alt="" aria-hidden="true">
+            </div>
+            <div class="astro-label">
+              <span class="astro-num">${String(l.id+1).padStart(2,'0')}</span>
+              <span class="astro-title">${l.title}</span>
+            </div>
+            <div class="astro-stars" aria-hidden="true">
+              ${starsHtml}
+            </div>
+          </button>`;
+        }).join('')}
+      </div>
+    </div>
+    <div class="astro-dots">
+      <span class="astro-dot ${mapChapter===0?'active':''}" data-chapter-step="${0-mapChapter}"></span>
+      <span class="astro-dot ${mapChapter===1?'active':''}" data-chapter-step="${1-mapChapter}"></span>
+      <span class="astro-dot ${mapChapter===2?'active':''}" data-chapter-step="${2-mapChapter}"></span>
+    </div>
+  `;
+ }
  function slideToChapter(nextChapter){
   if(nextChapter===mapChapter||nextChapter<0||nextChapter>2)return;
   const dir=nextChapter>mapChapter?'dir-next':'dir-prev';
-  const oldStage=$('#map-screen .astro-dial-stage');
-  const oldIncoming=oldStage?.querySelector('.astro-slide-incoming');
-  const outgoing=oldIncoming?oldIncoming.cloneNode(true):null;
+  const mapEl=$('#map-screen');
+  const stage=mapEl?.querySelector('.astro-dial-stage');
+  const oldIncoming=stage?.querySelector('.astro-slide-incoming');
+  if(!stage||!oldIncoming){mapChapter=nextChapter;mapSelected=null;renderMap();icons();return;}
+  const outgoing=oldIncoming.cloneNode(true);
   mapChapter=nextChapter;
   mapSelected=null;
-  renderMap();icons();
-  const newStage=$('#map-screen .astro-dial-stage');
-  const newIncoming=newStage?.querySelector('.astro-slide-incoming');
-  if(newStage&&newIncoming){
-   newStage.classList.add('is-sliding');
+  const ms=getMapState();
+  mapEl.style.setProperty('--astro-ch',String(mapChapter));
+  mapEl.dataset.chapter=String(mapChapter);
+  const prevBtn=mapEl.querySelector('.astro-nav-arrow[data-chapter-step="-1"]');
+  const nextBtn=mapEl.querySelector('.astro-nav-arrow[data-chapter-step="1"]');
+  if(prevBtn)prevBtn.disabled=(mapChapter===0);
+  if(nextBtn)nextBtn.disabled=(mapChapter===2);
+  const playBtn=mapEl.querySelector('.astro-dock-play');
+  if(playBtn){
+   playBtn.disabled=ms.locked;
+   playBtn.dataset.main=String(ms.action);
+   playBtn.setAttribute('aria-label',ms.label);
+   const span=playBtn.querySelector('span');
+   if(span)span.textContent=ms.label;
+  }
+  stage.innerHTML=buildDialStageHtml(ms);
+  const newIncoming=stage.querySelector('.astro-slide-incoming');
+  if(newIncoming){
+   stage.classList.add('is-sliding');
    newIncoming.classList.add(dir);
-   if(outgoing){
-    outgoing.className='astro-slide-outgoing '+dir;
-    newStage.appendChild(outgoing);
-   }
+   outgoing.className='astro-slide-outgoing '+dir;
+   stage.appendChild(outgoing);
    if(slideTimer)clearTimeout(slideTimer);
    slideTimer=setTimeout(()=>{
     outgoing?.remove();
-    newStage.classList.remove('is-sliding');
+    stage.classList.remove('is-sliding');
     newIncoming.classList.remove('dir-next','dir-prev');
-   },640);
+   },900);
   }
  }
  $('#map-screen').addEventListener('touchstart',e=>{
@@ -419,53 +509,51 @@
   }
  },{passive:true});
  function renderMap(){
- const next=unlocked(),ongoing=state.status==='playing'&&(state.moves>0||state.pending)&&state.level<=next;
- const recommended=ongoing?state.level:Math.min(next,C.levels.length-1);
- if(mapChapter===null)mapChapter=C.levels[recommended].chapter;
- const chapter=C.chapters[mapChapter],levels=C.levels.filter(l=>l.chapter===mapChapter),done=levels.filter(l=>profile.results[l.id]).length;
- if(!levels.some(l=>l.id===mapSelected))mapSelected=levels.some(l=>l.id===recommended)?recommended:levels.find(l=>!profile.results[l.id])?.id??levels.at(-1).id;
- const selectedLevel=C.levels[mapSelected],locked=mapSelected>next,resume=ongoing&&mapSelected===state.level,result=profile.results[mapSelected];
- const action=resume?'resume':mapSelected,label=locked?'Hoàn thành chương trước':(resume?I18N.t('resume'):result?I18N.t('replay'):I18N.t('play'))+' màn '+String(mapSelected+1).padStart(2,'0');
- const rows=[5,4,3,2,1],cols=[4,8,3,8,5],paths=['M 38 88 C 38 77 71 80 71 69','M 71 69 C 71 58 29 61 29 50','M 29 50 C 29 39 71 42 71 31','M 71 31 C 71 20 50 23 50 12'];
+ const ms=getMapState();
+ const {locked,action,label}=ms;
+ const mapEl=$('#map-screen');
+ mapEl.style.setProperty('--astro-ch',String(mapChapter));
+ mapEl.dataset.chapter=String(mapChapter);
 
   const totalStars = C.levels.reduce((acc,l)=>acc+(profile.results[l.id]?.stars||0),0);
   const maxTotalStars = C.levels.length * 3;
 
-  const starGoldSvg = `<svg class="astro-star-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9z" fill="#fbbf24" stroke="#b45309" stroke-width="1.4" stroke-linejoin="round"/></svg>`;
-  const starGraySvg = `<svg class="astro-star-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9z" fill="rgba(148,163,184,0.35)" stroke="rgba(148,163,184,0.65)" stroke-width="1.4" stroke-linejoin="round"/></svg>`;
-
-  $('#map-screen').innerHTML = `
+  mapEl.innerHTML = `
     <canvas class="astro-vfx-canvas" aria-hidden="true"></canvas>
 
     <div class="astro-scenery" aria-hidden="true">
-      <svg class="astro-aurora-svg" viewBox="0 0 1440 420" preserveAspectRatio="none">
-        <defs>
-          <linearGradient id="astroAuroraGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#38bdf8" stop-opacity="0"/>
-            <stop offset="30%" stop-color="#38bdf8" stop-opacity="0.22"/>
-            <stop offset="55%" stop-color="#a855f7" stop-opacity="0.24"/>
-            <stop offset="80%" stop-color="#ec4899" stop-opacity="0.16"/>
-            <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
-          </linearGradient>
-        </defs>
-        <path d="M -40 240 C 260 110, 520 290, 860 160 C 1100 70, 1280 210, 1480 120 L 1480 340 C 1220 260, 1020 350, 740 250 C 460 160, 220 320, -40 290 Z" fill="url(#astroAuroraGrad)"/>
-      </svg>
-      <svg class="astro-horizon-svg" viewBox="0 0 1440 220" preserveAspectRatio="none">
-        <path d="M 0 220 L 0 140 Q 180 75 360 135 T 760 115 T 1140 130 T 1440 95 L 1440 220 Z" fill="rgba(15, 23, 42, 0.48)"/>
-        <path d="M 0 220 L 0 165 Q 240 115 480 165 T 960 150 T 1440 135 L 1440 220 Z" fill="rgba(7, 11, 36, 0.72)"/>
-      </svg>
-      <div class="astro-moon-wrap">
-        <div class="astro-moon-glow"></div>
-        <img src="astro_assets/astro_moon.webp" class="astro-moon-img" alt="">
+      <div class="astro-parallax-far">
+        <svg class="astro-aurora-svg" viewBox="0 0 1440 420" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="astroAuroraGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#38bdf8" stop-opacity="0"/>
+              <stop offset="30%" stop-color="#38bdf8" stop-opacity="0.22"/>
+              <stop offset="55%" stop-color="#a855f7" stop-opacity="0.24"/>
+              <stop offset="80%" stop-color="#ec4899" stop-opacity="0.16"/>
+              <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path d="M -40 240 C 260 110, 520 290, 860 160 C 1100 70, 1280 210, 1480 120 L 1480 340 C 1220 260, 1020 350, 740 250 C 460 160, 220 320, -40 290 Z" fill="url(#astroAuroraGrad)"/>
+        </svg>
+        <svg class="astro-horizon-svg" viewBox="0 0 1440 220" preserveAspectRatio="none">
+          <path d="M 0 220 L 0 140 Q 180 75 360 135 T 760 115 T 1140 130 T 1440 95 L 1440 220 Z" fill="rgba(15, 23, 42, 0.48)"/>
+          <path d="M 0 220 L 0 165 Q 240 115 480 165 T 960 150 T 1440 135 L 1440 220 Z" fill="rgba(7, 11, 36, 0.72)"/>
+        </svg>
+        <div class="astro-moon-wrap">
+          <div class="astro-moon-glow"></div>
+          <img src="astro_assets/astro_moon.webp" class="astro-moon-img" alt="">
+        </div>
+        <img src="astro_assets/astro_dial_ring.webp" class="astro-dial-landmark" alt="">
       </div>
-      <img src="astro_assets/astro_dial_ring.webp" class="astro-dial-landmark" alt="">
-      <img src="astro_assets/astro_cloud.webp" class="astro-cloud mid-left" alt="">
-      <img src="astro_assets/astro_cloud.webp" class="astro-cloud left" alt="">
-      <img src="vfx_star.png" class="astro-star-spark s1" alt="">
-      <img src="vfx_star.png" class="astro-star-spark s2" alt="">
-      <div class="astro-observatory-wrap">
-        <div class="astro-observatory-glow"></div>
-        <img src="astro_assets/astro_observatory.webp" class="astro-observatory-img" alt="">
+      <div class="astro-parallax-near">
+        <img src="astro_assets/astro_cloud.webp" class="astro-cloud mid-left" alt="">
+        <img src="astro_assets/astro_cloud.webp" class="astro-cloud left" alt="">
+        <img src="vfx_star.png" class="astro-star-spark s1" alt="">
+        <img src="vfx_star.png" class="astro-star-spark s2" alt="">
+        <div class="astro-observatory-wrap">
+          <div class="astro-observatory-glow"></div>
+          <img src="astro_assets/astro_observatory.webp" class="astro-observatory-img" alt="">
+        </div>
       </div>
     </div>
 
@@ -504,69 +592,7 @@
       </button>
 
       <div class="astro-dial-stage">
-        <div class="astro-slide-incoming">
-        <div class="astro-chapter-bar">
-          <div class="astro-chapter-pill">
-            ${I18N.t('chapter')} ${String(mapChapter+1).padStart(2,'0')} · ${chapter.name}
-          </div>
-          <div class="astro-chapter-meta">
-            <span>${done}/${levels.length} màn hoàn thành</span>
-            <span class="astro-chapter-stars">★ ${levels.reduce((acc,l)=>acc+(profile.results[l.id]?.stars||0),0)}/${levels.length*3}</span>
-          </div>
-        </div>
-
-        <!-- 5 Orbital Pedestals Connected by Flowing VFX Energy Stream Underneath -->
-        <div class="astro-orbit-arena">
-          <canvas class="astro-energy-canvas" aria-hidden="true"></canvas>
-          ${levels.map((l, idx) => {
-            const r = profile.results[l.id];
-            const isLocked = l.id > next;
-            const current = l.id === mapSelected;
-            const starCount = r ? r.stars : 0;
-            const pairIdx = (l.id * 3 + 2) % 7;
-            const featuredKanji = l.targets && l.targets[0] ? l.targets[0] : (l.id + 1);
-            const starsHtml = [0, 1, 2].map(si => {
-              const filled = !isLocked && si < starCount;
-              const svg = filled ? starGoldSvg : starGraySvg;
-              return si === 1 ? svg.replace('class="astro-star-svg"', 'class="astro-star-svg center"') : svg;
-            }).join('');
-
-            const statusBadge = isLocked
-              ? `<span class="astro-badge locked">🔒</span>`
-              : r
-                ? `<span class="astro-badge done">✓</span>`
-                : l.review
-                  ? `<span class="astro-badge review">ÔN</span>`
-                  : `<span class="astro-badge play">MỚI</span>`;
-
-            return `<button type="button" class="astro-node astro-pos-${idx} ${isLocked ? 'locked' : ''} ${current ? 'active' : ''} ${r ? 'completed' : ''}" data-journey-level="${l.id}" ${isLocked ? 'disabled' : ''} aria-pressed="${current}" aria-label="Màn ${l.id+1}: ${l.title}${isLocked ? ', chưa mở khóa' : r ? ', ' + r.stars + ' sao' : ''}">
-              <div class="astro-pedestal-stack">
-                ${statusBadge}
-                <div class="astro-gem-float">
-                  <span class="astro-gem-icon result-gem" data-pair="${pairIdx}" style="--gem-label-y:${KanjiGemArt.cutFor(pairIdx).labelY}%">
-                    ${KanjiGemArt.render(pairIdx, 'map-gem-' + l.id)}
-                    <span class="result-glyph" lang="ja">${isLocked ? '?' : featuredKanji}</span>
-                  </span>
-                </div>
-                <img src="astro_assets/astro_orb_pedestal.webp" class="astro-pedestal-img" alt="" aria-hidden="true">
-              </div>
-              <div class="astro-label">
-                <span class="astro-num">${String(l.id+1).padStart(2,'0')}</span>
-                <span class="astro-title">${l.title}</span>
-              </div>
-              <div class="astro-stars" aria-hidden="true">
-                ${starsHtml}
-              </div>
-            </button>`;
-          }).join('')}
-        </div>
-        </div>
-
-        <div class="astro-dots">
-          <span class="astro-dot ${mapChapter===0?'active':''}" data-chapter-step="${0-mapChapter}"></span>
-          <span class="astro-dot ${mapChapter===1?'active':''}" data-chapter-step="${1-mapChapter}"></span>
-          <span class="astro-dot ${mapChapter===2?'active':''}" data-chapter-step="${2-mapChapter}"></span>
-        </div>
+        ${buildDialStageHtml(ms)}
       </div>
 
       <button type="button" class="astro-nav-arrow" data-chapter-step="1" ${mapChapter===2?'disabled':''} aria-label="Chương tiếp theo">
