@@ -71,13 +71,18 @@
 
     const t = ts * 0.001;
     const mapScreen = document.getElementById('map-screen');
-    const chIdx = Number(mapScreen?.dataset.chapter || 0);
-    const targetParallax = (1 - chIdx) * 32;
-    if (typeof window._astroSkyPx !== 'number') window._astroSkyPx = targetParallax;
-    window._astroSkyPx += (targetParallax - window._astroSkyPx) * (1 - Math.exp(-dt * 4.5));
-    const skyDx = window._astroSkyPx;
+    const arena = mapScreen?.querySelector('.astro-orbit-arena');
+    const scrollCh = (arena && arena.clientHeight > 0)
+      ? (arena.scrollTop / arena.clientHeight)
+      : Number(mapScreen?.dataset.chapter || 0);
+    const targetParallaxY = -scrollCh * 220;
+    if (typeof window._astroSkyPy !== 'number') window._astroSkyPy = targetParallaxY;
+    const prevSkyPy = window._astroSkyPy;
+    window._astroSkyPy += (targetParallaxY - window._astroSkyPy) * (1 - Math.exp(-dt * 5.5));
+    const skyDy = window._astroSkyPy;
+    const deltaSkyY = skyDy - prevSkyPy;
 
-    // Subtle Sky Constellations (Upper-Left & Upper-Right)
+    // Subtle Sky Constellations (Upper-Left & Upper-Right) with intact vertical parallax
     const constellations = [
       [[0.12, 0.24], [0.18, 0.16], [0.25, 0.21], [0.29, 0.12], [0.35, 0.17]],
       [[0.66, 0.14], [0.72, 0.20], [0.78, 0.13], [0.84, 0.19], [0.79, 0.26]]
@@ -85,19 +90,23 @@
     for (let c = 0; c < constellations.length; c++) {
       const pts = constellations[c];
       const pulse = 0.22 + 0.12 * Math.sin(t * 0.9 + c * 2.1);
+      const rawYs = pts.map(p => p[1] * h + skyDy * 0.75);
+      const maxY = Math.max(...rawYs);
+      const wrapShift = maxY < -20 ? Math.ceil((-20 - maxY) / h) * h + 40 : 0;
+
       ctx.strokeStyle = `rgba(125, 211, 252, ${pulse.toFixed(3)})`;
       ctx.lineWidth = 1.1;
       ctx.beginPath();
       for (let i = 0; i < pts.length; i++) {
-        const px = pts[i][0] * w + skyDx * 0.65;
-        const py = pts[i][1] * h;
+        const px = pts[i][0] * w;
+        const py = rawYs[i] + wrapShift;
         if (i === 0) ctx.moveTo(px, py);
         else ctx.lineTo(px, py);
       }
       ctx.stroke();
       for (let i = 0; i < pts.length; i++) {
-        const px = pts[i][0] * w + skyDx * 0.65;
-        const py = pts[i][1] * h;
+        const px = pts[i][0] * w;
+        const py = rawYs[i] + wrapShift;
         ctx.fillStyle = `rgba(253, 230, 138, ${(pulse + 0.35).toFixed(3)})`;
         ctx.beginPath();
         ctx.arc(px, py, 2.1, 0, Math.PI * 2);
@@ -105,14 +114,15 @@
       }
     }
 
-    // 1. Twinkling Stars
+    // 1. Twinkling Stars (depth-layered vertical parallax)
     for (let i = 0; i < stars.length; i++) {
       const s = stars[i];
-      const sx = ((s.x + skyDx * 0.5) % w + w) % w;
+      const sx = s.x;
+      const sy = ((s.y + skyDy * (0.55 + s.r * 0.25)) % h + h) % h;
       const tw = 0.35 + 0.65 * (0.5 + 0.5 * Math.sin(t * s.speed + s.phase));
       ctx.fillStyle = `rgba(${s.tint},${tw.toFixed(3)})`;
       ctx.beginPath();
-      ctx.arc(sx, s.y, s.r, 0, Math.PI * 2);
+      ctx.arc(sx, sy, s.r, 0, Math.PI * 2);
       ctx.fill();
 
       if (s.cross && tw > 0.72) {
@@ -120,10 +130,10 @@
         ctx.strokeStyle = `rgba(${s.tint},${(tw * 0.65).toFixed(3)})`;
         ctx.lineWidth = 0.9;
         ctx.beginPath();
-        ctx.moveTo(sx - len, s.y);
-        ctx.lineTo(sx + len, s.y);
-        ctx.moveTo(sx, s.y - len);
-        ctx.lineTo(sx, s.y + len);
+        ctx.moveTo(sx - len, sy);
+        ctx.lineTo(sx + len, sy);
+        ctx.moveTo(sx, sy - len);
+        ctx.lineTo(sx, sy + len);
         ctx.stroke();
       }
     }
@@ -132,9 +142,12 @@
     for (let i = 0; i < motes.length; i++) {
       const m = motes[i];
       m.x += m.vx * dt + Math.sin(t * 0.9 + m.phase) * 4 * dt;
-      m.y += m.vy * dt;
+      m.y += m.vy * dt + deltaSkyY * 1.15;
       if (m.y < -12) {
-        m.y = h + 12;
+        m.y = ((m.y % (h + 24)) + (h + 24)) % (h + 24) - 12;
+        m.x = Math.random() * w;
+      } else if (m.y > h + 12) {
+        m.y = ((m.y % (h + 24)) + (h + 24)) % (h + 24) - 12;
         m.x = Math.random() * w;
       }
       if (m.x < -12) m.x = w + 12;
