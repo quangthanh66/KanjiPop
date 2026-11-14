@@ -375,7 +375,49 @@
   $('#mission-done').hidden=true;
   $('#mission-status').textContent=current?'Thu đủ '+targets.length+' chữ mục tiêu để qua màn · Không cần đúng thứ tự.':'Đã khám phá đủ các chữ mục tiêu!';
  }
- let mapChapter=null,mapSelected=null;
+ let mapChapter=null,mapSelected=null,slideTimer=null,swipeStartX=0,swipeStartY=0;
+ function slideToChapter(nextChapter){
+  if(nextChapter===mapChapter||nextChapter<0||nextChapter>2)return;
+  const dir=nextChapter>mapChapter?'dir-next':'dir-prev';
+  const oldStage=$('#map-screen .astro-dial-stage');
+  const oldIncoming=oldStage?.querySelector('.astro-slide-incoming');
+  const outgoing=oldIncoming?oldIncoming.cloneNode(true):null;
+  mapChapter=nextChapter;
+  mapSelected=null;
+  renderMap();icons();
+  const newStage=$('#map-screen .astro-dial-stage');
+  const newIncoming=newStage?.querySelector('.astro-slide-incoming');
+  if(newStage&&newIncoming){
+   newStage.classList.add('is-sliding');
+   newIncoming.classList.add(dir);
+   if(outgoing){
+    outgoing.className='astro-slide-outgoing '+dir;
+    newStage.appendChild(outgoing);
+   }
+   if(slideTimer)clearTimeout(slideTimer);
+   slideTimer=setTimeout(()=>{
+    outgoing?.remove();
+    newStage.classList.remove('is-sliding');
+    newIncoming.classList.remove('dir-next','dir-prev');
+   },640);
+  }
+ }
+ $('#map-screen').addEventListener('touchstart',e=>{
+  if(!e.target.closest('.astro-dial-stage')||e.touches.length!==1){swipeStartX=0;return;}
+  swipeStartX=e.touches[0].clientX;
+  swipeStartY=e.touches[0].clientY;
+ },{passive:true});
+ $('#map-screen').addEventListener('touchend',e=>{
+  if(!swipeStartX||!e.changedTouches.length)return;
+  const dx=e.changedTouches[0].clientX-swipeStartX;
+  const dy=e.changedTouches[0].clientY-swipeStartY;
+  swipeStartX=0;
+  if(Math.abs(dx)>46&&Math.abs(dx)>Math.abs(dy)*1.35){
+   const step=dx<0?1:-1;
+   const nextChapter=Math.max(0,Math.min(2,mapChapter+step));
+   if(nextChapter!==mapChapter){A?.select();slideToChapter(nextChapter);}
+  }
+ },{passive:true});
  function renderMap(){
  const next=unlocked(),ongoing=state.status==='playing'&&(state.moves>0||state.pending)&&state.level<=next;
  const recommended=ongoing?state.level:Math.min(next,C.levels.length-1);
@@ -462,6 +504,7 @@
       </button>
 
       <div class="astro-dial-stage">
+        <div class="astro-slide-incoming">
         <div class="astro-chapter-bar">
           <div class="astro-chapter-pill">
             ${I18N.t('chapter')} ${String(mapChapter+1).padStart(2,'0')} · ${chapter.name}
@@ -472,12 +515,9 @@
           </div>
         </div>
 
-        <!-- 5 Orbital Pedestals Connected by Straight Zigzag Constellation Path -->
+        <!-- 5 Orbital Pedestals Connected by Flowing VFX Energy Stream Underneath -->
         <div class="astro-orbit-arena">
-          <svg class="astro-constellation-svg" viewBox="0 0 1000 400" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M 130 224 L 310 104 L 500 272 L 690 104 L 870 224" fill="none" stroke="rgba(251, 191, 36, 0.42)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path class="astro-constellation-flow" d="M 130 224 L 310 104 L 500 272 L 690 104 L 870 224" fill="none" stroke="rgba(125, 211, 252, 0.92)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <canvas class="astro-energy-canvas" aria-hidden="true"></canvas>
           ${levels.map((l, idx) => {
             const r = profile.results[l.id];
             const isLocked = l.id > next;
@@ -499,13 +539,8 @@
                   ? `<span class="astro-badge review">ÔN</span>`
                   : `<span class="astro-badge play">MỚI</span>`;
 
-            const activeVfx = current && !isLocked
-              ? `<div class="astro-node-vfx" aria-hidden="true"><div class="astro-vfx-flare"></div><div class="astro-vfx-magic"></div></div>`
-              : '';
-
             return `<button type="button" class="astro-node astro-pos-${idx} ${isLocked ? 'locked' : ''} ${current ? 'active' : ''} ${r ? 'completed' : ''}" data-journey-level="${l.id}" ${isLocked ? 'disabled' : ''} aria-pressed="${current}" aria-label="Màn ${l.id+1}: ${l.title}${isLocked ? ', chưa mở khóa' : r ? ', ' + r.stars + ' sao' : ''}">
               <div class="astro-pedestal-stack">
-                ${activeVfx}
                 ${statusBadge}
                 <div class="astro-gem-float">
                   <span class="astro-gem-icon result-gem" data-pair="${pairIdx}" style="--gem-label-y:${KanjiGemArt.cutFor(pairIdx).labelY}%">
@@ -524,6 +559,7 @@
               </div>
             </button>`;
           }).join('')}
+        </div>
         </div>
 
         <div class="astro-dots">
@@ -966,11 +1002,12 @@ function showSettings(){
   }
   const chapterButton=e.target.closest('[data-chapter-step]');
   if(chapterButton&&!chapterButton.disabled){
-   A?.select();
-   mapChapter=Math.max(0,Math.min(2,mapChapter+Number(chapterButton.dataset.chapterStep)));
-   mapSelected=null;
-   renderMap();icons();
-   $('#map-screen h1')?.focus({preventScroll:true});
+   const step=Number(chapterButton.dataset.chapterStep);
+   const nextChapter=Math.max(0,Math.min(2,mapChapter+step));
+   if(nextChapter!==mapChapter){
+    A?.select();
+    slideToChapter(nextChapter);
+   }
    return;
   }
   if(e.target.closest('[data-journey-album]')){A?.select();changeView('album');return;}

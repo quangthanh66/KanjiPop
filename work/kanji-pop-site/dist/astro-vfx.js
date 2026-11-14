@@ -179,7 +179,199 @@
       ctx.stroke();
     }
 
+    drawEnergyConduits(t);
     rafId = requestAnimationFrame(frame);
+  }
+
+  function drawEnergyConduits(t) {
+    const arenas = document.querySelectorAll('#map-screen .astro-orbit-arena');
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    for (let aIdx = 0; aIdx < arenas.length; aIdx++) {
+      const arena = arenas[aIdx];
+      const canvas = arena.querySelector('.astro-energy-canvas');
+      if (!canvas) continue;
+      const arenaRect = arena.getBoundingClientRect();
+      const aw = arenaRect.width;
+      const ah = arenaRect.height;
+      if (aw < 20 || ah < 20) continue;
+
+      if (canvas.width !== Math.floor(aw * dpr) || canvas.height !== Math.floor(ah * dpr)) {
+        canvas.width = Math.floor(aw * dpr);
+        canvas.height = Math.floor(ah * dpr);
+      }
+
+      const nodes = arena.querySelectorAll('.astro-node');
+      if (nodes.length < 2) continue;
+
+      const pts = [];
+      for (let i = 0; i < nodes.length; i++) {
+        const ped = nodes[i].querySelector('.astro-pedestal-img') || nodes[i];
+        const r = ped.getBoundingClientRect();
+        pts.push({
+          x: r.left + r.width * 0.5 - arenaRect.left,
+          y: r.top + r.height * 0.52 - arenaRect.top
+        });
+      }
+
+      // Compute cumulative arc length for smooth u in [0, 1] sampling
+      const segs = [];
+      let totalLen = 0;
+      for (let i = 0; i < pts.length - 1; i++) {
+        const dx = pts[i + 1].x - pts[i].x;
+        const dy = pts[i + 1].y - pts[i].y;
+        const len = Math.hypot(dx, dy) || 1;
+        segs.push({
+          ax: pts[i].x, ay: pts[i].y,
+          bx: pts[i + 1].x, by: pts[i + 1].y,
+          dx, dy, len,
+          nx: -dy / len, ny: dx / len,
+          start: totalLen, end: totalLen + len
+        });
+        totalLen += len;
+      }
+      if (totalLen < 1) continue;
+
+      function samplePath(u) {
+        const clamped = Math.max(0, Math.min(1, u));
+        const d = clamped * totalLen;
+        for (let i = 0; i < segs.length; i++) {
+          const s = segs[i];
+          if (d <= s.end || i === segs.length - 1) {
+            const f = Math.max(0, Math.min(1, (d - s.start) / s.len));
+            return {
+              x: s.ax + s.dx * f,
+              y: s.ay + s.dy * f,
+              nx: s.nx,
+              ny: s.ny
+            };
+          }
+        }
+        const lastS = segs[segs.length - 1];
+        return { x: lastS.bx, y: lastS.by, nx: lastS.nx, ny: lastS.ny };
+      }
+
+      const ctx = canvas.getContext('2d');
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, aw, ah);
+      ctx.save();
+      ctx.globalCompositeOperation = 'screen';
+
+      // 1. Soft Ambient Base Conduit (Gold + Cyan Bloom)
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.beginPath();
+      for (let i = 0; i < pts.length; i++) {
+        if (i === 0) ctx.moveTo(pts[i].x, pts[i].y);
+        else ctx.lineTo(pts[i].x, pts[i].y);
+      }
+      ctx.strokeStyle = 'rgba(56, 189, 248, 0.22)';
+      ctx.lineWidth = 8;
+      ctx.stroke();
+
+      ctx.strokeStyle = 'rgba(251, 191, 36, 0.24)';
+      ctx.lineWidth = 3.2;
+      ctx.stroke();
+
+      ctx.strokeStyle = 'rgba(224, 242, 254, 0.42)';
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+
+      // 2. Multi-Layered Sinusoidal Flowing Energy Ribbons (Target-VFX style)
+      const streamCount = 3;
+      const ribbonLen = 0.28;
+      const steps = 36;
+      for (let sIdx = 0; sIdx < streamCount; sIdx++) {
+        const head = ((t * 0.14 + sIdx / streamCount) % 1 + 1) % 1;
+        const tail = head - ribbonLen;
+
+        for (let layer = 0; layer < 3; layer++) {
+          const left = [];
+          const right = [];
+          for (let j = 0; j <= steps; j++) {
+            const f = j / steps;
+            const u = tail + f * ribbonLen;
+            if (u < 0 || u > 1) continue;
+            const p = samplePath(u);
+            const env = Math.sin(Math.PI * f);
+            const w = Math.pow(env, 0.65) * (layer === 0 ? 6.2 : layer === 1 ? 3.2 : 1.45);
+            const wave = Math.sin(f * 10 - t * 3.2 + layer * 1.1 + sIdx * 2.0) * (layer === 2 ? 0.9 : 2.6) * env;
+            left.push([p.x + p.nx * (wave + w), p.y + p.ny * (wave + w)]);
+            right.push([p.x + p.nx * (wave - w), p.y + p.ny * (wave - w)]);
+          }
+          if (left.length < 3) continue;
+
+          const pStart = left[0];
+          const pEnd = left[left.length - 1];
+          const grad = ctx.createLinearGradient(pStart[0], pStart[1], pEnd[0], pEnd[1]);
+          if (layer === 0) {
+            grad.addColorStop(0, 'rgba(56, 189, 248, 0)');
+            grad.addColorStop(0.55, 'rgba(56, 189, 248, 0.26)');
+            grad.addColorStop(0.85, 'rgba(125, 211, 252, 0.42)');
+            grad.addColorStop(1, 'rgba(125, 211, 252, 0)');
+          } else if (layer === 1) {
+            grad.addColorStop(0, 'rgba(125, 211, 252, 0)');
+            grad.addColorStop(0.5, 'rgba(125, 211, 252, 0.52)');
+            grad.addColorStop(0.82, 'rgba(253, 230, 138, 0.72)');
+            grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+          } else {
+            grad.addColorStop(0, 'rgba(254, 249, 195, 0)');
+            grad.addColorStop(0.6, 'rgba(254, 249, 195, 0.85)');
+            grad.addColorStop(0.88, 'rgba(255, 255, 255, 0.95)');
+            grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+          }
+
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          ctx.moveTo(left[0][0], left[0][1]);
+          for (let k = 1; k < left.length; k++) ctx.lineTo(left[k][0], left[k][1]);
+          for (let k = right.length - 1; k >= 0; k--) ctx.lineTo(right[k][0], right[k][1]);
+          ctx.closePath();
+          ctx.fill();
+        }
+
+        // Luminous Head Orb
+        const hPos = samplePath(Math.max(0, Math.min(1, head - 0.015)));
+        const orbR = 11;
+        const orb = ctx.createRadialGradient(hPos.x, hPos.y, 0, hPos.x, hPos.y, orbR);
+        orb.addColorStop(0, 'rgba(255, 255, 255, 0.92)');
+        orb.addColorStop(0.3, 'rgba(186, 230, 253, 0.55)');
+        orb.addColorStop(1, 'rgba(56, 189, 248, 0)');
+        ctx.fillStyle = orb;
+        ctx.fillRect(hPos.x - orbR, hPos.y - orbR, orbR * 2, orbR * 2);
+      }
+
+      // 3. Drifting Micro-Sparks Along Energy Stream
+      const sparkCount = 16;
+      for (let i = 0; i < sparkCount; i++) {
+        const life = ((t * 0.45 + i * 0.618) % 1 + 1) % 1;
+        const u = ((t * 0.08 + i / sparkCount) % 1 + 1) % 1;
+        const p = samplePath(u);
+        const dir = (i % 2 === 0 ? 1 : -1);
+        const drift = dir * (4 + 12 * life);
+        const sx = p.x + p.nx * drift;
+        const sy = p.y + p.ny * drift - life * 5;
+        const alpha = Math.sin(Math.PI * life) * 0.85;
+        const sr = 1.1 + (i % 3) * 0.55;
+
+        ctx.save();
+        ctx.translate(sx, sy);
+        ctx.rotate(t * 1.6 + i);
+        ctx.fillStyle = i % 3 === 0
+          ? `rgba(254, 240, 138, ${alpha.toFixed(3)})`
+          : `rgba(186, 230, 253, ${alpha.toFixed(3)})`;
+        ctx.beginPath();
+        ctx.moveTo(0, -sr * 1.6);
+        ctx.lineTo(sr * 0.9, 0);
+        ctx.lineTo(0, sr * 1.6);
+        ctx.lineTo(-sr * 0.9, 0);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+      }
+
+      ctx.restore();
+    }
   }
 
   window.AstroVFX = {
